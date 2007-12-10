@@ -1,0 +1,98 @@
+<!--
+.a_link
+{
+	color: #3366cc;
+}
+body
+{
+	background-attachment: fixed;
+	background-repeat: repeat-y;
+	background-position: center;
+	background-color: #FFFFFF;
+	font-family: "宋体";
+	font-size: 12px; 
+}
+a
+{
+	color: #000000;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #999999;
+	text-decoration: underline;
+}
+TD 
+{
+	font-family: "宋体";
+	font-size: 12px; 
+	SCROLLBAR-ARROW-COLOR: #666666; 
+	SCROLLBAR-BASE-COLOR: #f0faff;
+	SCROLLBAR-DARKSHADOW-COLOR: #EEEEEE
+}
+TR 
+{
+	font-family: "宋体";
+	font-size: 12px; 
+	SCROLLBAR-ARROW-COLOR: #666666; 
+}
+table
+{
+	border-collapse: collapse;
+}
+.LoginInput 
+{
+	font-family: "宋体", "Verdana", "Arial";
+	font-size:12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	background-color: #F6F6F6;
+	height: 17px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-right-color: #EEEEEE;
+	border-bottom-color: #EEEEEE;
+	border-left-color: #999999;
+}
+textarea
+{
+	font-family: "宋体","Arial";
+	font-size:12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	background-color: #F6F6F6;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #CDCDCD;
+	border-right-color: #EEEEEE;
+	border-bottom-color: #EEEEEE;
+	border-left-color: #CDCDCD;
+}
+.question
+{
+	font-family: "宋体", "Verdana", "Arial";
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	border: none;
+	background-color: #F6F6F6;
+}
+-->

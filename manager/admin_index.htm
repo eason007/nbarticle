@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>NB文章系统管理中心</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="zh-CN">
+<link rel="stylesheet" rev="stylesheet" href="css/base.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="css/manager.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="language_files/message.js"></script>
+<script type="text/javascript" src="language_files/tabTitle.js"></script>
+<script type="text/javascript" src="../common/js/public.js"></script>
+<script type="text/javascript" src="../common/js/objajax.js"></script>
+<script type="text/javascript" src="../common/js/objtable.js"></script>
+<script type="text/javascript" src="../common/js/objform.js"></script>
+<script type="text/javascript" src="../common/js/objformedit.js"></script>
+<script type="text/javascript" src="../common/js/objvalidator.js"></script>
+<script type="text/javascript" src="../common/js/objtabcenter.js"></script>
+<script type="text/javascript" src="../common/js/manager.js"></script>
+<script type="text/javascript" src="../common/js/jsdate.js"></script>
+<script type="text/javascript" src="../editor/fck_editor/fckeditor.js"></script>
+</head>
+<body id="center">
+
+<div id="divLoading" style="display: none;"><img src="images/loading_r.gif" alt=""></div>
+
+<div id="divDialog" onselectstart="window.event.returnValue=false;" style="filter:alpha(opacity=0); DISPLAY: none;">
+	<div id="DialogTitle"></div>
+	<div id="DialogContent"></div>
+	<div style="TEXT-ALIGN: center;"><input type="button" id="DialogCancel" onclick="closeDialog();"></div>
+</div>
+<div id="divModal" style="FILTER: alpha(opacity=75);" onclick="window.event.cancelBubble=true; window.event.returnValue=false;"></div>
+
+<div class="separator"></div>
+
+<div id="head">
+	<div class="left"><img src="images/logo.gif" alt=""></div>
+	<div class="left" style="width: 90px; margin-left: 15px;"><script type="text/javascript">document.write (getCookie("UserName"));</script>，您好。<br /><a href="login.asp?action=logout">登出</a></div>
+	<div class="left" id="NBArticlePlacard"></div>
+</div>
+
+<div class="separator" style="height: 3px;"></div>
+
+<div class="left" style="width: 20%;" id="leftChannel"></div>
+
+<div class="right" style="width: 78%;">
+	<div class="nav" id="tabBox"><img src="images/plus.gif" width="18" class="right" style="cursor:pointer;" onclick="javascript: newTab();" alt="新开标签" /><span class="abg" id="Tab_0" onclick="javascript: switchTab(0);" title="首页" userData="1" blank="0">首页</span></div>
+	<div id="contentDiv"></div>
+</div>
+
+<div class="separator"></div>
+
+<script type="text/javascript">
+var FormEdit = new formEditObject();
+var objForm = new formObject();
+var objTable = new tableObject();
+
+var tabIndex = 1;
+var rTab = ",";
+var openNewTab = false;
+var currentTab = 0;
+var tabCache = new Array();
+var tabScriptCache = new Array();
+var tabFormID = new Array();
+
+var editDateVal = "";
+objForm.formName = "form1";
+
+document.getElementById("divLoading").innerHTML += "&nbsp;" + loadingMsg;
+
+ajaxGetDateToPage("./admin_left.asp","leftChannel");
+ajaxGetDate("./templates/admin_main.htm", loadMain);
+
+function loadMain(obj){
+	var regexp1 = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/ig;
+
+	var sContent = obj.returnMessageText;
+	var returnMessage = sContent.replace(regexp1, "");
+	sContent = sContent.match(regexp1);
+
+	document.getElementById("contentDiv").innerHTML = returnMessage;
+	tabCache[0] = returnMessage;
+	executeScript(sContent);
+}
+</script>
+
+<script type="text/javascript" src="http://nbarticle.com/plaCard.js"></script>
+</body>
+</html>

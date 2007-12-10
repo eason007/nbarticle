@@ -1,0 +1,52 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_makeindex.asp";
+FormEdit.dateVal = "action=";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.doResponseMethod = getMakeIndexResult;
+objForm.postUrl = "./admin_makeindex.asp";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[170]);
+
+	FormEdit.start();
+}
+
+function getMakeIndexResult(sReturn){
+	if(sReturn >= 0) {
+		alertMessage(makeIndexSuccess);
+	}
+	else {
+		alertMessage(makeIndexFail);
+	}
+	objForm.resetForm();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="action" value="make">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_MakeIndex_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_MakeIndex_Info"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td><input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

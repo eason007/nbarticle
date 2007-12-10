@@ -1,0 +1,110 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_makejs.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+	
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_makejs_list.htm';
+
+	setTabTitle(currentTab, tabTitle[222]);
+}
+else{
+	objForm.doResponseMethod = getAddPostResult;
+
+	setTabTitle(currentTab, tabTitle[221]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	FormEdit.start();
+}
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_makejs.asp";
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Js_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Js_BaseSetting"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="13%" align="right"><span id="Language_Js_Title"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="Title" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_Detail"></span></td>
+				  <td align="left">&nbsp;<textarea name="Info" cols="50" rows="5" wrap="VIRTUAL"></textarea></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_FilePath"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="FileName" size="25" dataType="Require">.js</td>
+				</tr>
+			  </table>
+		</fieldset>
+		<div style="height: 25px;TEXT-ALIGN: left;margin: 5px 0 0 0;">&nbsp;<input type="button" name="btnSubmit1" id="btnSubmit1" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn1" id="btnReturn1" onclick="javascript:ajaxChangeRightContent('./templates/admin_makejs_list.htm','pageContent');"></div>
+		<fieldset>
+			<legend id="Language_Js_TransferSetting"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="13%" align="right"><span id="Language_Js_TransferColumn"></span></td>
+				  <td align="left">&nbsp;<select name="ColumnList"></select>&nbsp;<input type="checkbox" value="1" name="IncludeChildColumn"><span id="Language_Js_IncludeChildColumn"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_ListStyle"></span></td>
+				  <td align="left">&nbsp;<select name="Style"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_TransferTotal"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="TransferTotal" size="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_TransferType"></span></td>
+				  <td align="left">&nbsp;<select name="Type"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_TitleLen"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="TitleLen" size="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_ContentLen"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="ContentLen" size="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_ShowFields"></span></td>
+				  <td align="left"><input type="checkbox" value="1" name="ShowColumn"><span id="Language_Js_ShowFields_ColumnName"></span>&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="ShowNew"><span id="Language_Js_ShowFields_NewTag"></span>&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="ShowTime"><span id="Language_Js_ShowFields_AddTime"></span>&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="ShowTypes"><span id="Language_Js_ShowFields_TypeTag"></span>&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="ShowReview"><span id="Language_Js_ShowFields_ReviewLink"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_OpenWindowType"></span></td>
+				  <td align="left">&nbsp;<select name="OpenWindowType"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_RowTotal"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="RowTotal" size="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Js_ImgSize"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="ImgSize" size="8"></td>
+				</tr>
+			  </table>
+		</fieldset>
+		<div style="height: 25px;TEXT-ALIGN: left;margin: 5px 0 0 0;">&nbsp;<input type="button" name="btnSubmit2" id="btnSubmit2" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn2" id="btnReturn2" onclick="javascript:ajaxChangeRightContent('./templates/admin_makejs_list.htm','pageContent');"></div>
+	</div>
+</div>
+
+</form>

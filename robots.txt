@@ -1,0 +1,17 @@
+#
+# robots.txt for NBArticle
+# Version 3.0
+#
+
+User-agent: *
+
+Disallow: /depot/
+Disallow: /editor/
+Disallow: /images/
+Disallow: /include/
+Disallow: /js/
+Disallow: /jsfiles/
+Disallow: /language_files/
+Disallow: /manager/
+Disallow: /userfiles/
+Disallow: /xml_rpc/

@@ -1,0 +1,195 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_content.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_content_list.htm';
+
+	document.getElementById('saveas').style.display = "";
+
+	setTabTitle(currentTab, tabTitle[92]);
+}
+else{
+	editDateVal = "";
+	objForm.doResponseMethod = getAddPostResult;
+
+	document.getElementById('saveas').style.display = "none";
+
+	setTabTitle(currentTab, tabTitle[91]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+document.getElementById('AdvancedFunctionImg').alt = openAdvancedSetting;
+document.getElementById('AdvancedFunctionTD').title= openAdvancedSetting;
+document.getElementById('AdvancedFunctionSPAN').innerHTML = openAdvancedSetting;
+
+function initTabContent(){
+	FCKeditorAPI = null;
+	var oFCKeditor = new FCKeditor('Content', 730, 450) ;
+	oFCKeditor.BasePath	= "../editor/fck_editor/";
+	oFCKeditor.EnableOpera = true;
+	oFCKeditor.ReplaceTextarea() ;
+	__FCKeditorNS = null;
+
+	FormEdit.start();
+}
+
+function checkData(sTargetName) {
+	document.getElementById(sTargetName).value = getFekeditorText(sTargetName);
+	
+	FormEdit.doResponseMethodOther = "";
+
+	//objForm.debug = true;
+	objForm.doResponseOther = "switchTab(currentTab);";
+	objForm.postUrl = "./admin_content.asp";
+	objForm.ajaxPost();
+
+	return false;
+}
+
+function RedirectTemplate(iValue,vSelect){
+	//objForm.resetForm();
+	FCKeditorAPI = null;
+	__FCKeditorNS = null;
+
+	var dateVal = FormEdit.dateVal;
+
+	if (dateVal.indexOf("temp_id")>-1)
+	{
+		dateVal = dateVal.substring(0,dateVal.indexOf("temp_id")+8) + vSelect.options[iValue].value;
+	}
+	else{
+		dateVal = dateVal + '&temp_id=' + vSelect.options[iValue].value;
+	}
+	
+	FormEdit.dateVal = dateVal;
+	FormEdit.doResponseMethodOther = "";
+	FormEdit.start();
+
+	document.getElementById('Content___Frame').src = document.getElementById('Content___Frame').src;
+}
+
+function inputsource(Str){
+	var tmp
+	
+	tmp=Str.split("==");
+	
+	document.getElementById('source').value=tmp[0];
+	document.getElementById('sourceurl').value=tmp[1];
+	
+}
+
+function review_img(){
+	if (document.getElementById('img').value!=''){
+		window.open(''+document.getElementById('img').value+'','','');
+	}
+}
+
+function AdvancedFunction(){
+	if (document.getElementById('AdvancedFunction').style.display=="")
+	{
+		document.getElementById('AdvancedFunctionImg').src = "images/menu_title_down.gif";
+		document.getElementById('AdvancedFunctionImg').alt = openAdvancedSetting;
+
+		document.getElementById('AdvancedFunctionTD').title= openAdvancedSetting;
+		document.getElementById('AdvancedFunctionSPAN').innerHTML = openAdvancedSetting;
+
+		document.getElementById('AdvancedFunction').style.display = "none";
+	}
+	else{
+		document.getElementById('AdvancedFunctionImg').src = "images/menu_title_up.gif";
+		document.getElementById('AdvancedFunctionImg').alt = closeAdvancedSetting;
+
+		document.getElementById('AdvancedFunctionTD').title= closeAdvancedSetting;
+		document.getElementById('AdvancedFunctionSPAN').innerHTML = closeAdvancedSetting;
+
+		document.getElementById('AdvancedFunction').style.display = "";
+	}
+}
+
+function getFekeditorText(editor_name)
+{
+    var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
+    returnValue = oEditor.GetXHTML(true);
+    return returnValue;
+}
+</script>
+
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="authorid">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Content_Add_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Content_AddArticle"></legend>
+			<table width="100%" class="edittable">
+			  <tr>
+				<td width="10%" align="right"><span id="Language_Content_Column"></span></td>
+				<td align="left" width="50%">&nbsp;<select name="Column" dataType="Require"></select></td>
+				<td width="10%" align="right"><span id="Language_Content_ArticleTemplate"></span></td>
+				<td align="left">&nbsp;<select name="atemplate" onchange="RedirectTemplate(this.options.selectedIndex,this);"></select></td>
+			  </tr>
+			  <tr>
+				<td align="right"><span id="Language_Content_Title"></span></td>
+				<td align="left" colspan="3">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="60" dataType="Require"></td>
+			  </tr>
+			  <tr>
+				<td align="right"><span id="Language_Content_Keyword"></span></td>
+				<td align="left">&nbsp;<input type="text" name="keyword" size="50"></td>
+				<td align="right"><span id="Language_Content_Author"></span></td>
+				<td align="left">&nbsp;<input type="text" name="author"></td>
+			  </tr>
+			  <tr valign="middle">
+				<td align="right" valign="top"><span id="Language_Content_Summary"></span></td>
+				<td align="left" colspan="3">&nbsp;<textarea name="summary" id="summary" cols="70" rows="5" wrap="VIRTUAL"></textarea></td>
+			  </tr>
+			  <tr valign="middle">
+				<td colspan="4" style="CURSOR: hand" onclick="AdvancedFunction()" id="AdvancedFunctionTD">&nbsp;<img src="images/menu_title_down.gif" id="AdvancedFunctionImg"><span id="AdvancedFunctionSPAN"></span></td>
+			  </tr>
+			  <tr valign="middle" id="AdvancedFunction" style="display:none">
+				<td colspan="4"><table width="100%">
+					<tr>
+					  <td align="right"><span id="Language_Content_Img"></span></td>
+					  <td align="left">&nbsp;<input type="text" name="img" id="img" size="40">&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
+					  <td align="right"><span id="Language_Content_Top"></span></td>
+					  <td align="left">&nbsp;<input type="radio" name="istop" value="1"><span id="Language_Comm_Yes"></span>&nbsp;<input type="radio" name="istop" value="0"><span id="Language_Comm_No"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Content_OutURL"></span></td>
+					  <td align="left" colspan="3">&nbsp;<input type="text" name="outurl" size="60"></td>
+					<tr>
+					  <td align="right"><span id="Language_Content_Source"></span></td>
+					  <td align="left" colspan="3">&nbsp;<select name="choosesource" onchange="inputsource(this.options[this.selectedIndex].value)"></select>&nbsp;=->&nbsp;<input type="text" name="source" id="source">&nbsp;<input type="text" name="sourceurl" id="sourceurl" size="30"></td>
+					</tr>
+					<tr>
+					  <td colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="Language_Content_ViewNum"></span>&nbsp;<input type="text" name="viewnum" size="5">&nbsp;&nbsp;&nbsp;<span id="Language_Content_Date"></span>&nbsp;<input type="text" name="adddate" size="23">&nbsp;&nbsp;&nbsp;<span id="Language_Content_PassNow"></span>&nbsp;<input type="checkbox" name="ispass" value="1">&nbsp;&nbsp;&nbsp;<span id="Language_Content_SaveAs"></span>&nbsp;<input type="checkbox" name="saveas" id="saveas" value="1"></td>
+					</tr>
+				  </table></td>
+			  </tr>
+			  <tr>
+				<td align="center" colspan="4" valign="top"><textarea name="Content" id="Content" dataType="Require" style="display:none"></textarea></td>
+			  </tr>
+			  <tr bgcolor="#efefef">
+				  <td align="left" valign="middle" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_content_list.htm','pageContent');"></td>
+			  </tr>
+		  </table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

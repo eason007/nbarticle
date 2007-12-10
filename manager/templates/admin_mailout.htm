@@ -1,0 +1,62 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_mailout.asp";
+FormEdit.dateVal = "action=add";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_mailout.asp";
+objForm.doResponseMethod = getOutMailResult;
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[260]);
+
+	FormEdit.start();
+}
+
+function getOutMailResult(returnResult){
+	switch (returnResult)
+	{
+	case -1:
+		alertMessage(outMailFail);
+		break;
+	case 0:
+		document.getElementById("actionTD").innerHTML = outMailSuccess + "<a href='databackup/nb_maillist.mdb' target='_blank'>databackup/nb_maillist.mdb</a>";
+		break;
+	case 1:
+		document.getElementById("actionTD").innerHTML = outMailSuccess + "<a href='mail.txt' target='_blank'>mail.txt</a>";
+		break;
+	}
+	objForm.resetForm();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_MailOut_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_MailOut_ExportList"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="80">&nbsp;<span id="Language_MailOut_ExportType"></span></td>
+				  <td><span id="Language_MailOut_OutToDataBase"></span><input type="radio" name="way" value="todatabase">&nbsp;&nbsp;<span id="Language_MailOut_OutToTxt"></span><input type="radio" name="way" value="totxt" dataType="Group"></td>
+				</tr>
+				<tr>
+				  <td colspan="2">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();"></td>
+				</tr>
+				<tr>
+				  <td colspan="2" style="color: RED;" id="actionTD">&nbsp;</td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

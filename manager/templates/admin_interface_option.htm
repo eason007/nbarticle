@@ -1,0 +1,74 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_interface.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_interface_list.htm';
+
+	setTabTitle(currentTab, tabTitle[282]);
+}
+else{
+	objForm.doResponseMethod = getAddPostResult;
+
+	setTabTitle(currentTab, tabTitle[281]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_interface.asp";
+
+function initTabContent(){
+	FormEdit.start();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Interface_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Interface_Input"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="15%" align="right"><span id="Language_Interface_Title"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="Title" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right" valign="top"><span id="Language_Interface_RemoteURL"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="RemoteURL" size="45" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Interface_StructFile"></span></td>
+				  <td align="left">&nbsp;<input type="text" name="StructFile" size="25" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Interface_Type"></span></td>
+				  <td align="left">&nbsp;<select name="Type" dataType="Require"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Interface_SKey"></span></td>
+				  <td align="left">&nbsp;<span id=""></span><input type="text" name="SKey" size="20" dataType="Require"></td>
+				</tr>
+				<tr bgcolor="efefef">
+				  <td align="left" colspan="2" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_interface_list.htm','pageContent');"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

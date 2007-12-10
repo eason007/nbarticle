@@ -1,0 +1,43 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_data.asp";
+FormEdit.dateVal = "action=diskview";
+FormEdit.doResponseMethodOther = "showPic();";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[250]);
+	
+	FormEdit.start();
+}
+
+function showPic(){
+	for (var i=1;i<=6 ;i++ )
+	{
+		document.getElementById("Pic_" + i).width = document.getElementById("hPic_" + i).value;
+	}
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="hPic_1" id="hPic_1">
+<input type="hidden" name="hPic_2" id="hPic_2">
+<input type="hidden" name="hPic_3" id="hPic_3">
+<input type="hidden" name="hPic_4" id="hPic_4">
+<input type="hidden" name="hPic_5" id="hPic_5">
+<input type="hidden" name="hPic_6" id="hPic_6">
+
+<div class="mainWindows">
+	<div>
+		<fieldset>
+			<legend id="Language_Data_SpaceView_Title"></legend>
+			<table width="95%" class="edittable">
+			  <tr>
+				<td><blockquote><br><span id="Language_Data_SpaceView_BackupFolder"></span>:&nbsp;<img src="images/bar1.gif" height=10 id="Pic_1"><img src="images/bar1_1.gif" height=10>&nbsp;<span id="InfoBackup"></span><br><br><span id="Language_Data_SpaceView_DatabaseFolder"></span>:&nbsp;<img src="images/bar2.gif" height=10 id="Pic_2"><img src="images/bar2_1.gif" height=10>&nbsp;<span id="InfoDepot"></span><br><br><span id="Language_Data_SpaceView_UploadFolder"></span>:&nbsp;<img src="images/bar3.gif" height=10 id="Pic_3"><img src="images/bar3_1.gif" height=10>&nbsp;<span id="InfoUserFiles"></span><br><br><span id="Language_Data_SpaceView_ManagerFolder"></span>:&nbsp;<img src="images/bar4.gif" height=10 id="Pic_4"><img src="images/bar4_1.gif" height=10>&nbsp;<span id="InfoThis"></span><br><br><span id="Language_Data_SpaceView_HTMLListFolder"></span>:&nbsp;<img src="images/bar1.gif" height=10 id="Pic_5"><img src="images/bar1_1.gif" height=10>&nbsp;<span id="InfoHTMLList"></span><br><br><span id="Language_Data_SpaceView_HTMLViewFolder"></span>:&nbsp;<img src="images/bar2.gif" height=10 id="Pic_6"><img src="images/bar2_1.gif" height=10>&nbsp;<span id="InfoHTMLView"></span><br><br><span id="Language_Data_SpaceView_All"></span>:<br><img src="images/bar3.gif" width=400 height=10><img src="images/bar3_1.gif" height=10><span id="InfoAll"></span></blockquote></td>
+			  </tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

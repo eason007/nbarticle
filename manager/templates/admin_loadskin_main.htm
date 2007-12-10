@@ -1,0 +1,66 @@
+<script type="text/javascript">
+var bOperationWay = null;
+
+//objTable.debug = true;
+objTable.setURL("./admin_loadskin.asp");
+
+if (typeof(sPost) == "string")
+{
+	objTable.dateVal = sPost;
+	sPost = "";
+
+	bOperationWay = 1;
+}
+else{
+	objTable.dateVal = "action=";
+
+	bOperationWay = 0;
+}
+objTable.action = "";
+objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
+objTable.doResponseOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[210]);
+
+	objTable.start();
+}
+
+function getTemplateOperation(returnResult){
+	if(returnResult >= 0) {
+		alertMessage(templateOperationSuccess);
+		if (bOperationWay == 1)
+		{
+			ajaxChangeRightContent('./templates/admin_template_list.htm','pageContent');
+		}
+	}
+	else {
+		alertMessage(templateOperationFail);
+	}
+
+	initTabContent();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Skin_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<table width="100%" id="listTable">
+		  <tr>
+			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);"></th>
+			<th><span id="Language_Template_TempName"></span></th>
+		  </tr>
+		</table>
+		<div style="BACKGROUND: #efefef;height:25px;">
+			<div id="opBar">&nbsp;<span id="Language_Skin_Database"></span>:&nbsp;<input type="text" name="mdbName" size="40">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return postChooseForm('./admin_loadskin.asp','operation&way='+bOperationWay+'&dbname='+this.form.mdbName.value,getTemplateOperation);"></div>
+		</div>
+	</div>
+</div>
+
+</form>

@@ -1,0 +1,57 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_data.asp";
+FormEdit.dateVal = "action=execute";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.doResponseMethod = getQueryResult;
+objForm.postUrl = "./admin_data.asp";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[240]);
+
+	FormEdit.start();
+}
+
+function getQueryResult(returnResult){
+	if (returnResult == "1")
+	{
+		alertMessage(queryComplate);
+	}
+	else{
+		alertMessage(queryFail + returnResult);
+	}
+
+	objForm.resetForm();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="action" value="exe">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Data_Execute_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Data_Execute_Title"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td height=100>&nbsp;TSQL&nbsp;&nbsp;<textarea name="text" cols="55" rows="4" wrap="VIRTUAL"></textarea></td>
+				</tr>
+				<tr>
+				  <td height=25>&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

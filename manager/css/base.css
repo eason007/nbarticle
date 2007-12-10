@@ -1,0 +1,65 @@
+body {
+	FONT-FAMILY: 'Lucida Grande','Lucida Sans Unicode','宋体','新宋体',arial,verdana,sans-serif;
+	FONT-SIZE: 12px;
+	MARGIN: 10px 0px; 
+	padding: 0;
+	BACKGROUND: #F2F6F8;
+}
+form {
+	margin: 0;
+	padding: 0;
+}
+table{
+	BORDER: 0px;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+td {
+	padding: 0;
+	margin: 0;
+	FONT-SIZE: 12px;
+}
+select, textarea {
+	FONT-SIZE: 12px;
+}
+input {
+	BORDER-RIGHT: #7f9db9 1px solid;
+	BORDER-TOP: #7f9db9 1px solid;
+	BORDER-LEFT: #7f9db9 1px solid;
+	BORDER-BOTTOM: #7f9db9 1px solid;
+	FONT-SIZE: 12px;
+}
+img {
+	BORDER: 0px;
+}
+a, a:visited {
+	COLOR: #014e82;
+	TEXT-DECORATION: none;
+}
+a:hover {
+	COLOR: #9eaeb3; 
+	TEXT-DECORATION: underline;
+	border-bottom: 0px dotted;
+}
+FIELDSET {
+	BORDER-RIGHT: #c8d9e4 1px solid; 
+	BORDER-TOP: #c8d9e4 1px solid; 
+	BORDER-LEFT: #c8d9e4 1px solid; 
+	BORDER-BOTTOM: #c8d9e4 1px solid;
+}
+LEGEND {
+	FONT-WEIGHT: bold; 
+	COLOR: #000;
+}
+#opBar {
+	TEXT-ALIGN: left;
+	float: left;
+}
+TH {
+	PADDING-LEFT: 5px; 
+	BACKGROUND: #CDE3FF; 
+	LINE-HEIGHT: 25px;
+	FONT-SIZE: 12px;
+	TEXT-ALIGN: left;
+}

@@ -1,0 +1,158 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_template.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getTemplateEditResult;
+	editSuccessUrl = './templates/admin_template_list.htm';
+
+	setTabTitle(currentTab, tabTitle[202]);
+}
+else{
+	objForm.doResponseMethod = getAddPostResult;
+
+	setTabTitle(currentTab, tabTitle[201]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_template.asp";
+
+function initTabContent(){
+	FormEdit.start();
+}
+
+function loadTemplate(sTagName,sEditName){
+	document.getElementById('TemplateContent').value = document.getElementById('Template' + sTagName).value;
+	document.getElementById('TemplateTag').value = sTagName;
+	document.getElementById('editTag').innerHTML = sEditName;
+}
+
+function getTemplateEditResult(returnResult){
+	if(returnResult >= 0) {
+		alertMessage(editSuccess);
+	}
+	else {
+		alertMessage(editSuccess);
+	}
+
+	objForm.resetForm();
+	FormEdit.doResponseMethodOther = "";
+	initTabContent();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<textarea id="TemplateName" name="TemplateName" style="display:none"></textarea>
+<textarea id="TemplateCSS" name="TemplateCSS" style="display:none"></textarea>
+<textarea id="TemplateHead" name="TemplateHead" style="display:none"></textarea>
+<textarea id="TemplateFoot" name="TemplateFoot" style="display:none"></textarea>
+<textarea id="TemplateIndex" name="TemplateIndex" style="display:none"></textarea>
+<textarea id="TemplateList" name="TemplateList" style="display:none"></textarea>
+<textarea id="TemplateView" name="TemplateView" style="display:none"></textarea>
+<textarea id="TemplateSearch" name="TemplateSearch" style="display:none"></textarea>
+<textarea id="TemplateMemberList" name="TemplateMemberList" style="display:none"></textarea>
+<textarea id="TemplateImgList" name="TemplateImgList" style="display:none"></textarea>
+<textarea id="TemplateError" name="TemplateError" style="display:none"></textarea>
+<textarea id="TemplateSuccess" name="TemplateSuccess" style="display:none"></textarea>
+<textarea id="TemplateLogin" name="TemplateLogin" style="display:none"></textarea>
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="TemplateTag" id="TemplateTag" value="">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Template_Info"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Template_Manager"></legend>
+				<table width="100%" class="edittable">
+					 <tr>
+					  <td width="13%" align="right"><span id="Language_Template_TempName"></span></td>
+					  <td align="left">&nbsp;<strong><span id="TemplateName1"></span></strong></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Name','Name')" id="Comm_Edit_1"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">CSS</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Css_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('CSS','CSS')" id="Comm_Edit_2"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Head</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Head_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Head','Head')" id="Comm_Edit_3"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Foot</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Foot_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Foot','Foot')" id="Comm_Edit_4"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Index</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Index_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Index','Index')" id="Comm_Edit_5"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">List</td>
+					  <td align="left">&nbsp;<span id="Language_Template_List_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('List','List')" id="Comm_Edit_6"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">View</td>
+					  <td align="left">&nbsp;<span id="Language_Template_View_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('View','View')" id="Comm_Edit_7"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Member List</td>
+					  <td align="left">&nbsp;<span id="Language_Template_MemberList_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('MemberList','Member List')" id="Comm_Edit_8"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Img List</td>
+					  <td align="left">&nbsp;<span id="Language_Template_ImgList_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('ImgList','Img List')" id="Comm_Edit_9"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Search</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Search_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Search','Search')" id="Comm_Edit_10"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Error</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Error_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Error','Error')" id="Comm_Edit_11"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Success</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Success_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Success','Success')" id="Comm_Edit_12"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td width="13%" align="right">Login</td>
+					  <td align="left">&nbsp;<span id="Language_Template_Login_Info"></span></td>
+					  <td align="right"><a href="javascript:vod();" onclick="javascript:loadTemplate('Login','Login')" id="Comm_Edit_13"></a>&nbsp;</td>
+					</tr>
+					<tr>
+					  <td align="center"><span id="Language_Template_CurrentEdit"></span><br><span id="editTag"></span></td>
+					  <td align="left" colspan="2">&nbsp;<textarea name="TemplateContent" id="TemplateContent" cols="79" rows="15" wrap="VIRTUAL"></textarea>
+						<br>&nbsp;<a href="javascript:vod();" onclick="javascript:change(document.getElementById('TemplateContent'),-40)"><img src="images/minus.gif" border=0></a>&nbsp;&nbsp;<a href="javascript:vod();" onclick="javascript:change(document.getElementById('TemplateContent'),40)"><img src="images/plus.gif" border=0></a></td>
+					</tr>
+					<tr bgcolor="#efefef">
+					  <td align="left" colspan="3" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_template_list.htm','pageContent');"></td>
+					</tr>
+				</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

@@ -1,0 +1,80 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_makelist.asp";
+FormEdit.dateVal = "action=";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[180]);
+
+	FormEdit.start();
+}
+
+</script>
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_MakeList_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+	<form id="form1" name="form1" method="post" action="./admin_makelist.asp" target="frmAction">
+		<input type="hidden" name="action" value="mark">
+		<fieldset>
+			<legend id="Language_MakeList_Title"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="13%">&nbsp;<span id="Language_Comm_Select"></span>:</td>
+				  <td><select name="ColumnList"></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="1" checked></td>
+				  <td><span id="Language_MakeList_Option_1"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="2"></td>
+				  <td><span id="Language_MakeList_Option_2"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="3"></td>
+				  <td><span id="Language_MakeList_Option_3"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="4"></td>
+				  <td><span id="Language_MakeList_Option_4"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="5"></td>
+				  <td><span id="Language_MakeList_Option_5"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="6"></td>
+				  <td><span id="Language_MakeList_Option_6"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="7"></td>
+				  <td><span id="Language_MakeList_Option_7"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input name="selType" type="checkbox" value="8"></td>
+				  <td><span id="Language_MakeList_Option_8"></span></td>
+				</tr>
+				<tr>
+				  <td align="right"><input type="checkbox" name="checkbox" value="on" onclick="CheckAll(document.form1,this);"></td>
+				  <td><span id="Language_Comm_SelectAll"></span></td>
+				</tr>
+				<tr>
+				  <td colspan="2" bgcolor="efefef">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="this.form.submit();"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+	</div>
+
+	<div style="margin: 0 5px 0 5px;"><iframe name="frmAction" frameborder="0" scrolling="no" src="" width="100%" height="90"></iframe></div>
+</div>
+
+</div>

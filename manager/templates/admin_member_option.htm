@@ -1,0 +1,85 @@
+﻿<script type="text/javascript">
+if (typeof(tabFormID[currentTab]) == "undefined")
+{
+	ajaxChangeRightContent('./templates/admin_member_list.htm');
+}
+else{
+	//FormEdit.debug = true;
+	FormEdit.formName= "form1";
+	FormEdit.postUrl = "./admin_member.asp";
+	FormEdit.dateVal = "action=add&ID=" + tabFormID[currentTab];
+	FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+	editSuccessUrl = './templates/admin_member_list.htm';
+	
+	//objForm.debug = true;
+	objForm.postUrl = "./admin_member.asp";
+	objForm.doResponseMethod = getEditPostResult;
+
+	setTabTitle(currentTab, tabTitle[141]);
+}
+
+function initTabContent(){
+	FormEdit.start();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Member_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Member_MemberInfo"></legend>
+				<table width="100%" class="edittable">
+					<tr>
+					  <td width="12%" align="right"><span id="Language_Member_Account"></span></td>
+					  <td width="25%" align="left">&nbsp;<span id="Account"></span></td>
+					  <td width="15%" align="right"><span id="Language_Member_Sex"></span></td>
+					  <td align="left">&nbsp;<span id="Sex"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Member_NickName"></span></td>
+					  <td align="left">&nbsp;<span id="NickName"></span></td>
+					  <td align="right">E-Mail</td>
+					  <td align="left">&nbsp;<span id="Email"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Member_LoginTotal"></span></td>
+					  <td align="left">&nbsp;<span id="LoginTotal"></span></td>
+					  <td align="right"><span id="Language_Member_RegDate"></span></td>
+					  <td align="left">&nbsp;<span id="RegTime"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Member_BirtDay"></span></td>
+					  <td align="left">&nbsp;<span id="BirtDay"></span></td>
+					  <td align="right"><span id="Language_Member_ArticleTotal"></span></td>
+					  <td align="left">&nbsp;<span id="ArticleCount"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Member_GroupName"></span></td>
+					  <td align="left">&nbsp;<select name="UserGroup"></select></td>
+					  <td align="right"><span id="Language_Member_LoginPassword"></span></td>
+					  <td align="left">&nbsp;<input type="text" name="logPass">&nbsp;<span id="Language_Member_PasswordEditInfo" size="10" style="color: RED;"></span></td>
+					</tr>
+					<tr>
+					  <td align="right"><span id="Language_Member_IsLogin"></span></td>
+					  <td align="left" colspan="3">&nbsp;<span id="Language_Comm_Yes"></span><input type="radio" name="State" value="1"><span id="Language_Comm_No"></span><input type="radio" name="State" value="0"></td>
+					</tr>
+					<tr bgcolor="#efefef">
+					  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_member_list.htm','pageContent');"></td>
+					</tr>
+				</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

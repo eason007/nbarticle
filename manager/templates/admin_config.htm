@@ -1,0 +1,261 @@
+<script type="text/javascript">
+editSuccessUrl = './templates/admin_config.htm';
+
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_config.asp";
+FormEdit.dateVal = "action=";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.doResponseMethod = getEditPostResult;
+objForm.postUrl = "./admin_config.asp";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[10]);
+	FormEdit.start();
+}
+
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="master_editor">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Config_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_Base"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_WebSiteName"></span>:&nbsp;</TD>
+					<TD><input type="text" name="SiteName" size="30" /></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_WebSiteURL"></span>:&nbsp;</TD>
+					<TD><input type="text" name="SiteURL" size="30" /></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_WebSiteState"></span>:&nbsp;</TD>
+					<TD><span id="Language_Config_WebSiteState_Open"></span>
+					  <input type="radio" name="SiteState" value="1" />
+					  <span id="Language_Config_WebSiteState_Close"></span>
+					  <input type="radio" name="SiteState" value="0" /></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right valign="top"><span id="Language_Config_ClosedMsg"></span>:&nbsp;</TD>
+					<TD><textarea name="ClosedMsg" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SystemTimer"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes1"></span>
+					  <input type="radio" name="IsClose" value="1">
+					  <span id="Language_Comm_No1"></span>
+					  <input type="radio" name="IsClose" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SystemTimer_Value"></span>:&nbsp;</TD>
+					<TD><input type="text" name="SystemTimer" size="5"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;<span id="Language_Config_SystemTimer_Value_Help"></span></TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_PageKeyWord"></span>:&nbsp;</TD>
+					<TD><textarea name="keyword" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageKeyWord_Help"></span></TD>
+				  </TR>
+				  <TR>
+					<TD align=right valign="top"><span id="Language_Config_PageDescription"></span>:&nbsp;</TD>
+					<TD><textarea name="description" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageDescription_Help"></span></TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SystemMode"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes2"></span><input type="radio" name="debug" value="1"> <span id="Language_Comm_No2"></span><input type="radio" name="debug" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SystemStyle"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes3"></span><input type="radio" name="skin" value="0"> <span id="Language_Comm_No3"></span><input type="radio" name="skin" value="1"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SystemIndexMode"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes4"></span><input type="radio" name="index" value="1"> <span id="Language_Comm_No4"></span><input type="radio" name="index" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit1" id="btnSubmit1" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset1" id="btnReset1" onclick="javascript:FormEdit.start();"></div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_Article"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_MemberEditor"></span>:&nbsp;</TD>
+					<TD><select name="member_editor">
+<option value='0'>eWeb Editor</option>
+<option value='1'>FCK Editor</option>
+<option value='2'>Innova Editor</option>
+<option value='3'>TinyMCE Editor</option>
+</select></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_AutoRemote"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes5"></span><input type="radio" name="autoremote" value="1"> <span id="Language_Comm_No5"></span><input type="radio" name="autoremote" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;<span id="Language_Config_AutoRemote_Help"></span></TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_DefaultPoster"></span>:&nbsp;</TD>
+					<TD><input type="text" name="author" size="16"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit2" id="btnSubmit2" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset2" id="btnReset2" onclick="javascript:FormEdit.start();"></div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_Reg"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_UserRegEnable"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes6"></span><input type="radio" name="isreg" value="1">&nbsp;<span id="Language_Comm_No6"></span><input type="radio" name="isreg" value="0"></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_EmailById"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes7"></span><input type="radio" name="isemail" value="1">&nbsp;<span id="Language_Comm_No7"></span><input type="radio" name="isemail" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_RegWaitAdmin"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes8"></span><input type="radio" name="isadmin" value="0">&nbsp;<span id="Language_Comm_No8"></span><input type="radio" name="isadmin" value="1"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit3" id="btnSubmit3" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset3" id="btnReset3" onclick="javascript:FormEdit.start();"></div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_EMail"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_EMailAddress"></span>:&nbsp;</TD>
+					<TD><input type="text" name="mail"></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SMTPServerAddress"></span>:&nbsp;</TD>
+					<TD><input type="text" name="mail_s"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SMTPLoginAccout"></span>:&nbsp;</TD>
+					<TD><input type="text" name="mail_n"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_SMTPLoginPassWord"></span>:&nbsp;</TD>
+					<TD><input type="password" name="mail_p"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit4" id="btnSubmit4" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset4" id="btnReset4" onclick="javascript:FormEdit.start();"></div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_Other"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_GhostPostReview"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes9"></span><input type="radio" name="isreview" value="1"> <span id="Language_Comm_No9"></span><input type="radio" name="isreview" value="0"></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_ReviewWaitAdmin"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes10"></span><input type="radio" name="isreview_admin" value="1"> <span id="Language_Comm_No10"></span><input type="radio" name="isreview_admin" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_GhostPostVote"></span>:&nbsp;</TD>
+					<TD><span id="Language_Comm_Yes11"></span><input type="radio" name="isvote" value="1"> <span id="Language_Comm_No11"></span><input type="radio" name="isvote" value="0"></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right valign="top"><span id="Language_Config_BadWord"></span>:&nbsp;</TD>
+					<TD><textarea name="badword" cols="27" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt><span id="Language_Config_BadWord_Help"></span></TD>
+				  </TR>
+				  <TR>
+					<TD align=right valign="top"><span id="Language_Config_ArticleFrom"></span>:&nbsp;</TD>
+					<TD><textarea name="source" cols="27" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt><span id="Language_Config_ArticleFrom_Help"></span></TD>
+				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit5" id="btnSubmit5" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset5" id="btnReset5" onclick="javascript:FormEdit.start();"></div>
+</div>
+
+</form>

@@ -1,0 +1,373 @@
+﻿
+
+<!--
+/*定义页面基本样式*/
+body {
+	FONT-FAMILY: '宋体','新宋体',arial,verdana,sans-serif;
+	FONT-SIZE: 12px;
+	BACKGROUND: #ffffff;
+	TEXT-ALIGN: center;
+	margin: 3px 0 0 0;
+	padding: 0;
+}
+#center {
+	WIDTH: 776px;
+	MARGIN-RIGHT: auto;
+	MARGIN-LEFT: auto;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.hidden {
+	display: none;
+}
+.clear {
+	clear: both;
+	font-size: 1px;
+	width: 1px;
+	visibility: hidden;
+}
+.mainDiv {
+	WIDTH: 778px;
+	TEXT-ALIGN: left;
+}
+.border {
+	BORDER-TOP: #000000 1px solid;
+	BORDER-RIGHT: #000000 1px solid;
+	BORDER-BOTTOM: #000000 1px solid;
+	BORDER-LEFT: #000000 1px solid;
+}
+.content {
+	padding: 0;
+	margin: 0;
+}
+.content td {
+	HEIGHT: 19px;
+}
+.content p {
+	BORDER: 0px;
+	padding: 0 0 0 10px;
+	margin: 0;
+	TEXT-ALIGN: left;
+}
+.titleDiv{
+	margin: 5px 0 5px 0;
+	padding:3px 0 0 28px !important; padding:6px 0 0 28px;
+	height:17px;
+	border-bottom:1px solid #b2b2b2; 
+	border-top:1px solid #b2b2b2;
+	background:url(/html/images/new163/i3.gif) #DEE8F2 left no-repeat;
+	color: #800000;
+}
+.rightTitle {
+	height:20px; 
+	background:#f1f1f1 url(/html/images/new163/i9.gif) no-repeat 7px 10px; 
+	padding:10px 6px 0 25px;
+}
+.rightContent {
+	padding:1px 8px 2px 8px;
+}
+.rightContent a:link, a:visited, a:active {
+	color: #1F18A0;
+	TEXT-DECORATION: none;
+	font-size: 12px;
+}
+.rightContent a:hover {
+	COLOR: #800000; 
+	TEXT-DECORATION: underline;
+	border-bottom: 0px dotted;
+	font-size: 12px;
+}
+.rightContent td {
+	height: 16px;
+}
+
+/*分页样式*/
+#pageList {
+	padding: 3px 0 2px 0;
+	margin: 0;
+	BORDER: 0px;
+}
+#pageList .total {
+	padding: 1px 3px 0 3px;
+	margin: 0;
+	background: #F0F5FA;
+	border: 1px solid #8394B2;
+	TEXT-ALIGN: center;
+}
+#pageList .current {
+	padding: 1px 3px;
+	margin: 0;
+	background: #8394B2;
+	border: 1px solid #8394B2;
+	TEXT-ALIGN: center;
+	COLOR: #FFF;
+}
+#pageList a {
+	padding: 1px 3px;
+	margin: 0;
+	TEXT-ALIGN: center;
+	font-size: 12px;
+}
+#pageList a.list {
+	background: #F0F5FA;
+	TEXT-DECORATION: none;
+	border: 1px solid #8394B2;
+	color: #00328D;
+}
+#pageList a:hover.list {
+	background: #FFF;
+	TEXT-DECORATION: none;
+	border: 1px solid #8394B2;
+	color: #EC6600;
+}
+#pageList a.first,#pageList a.last {
+	background: #DFE6EF;
+	border: 1px solid #8394B2;
+	TEXT-ALIGN: center;
+}
+#pageList a:hover.first,#pageList a:hover.last {
+	background: #FFF;
+	border: 1px solid #8394B2;
+	TEXT-ALIGN: center;
+	color: #EC6600;
+}
+#pageList input {
+	border: 1px solid #4a7b6f;
+}
+
+/*定义元素基本样式*/
+img {
+	BORDER: 0px;
+}
+
+table {
+	BORDER: 0px;
+	padding: 0;
+	margin: 0;
+	TEXT-ALIGN: left;
+}
+
+form {
+	BORDER: 0px;
+	padding: 0;
+	margin: 0;
+	TEXT-ALIGN: left;
+}
+
+A:link {
+	COLOR: #000000; 
+	TEXT-DECORATION: none;
+	font-size: 14px;
+}
+A:hover {
+	COLOR: #FF0000; 
+	TEXT-DECORATION: underline;
+	font-size: 14px;
+}
+
+input {
+	font-size: 12px;
+}
+
+select {
+	font-size: 12px;
+}
+
+/*定义 Head 布局样式*/
+#head {
+	padding: 0 0 3px 0;
+	margin: 3px 0 0 0;
+}
+#head .logo {
+	WIDTH: 199px;
+	HEIGHT: 48px;
+	margin: 5px 0 8px 0;
+	padding: 0;
+}
+#headNav {
+	margin: 3px 0 0 0;
+	BORDER-TOP: #000000 1px solid;
+	BORDER-BOTTOM: #000000 1px solid;
+	BACKGROUND: #F6F6F6;
+	HEIGHT: 22px;
+	WIDTH: 778px;
+	TEXT-ALIGN: left;
+}
+
+
+/*定义 Foot 布局样式*/
+#foot {
+	BORDER-TOP: #000000 1px solid;
+	margin: 5px 0 0 0;
+	WIDTH: 778px;
+}
+
+#foot ul {
+	LIST-STYLE-TYPE: none;
+	margin: 5px 0 0px 10px;
+	padding: 0;
+}
+
+#foot li {
+	margin:3px 0 0 0;
+}
+
+#foot a:link, a:visited, a:active {
+	color: #1F18A0;
+	TEXT-DECORATION: none;
+	font-size: 12px;
+}
+#foot a:hover {
+	COLOR: #800000; 
+	TEXT-DECORATION: underline;
+	border-bottom: 0px dotted;
+	font-size: 12px;
+}
+
+/*定义广告样式*/
+.google-broad {
+	margin: 0.5em 0 1em 0;
+	height: 98px;
+	padding-left: 10px;
+	background: #F5F7FA url(/html/images/new_blue/google-back-99.png) 0 0 no-repeat;
+	border: none;
+	width: 530px;
+}
+.google-broad div {
+	height: 94px;
+	padding-top: 5px;
+	background: url(/html/images/new_blue/google-back-99.png) 100% 0 no-repeat;
+	overflow: hidden;
+}
+
+/*首页样式*/
+.line {
+	border-right:1px solid #b2b2b2;
+}
+.conLeftT1 {
+	background:url(/html/images/new163/i12.gif) left top no-repeat;
+	border-bottom:1px solid #b2b2b2;
+	padding:12px 0 5px 12px; 
+}
+
+/*List页面样式*/
+#listContent {
+}
+#listContent li {
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+	line-height: 160%;
+}
+#listContent #title {
+	background:url(/html/images/new163/i2.gif) 3px 12px no-repeat;
+	list-style-type:none;
+	padding:5px 0 0 10px;
+	TEXT-ALIGN: left;
+	line-height: 200%;
+}
+#listContent #title a {
+	font-size: 14px;
+}
+#listContent #info {
+	BACKGROUND: #EEEEEE;
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+	TEXT-ALIGN: left;
+}
+#listContent a {
+	font-size: 12px;
+}
+.listTitle {
+	height:20px; 
+	background:url(/html/images/new163/i1.gif) no-repeat 5px 7px; 
+	padding:2px 6px 5px 20px;
+	margin: 0 0 5px 0;
+	font-size:14px;
+}
+
+/*内容页样式*/
+#articleText {
+	background:#F9FCFE;
+	padding: 3px 0 0 5px;
+	margin: 0;
+	border-bottom:1px solid #b2b2b2;
+}
+#articleText h1 {
+	font-size:24px;
+	padding: 0;
+	margin: 0;
+}
+#text {
+	text-align:left; 
+	font-size:14px; 
+	clear:both; 
+	line-height: 160%;
+	word-wrap:break-word; 
+	word-break:break-all;
+	margin:5px 3px 5px 3px;
+	overflow:auto;
+	padding: 5px 5px 2px 5px;
+}
+#pageNav {
+	border-bottom:1px solid #b2b2b2;
+	height: 19px;
+	padding: 3px 0 0 3px;
+}
+#pageNav a:link, a:visited, a:active {
+	color: #000000;
+	TEXT-DECORATION: none;
+	font-size: 12px;
+}
+#pageNav a:hover {
+	COLOR: #800000; 
+	TEXT-DECORATION: underline;
+	border-bottom: 0px dotted;
+	font-size: 12px;
+}
+
+/*Img_List页面样式*/
+#ImgDiv img {
+	width: 90px;
+}
+#ImgDiv ul {
+	CLEAR: left;
+	LIST-STYLE-TYPE: none; 
+	TEXT-ALIGN: center; 
+	DISPLAY:inline;
+}
+#ImgDiv li {
+	background:url(/html/images/new163/i2.gif) 8px 8px no-repeat;
+	list-style-type:none;
+	FLOAT: left;
+	width: 120px;
+	text-align:center;
+	margin: 5px;
+	PADDING: 0;
+	DISPLAY: block; 
+}
+
+.keyworld {
+	color: #FF0000;
+	background-color: #FFFF00;
+}
+.link-Date {
+	color:#666666;
+}
+
+#divAjax {
+	POSITION: absolute;
+	Z-INDEX: 4;
+	BORDER-TOP: #EEE 1px solid;
+	BORDER-RIGHT: #CCC 1px solid;
+	BORDER-BOTTOM: #CCC 1px solid;
+	BORDER-LEFT: #EEE 1px solid;
+	margin: 200px 150px;
+	background: #FFF;
+}
+-->
