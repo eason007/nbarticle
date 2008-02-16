@@ -189,6 +189,7 @@ Const str_Config_BadWord="系统屏蔽字符"
 Const str_Config_BadWord_Help="格式:<br>屏蔽字符1==屏蔽后内容1;屏蔽字符2==屏蔽后内容2"
 Const str_Config_ArticleFrom="文章来源"
 Const str_Config_ArticleFrom_Help="格式:<br>名称1==网址1;名称2==网址2"
+Const str_Config_SEO="搜索引擎优化(SEO)"
 
 'admin_friend.asp
 Const str_Friend_Help="①排序号为从大到小排列<br>②相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_friend.html' target='_blank'>查看</a>"

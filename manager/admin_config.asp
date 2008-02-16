@@ -100,8 +100,9 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Config_BadWord_Help",str_Config_BadWord_Help)
 	Call EA_M_XML.AppElements("Language_Config_ArticleFrom",str_Config_ArticleFrom)
 	Call EA_M_XML.AppElements("Language_Config_ArticleFrom_Help",str_Config_ArticleFrom_Help)
+	Call EA_M_XML.AppElements("Language_Config_SEO",str_Config_SEO)
 
-	For i= 1 To 5
+	For i= 1 To 6
 		Call EA_M_XML.AppElements("btnSubmit" & i,str_Comm_Save_Button)
 		Call EA_M_XML.AppElements("btnReset" & i,str_Comm_Reset_Button)
 	Next

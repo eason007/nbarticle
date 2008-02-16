@@ -36,29 +36,17 @@ function initTabContent(){
 			<TABLE id="edittable" width="100%">
 				<TBODY>
 				  <TR>
-					<TD align=right width="140"><span id="Language_Config_WebSiteName"></span>:&nbsp;</TD>
-					<TD><input type="text" name="SiteName" size="30" /></TD>
-					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
-				  </TR>
-				  <TR>
-					<TD align=right><span id="Language_Config_WebSiteURL"></span>:&nbsp;</TD>
-					<TD><input type="text" name="SiteURL" size="30" /></TD>
-					<TD class=vsplit_line></TD>
-					<TD class=describe_txt>&nbsp;</TD>
-				  </TR>
-				  <TR>
-					<TD align=right><span id="Language_Config_WebSiteState"></span>:&nbsp;</TD>
+					<TD align=right width="140"><span id="Language_Config_WebSiteState"></span>:&nbsp;</TD>
 					<TD><span id="Language_Config_WebSiteState_Open"></span>
 					  <input type="radio" name="SiteState" value="1" />
 					  <span id="Language_Config_WebSiteState_Close"></span>
 					  <input type="radio" name="SiteState" value="0" /></TD>
-					<TD class=vsplit_line></TD>
-					<TD class=describe_txt>&nbsp;</TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_ClosedMsg"></span>:&nbsp;</TD>
-					<TD><textarea name="ClosedMsg" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="ClosedMsg" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;</TD>
 				  </TR>
@@ -77,23 +65,41 @@ function initTabContent(){
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;<span id="Language_Config_SystemTimer_Value_Help"></span></TD>
 				  </TR>
+				</TBODY>
+			  </TABLE>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit1" id="btnSubmit1" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset1" id="btnReset1" onclick="javascript:FormEdit.start();"></div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Config_SEO"></legend>
+			<TABLE id="edittable" width="100%">
+				<TBODY>
+				  <TR>
+					<TD align=right width="140"><span id="Language_Config_WebSiteName"></span>:&nbsp;</TD>
+					<TD><input type="text" name="SiteName" size="30" /></TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=300>&nbsp;</TD>
+				  </TR>
+				  <TR>
+					<TD align=right><span id="Language_Config_WebSiteURL"></span>:&nbsp;</TD>
+					<TD><input type="text" name="SiteURL" size="30" /></TD>
+					<TD class=vsplit_line></TD>
+					<TD class=describe_txt>&nbsp;</TD>
+				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_PageKeyWord"></span>:&nbsp;</TD>
-					<TD><textarea name="keyword" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="keyword" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageKeyWord_Help"></span></TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_PageDescription"></span>:&nbsp;</TD>
-					<TD><textarea name="description" cols="27" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="description" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageDescription_Help"></span></TD>
-				  </TR>
-				  <TR>
-					<TD align=right><span id="Language_Config_SystemMode"></span>:&nbsp;</TD>
-					<TD><span id="Language_Comm_Yes2"></span><input type="radio" name="debug" value="1"> <span id="Language_Comm_No2"></span><input type="radio" name="debug" value="0"></TD>
-					<TD class=vsplit_line></TD>
-					<TD class=describe_txt>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_SystemStyle"></span>:&nbsp;</TD>
@@ -112,7 +118,7 @@ function initTabContent(){
 		</fieldset>
 	</div>
 
-	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit1" id="btnSubmit1" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset1" id="btnReset1" onclick="javascript:FormEdit.start();"></div>
+	<div style="margin-top: 5px;TEXT-ALIGN: left;"><input type="button" name="btnSubmit6" id="btnSubmit6" onclick="javascript:return objForm.ajaxPost();">&nbsp;&nbsp;<input type="button" name="btnReset6" id="btnReset6" onclick="javascript:FormEdit.start();"></div>
 
 	<div style="margin-top: 5px;">
 		<fieldset>
@@ -240,13 +246,13 @@ function initTabContent(){
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_BadWord"></span>:&nbsp;</TD>
-					<TD><textarea name="badword" cols="27" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="badword" cols="40" rows="7" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt><span id="Language_Config_BadWord_Help"></span></TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_ArticleFrom"></span>:&nbsp;</TD>
-					<TD><textarea name="source" cols="27" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="source" cols="40" rows="7" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt><span id="Language_Config_ArticleFrom_Help"></span></TD>
 				  </TR>
