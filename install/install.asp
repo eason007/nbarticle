@@ -2,7 +2,7 @@
 <%
 '====================================================================
 '= Team Elite - Elite Article System
-'= Copyright (c) 2004 - 2007 Eason Chan All Rights Reserved.
+'= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
@@ -11,7 +11,7 @@
 '= 摘    要：安装文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-11-21
+'= 最后日期：2008-02-14
 '====================================================================
 
 Dim dis
@@ -39,7 +39,7 @@ End If
 <meta name="generator" content="NB文章系统(NBArticle) EliteArticle System" />
 <meta name="author" content="eason007<eason007#163.com>" />
 <meta name="copyright" content="www.nbarticle.com" />
-<script src="../common/js/objAjax.js" type="text/javascript"></script>
+<script src="../js/objAjax.js" type="text/javascript"></script>
 <script type="text/javascript">
 function testDBConnection () {
 	document.getElementById('testBtn').disabled = true;
@@ -256,8 +256,6 @@ img {
 		<input type="button" name="P" value="&lt;&lt;上一步" onclick="javascript: location.href = '?Step=<%= StepNum - 1 %>';" />
 		<% End If %>
 		<input type="button" name="N" id="N" value="下一步&gt;&gt;"<%=dis%> onclick="javascript: <%=GoCode%>;" />
-	<% Else %>
-		<input type="button" name="O" value="完成"<%=dis%> onclick="javascript: location.href ='../';" />
 	<% End If %>
 </div>
 
@@ -268,7 +266,7 @@ img {
 <div id="title">最终用户授权协议</div>
 
 <div id="text">
-	<p>版权所有&nbsp;(&copy)&nbsp;2004&nbsp;-&nbsp;2007&nbsp;[Team Elite,Eason Chan]</p>
+	<p>版权所有&nbsp;(&copy)&nbsp;2004&nbsp;-&nbsp;2008&nbsp;[Team Elite,Eason Chan]</p>
 	<p>感谢您选择&nbsp;<a href="http://www.nbarticle.com/" target="_blank">NB文章系统(NBArticle)</a>。本文章系统是由&nbsp;<span class="italic">Team Elite</span>&nbsp;自主开发的一个免费、开源、高效、安全的ASP内容管理系统。</p>
 	<p><a href="http://www.nbarticle.com/" target="_blank">NB文章系统(NBArticle)</a>&nbsp;英文全称为&nbsp;NetBuilder Article，中文全称为&nbsp;NB文章系统，以下统称&nbsp;<strong>NB文章系统(NBArticle)</strong>。</p>
 	<p><strong>NB文章系统(NBArticle)</strong>&nbsp;官方技术支持论坛为&nbsp;<a href="http://forum.nbarticle.com/" target="_blank">http://forum.nbarticle.com/</a>；<strong>NB文章系统(NBArticle)</strong>&nbsp;官方产品网站为&nbsp;<a href="http://www.nbarticle.com/" target="_blank">http://www.nbarticle.com/</a>。</p>
@@ -293,7 +291,7 @@ Sub Step1
 
 	<p><strong>系统运行需要服务器有以下的支持：</strong>
 	<br />>>IIS版本：<span style="color:#800000;">5.1或以上</span>
-	<br />>>脚本解译引擎：<span style="color:#800000;">VBScript/5.6.8820或以上</span>
+	<br />>>脚本解译引擎：<span style="color:#800000;">VBScript 5.6.8820或以上</span>
 	<br />>>Scripting.FileSystemObject(FSO)：<span style="color:#800000;">启用状态</span>
 	<br />>>ADODB.Stream：<span style="color:#800000;">启用状态</span>
 	<br />>>ADODB.Connection(ADO)：<span style="color:#800000;">启用状态</span>
@@ -319,7 +317,7 @@ Sub Access_Step2
 	<input type="hidden" name="Folder" id="Folder" value="<%=Folder%>" />
 
 	<p>>>请输入你的Access数据库路径：
-	<br /><%=Folder%><input name="DataName" id="DataName" type="text" size="30" value="Depot/NBArticle.asp" />&nbsp;<input type="button" id="testBtn" onclick="javascript:testDBConnection();" value="测试连接" />
+	<br /><%=Folder%><input name="DataName" id="DataName" type="text" size="30" value="db/NBArticle.asp" />&nbsp;<input type="button" id="testBtn" onclick="javascript:testDBConnection();" value="测试连接" />
 	<br />>><span style="color:#800000;">如没有修改数据库目录名及文件名，使用默认的即可；否则请改为正确的目录名及文件名。数据库文件已进行防下载处理</span></p>
 </div>
 <%
@@ -345,11 +343,18 @@ Sub SQL_Step2
 End Sub
 
 Sub EndStr
+	Dim HostUrl
+	
+	HostUrl = Request.ServerVariables ("SERVER_NAME")
+	If Request.ServerVariables ("SERVER_PORT") <> "80" Then
+		HostUrl = HostUrl & ":" & Request.ServerVariables ("SERVER_PORT")
+	End If
+	HostUrl = HostUrl & Replace(Request.ServerVariables ("URL"), "/install/install.asp", "") & "/"
 %>
 <div id="title">安装完成</div>
 
 <div id="text">
-	<p>恭喜！<br />安装顺利完成，现在您可以通过&nbsp;<a href="../">http://<%=Request.ServerVariables ("SERVER_NAME") & ":" & Request.ServerVariables ("SERVER_PORT") & Replace(Request.ServerVariables ("URL"), "/install/install.asp", "")%></a>&nbsp;来访问NB文章系统(NBArticle)了。</p>
+	<p>恭喜！<br />安装顺利完成，现在您可以通过&nbsp;<a href="../">http://<%=HostUrl%></a>&nbsp;来访问NB文章系统(NBArticle)了。</p>
 </div>
 <%
 End Sub
