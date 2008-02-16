@@ -24,14 +24,10 @@ else{
 }
 FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
-document.getElementById('AdvancedFunctionImg').alt = openAdvancedSetting;
-document.getElementById('AdvancedFunctionTD').title= openAdvancedSetting;
-document.getElementById('AdvancedFunctionSPAN').innerHTML = openAdvancedSetting;
-
 function initTabContent(){
 	FCKeditorAPI = null;
-	var oFCKeditor = new FCKeditor('Content', 730, 450) ;
-	oFCKeditor.BasePath	= "../editor/fck_editor/";
+	var oFCKeditor = new FCKeditor('Content', 650, 450) ;
+	oFCKeditor.BasePath	= "../plugins/fck_editor/";
 	oFCKeditor.EnableOpera = true;
 	oFCKeditor.ReplaceTextarea() ;
 	__FCKeditorNS = null;
@@ -45,7 +41,7 @@ function checkData(sTargetName) {
 	FormEdit.doResponseMethodOther = "";
 
 	//objForm.debug = true;
-	objForm.doResponseOther = "switchTab(currentTab);";
+	objForm.doResponseOther = "switchTab(currentTab);FormEdit.start();";
 	objForm.postUrl = "./admin_content.asp";
 	objForm.ajaxPost();
 
@@ -90,28 +86,6 @@ function review_img(){
 	}
 }
 
-function AdvancedFunction(){
-	if (document.getElementById('AdvancedFunction').style.display=="")
-	{
-		document.getElementById('AdvancedFunctionImg').src = "images/menu_title_down.gif";
-		document.getElementById('AdvancedFunctionImg').alt = openAdvancedSetting;
-
-		document.getElementById('AdvancedFunctionTD').title= openAdvancedSetting;
-		document.getElementById('AdvancedFunctionSPAN').innerHTML = openAdvancedSetting;
-
-		document.getElementById('AdvancedFunction').style.display = "none";
-	}
-	else{
-		document.getElementById('AdvancedFunctionImg').src = "images/menu_title_up.gif";
-		document.getElementById('AdvancedFunctionImg').alt = closeAdvancedSetting;
-
-		document.getElementById('AdvancedFunctionTD').title= closeAdvancedSetting;
-		document.getElementById('AdvancedFunctionSPAN').innerHTML = closeAdvancedSetting;
-
-		document.getElementById('AdvancedFunction').style.display = "";
-	}
-}
-
 function getFekeditorText(editor_name)
 {
     var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
@@ -137,57 +111,74 @@ function getFekeditorText(editor_name)
 	<div style="margin-top: 5px;">
 		<fieldset>
 			<legend id="Language_Content_AddArticle"></legend>
-			<table width="100%" class="edittable">
-			  <tr>
-				<td width="10%" align="right"><span id="Language_Content_Column"></span></td>
-				<td align="left" width="50%">&nbsp;<select name="Column" dataType="Require"></select></td>
-				<td width="10%" align="right"><span id="Language_Content_ArticleTemplate"></span></td>
-				<td align="left">&nbsp;<select name="atemplate" onchange="RedirectTemplate(this.options.selectedIndex,this);"></select></td>
-			  </tr>
-			  <tr>
-				<td align="right"><span id="Language_Content_Title"></span></td>
-				<td align="left" colspan="3">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="60" dataType="Require"></td>
-			  </tr>
-			  <tr>
-				<td align="right"><span id="Language_Content_Keyword"></span></td>
-				<td align="left">&nbsp;<input type="text" name="keyword" size="50"></td>
-				<td align="right"><span id="Language_Content_Author"></span></td>
-				<td align="left">&nbsp;<input type="text" name="author"></td>
-			  </tr>
-			  <tr valign="middle">
-				<td align="right" valign="top"><span id="Language_Content_Summary"></span></td>
-				<td align="left" colspan="3">&nbsp;<textarea name="summary" id="summary" cols="70" rows="5" wrap="VIRTUAL"></textarea></td>
-			  </tr>
-			  <tr valign="middle">
-				<td colspan="4" style="CURSOR: hand" onclick="AdvancedFunction()" id="AdvancedFunctionTD">&nbsp;<img src="images/menu_title_down.gif" id="AdvancedFunctionImg"><span id="AdvancedFunctionSPAN"></span></td>
-			  </tr>
-			  <tr valign="middle" id="AdvancedFunction" style="display:none">
-				<td colspan="4"><table width="100%">
-					<tr>
-					  <td align="right"><span id="Language_Content_Img"></span></td>
-					  <td align="left">&nbsp;<input type="text" name="img" id="img" size="40">&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
-					  <td align="right"><span id="Language_Content_Top"></span></td>
-					  <td align="left">&nbsp;<input type="radio" name="istop" value="1"><span id="Language_Comm_Yes"></span>&nbsp;<input type="radio" name="istop" value="0"><span id="Language_Comm_No"></span></td>
-					</tr>
-					<tr>
-					  <td align="right"><span id="Language_Content_OutURL"></span></td>
-					  <td align="left" colspan="3">&nbsp;<input type="text" name="outurl" size="60"></td>
-					<tr>
-					  <td align="right"><span id="Language_Content_Source"></span></td>
-					  <td align="left" colspan="3">&nbsp;<select name="choosesource" onchange="inputsource(this.options[this.selectedIndex].value)"></select>&nbsp;=->&nbsp;<input type="text" name="source" id="source">&nbsp;<input type="text" name="sourceurl" id="sourceurl" size="30"></td>
-					</tr>
-					<tr>
-					  <td colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="Language_Content_ViewNum"></span>&nbsp;<input type="text" name="viewnum" size="5">&nbsp;&nbsp;&nbsp;<span id="Language_Content_Date"></span>&nbsp;<input type="text" name="adddate" size="23">&nbsp;&nbsp;&nbsp;<span id="Language_Content_PassNow"></span>&nbsp;<input type="checkbox" name="ispass" value="1">&nbsp;&nbsp;&nbsp;<span id="Language_Content_SaveAs"></span>&nbsp;<input type="checkbox" name="saveas" id="saveas" value="1"></td>
-					</tr>
-				  </table></td>
-			  </tr>
-			  <tr>
-				<td align="center" colspan="4" valign="top"><textarea name="Content" id="Content" dataType="Require" style="display:none"></textarea></td>
-			  </tr>
-			  <tr bgcolor="#efefef">
-				  <td align="left" valign="middle" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_content_list.htm','pageContent');"></td>
-			  </tr>
-		  </table>
+			<div class="left" style="margin-right: 5px;">
+				<table class="edittable">
+				  <tr>
+					<td align="right">&nbsp;<span id="Language_Content_Title"></span></td>
+					<td align="left">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="77" dataType="Require"></td>
+				  </tr>
+				  <tr>
+					<td align="left" colspan="2" valign="top">&nbsp;<textarea name="Content" id="Content" dataType="Require" style="display:none"></textarea></td>
+				  </tr>
+			  </table>
+		  </div>
+		  <div class="left">
+			  <table class="edittable">
+				  <tr>
+					<td align="right"><span id="Language_Content_Column"></span></td>
+					<td align="left">&nbsp;<select name="Column" dataType="Require"></select></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Keyword"></span></td>
+					<td align="left">&nbsp;<textarea name="keyword" cols="28" rows="4"></textarea></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Summary"></span></td>
+					<td align="left">&nbsp;<textarea name="summary" id="summary" cols="28" rows="8" wrap="VIRTUAL"></textarea></td>
+				  </tr>
+				  <tr>
+				    <td align="right" valign="top"><span id="Language_Content_OutURL"></span></td>
+					<td align="left">&nbsp;<textarea name="outurl" id="outurl" cols="28" rows="2" wrap="VIRTUAL"></textarea></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Img"></span></td>
+					<td align="left">&nbsp;<textarea name="img" id="img" cols="28" rows="2" wrap="VIRTUAL"></textarea><br />&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
+				  </tr>
+				  <tr>
+				    <td align="right" valign="top"><span id="Language_Content_Source"></span></td>
+					<td align="left">&nbsp;<select name="choosesource" onchange="inputsource(this.options[this.selectedIndex].value)"></select><br />&nbsp;<input type="text" name="source" id="source" size="33"><br />&nbsp;<input type="text" name="sourceurl" id="sourceurl" size="33"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_Date"></span></td>
+					<td align="left">&nbsp;<input type="text" name="adddate" size="17"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_ArticleTemplate"></span></td>
+					<td align="left">&nbsp;<select name="atemplate" onchange="RedirectTemplate(this.options.selectedIndex,this);"></select></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_Top"></span></td>
+					<td align="left">&nbsp;<input type="radio" name="istop" value="1"><span id="Language_Comm_Yes"></span>&nbsp;<input type="radio" name="istop" value="0"><span id="Language_Comm_No"></span></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_ViewNum"></span></td>
+					<td align="left">&nbsp;<input type="text" name="viewnum" size="5"></td>
+				  </tr>
+				  
+				  <tr>
+					<td align="right"><span id="Language_Content_PassNow"></span></td>
+					<td align="left">&nbsp;<input type="checkbox" name="ispass" value="1"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_SaveAs"></span></td>
+					<td align="left">&nbsp;<input type="checkbox" name="saveas" id="saveas" value="1"></td>
+				  </tr>
+			  </table>
+		  </div>
+
+		  <div class="separator"></div>
+
+		  <div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_content_list.htm','pageContent');"></div>
 		</fieldset>
 	</div>
 </div>
