@@ -19,36 +19,37 @@
 <script type="text/javascript" src="../js/manager.js"></script>
 <script type="text/javascript" src="../js/jsdate.js"></script>
 <script type="text/javascript" src="../plugins/fck_editor/fckeditor.js"></script>
+<script type="text/javascript">
+function menuFormat (title, link) {
+	this.title	= title,
+	this.link	= link
+}
+</script>
+<script type="text/javascript" src="./admin_menu.asp"></script>
 </head>
 <body id="center">
 
-<div id="divLoading" style="display: none;"><img src="images/loading_r.gif" alt=""></div>
+<div id="divLoading" style="display: none;"><img src="images/loading_r.gif" alt="" /></div>
 
 <div id="divDialog" onselectstart="window.event.returnValue=false;" style="filter:alpha(opacity=0); display: none;">
 	<div id="DialogTitle"></div>
 	<div id="DialogContent"></div>
-	<div style="TEXT-ALIGN: center;"><input type="button" id="DialogCancel" onclick="closeDialog();"></div>
+	<div style="TEXT-ALIGN: center;"><input type="button" id="DialogCancel" onclick="closeDialog();" /></div>
 </div>
 <div id="divModal" style="FILTER: alpha(opacity=75);" onclick="window.event.cancelBubble=true; window.event.returnValue=false;"></div>
 
-<div class="separator"></div>
-
 <div id="head">
 	<div class="left" id="NBArticlePlacard"></div>
-
-	<>
+	<div class="left" id="menu"></div>
 </div>
+<div id="subMenu"></div>
 
-<div class="separator" style="height: 3px;"></div>
+<div class="separator"></div>
 
-<div class="left" style="width: 20%;" id="leftChannel"></div>
-
-<div class="right" style="width: 78%;">
+<div style="width: 99%;MARGIN-RIGHT: auto;MARGIN-LEFT: auto;MARGIN-top: 5px;">
 	<div class="nav" id="tabBox"><img src="images/plus.gif" width="18" class="right" style="cursor:pointer;" onclick="javascript: newTab();" alt="新开标签" /><span class="abg" id="Tab_0" onclick="javascript: switchTab(0);" title="首页" userData="1" blank="0">首页</span></div>
 	<div id="contentDiv"></div>
 </div>
-
-<div class="separator"></div>
 
 <script type="text/javascript">
 var FormEdit = new formEditObject();
@@ -68,7 +69,6 @@ objForm.formName = "form1";
 
 document.getElementById("divLoading").innerHTML += "&nbsp;" + loadingMsg;
 
-ajaxGetDateToPage("./admin_left.asp","leftChannel");
 ajaxGetDate("./templates/admin_main.htm", loadMain);
 
 function loadMain(obj){
@@ -81,6 +81,11 @@ function loadMain(obj){
 	document.getElementById("contentDiv").innerHTML = returnMessage;
 	tabCache[0] = returnMessage;
 	executeScript(sContent);
+}
+
+for (var i = 0; i < mainMenu.length ; i++ )
+{
+	document.getElementById("menu").innerHTML += "<a href='javascript: vod();' class='title'>" + mainMenu[i].title + "</a>";
 }
 </script>
 

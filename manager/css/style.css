@@ -17,13 +17,11 @@
 
 #head {
 	background-color: #135E93;
-	height: 80px;
-}
-#head #logo {
-	padding: 10px 5px;
+	height: 81px;
 }
 #head #NBArticlePlacard {
-	MARGIN: 2px 1px;
+	MARGIN: 1px;
+	height: 53px;
 }
 #head #NBArticlePlacard .title{
 	font-weight:bold;
@@ -31,6 +29,24 @@
 #head #NBArticlePlacard  .content{
 	font-style:italic;
 	font-size: 11px;
+}
+#head #menu {
+	width: 990px;
+	MARGIN: 4px 1px 0 1px;
+}
+#head #menu .title{
+	background-color: #EFEFEF;
+	padding: 3px 8px;
+	MARGIN-right: 8px;
+	text-decoration:none;
+}
+
+#subMenu {
+	height: 20px;
+	background-color: #FFF;
+	border-bottom:1px #135E93 solid;
+	border-left:1px #135E93 solid;
+	border-right:1px #135E93 solid;
 }
 
 .nav {

@@ -10,54 +10,54 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-10-27
+'= 最后日期：2008-02-16
 '====================================================================
 
 Dim str_LeftMenu(8,11)
 
 str_LeftMenu(0,0)="系统管理"
-str_LeftMenu(0,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_config.htm');"">系统设定</a>"
-str_LeftMenu(0,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_friend_list.htm');"">联盟管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_friend_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(0,3)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_placard_list.htm');"">公告管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_placard_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(0,4)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_vote_list.htm');"">投票管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_vote_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(0,5)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_insidelink_list.htm');"">站内连接</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_insidelink_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(0,6)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_adsense_list.htm');"">广告管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_adsense_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(0,7)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/reload.htm');"">数据更新</a>"
+str_LeftMenu(0,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_config.htm\');"">系统设定</a>"
+str_LeftMenu(0,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_friend_list.htm\');"">联盟管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_friend_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(0,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_placard_list.htm\');"">公告管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_placard_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(0,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_vote_list.htm\');"">投票管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_vote_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(0,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_insidelink_list.htm\');"">站内连接</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_insidelink_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(0,6)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_adsense_list.htm\');"">广告管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_adsense_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(0,7)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/reload.htm\');"">数据更新</a>"
 
 str_LeftMenu(1,0)="内容管理"
-str_LeftMenu(1,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_column_list.htm');"">栏目管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_column_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(1,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_content_list.htm');"">文章管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_content_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(1,3)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_columnbath_move.htm');"">文章批量移动</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_columnbath_del.htm');"">删除</a>"
-str_LeftMenu(1,4)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_review_list.htm');"">评论管理</a>"
-str_LeftMenu(1,5)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_arttemplate_list.htm');"">文章模版管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_arttemplate_option.htm', 'pageAdd');"">添加</a>"
+str_LeftMenu(1,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_column_list.htm\');"">栏目管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_column_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(1,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_list.htm\');"">文章管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(1,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_columnbath_move.htm\');"">文章批量移动</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_columnbath_del.htm\');"">删除</a>"
+str_LeftMenu(1,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_review_list.htm\');"">评论管理</a>"
+str_LeftMenu(1,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_arttemplate_list.htm\');"">文章模版管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_arttemplate_option.htm\', \'pageAdd\');"">添加</a>"
 
 str_LeftMenu(2,0)="会员管理"
-str_LeftMenu(2,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_usergroup_list.htm');"">用户组管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_usergroup_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(2,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_member_list.htm');"">用户管理</a>"
+str_LeftMenu(2,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_usergroup_list.htm\');"">用户组管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_usergroup_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(2,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_member_list.htm\');"">用户管理</a>"
 
 str_LeftMenu(3,0)="安全管理"
-str_LeftMenu(3,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_master_list.htm');"">管理员管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./admin_master.asp','','',false,'action=add');"">添加</a>"
-str_LeftMenu(3,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_ip_list.htm');"">IP管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_ip_option.htm', 'pageAdd');"">添加</a>"
+str_LeftMenu(3,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./admin_master.asp\',\'\',\'\',false,\'action=add\');"">添加</a>"
+str_LeftMenu(3,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_ip_list.htm\');"">IP管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_ip_option.htm\', \'pageAdd\');"">添加</a>"
 
 str_LeftMenu(4,0)="风格及模版管理"
-str_LeftMenu(4,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_makeindex_main.htm');"">生成首页</a>"
-str_LeftMenu(4,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_makelist_main.htm');"">生成列表</a>"
-str_LeftMenu(4,3)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_makeview_main.htm');"">生成内容页</a>"
-str_LeftMenu(4,4)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_template_list.htm');"">模版管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_template_option.htm', 'pageAdd');"">添加</a>"
-str_LeftMenu(4,5)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_loadskin_main.htm');"">导出模版</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_loadskin_input.htm');"">导入</a>"
-str_LeftMenu(4,6)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_makejs_list.htm');"">Js文件管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_makejs_option.htm', 'pageAdd');"">添加</a>"
+str_LeftMenu(4,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeindex_main.htm\');"">生成首页</a>"
+str_LeftMenu(4,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makelist_main.htm\');"">生成列表</a>"
+str_LeftMenu(4,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeview_main.htm\');"">生成内容页</a>"
+str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_list.htm\');"">模版管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_main.htm\');"">导出模版</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_input.htm\');"">导入</a>"
+str_LeftMenu(4,6)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_list.htm\');"">Js文件管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_option.htm\', \'pageAdd\');"">添加</a>"
 
 str_LeftMenu(5,0)="数据库管理"
-str_LeftMenu(5,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./admin_data.asp','','',false,'action=backupdata');"">备份数据库</a>"
-str_LeftMenu(5,2)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_data_execute.htm');"">数据库高级管理</a>"
-str_LeftMenu(5,3)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_data_diskview.htm');"">系统空间占用</a>"
-str_LeftMenu(5,4)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_mailout.htm');"">导出邮件地址列表</a>"
+str_LeftMenu(5,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./admin_data.asp\',\'\',\'\',false,\'action=backupdata\');"">备份数据库</a>"
+str_LeftMenu(5,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_data_execute.htm\');"">数据库高级管理</a>"
+str_LeftMenu(5,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_data_diskview.htm\');"">系统空间占用</a>"
+str_LeftMenu(5,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_mailout.htm\');"">导出邮件地址列表</a>"
 
 str_LeftMenu(6,0)="上传文件管理"
-str_LeftMenu(6,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_upfile_list.htm');"">上传文件管理</a>"
+str_LeftMenu(6,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_upfile_list.htm\');"">上传文件管理</a>"
 
 str_LeftMenu(7,0)="接口管理"
-str_LeftMenu(7,1)="<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_interface_list.htm');"">外部接口管理</a> | <a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_interface_option.htm', 'pageAdd');"">添加</a>"
+str_LeftMenu(7,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_interface_list.htm\');"">外部接口管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_interface_option.htm\', \'pageAdd\');"">添加</a>"
 
 Const str_Comm_Reduce_Input="缩小文本框"
 Const str_Comm_Zoom_Input="放大文本框"
@@ -242,7 +242,7 @@ Const str_InsideLink_Input_Info="输入站内连接资料"
 Const str_InsideLink_All="全站"
 
 'admin_column.asp
-Const str_Column_Help="①新添加的栏目，必须先到安全管理-=><a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_master_list.htm');"">管理员管理</a>中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关模版调用标签说明。<a href='http://help.nbarticle.com/template_tags.html' target='_blank'>查看</a>"
+Const str_Column_Help="①新添加的栏目，必须先到安全管理-=><a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a>中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关模版调用标签说明。<a href='http://help.nbarticle.com/template_tags.html' target='_blank'>查看</a>"
 Const str_Column_ColumnList="栏目列表"
 Const str_Column_AddColumn="添加栏目"
 Const str_Column_Title="栏目名称"
@@ -322,7 +322,7 @@ Const str_Content_ArticleTemplate="文章模版"
 
 'admin_columnbath.asp
 Const str_Bath_Move_Help="①这里只是移动文章，而不是拷贝或者删除！ <br />②您可以将一个下属栏目的文章移动到上级栏目，也可以将上级栏目的文章移动到下级栏目<br />③当使用该功能之后，建议更新一次系统及栏目数据"
-Const str_Bath_Del_Help="①如果选择了不入回收站，本操作将批量删除栏目文章，<font color=red>则所有操作不可恢复。</font>如需还原文章，请到<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_content_list.htm');"">回收站</a>。<br />②如果您确定这样做，请仔细检查您输入的信息。<br />③当使用该功能之后，建议更新一次系统及栏目数据"
+Const str_Bath_Del_Help="①如果选择了不入回收站，本操作将批量删除栏目文章，<font color=red>则所有操作不可恢复。</font>如需还原文章，请到<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_list.htm\');"">回收站</a>。<br />②如果您确定这样做，请仔细检查您输入的信息。<br />③当使用该功能之后，建议更新一次系统及栏目数据"
 Const str_Bath_BathMove="批量移动"
 Const str_Bath_From="从"
 Const str_Bath_To="到"
@@ -463,7 +463,7 @@ Const str_MakeList_Now="现第"
 Const str_MakeList_AllComplate="所有任务已完成"
 
 'admin_makeview.asp
-Const str_MakeView_Help="①文章ID，可以填写您想从哪一个ID号开始进行生成静态网页。具体ID号可以在<a href='javascript:vod();' onclick=""javascript:ajaxChangeRightContent('./templates/admin_content_list.htm');"">文章管理</a>中查看。<br />②无论是选择""按ID生成""还是按""按日期生成""，相互之间的间隔最好不要选择过大。"
+Const str_MakeView_Help="①文章ID，可以填写您想从哪一个ID号开始进行生成静态网页。具体ID号可以在<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_list.htm\');"">文章管理</a>中查看。<br />②无论是选择""按ID生成""还是按""按日期生成""，相互之间的间隔最好不要选择过大。"
 Const str_MakeView_Title="批量生成静态内容页"
 Const str_MakeView_MakeById="按ID生成"
 Const str_MakeView_MakeByDate="按日期生成"
