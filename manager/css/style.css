@@ -1,6 +1,6 @@
 ﻿<!--
 #center {
-	WIDTH: 980px;
+	WIDTH: 1000px;
 	MARGIN-RIGHT: auto;
 	MARGIN-LEFT: auto;
 }
@@ -12,6 +12,25 @@
 }
 .separator {
 	clear: both;
+}
+
+
+#head {
+	background-color: #135E93;
+	height: 80px;
+}
+#head #logo {
+	padding: 10px 5px;
+}
+#head #NBArticlePlacard {
+	MARGIN: 2px 1px;
+}
+#head #NBArticlePlacard .title{
+	font-weight:bold;
+}
+#head #NBArticlePlacard  .content{
+	font-style:italic;
+	font-size: 11px;
 }
 
 .nav {
