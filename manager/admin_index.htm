@@ -83,9 +83,13 @@ function loadMain(obj){
 	executeScript(sContent);
 }
 
+function showSubMenu (iMenu) {
+	document.getElementById("subMenu").innerHTML = mainMenu[iMenu].link;
+}
+
 for (var i = 0; i < mainMenu.length ; i++ )
 {
-	document.getElementById("menu").innerHTML += "<a href='javascript: vod();' class='title'>" + mainMenu[i].title + "</a>";
+	document.getElementById("menu").innerHTML += "<a href='javascript: vod();' class='title' onclick='javascript: showSubMenu(" + i + ");'>" + mainMenu[i].title + "</a>";
 }
 </script>
 
