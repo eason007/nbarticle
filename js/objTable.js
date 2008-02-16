@@ -116,11 +116,15 @@ function tableObject() {
 
 					for(var i=0; i<contents.length;i++) {
 						var s = contents[i];
-						var row = table.insertRow(nowRows+i);
 
+						var row = table.insertRow(nowRows+i);
 						row.setAttribute("id", obj.tableID+"row"+i);
-						row.setAttribute("className", className);
-						row.setAttribute("class", className);
+						
+						var cName = s.getAttribute("className");
+						if (!cName) {
+							row.setAttribute("className", className);
+							row.setAttribute("class", className);
+						}
 
 						if(s.getAttribute("ID")) {
 							var ID = s.getAttribute("ID");
