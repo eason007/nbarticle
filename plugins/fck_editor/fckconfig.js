@@ -97,17 +97,11 @@ FCKConfig.TemplateReplaceCheckbox = true ;
 FCKConfig.ToolbarLocation = 'In' ;
 
 FCKConfig.ToolbarSets["Default"] = [
-	['Source','DocProps','-','Preview'],
-	['Cut','Copy','Paste','PasteText','PasteWord','RemoveFormat'],
-	['Undo','Redo','-','Find','Replace','-','SelectAll'],
+	['Source','-','Preview','FitWindow','-','Cut','Copy','Paste','PasteText','PasteWord','RemoveFormat','-','Undo','Redo','-','Find','Replace'],
+	['Subscript','Superscript','-','Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','About'],
 	'/',
-	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
-	['OrderedList','UnorderedList','-','Outdent','Indent'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-	['Link','Unlink'],
-	['Image','Flash','Table','Rule','Smiley','SpecialChar','-','TextColor','BGColor','-','FitWindow','-','PageBreak','-','About'],
-	'/',
-	['Style','FontFormat','FontName','FontSize']
+	['Bold','Italic','Underline','StrikeThrough','-','TextColor','BGColor','-','FontName','FontSize'],
+	['Link','Unlink','-','Image','Flash','Table','Smiley','-','PageBreak']
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
