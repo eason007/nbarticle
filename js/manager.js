@@ -280,11 +280,11 @@ function getEditPostResult(returnResult) {
 function getAddPostResult(returnResult) {
 	if(returnResult >= 0) {
 		alertMessage(addSuccess);
-		objForm.resetForm();
 	}
 	else{
 		alertMessage(addFail);
 	}
+	objForm.resetForm();
 }
 
 function alertMessage(sMsg){
