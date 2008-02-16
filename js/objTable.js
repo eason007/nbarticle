@@ -247,7 +247,7 @@ function tableObject() {
     			pageContent += "<a href=\"#\" onclick=\"javascript:pageGo(1);\">首页</a>&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:pageGo("+(nowPage-1)+");\">上一页</a>";
     		}
 			else {
-    			pageContent += "首页&nbsp;&nbsp;上一页";
+    			//pageContent += "首页&nbsp;&nbsp;上一页";
     		}
 
     		pageContent += "&nbsp;&nbsp;";
@@ -255,7 +255,7 @@ function tableObject() {
     			pageContent += "<a href=\"#\" onclick=\"pageGo("+(nowPage+1)+");\">下一页</a>&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:pageGo("+pageNum+");\">尾页</a>&nbsp;&nbsp;";
     		}
 			else {
-    			pageContent += "下一页&nbsp;&nbsp;尾页&nbsp;&nbsp;";
+    			//pageContent += "下一页&nbsp;&nbsp;尾页&nbsp;&nbsp;";
     		}
     		
     		pageContent += "";
