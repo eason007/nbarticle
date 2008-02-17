@@ -25,12 +25,19 @@ else{
 FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
+/*
 	FCKeditorAPI = null;
-	var oFCKeditor = new FCKeditor('Content', 650, 450) ;
-	oFCKeditor.BasePath	= "../plugins/fck_editor/";
+	var oFCKeditor = new FCKeditor('Content') ;
+	oFCKeditor.BasePath	= "/plugins/fck_editor/";
 	oFCKeditor.EnableOpera = true;
 	oFCKeditor.ReplaceTextarea() ;
 	__FCKeditorNS = null;
+*/
+
+	var div = document.getElementById("myFCKeditor");
+	var fck = new FCKeditor("Content", 650, 450);
+	fck.BasePath	= "../plugins/fck_editor/";
+	div.innerHTML = fck.CreateHtml();
 
 	FormEdit.start();
 }
@@ -118,7 +125,7 @@ function getFekeditorText(editor_name)
 					<td align="left">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="77" dataType="Require"></td>
 				  </tr>
 				  <tr>
-					<td align="left" colspan="2" valign="top">&nbsp;<textarea name="Content" id="Content" dataType="Require" style="display:none"></textarea></td>
+					<td align="left" colspan="2" valign="top" id="myFCKeditor"></td>
 				  </tr>
 			  </table>
 		  </div>
