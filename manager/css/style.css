@@ -20,7 +20,11 @@
 }
 #head #NBArticlePlacard {
 	MARGIN: 2px 5px;
+	BORDER: #c8d9e4 1px solid;
+	width: 650px;
 	height: 53px;
+	BACKGROUND: #FFF;
+	PADDING: 1px 3px;
 }
 #head #NBArticlePlacard .title{
 	font-weight:bold;

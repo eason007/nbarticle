@@ -55,17 +55,16 @@
 .menu2 a:hover {text-decoration: none; background-color: #c5d7e2;color:#fff;}
 .abg {background:#fff;color:#000;font-weight:bold;border-top:1px #c5d7e2 solid;border-left:1px #c5d7e2 solid;border-right:1px #c5d7e2 solid;}
 
-.editTable {}
 .editTable td {
 	height: 30px;
 }
 
 .wrong {
-margin: 0 0 0 5px;
-padding:0 10px 0 18px;
-color:red;
-background: #FFF2E9 url(../images/r_wrong.gif) no-repeat 4px 1px;
-border: #FF6600 1px solid;
+	margin: 0 0 0 5px;
+	padding:0 10px 0 18px;
+	color:red;
+	background: #FFF2E9 url(../images/r_wrong.gif) no-repeat 4px 1px;
+	border: #FF6600 1px solid;
 }
 
 .mainWindows {
@@ -75,41 +74,11 @@ border: #FF6600 1px solid;
 
 #divDialog {
 	width: 300px;
-	POSITION: absolute;
-	Z-INDEX: 4;
-	TEXT-ALIGN: left;
-	background: #FFF;
 	border: 1px solid #ddd;
-}
-#divDialog #DialogTitle {
-	background-color: #E5FFE1;
-}
-#divDialog #DialogTitle img {
-	background-color: #390;
-	vertical-align: middle;
-	width: 10px;
-	height: 23px;
-}
-#divDialog #DialogContent {
-	padding: 13px 20px;
-	background: #FFF;
-}
-#divDialog #DialogCancel {
-	border: 0;
-	BORDER-TOP: #EEE 1px solid;
-	BORDER-RIGHT: #CCC 1px solid;
-	BORDER-BOTTOM: #CCC 1px solid;
-	BORDER-LEFT: #EEE 1px solid;
-	background: #FFF;
-	margin-bottom: 3px;
-}
-
-#divModal {
-	BACKGROUND-COLOR: white;
-	LEFT: 0px; 
-	POSITION: absolute; 
-	TOP: 0px; 
-	Z-INDEX: 3;
+	background:#FFF;
+	margin: 5px;
+	padding: 10px;
+	font-size: 14px;
 }
 
 #divLoading {
@@ -120,13 +89,4 @@ border: #FF6600 1px solid;
 	background:#FFF;
 	border: #DDD 1px solid;
 	color: red;
-}
-
-#NBArticlePlacard {
-	margin-left: 10px;
-	BORDER: #c8d9e4 1px solid;
-	width: 650px;
-	height: 50px;
-	BACKGROUND: #FFF;
-	PADDING: 1px 3px;
 }

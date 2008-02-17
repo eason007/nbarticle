@@ -31,13 +31,6 @@ function menuFormat (title, link) {
 
 <div id="divLoading" style="display: none;"><img src="images/loading_r.gif" alt="" /></div>
 
-<div id="divDialog" onselectstart="window.event.returnValue=false;" style="filter:alpha(opacity=0); display: none;">
-	<div id="DialogTitle"></div>
-	<div id="DialogContent"></div>
-	<div style="TEXT-ALIGN: center;"><input type="button" id="DialogCancel" onclick="closeDialog();" /></div>
-</div>
-<div id="divModal" style="FILTER: alpha(opacity=75);" onclick="window.event.cancelBubble=true; window.event.returnValue=false;"></div>
-
 <div id="head">
 	<div class="left" id="NBArticlePlacard"></div>
 	<div class="left" id="menu"></div>
@@ -45,6 +38,8 @@ function menuFormat (title, link) {
 <div id="subMenu"></div>
 
 <div class="separator"></div>
+
+<div id="divDialog" style="display: none;"></div>
 
 <div style="width: 99%;MARGIN-RIGHT: auto;MARGIN-LEFT: auto;MARGIN-top: 5px;">
 	<div class="nav" id="tabBox"><img src="images/plus.gif" width="18" class="right" style="cursor:pointer;" onclick="javascript: newTab();" alt="新开标签" /><span class="abg" id="Tab_0" onclick="javascript: switchTab(0);" title="首页" userData="1" blank="0">首页</span></div>
