@@ -88,6 +88,7 @@ function ajaxChangeRightContent(pageUrl, pageType, actionMessage, isPageForceLoa
 	}
 
 	document.getElementById("divLoading").style.display = "";
+	document.getElementById('divDialog').style.display = "none";
 
 	aoControl = new ajaxObject();
 	aoControl.URL = pageUrl;
@@ -290,7 +291,7 @@ function getAddPostResult(returnResult) {
 function alertMessage(sMsg){
 	//alert(sMsg);
 	//loadDialog(sMsg);
-	document.getElementById('divDialog').innerHTML = sMsg;
+	document.getElementById('dialogBox').innerHTML = sMsg;
 	document.getElementById('divDialog').style.display = "";
 }
 

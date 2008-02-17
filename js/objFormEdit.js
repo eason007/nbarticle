@@ -20,6 +20,8 @@ function formEditObject() {
 	
 	this.start = function(){
 	    if(this.dateVal != "" && this.postUrl!="") {
+			document.getElementById("divLoading").style.display = "";
+
 			aoForm = new ajaxObject();
 			aoForm.URL = this.postUrl;
 			aoForm.dateVal = this.dateVal;
@@ -43,6 +45,8 @@ function formEditObject() {
 			removeTab(currentTab);
 			return false;
 		}
+		document.getElementById("divLoading").style.display = "";
+
 		if(!obj.targetArea.doResponseMethod) {
 	        obj.targetArea.editForm(obj.returnMessage, obj.targetArea);
 	    }

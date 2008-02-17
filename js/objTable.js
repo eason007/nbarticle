@@ -29,11 +29,15 @@ function tableObject() {
 		aoTable.debug = this.debug;
 
 		if(this.dateVal != "") {
+			document.getElementById("divLoading").style.display = "";
+
 			aoTable.URL = this.url;
 			aoTable.dateVal=this.dateVal+"&nowPage="+this.nowPage+"&prePage="+this.prePage;
 			aoTable.ajaxPostDate(aoTable);
 		}
 		else {
+			document.getElementById("divLoading").style.display = "";
+
 			if(this.url.indexOf("?")>-1){
 				aoTable.URL = this.url+"&nowPage="+this.nowPage+"&prePage="+this.prePage;
 			}else{
@@ -64,6 +68,8 @@ function tableObject() {
 			removeTab(currentTab);
 			return false;
 		}
+
+		document.getElementById("divLoading").style.display = "";
 
 		/*删除旧表格*/
 		for(ti=0;ti<100;ti++) {
@@ -246,16 +252,10 @@ function tableObject() {
     		if(nowPage > 1) {
     			pageContent += "<a href=\"#\" onclick=\"javascript:pageGo(1);\">首页</a>&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:pageGo("+(nowPage-1)+");\">上一页</a>";
     		}
-			else {
-    			//pageContent += "首页&nbsp;&nbsp;上一页";
-    		}
 
     		pageContent += "&nbsp;&nbsp;";
     		if( pageNum > nowPage >= 1) {
     			pageContent += "<a href=\"#\" onclick=\"pageGo("+(nowPage+1)+");\">下一页</a>&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:pageGo("+pageNum+");\">尾页</a>&nbsp;&nbsp;";
-    		}
-			else {
-    			//pageContent += "下一页&nbsp;&nbsp;尾页&nbsp;&nbsp;";
     		}
     		
     		pageContent += "";

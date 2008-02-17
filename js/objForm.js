@@ -79,7 +79,6 @@ function formObject() {
 		} else {
 		    postStr = this.dateVal;
 		}
-		//postStr = postStr+"&userAccount="+userAccount+"&userCode="+userCode;
 
 		if(!returnStr) {
 			if(this.postUrl && this.postUrl!="") {

@@ -204,8 +204,8 @@ function ajaxObject() {
 				}
 			}
 		}
-		if(document.getElementById("ajaxLoading")) {
-			document.getElementById("ajaxLoading").style.display="NONE";
+		if(document.getElementById("divLoading")) {
+			document.getElementById("divLoading").style.display="NONE";
 		}
 	}
 }
