@@ -6,6 +6,10 @@
 	padding: 10px;
 	font-size: 14px;
 }
+#divDialog #dialogClose{
+	cursor: pointer;
+	color: red;
+}
 
 #divLoading {
 	POSITION: absolute;
