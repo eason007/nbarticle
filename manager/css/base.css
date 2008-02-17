@@ -10,15 +10,10 @@ form {
 	padding: 0;
 }
 table{
-	BORDER: 0px;
+	BORDER: 0;
 	padding: 0;
 	margin: 0;
 	border-collapse: collapse;
-}
-td {
-	padding: 0;
-	margin: 0;
-	FONT-SIZE: 12px;
 }
 select, textarea {
 	FONT-SIZE: 12px;
@@ -31,7 +26,7 @@ input {
 	FONT-SIZE: 12px;
 }
 img {
-	BORDER: 0px;
+	BORDER: 0;
 }
 a, a:visited {
 	COLOR: #014e82;
@@ -40,7 +35,7 @@ a, a:visited {
 a:hover {
 	COLOR: #9eaeb3; 
 	TEXT-DECORATION: underline;
-	border-bottom: 0px dotted;
+	border-bottom: 0 dotted;
 }
 FIELDSET {
 	BORDER-RIGHT: #c8d9e4 1px solid; 
@@ -52,14 +47,25 @@ LEGEND {
 	FONT-WEIGHT: bold; 
 	COLOR: #000;
 }
-#opBar {
-	TEXT-ALIGN: left;
-	float: left;
-}
 TH {
 	PADDING-LEFT: 5px; 
 	BACKGROUND: #CDE3FF; 
 	LINE-HEIGHT: 25px;
 	FONT-SIZE: 12px;
 	TEXT-ALIGN: left;
+}
+
+#center {
+	WIDTH: 1000px;
+	MARGIN-RIGHT: auto;
+	MARGIN-LEFT: auto;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.separator {
+	clear: both;
 }

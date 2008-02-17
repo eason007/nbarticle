@@ -1,17 +1,113 @@
-.form_border {
-	BORDER-RIGHT: #6795b4 1px solid; 
-	BACKGROUND: #fff; 
-	BORDER-LEFT: #6795b4 1px solid;
-}
-.form_in {
-	LINE-HEIGHT: 120%;
+#divDialog {
+	width: 300px;
+	border: 1px solid #ddd;
+	background: #FFF;
+	margin: 5px;
+	padding: 10px;
+	font-size: 14px;
 }
 
-/*分隔线*/
+#divLoading {
+	POSITION: absolute;
+	Z-INDEX: 2;
+	right: 10px; 
+	padding: 3px 10px;
+	background: #FFF;
+	border: #DDD 1px solid;
+	color: red;
+}
+
+#head {
+	height: 81px;
+}
+#head #NBArticlePlacard {
+	MARGIN: 2px 5px;
+	BORDER: #c8d9e4 1px solid;
+	width: 650px;
+	height: 53px;
+	BACKGROUND: #FFF;
+	PADDING: 1px 3px;
+}
+#head #NBArticlePlacard .title{
+	font-weight: bold;
+}
+#head #NBArticlePlacard  .content{
+	font-style: italic;
+	font-size: 11px;
+}
+#head #menu {
+	width: 990px;
+	MARGIN: 5px 1px 0 1px;
+}
+#head #menu .title{
+	background-color: #79CEFF;
+	padding: 5px;
+	MARGIN-right: 8px;
+	text-decoration: none;
+	font-size: 14px;
+	color: #000;
+}
+
+#subMenu {
+	MARGIN-left: 2px;
+	height: 20px;
+	background-color: #FFF;
+	border-top: 1px #79CEFF solid;
+	border-left: 1px #79CEFF solid;
+}
+
+.nav {
+	border-bottom: 1px #c5d7e2 solid;
+	padding: 3px 0;
+	TEXT-ALIGN: left;
+	font-size: 12px;
+}
+.nav span {
+	padding: 5px 10px 4px 10px;
+	cursor: pointer;
+	color: #949290;
+	border-top: 1px #c5d7e2 solid;
+	border-left: 1px #c5d7e2 solid;
+	border-right: 1px #c5d7e2 solid;
+}
+.nav span a{
+	text-decoration: none;
+	color: #949290;
+}
+.nav .hover {
+	background-color: #EEE;
+	color: #7A8180;
+}
+.nav .abg {
+	background: #fff;
+	color: #0066CC;
+	font-weight: bold;
+	border-top: 1px #c5d7e2 solid;
+	border-left: 1px #c5d7e2 solid;
+	border-right: 1px #c5d7e2 solid;
+}
+
+.mainWindows {
+	padding: 12px 10px;
+}
+
+#contentDiv {
+	background: #fff;
+	width: 99.8%;
+	border-bottom: 1px #c5d7e2 solid;
+	border-left: 1px #c5d7e2 solid;
+	border-right: 1px #c5d7e2 solid;
+}
+
+#opBar {
+	TEXT-ALIGN: left;
+	float: left;
+}
+
+
 .vsplit_line {
 	BACKGROUND: url(../images/box_vsplit.gif);
 }
-/*描述内容*/
 .describe_txt {
 	COLOR: #7e7e7e; 
 	LINE-HEIGHT: 150%;
@@ -41,13 +137,6 @@
 	height: 26px;
 	border-bottom: 1px solid #ccc;
 	background: #fff;
-	font-family: arial, verdana, tahoma, '宋体', sans-serif;
-	font-size: 12px;
-}
-
-.nonetdlist {                        
-	font-family: arial, verdana, tahoma, '宋体', sans-serif;
-	font-size: 12px;
 }
 
 .menu2 {border-bottom:1px #c5d7e2 solid;padding:5px 0 4px 0;}
@@ -60,33 +149,9 @@
 }
 
 .wrong {
-	margin: 0 0 0 5px;
-	padding:0 10px 0 18px;
-	color:red;
+	margin-left: 5px;
+	padding: 0 10px 0 18px;
+	color: red;
 	background: #FFF2E9 url(../images/r_wrong.gif) no-repeat 4px 1px;
 	border: #FF6600 1px solid;
-}
-
-.mainWindows {
-	padding:12px 10px;
-}
-
-
-#divDialog {
-	width: 300px;
-	border: 1px solid #ddd;
-	background:#FFF;
-	margin: 5px;
-	padding: 10px;
-	font-size: 14px;
-}
-
-#divLoading {
-	POSITION: absolute;
-	Z-INDEX: 2;
-	right:10px; 
-	padding:3px 10px;
-	background:#FFF;
-	border: #DDD 1px solid;
-	color: red;
 }
