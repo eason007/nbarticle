@@ -71,20 +71,9 @@ function tableObject() {
 
 		document.getElementById("divLoading").style.display = "";
 
-		/*删除旧表格*/
-		for(ti=0;ti<100;ti++) {
-			if(document.getElementById(obj.tableID+"row"+ti)) {
-				var row = document.getElementById(obj.tableID+"row"+ti);
-				var tbl = row.parentNode;
-				tbl.removeChild(row);
-			}
-			else {
-				break;
-			}
-		}
-
 		if(tableXmldoc.getElementsByTagName("list").length>0) {
 			var listContents = tableXmldoc.getElementsByTagName("list")[0];
+
 			if(listContents) {
 				total = listContents.getAttribute("total");
 				if(total) {	
@@ -99,12 +88,11 @@ function tableObject() {
 						if(obj.noneValue != "") {
 							var row = table.insertRow(nowRows);
 							hr = row.insertCell(0);
-							className = 'nonetdlist';
 							row.setAttribute("id", obj.tableID+"row0");
 							hr.setAttribute("align", "center");
 							hr.setAttribute("colSpan", "100");
-							hr.setAttribute("className", className);
-							hr.setAttribute("class", className);
+							hr.setAttribute("className", "nonetdlist");
+							hr.setAttribute("class", "nonetdlist");
 							hr.innerHTML = trim(obj.noneValue);	
 						}
 					}
