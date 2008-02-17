@@ -16,11 +16,10 @@
 
 
 #head {
-	background-color: #135E93;
 	height: 81px;
 }
 #head #NBArticlePlacard {
-	MARGIN: 1px;
+	MARGIN: 2px 5px;
 	height: 53px;
 }
 #head #NBArticlePlacard .title{
@@ -32,21 +31,23 @@
 }
 #head #menu {
 	width: 990px;
-	MARGIN: 4px 1px 0 1px;
+	MARGIN: 5px 1px 0 1px;
 }
 #head #menu .title{
-	background-color: #EFEFEF;
-	padding: 3px 8px;
+	background-color: #79CEFF;
+	padding: 5px;
 	MARGIN-right: 8px;
 	text-decoration:none;
+	font-size: 14px;
+	color: #000;
 }
 
 #subMenu {
+	MARGIN-left: 2px;
 	height: 20px;
 	background-color: #FFF;
-	border-bottom:1px #135E93 solid;
-	border-left:1px #135E93 solid;
-	border-right:1px #135E93 solid;
+	border-top:1px #79CEFF solid;
+	border-left:1px #79CEFF solid;
 }
 
 .nav {

@@ -84,7 +84,13 @@ function loadMain(obj){
 }
 
 function showSubMenu (iMenu) {
-	document.getElementById("subMenu").innerHTML = mainMenu[iMenu].link;
+	var subMenu = mainMenu[iMenu].link;
+	document.getElementById("subMenu").innerHTML = "";
+
+	for (var i = 0;i < subMenu.length ; i++)
+	{
+		document.getElementById("subMenu").innerHTML += "&nbsp;[" + subMenu[i] + "]&nbsp;&nbsp;&nbsp;";
+	}
 }
 
 for (var i = 0; i < mainMenu.length ; i++ )
