@@ -11,7 +11,7 @@
 '= 摘    要：XML-RPC接口类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-27
+'= 最后日期：2008-02-18
 '====================================================================
 
 Class cls_XML_RPC
@@ -34,7 +34,7 @@ Class cls_XML_RPC
 	End Sub
 
 	Private Property Let XMLStructFile(sFilePath)
-		sStructFile = Server.Mappath(SystemFolder & "xml_rpc/" & sFilePath)
+		sStructFile = Server.Mappath(SystemFolder & "plugins/xml_rpc/" & sFilePath)
 	End Property
 
 	Private Property Let AppKey(sKey)

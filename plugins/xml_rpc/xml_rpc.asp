@@ -1,6 +1,6 @@
-<!--#Include File="../conn.asp" -->
-<!--#Include File="../include/inc.asp"-->
-<!--#Include File="../include/cls_xml_rpc.asp"-->
+<!--#Include File="../../conn.asp" -->
+<!--#Include File="../../include/inc.asp"-->
+<!--#Include File="../../include/cls_xml_rpc.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -13,7 +13,7 @@
 '= 摘    要：XML-RPC接口文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2005-10-19
+'= 最后日期：2008-02-18
 '====================================================================
 Dim XML_RPC
 Dim objXML
