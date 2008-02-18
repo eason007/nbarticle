@@ -17,10 +17,10 @@ function initTabContent(){
 function query(flag,data){
 	for (var i=0;i<=6 ;i++ )
 	{
-		document.getElementById('menu'+i).className="";
+		$('menu'+i).className="";
 		if (i == flag)
 		{
-			document.getElementById('menu'+i).className="abg";
+			$('menu'+i).className="abg";
 		}
 	}
 
@@ -76,7 +76,7 @@ function getBatchPostResult(returnResult) {
 				<select name="Field" id="Field"></select>&nbsp;
 				<select name="ColumnList" id="ColumnList"></select>&nbsp;
 				<input type="text" name="Keyword" id="Keyword">&nbsp;
-				<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:query(0,'w=search&Field='+document.getElementById('Field').value+'&Column='+document.getElementById('ColumnList').value+'&Keyword='+document.getElementById('Keyword').value);"></td>
+				<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:query(0,'w=search&Field='+$('Field').value+'&Column='+$('ColumnList').value+'&Keyword='+$('Keyword').value);"></td>
 			</tr>
 		</table>
 	</div>

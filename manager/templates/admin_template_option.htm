@@ -27,9 +27,9 @@ function initTabContent(){
 }
 
 function loadTemplate(sTagName,sEditName){
-	document.getElementById('TemplateContent').value = document.getElementById('Template' + sTagName).value;
-	document.getElementById('TemplateTag').value = sTagName;
-	document.getElementById('editTag').innerHTML = sEditName;
+	$('TemplateContent').value = $('Template' + sTagName).value;
+	$('TemplateTag').value = sTagName;
+	$('editTag').innerHTML = sEditName;
 }
 
 function getTemplateEditResult(returnResult){
@@ -145,7 +145,7 @@ function getTemplateEditResult(returnResult){
 					<tr>
 					  <td align="center"><span id="Language_Template_CurrentEdit"></span><br><span id="editTag"></span></td>
 					  <td align="left" colspan="2">&nbsp;<textarea name="TemplateContent" id="TemplateContent" cols="79" rows="15" wrap="VIRTUAL"></textarea>
-						<br>&nbsp;<a href="javascript:vod();" onclick="javascript:change(document.getElementById('TemplateContent'),-40)"><img src="images/minus.gif" border=0></a>&nbsp;&nbsp;<a href="javascript:vod();" onclick="javascript:change(document.getElementById('TemplateContent'),40)"><img src="images/plus.gif" border=0></a></td>
+						<br>&nbsp;<a href="javascript:vod();" onclick="javascript:change($('TemplateContent'),-40)"><img src="images/minus.gif" border=0></a>&nbsp;&nbsp;<a href="javascript:vod();" onclick="javascript:change($('TemplateContent'),40)"><img src="images/plus.gif" border=0></a></td>
 					</tr>
 					<tr bgcolor="#efefef">
 					  <td align="left" colspan="3" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_template_list.htm','pageContent');"></td>

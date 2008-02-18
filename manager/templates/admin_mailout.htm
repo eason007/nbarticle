@@ -22,10 +22,10 @@ function getOutMailResult(returnResult){
 		alertMessage(outMailFail);
 		break;
 	case 0:
-		document.getElementById("actionTD").innerHTML = outMailSuccess + "<a href='databackup/nb_maillist.mdb' target='_blank'>databackup/nb_maillist.mdb</a>";
+		$("actionTD").innerHTML = outMailSuccess + "<a href='databackup/nb_maillist.mdb' target='_blank'>databackup/nb_maillist.mdb</a>";
 		break;
 	case 1:
-		document.getElementById("actionTD").innerHTML = outMailSuccess + "<a href='mail.txt' target='_blank'>mail.txt</a>";
+		$("actionTD").innerHTML = outMailSuccess + "<a href='mail.txt' target='_blank'>mail.txt</a>";
 		break;
 	}
 	objForm.resetForm();

@@ -10,7 +10,7 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	objForm.doResponseMethod = getEditPostResult;
 	editSuccessUrl = './templates/admin_content_list.htm';
 
-	document.getElementById('saveas').style.display = "";
+	$('saveas').style.display = "";
 
 	setTabTitle(currentTab, tabTitle[92]);
 }
@@ -18,23 +18,14 @@ else{
 	editDateVal = "";
 	objForm.doResponseMethod = getAddPostResult;
 
-	document.getElementById('saveas').style.display = "none";
+	$('saveas').style.display = "none";
 
 	setTabTitle(currentTab, tabTitle[91]);
 }
 FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
-/*
-	FCKeditorAPI = null;
-	var oFCKeditor = new FCKeditor('Content') ;
-	oFCKeditor.BasePath	= "/plugins/fck_editor/";
-	oFCKeditor.EnableOpera = true;
-	oFCKeditor.ReplaceTextarea() ;
-	__FCKeditorNS = null;
-*/
-
-	var div = document.getElementById("myFCKeditor");
+	var div = $("myFCKeditor");
 	var fck = new FCKeditor("Content", 650, 450);
 	fck.BasePath	= "../plugins/fck_editor/";
 	div.innerHTML = fck.CreateHtml();
@@ -43,7 +34,7 @@ function initTabContent(){
 }
 
 function checkData(sTargetName) {
-	document.getElementById(sTargetName).value = getFekeditorText(sTargetName);
+	$(sTargetName).value = getFekeditorText(sTargetName);
 	
 	FormEdit.doResponseMethodOther = "";
 
@@ -74,7 +65,7 @@ function RedirectTemplate(iValue,vSelect){
 	FormEdit.doResponseMethodOther = "";
 	FormEdit.start();
 
-	document.getElementById('Content___Frame').src = document.getElementById('Content___Frame').src;
+	$('Content___Frame').src = $('Content___Frame').src;
 }
 
 function inputsource(Str){
@@ -82,14 +73,14 @@ function inputsource(Str){
 	
 	tmp=Str.split("==");
 	
-	document.getElementById('source').value=tmp[0];
-	document.getElementById('sourceurl').value=tmp[1];
+	$('source').value=tmp[0];
+	$('sourceurl').value=tmp[1];
 	
 }
 
 function review_img(){
-	if (document.getElementById('img').value!=''){
-		window.open(''+document.getElementById('img').value+'','','');
+	if ($('img').value!=''){
+		window.open(''+$('img').value+'','','');
 	}
 }
 

@@ -44,7 +44,7 @@ function initTabContent(){
 			  <td><span id="Language_QuickSearchUser"></span>:
 				<input type="text" name="keyword" id="keyword">&nbsp;<span id="Language_UserGroup"></span>:
 				<select name="UserGroup" id="UserGroup"></select>&nbsp;&nbsp;
-				<input type="submit" onclick="javascript:objTable.dateVal='action=&group='+document.getElementById('UserGroup').value+'&keyword='+document.getElementById('keyword').value;objTable.nowPage=1;objTable.start();return false;"></td>
+				<input type="submit" onclick="javascript:objTable.dateVal='action=&group='+$('UserGroup').value+'&keyword='+$('keyword').value;objTable.nowPage=1;objTable.start();return false;"></td>
 			</tr>
 		</table>
 	</div>

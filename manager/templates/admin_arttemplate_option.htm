@@ -30,7 +30,7 @@ function initTabContent(){
 }
 
 function checkData(sTargetName) {
-	document.getElementById(sTargetName).value = getFekeditorText(sTargetName);
+	$(sTargetName).value = getFekeditorText(sTargetName);
 
 	objForm.doResponseOther = "switchTab(currentTab);";
 	objForm.postUrl = "./admin_arttemplate.asp";
