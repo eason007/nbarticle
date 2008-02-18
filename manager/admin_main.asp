@@ -12,7 +12,7 @@
 '= 摘    要：后台-控制台文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-05-22
+'= 最后日期：2008-02-18
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -78,6 +78,7 @@ Call EA_M_XML.AppElements("Language_ProductCopyright",str_ProductCopyright)
 Call EA_M_XML.AppElements("Language_AboutMe",str_AboutMe)
 Call EA_M_XML.AppElements("Language_ProductSales",str_ProductSales)
 Call EA_M_XML.AppElements("Language_UseGuide",str_UseGuide)
+Call EA_M_XML.AppElements("Language_Thruway",str_Thruway)
 Call EA_M_XML.AppElements("ColumnTotal",ColumnNum)
 Call EA_M_XML.AppElements("TopicTotal",TopicNum)
 Call EA_M_XML.AppElements("MangerTopicTotal",MangerTopicNum)
@@ -88,7 +89,7 @@ Call EA_M_XML.AppElements("SystemVersion",SysVersion)
 Call EA_M_XML.AppElements("Request_OS",Request.ServerVariables("OS"))
 Call EA_M_XML.AppElements("Request_Local",Request.ServerVariables("LOCAL_ADDR"))
 Call EA_M_XML.AppElements("Request_Path",Request.ServerVariables("APPL_PHYSICAL_PATH"))
-Call EA_M_XML.AppElements("ScriptEngine",ScriptEngine & "/"& ScriptEngineMajorVersion &"."&ScriptEngineMinorVersion&"."& ScriptEngineBuildVersion)
+Call EA_M_XML.AppElements("ScriptEngine",ScriptEngine & " "& ScriptEngineMajorVersion &"."&ScriptEngineMinorVersion&"."& ScriptEngineBuildVersion)
 
 If iDataBaseType=0 Then
 	Call EA_M_XML.AppElements("DatabaseVersion","Access")
