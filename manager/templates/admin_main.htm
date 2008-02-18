@@ -1,4 +1,6 @@
 <script type="text/javascript">
+ajaxReplaceElement("./admin_main.asp");
+
 $("quickMenu1").innerHTML = "&nbsp;" + mainMenu[0].link[0] + "&nbsp;";
 $("quickMenu2").innerHTML = mainMenu[1].link[1];
 $("quickMenu3").innerHTML = mainMenu[4].link[3];
@@ -7,8 +9,6 @@ $("quickMenu5").innerHTML = mainMenu[4].link[1];
 $("quickMenu6").innerHTML = mainMenu[4].link[2];
 $("quickMenu7").innerHTML = mainMenu[2].link[0];
 $("quickMenu8").innerHTML = "&nbsp;" + mainMenu[2].link[1] + "&nbsp;";
-
-ajaxReplaceElement("./admin_main.asp");
 </script>
 
 <div class="mainWindows">
@@ -43,6 +43,6 @@ ajaxReplaceElement("./admin_main.asp");
 			<li></li>
 		</ul>
 	</div>
-</div>
 
+	<div class="separator"></div>
 </div>

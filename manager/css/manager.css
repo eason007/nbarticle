@@ -125,7 +125,7 @@
 	border-bottom: 1px #c5d7e2 solid;
 	border-left: 1px #c5d7e2 solid;
 	border-right: 1px #c5d7e2 solid;
-	display:inline-block
+	display:inline-block;
 }
 #mainControl span a{
 	TEXT-DECORATION: none;
