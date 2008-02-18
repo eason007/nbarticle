@@ -153,7 +153,7 @@ function ajaxObject() {
     		/* draw the html first */
     		var returnMessage = message.replace(regexp1, "");
 
-    		document.getElementById(obj.targetArea).innerHTML = returnMessage;
+    		$(obj.targetArea).innerHTML = returnMessage;
     		var result = message.match(regexp1);
     		if (result) {
     			for (var i = 0; i < result.length; i++) {
@@ -164,7 +164,7 @@ function ajaxObject() {
     				_executeScript(realScript[2]);
     			}
     		}
-    		document.getElementById(obj.targetArea).style.display="";
+    		$(obj.targetArea).style.display="";
 		}
 		else {
 		    return true;
@@ -181,22 +181,22 @@ function ajaxObject() {
 					elementValue = rowNames[0].childNodes[ri].firstChild.nodeValue;
 					elementID = rowNames[0].childNodes[ri].getAttribute("elementID");
 					elementType = rowNames[0].childNodes[ri].getAttribute("elementType");
-					if(document.getElementById(elementID)) {
+					if($(elementID)) {
 						if(elementType == "innerText") {
 							if(navigator.appName.indexOf("Explorer") > -1){
-								document.getElementById(elementID).innerText = elementValue;
+								$(elementID).innerText = elementValue;
 							} 
 							else{
-								document.getElementById(elementID).textContent = elementValue;
+								$(elementID).textContent = elementValue;
 							}
 						} 
 						else {
-							if(document.getElementById(elementID)) {
-								if(document.getElementById(elementID).type == "hidden" || document.getElementById(elementID).type == "text"  || document.getElementById(elementID).type == "textArea") {
-									document.getElementById(elementID).value = elementValue;
+							if($(elementID)) {
+								if($(elementID).type == "hidden" || $(elementID).type == "text"  || $(elementID).type == "textArea") {
+									$(elementID).value = elementValue;
 								} 
 								else {
-									document.getElementById(elementID).innerHTML = elementValue;
+									$(elementID).innerHTML = elementValue;
 								}
 							}
 						}
@@ -204,8 +204,8 @@ function ajaxObject() {
 				}
 			}
 		}
-		if(document.getElementById("divLoading")) {
-			document.getElementById("divLoading").style.display="NONE";
+		if($("divLoading")) {
+			$("divLoading").style.display="NONE";
 		}
 	}
 }

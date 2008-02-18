@@ -29,14 +29,14 @@ function tableObject() {
 		aoTable.debug = this.debug;
 
 		if(this.dateVal != "") {
-			document.getElementById("divLoading").style.display = "";
+			$("divLoading").style.display = "";
 
 			aoTable.URL = this.url;
 			aoTable.dateVal=this.dateVal+"&nowPage="+this.nowPage+"&prePage="+this.prePage;
 			aoTable.ajaxPostDate(aoTable);
 		}
 		else {
-			document.getElementById("divLoading").style.display = "";
+			$("divLoading").style.display = "";
 
 			if(this.url.indexOf("?")>-1){
 				aoTable.URL = this.url+"&nowPage="+this.nowPage+"&prePage="+this.prePage;
@@ -59,7 +59,7 @@ function tableObject() {
 	this.makeTable = function(mtObj) {
 		var tableXmldoc = mtObj.returnMessage;
 		var obj = mtObj.targetArea;
-		var	table = document.getElementById(obj.tableID);
+		var	table = $(obj.tableID);
 		var elementType = "innerText";
 
 		if (mtObj.returnMessageText == "505")
@@ -69,12 +69,12 @@ function tableObject() {
 			return false;
 		}
 
-		document.getElementById("divLoading").style.display = "";
+		$("divLoading").style.display = "";
 
 		/*删除旧表格*/
 		for(ti=0;ti<100;ti++) {
-			if(document.getElementById(obj.tableID+"row"+ti)) {
-				var row = document.getElementById(obj.tableID+"row"+ti);
+			if($(obj.tableID+"row"+ti)) {
+				var row = $(obj.tableID+"row"+ti);
 				var tbl = row.parentNode;
 				tbl.removeChild(row);
 			}
@@ -206,13 +206,13 @@ function tableObject() {
 
 		if(obj.pageTargetID) {
 			var total	= obj.total ? obj.total:0;
-			if(document.getElementById(obj.pageTargetID)) {
+			if($(obj.pageTargetID)) {
 				if(total > 0) {
-					document.getElementById(obj.pageTargetID).innerHTML= obj.page();
-					document.getElementById(obj.pageTargetID).style.display = "";
+					$(obj.pageTargetID).innerHTML= obj.page();
+					$(obj.pageTargetID).style.display = "";
 				}
 				else {
-					document.getElementById(obj.pageTargetID).innerHTML= "";
+					$(obj.pageTargetID).innerHTML= "";
 				}
 			}
 		}
@@ -231,7 +231,7 @@ function tableObject() {
 			}
 		}
 
-		document.getElementById("divLoading").style.display = "none";
+		$("divLoading").style.display = "none";
 	}
 
 
@@ -266,7 +266,7 @@ function tableObject() {
 }
 
 function pageGo(nowPage) {
-	document.getElementById("divLoading").style.display = "";
+	$("divLoading").style.display = "";
 
 	objTable.nowPage = nowPage;
 	objTable.start();

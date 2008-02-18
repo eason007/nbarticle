@@ -7,8 +7,8 @@ var help_topic_title = "";
 
 function sw_help_topic_init(title)
 {
-	var obj = document.getElementById("help_topic");
-	var obj_icon = document.getElementById("help_topic_icon");
+	var obj = $("help_topic");
+	var obj_icon = $("help_topic_icon");
 
 	help_topic_desc = obj.innerHTML;
 	help_topic_title = obj_icon.innerHTML;
@@ -21,8 +21,8 @@ function sw_help_topic_init(title)
 
 function sw_help_topic()
 {
-	var obj = document.getElementById("help_topic");
-	var obj_icon = document.getElementById("help_topic_icon");
+	var obj = $("help_topic");
+	var obj_icon = $("help_topic_icon");
 
 	if (obj.style.height == "20px")
 	{
@@ -38,8 +38,8 @@ function sw_help_topic()
 
 function sw_help_topic_ex(b_status)
 {
-	var obj = document.getElementById("help_topic");
-	var obj_icon = document.getElementById("help_topic_icon");
+	var obj = $("help_topic");
+	var obj_icon = $("help_topic_icon");
 
 	if (b_status == 1)
 	{ 
@@ -87,8 +87,8 @@ function ajaxChangeRightContent(pageUrl, pageType, actionMessage, isPageForceLoa
 		delete tabFormID[currentTab];
 	}
 
-	document.getElementById("divLoading").style.display = "";
-	document.getElementById('divDialog').style.display = "none";
+	$("divLoading").style.display = "";
+	$('divDialog').style.display = "none";
 
 	aoControl = new ajaxObject();
 	aoControl.URL = pageUrl;
@@ -167,9 +167,9 @@ function edit(ID, url) {
 /*删除信息*/
 function del(url, formid, name) {
     if(!formid){
-		var form=document.getElementById('form1');
+		var form=$('form1');
 	}else{
-		var form=document.getElementById(formid);
+		var form=$(formid);
 	}
 
 	if(!name){
@@ -205,9 +205,9 @@ function del(url, formid, name) {
 /*自定义表单提交*/
 function postChooseForm(url, action, resultFunction, formid, name) {
     if(!formid){
-		var form=document.getElementById('form1');
+		var form=$('form1');
 	}else{
-		var form=document.getElementById(formid);
+		var form=$(formid);
 	}
 
 	if(!name){
@@ -291,8 +291,8 @@ function getAddPostResult(returnResult) {
 function alertMessage(sMsg){
 	//alert(sMsg);
 	//loadDialog(sMsg);
-	document.getElementById('dialogBox').innerHTML = sMsg;
-	document.getElementById('divDialog').style.display = "";
+	$('dialogBox').innerHTML = sMsg;
+	$('divDialog').style.display = "";
 }
 
 function confirmMessage(sMsg){

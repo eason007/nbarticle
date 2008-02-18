@@ -19,12 +19,12 @@ function formObject() {
 	this.doResponseOther = "";
 
 	this.ajaxPost = function(returnStr,appendArg){
-		document.getElementById("divLoading").style.display = "";
+		$("divLoading").style.display = "";
 
-		vForm = document.getElementById(this.formName);
+		vForm = $(this.formName);
 		if(vForm) {
 		    if(!Validator.Validate(vForm, 3)) {
-				document.getElementById("divLoading").style.display = "none";
+				$("divLoading").style.display = "none";
     			return false;
 		    }
 		}
@@ -111,10 +111,10 @@ function formObject() {
             eval(obj.targetArea.doResponseOther);
         }
 
-		document.getElementById("divLoading").style.display = "none";
+		$("divLoading").style.display = "none";
 	}
 	this.resetForm = function(){
-	   vForm = document.getElementById(this.formName);
+	   vForm = $(this.formName);
 	   if(vForm) {
 			vForm.reset();
 			var elementsCount = vForm.elements.length;

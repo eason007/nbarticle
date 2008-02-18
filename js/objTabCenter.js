@@ -69,7 +69,7 @@ if (isMozilla) {
 }
 
 function cleanSpace(span){
-	var tabBox = document.getElementById("tabBox").innerHTML + span;
+	var tabBox = $("tabBox").innerHTML + span;
 
 	while (tabBox.indexOf("&nbsp;&nbsp;") > -1){
 		tabBox = tabBox.replace("&nbsp;&nbsp;", "&nbsp;");
@@ -99,9 +99,9 @@ function initTab(obj) {
 function newTab(sContent){
 	var span = "&nbsp;<span id='Tab_" + tabIndex+"' onclick='javascript: switchTab("+tabIndex+");' userData='1' blank='1'>"+emptyTab+tabCloseIcon(tabIndex)+"</span>";
 
-	document.getElementById("tabBox").innerHTML = cleanSpace(span);
+	$("tabBox").innerHTML = cleanSpace(span);
 
-	initTab(document.getElementById("Tab_" + tabIndex));
+	initTab($("Tab_" + tabIndex));
 
 	tabIndex++;
 
@@ -113,21 +113,21 @@ function tabCloseIcon(iTabIndex) {
 }
 
 function setTabTitle(iTabIndex, sTabTitle){
-	document.getElementById("Tab_"+iTabIndex).innerHTML = sTabTitle + tabCloseIcon(iTabIndex);
-	document.getElementById("Tab_"+iTabIndex).title = sTabTitle;
+	$("Tab_"+iTabIndex).innerHTML = sTabTitle + tabCloseIcon(iTabIndex);
+	$("Tab_"+iTabIndex).title = sTabTitle;
 }
 
 function removeTab(tabNum){
 	rTab += "Tab_" + tabNum + ",";
 
-	var isSwitch = document.getElementById("Tab_"+tabNum).getAttribute("userData");
+	var isSwitch = $("Tab_"+tabNum).getAttribute("userData");
 
-	document.getElementById("tabBox").removeChild(document.getElementById("Tab_"+tabNum));
+	$("tabBox").removeChild($("Tab_"+tabNum));
 
 	tabCache[tabNum] = "";
 	tabScriptCache[tabNum] = "";
 
-	document.getElementById("tabBox").innerHTML = cleanSpace("");
+	$("tabBox").innerHTML = cleanSpace("");
 
 	if (isSwitch == "1")
 	{
@@ -136,10 +136,10 @@ function removeTab(tabNum){
 			if (rTab.indexOf(",Tab_"+i+",") == -1)
 			{
 				if(document.all){
-					document.getElementById("Tab_"+i).click();
+					$("Tab_"+i).click();
 				}
 				else{
-					document.getElementById("Tab_"+i).onclick(i);
+					$("Tab_"+i).onclick(i);
 				}
 				break;
 			}
@@ -166,19 +166,19 @@ function outTab(event){
 }
 
 function switchTab(eventObjIndex){
-	document.getElementById("contentDiv").outerHTML;
-	tabCache[currentTab] = document.getElementById("contentDiv").innerHTML;
+	$("contentDiv").outerHTML;
+	tabCache[currentTab] = $("contentDiv").innerHTML;
 
 	if (eventObjIndex != currentTab)
 	{
 		//切换标签
 		if (rTab.indexOf(",Tab_"+currentTab+",") == -1){
-			var tabObj = document.getElementById("Tab_"+currentTab);
+			var tabObj = $("Tab_"+currentTab);
 			tabObj.className = "";
 			initTab(tabObj);
 		}
 
-		tabObj = document.getElementById("Tab_"+eventObjIndex);
+		tabObj = $("Tab_"+eventObjIndex);
 		tabObj.className = "abg";
 		if(document.all){
 			tabObj.detachEvent("onmouseover", overTab);
@@ -224,7 +224,7 @@ function switchTab(eventObjIndex){
 		isExeJS = false;
 	}
 
-	document.getElementById("contentDiv").innerHTML = returnMessage;
+	$("contentDiv").innerHTML = returnMessage;
 	
 	executeScript(sContent, isExeJS);
 }
@@ -234,7 +234,7 @@ function openTab(sContent){
 	{
 		for (var i = 0;i<tabIndex ;i++ )
 		{
-			if (rTab.indexOf(",Tab_"+i+",") == -1 && document.getElementById("Tab_"+i).getAttribute("blank") == "1")
+			if (rTab.indexOf(",Tab_"+i+",") == -1 && $("Tab_"+i).getAttribute("blank") == "1")
 			{
 				switchTab(i, sContent);
 				return false;

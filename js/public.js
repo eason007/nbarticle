@@ -12,13 +12,13 @@ function externallinks() {
 window.onload = externallinks;
 
 function vod() {
-//空函数
+	//空函数
 }
 
 /*处理脚本部份 begin*/
 function _executeScript(scriptFrag) {
 	var scriptContainerId = "_SCRIPT_CONTAINER";
-	var obj = document.getElementById(scriptContainerId);
+	var obj = $(scriptContainerId);
 	if (obj != null) {
 		document.body.removeChild(obj);
 	}
@@ -44,6 +44,24 @@ if (ie){
 			this.document.form1.submit();
 		}
 	}
+}
+
+function $() {
+	var elements = new Array();
+
+	for (var i = 0; i < arguments.length; i++) {
+		var element = arguments[i];
+
+		if (typeof element == 'string')
+			element = document.getElementById(element);
+
+		if (arguments.length == 1)
+			return element;
+
+		elements.push(element);
+	}
+
+	return elements;
 }
 
 function PageNav(vPageNo,vShowTypes){
@@ -130,12 +148,12 @@ function ShowContentList(vPage,ShowTypes){
 
 	TmpStr+=PageNav(vPage,ShowTypes);
 
-	document.getElementById('CommentList').innerHTML=TmpStr;
+	$('CommentList').innerHTML=TmpStr;
 }
 
 function submit_vote(vote_id){
 //投票处理函数
-	var vote_form=document.getElementById('vote_'+vote_id);
+	var vote_form=$('vote_'+vote_id);
 
 	var target_url='vote.asp?votetype='+vote_form.votetype.value;
 	target_url+='&voteid='+vote_form.voteid.value;

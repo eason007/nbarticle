@@ -20,7 +20,7 @@ function formEditObject() {
 	
 	this.start = function(){
 	    if(this.dateVal != "" && this.postUrl!="") {
-			document.getElementById("divLoading").style.display = "";
+			$("divLoading").style.display = "";
 
 			aoForm = new ajaxObject();
 			aoForm.URL = this.postUrl;
@@ -45,7 +45,7 @@ function formEditObject() {
 			removeTab(currentTab);
 			return false;
 		}
-		document.getElementById("divLoading").style.display = "";
+		$("divLoading").style.display = "";
 
 		if(!obj.targetArea.doResponseMethod) {
 	        obj.targetArea.editForm(obj.returnMessage, obj.targetArea);
@@ -57,7 +57,7 @@ function formEditObject() {
 			eval(obj.targetArea.doResponseMethodOther);
 		}
 
-		document.getElementById("divLoading").style.display = "none";
+		$("divLoading").style.display = "none";
 	}
 	
 	this.editForm = function(infoXmldoc, formObj) {
@@ -69,13 +69,13 @@ function formEditObject() {
 					elementValue = rowNames[0].childNodes[ri].firstChild.nodeValue;
 					elementID = rowNames[0].childNodes[ri].getAttribute("elementID");
 					elementType = rowNames[0].childNodes[ri].getAttribute("elementelementType");
-					if(document.getElementById(elementID) && elementValue != "") {
-						if (document.getElementById(elementID).type == "button" || document.getElementById(elementID).type == "hidden")
+					if($(elementID) && elementValue != "") {
+						if ($(elementID).type == "button" || $(elementID).type == "hidden")
 						{
-							document.getElementById(elementID).value = elementValue;
+							$(elementID).value = elementValue;
 						}
 						else{
-							document.getElementById(elementID).innerHTML = elementValue;
+							$(elementID).innerHTML = elementValue;
 						}
 					}
 				}
@@ -108,7 +108,7 @@ function formEditObject() {
 
 	this.doFormValue = function(targetID, value, formObj) {
 		//value = decodeURIComponent(value);//相对于objForm编码的解码
-	    vForm = document.getElementById(formObj.formName);
+	    vForm = $(formObj.formName);
 
 	    var elementsCount = vForm.elements.length;
 		var elements = vForm.elements;
