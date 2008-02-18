@@ -39,57 +39,58 @@ End If
 <meta name="generator" content="NB文章系统(NBArticle) EliteArticle System" />
 <meta name="author" content="eason007<eason007#163.com>" />
 <meta name="copyright" content="www.nbarticle.com" />
+<script src="../js/public.js" type="text/javascript"></script>
 <script src="../js/objAjax.js" type="text/javascript"></script>
 <script type="text/javascript">
 function testDBConnection () {
-	document.getElementById('testBtn').disabled = true;
-	document.getElementById('message').innerHTML = "";
+	$('testBtn').disabled = true;
+	$('message').innerHTML = "";
 
-	var iDatabaseType = document.getElementById('DataType').value;
+	var iDatabaseType = $('DataType').value;
 
 	var postDal = "action=testDBConnection&DataType=" + iDatabaseType;
-	postDal+= "&Key=" + document.getElementById('Key').value;
+	postDal+= "&Key=" + $('Key').value;
 
 	if (iDatabaseType == "0")
 	{
-		postDal+= "&Folder=" + document.getElementById('Folder').value;
-		postDal+= "&DataName=" + document.getElementById('Folder').value + document.getElementById('DataName').value;
+		postDal+= "&Folder=" + $('Folder').value;
+		postDal+= "&DataName=" + $('Folder').value + $('DataName').value;
 	}
 	else{
-		postDal+= "&DataHost=" + document.getElementById('DataHost').value;
-		postDal+= "&DataName=" + document.getElementById('DataName').value;
-		postDal+= "&DataUser=" + document.getElementById('DataUser').value;
-		postDal+= "&DataPass=" + document.getElementById('DataPass').value;
+		postDal+= "&DataHost=" + $('DataHost').value;
+		postDal+= "&DataName=" + $('DataName').value;
+		postDal+= "&DataUser=" + $('DataUser').value;
+		postDal+= "&DataPass=" + $('DataPass').value;
 	}
 
 	ajaxPostDate ("./install.asp", postDal, reportTest, "TEXT");
 }
 
 function reportTest (obj) {
-	document.getElementById('testBtn').disabled = false;
+	$('testBtn').disabled = false;
 
 	var message = obj.returnMessage;
 
 	switch (message.substring(0, 1))
 	{
 	case "0":
-		document.getElementById('message').innerHTML = "配置文件已被创建";
-		document.getElementById('message').style.color = "green";
-		document.getElementById('N').disabled = false;
+		$('message').innerHTML = "配置文件已被创建";
+		$('message').style.color = "green";
+		$('N').disabled = false;
 		break;
 
 	case "1":
-		document.getElementById('message').innerHTML = "您的数据驱动存在问题,或者您设定的条件不足以连接指定的数据服务器";
-		document.getElementById('message').style.color = "red";
+		$('message').innerHTML = "您的数据驱动存在问题,或者您设定的条件不足以连接指定的数据服务器";
+		$('message').style.color = "red";
 		break;
 
 	case "2":
-		document.getElementById('message').innerHTML = "因为您的服务器FSO权限设置可能有点问题,配置文件未被写入,请自行修改系统根目录的[Connection.asp]文件";
-		document.getElementById('message').style.color = "red";
+		$('message').innerHTML = "因为您的服务器FSO权限设置可能有点问题,配置文件未被写入,请自行修改系统根目录的[Connection.asp]文件";
+		$('message').style.color = "red";
 		break;
 	}
 
-	document.getElementById('message').style.display = "";
+	$('message').style.display = "";
 }
 </script>
 <style type="text/css">
