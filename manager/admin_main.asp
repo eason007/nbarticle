@@ -15,36 +15,36 @@
 '= 最后日期：2006-05-22
 '====================================================================
 
-	Call EA_Manager.Chk_IsMaster
+Call EA_Manager.Chk_IsMaster
 
-	Dim theInstalledObjects(4)
-    theInstalledObjects(0) = "Scripting.FileSystemObject"
-    theInstalledObjects(1) = "adodb.connection"
-    theInstalledObjects(2) = "JMail.SMTPMail"
-    theInstalledObjects(3) = "CDONTS.NewMail"
-    
-    Dim RegUser,TopicNum,ColumnNum,MangerTopicNum,ReviewNum
-    Dim UserGroup_Array,GroupList
-    Dim i
-    
-    RegUser=0
-    TopicNum=0
-    ColumnNum=0
-    MangerTopicNum=0
-    ReviewNum=0
-    
-    Sql="select reguser,topicnum,ColumnNum,MangerTopicNum,ReviewNum from [nb_system]"
-    set rs=conn.execute(sql)
-    If Not rs.eof And Not rs.bof Then 
-		RegUser=rs(0)
-		TopicNum=rs(1)
-		ColumnNum=rs(2)
-		MangerTopicNum=rs(3)
-		ReviewNum=rs(4)
-	End If
-	
-	Rs.Close
-	Set Rs=Nothing
+Dim theInstalledObjects(4)
+theInstalledObjects(0) = "Scripting.FileSystemObject"
+theInstalledObjects(1) = "adodb.connection"
+theInstalledObjects(2) = "JMail.SMTPMail"
+theInstalledObjects(3) = "CDONTS.NewMail"
+
+Dim RegUser,TopicNum,ColumnNum,MangerTopicNum,ReviewNum
+Dim UserGroup_Array,GroupList
+Dim i
+
+RegUser=0
+TopicNum=0
+ColumnNum=0
+MangerTopicNum=0
+ReviewNum=0
+
+Sql="select reguser,topicnum,ColumnNum,MangerTopicNum,ReviewNum from [nb_system]"
+set rs=conn.execute(sql)
+If Not rs.eof And Not rs.bof Then 
+	RegUser=rs(0)
+	TopicNum=rs(1)
+	ColumnNum=rs(2)
+	MangerTopicNum=rs(3)
+	ReviewNum=rs(4)
+End If
+
+Rs.Close
+Set Rs=Nothing
 
 
 Call EA_M_XML.AppElements("Language_SystemInformation",str_SystemInformation)

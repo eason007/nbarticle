@@ -95,6 +95,12 @@
 	padding: 12px 10px;
 }
 
+.mainWindows .title{
+	BACKGROUND: #CDE3FF;
+	LINE-HEIGHT: 25px;
+	padding-left: 5px;
+}
+
 #contentDiv {
 	background: #fff;
 	width: 99.8%;
@@ -106,6 +112,26 @@
 #opBar {
 	TEXT-ALIGN: left;
 	float: left;
+}
+
+#mainControl {
+	width: 45%;
+	MARGIN-right: 15px;
+}
+#mainControl span {
+	MARGIN: 5px 10px;
+	padding: 11px 10px;
+	border-top: 1px #c5d7e2 solid;
+	border-bottom: 1px #c5d7e2 solid;
+	border-left: 1px #c5d7e2 solid;
+	border-right: 1px #c5d7e2 solid;
+	display:inline-block
+}
+#mainControl span a{
+	TEXT-DECORATION: none;
+}
+#mainControl span a:hover{
+	color: #000;
 }
 
 
