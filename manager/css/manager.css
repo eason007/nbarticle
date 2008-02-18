@@ -121,11 +121,8 @@
 #mainControl span {
 	MARGIN: 5px 10px;
 	padding: 11px 10px;
-	border-top: 1px #c5d7e2 solid;
-	border-bottom: 1px #c5d7e2 solid;
-	border-left: 1px #c5d7e2 solid;
-	border-right: 1px #c5d7e2 solid;
-	display:inline-block;
+	border: 1px #c5d7e2 solid;
+	display: inline-block;
 }
 #mainControl span a{
 	TEXT-DECORATION: none;
