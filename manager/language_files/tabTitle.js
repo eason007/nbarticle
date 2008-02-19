@@ -61,12 +61,12 @@ tabTitle[180] = "生成列表";
 
 tabTitle[190] = "生成内容页";
 
-tabTitle[200] = "模版管理";
-tabTitle[201] = "添加模版";
-tabTitle[202] = "编辑模版";
+tabTitle[200] = "风格管理";
+tabTitle[201] = "添加风格";
+tabTitle[202] = "编辑风格";
 
-tabTitle[210] = "导出模版";
-tabTitle[211] = "导入模版";
+tabTitle[210] = "导出风格";
+tabTitle[211] = "导入风格";
 
 tabTitle[220] = "Js文件管理";
 tabTitle[221] = "添加Js文件";
