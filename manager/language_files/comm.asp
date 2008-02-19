@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-16
+'= 最后日期：2008-02-19
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -39,12 +39,12 @@ str_LeftMenu(3,0)="安全管理"
 str_LeftMenu(3,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./admin_master.asp\',\'\',\'\',false,\'action=add\');"">添加</a>"
 str_LeftMenu(3,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_ip_list.htm\');"">IP管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_ip_option.htm\', \'pageAdd\');"">添加</a>"
 
-str_LeftMenu(4,0)="风格及模版管理"
+str_LeftMenu(4,0)="风格管理"
 str_LeftMenu(4,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeindex_main.htm\');"">生成首页</a>"
 str_LeftMenu(4,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makelist_main.htm\');"">生成列表</a>"
 str_LeftMenu(4,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeview_main.htm\');"">生成内容页</a>"
-str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_list.htm\');"">模版管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_option.htm\', \'pageAdd\');"">添加</a>"
-str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_main.htm\');"">导出模版</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_input.htm\');"">导入</a>"
+str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_list.htm\');"">风格管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_main.htm\');"">导出风格</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_input.htm\');"">导入</a>"
 str_LeftMenu(4,6)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_list.htm\');"">Js文件管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_option.htm\', \'pageAdd\');"">添加</a>"
 
 str_LeftMenu(5,0)="数据库管理"
@@ -192,7 +192,7 @@ Const str_Config_ArticleFrom_Help="格式:<br>名称1==网址1;名称2==网址2"
 Const str_Config_SEO="搜索引擎优化(SEO)"
 
 'admin_friend.asp
-Const str_Friend_Help="①排序号为从大到小排列<br>②相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_friend.html' target='_blank'>查看</a>"
+Const str_Friend_Help="①排序号为从大到小排列<br>②相关风格标签说明。<a href='http://help.nbarticle.com/tags_friend.html' target='_blank'>查看</a>"
 Const str_Friend_LinkList="联盟列表"
 Const str_Friend_AddLink="添加联盟"
 Const str_Friend_Order="排序"
@@ -209,7 +209,7 @@ Const str_Friend_Style_Txt="文本"
 Const str_Friend_Index="首页"
 
 'admin_placard.asp
-Const str_Placard_Help="①相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_siteplacard.html' target='_blank'>查看</a>"
+Const str_Placard_Help="①相关风格标签说明。<a href='http://help.nbarticle.com/tags_siteplacard.html' target='_blank'>查看</a>"
 Const str_Placard_PlacardList="公告列表"
 Const str_Placard_AddPlacard="添加公告"
 Const str_Placard_Title="公告标题"
@@ -219,7 +219,7 @@ Const str_Placard_AddTime="发布时间"
 Const str_Placard_Input_Placard="输入公告内容"
 
 'admin_vote.asp
-Const str_Vote_Help="①每行一个投票项目，最多<strong>10</strong>个投票项目，超过则会自动作废，空行自动过滤<br />②相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_sitevote.html' target='_blank'>查看</a>"
+Const str_Vote_Help="①每行一个投票项目，最多<strong>10</strong>个投票项目，超过则会自动作废，空行自动过滤<br />②相关风格标签说明。<a href='http://help.nbarticle.com/tags_sitevote.html' target='_blank'>查看</a>"
 Const str_Vote_VoteList="投票列表"
 Const str_Vote_AddVote="添加投票"
 Const str_Vote_Title="投票主题"
@@ -243,7 +243,7 @@ Const str_InsideLink_Input_Info="输入站内连接资料"
 Const str_InsideLink_All="全站"
 
 'admin_column.asp
-Const str_Column_Help="①新添加的栏目，必须先到安全管理-=><a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a>中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关模版调用标签说明。<a href='http://help.nbarticle.com/template_tags.html' target='_blank'>查看</a>"
+Const str_Column_Help="①新添加的栏目，必须先到安全管理-=><a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a>中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关风格标签说明。<a href='http://help.nbarticle.com/template_tags.html' target='_blank'>查看</a>"
 Const str_Column_ColumnList="栏目列表"
 Const str_Column_AddColumn="添加栏目"
 Const str_Column_Title="栏目名称"
@@ -271,8 +271,8 @@ Const str_Column_Style_Txt="纯标题文本"
 Const str_Column_Style_Info="标题+简介"
 Const str_Column_Style_Img="纯标题图片"
 Const str_Column_Style_Txt_Info_Img="标题+简介+图片"
-Const str_Column_ListTemplate="列表页模版"
-Const str_Column_ArticleTemplate="文章页模版"
+Const str_Column_ListTemplate="栏目页风格"
+Const str_Column_ArticleTemplate="内容页风格"
 Const str_Column_PageSize="列表页记录数"
 Const str_Column_EofOrBof="对不起,已经是尽头不能再移动了."
 Const str_Column_ColumnIsNotEmpty="对不起,栏目内还有文章,请清空或转移后再进行删除操作."
@@ -280,7 +280,7 @@ Const str_Column_ColumnHaveUnder="对不起,栏目尚有下属版块."
 Const str_Column_Root="根目录"
 
 'admin_content.asp
-Const str_Content_Help="①删除单个文章默认为直接删除，而不进入回收站<br>②当使用批量管理功能之后，建议更新一次系统及栏目数据<br>③相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_getarticlelist.html' target='_blank'>查看</a>"
+Const str_Content_Help="①删除单个文章默认为直接删除，而不进入回收站<br>②当使用批量管理功能之后，建议更新一次系统及栏目数据<br>③相关风格标签说明。<a href='http://help.nbarticle.com/tags_getarticlelist.html' target='_blank'>查看</a>"
 Const str_Content_Add_Help="①只有在“标题图片”处填写图片的url后，才为图片新闻，建议图片大小为120*90<br>②当填写外部连接之后，即代表文章将连接到外部网址，请确保填写的地址正确。连接地址必须基于HTTP协议的网址格式,如:<br>&nbsp;http://www.youdomain.com<br>&nbsp;ftp://account:password@ipaddress:port<br>③可设定多个文章搜索关键字，关键字之间请以英文,号分隔，例如：xp,sp2<br>④选择手动分页时，分页标记是[NextPage]，<font color=red>区分大小写</font>。如需要对每页指定标题，则为[NextPage=标题内容]"
 Const str_Content_ArticleList="所有文章"
 Const str_Content_AddArticle="添加文章"
@@ -485,14 +485,14 @@ Const str_ReLoad_MakeBaiduNewsop="生成百度新闻开放协议文件"
 Const str_ReLoad_MakeBaiduNewsop_Desc="协议文件生成于网站根目录下的baidu-newsop.xml，请在 <a href='http://news.baidu.com/newsop.html#ks5' target=_blank>这里</a> 提交，将可能有助于百度对您网站页面的收录。"
 
 'admin_template.asp
-Const str_Template_Info="①在这里，您可以新建和修改模板，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认模板不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>模版标签说明</u></font></a>"
-Const str_Template_TempName="模版名称"
-Const str_Template_Default="默认模版"
+Const str_Template_Info="①在这里，您可以新建和修改模板，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认模板不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
+Const str_Template_TempName="风格名称"
+Const str_Template_Default="默认风格"
 Const str_Template_CopyTemp="复制"
-Const str_Template_Manager="编辑模版"
-Const str_Template_List="模版列表"
-Const str_Template_Add="添加模版"
-Const str_Template_Css_Info = "全套模版公用的css设定"
+Const str_Template_Manager="编辑风格"
+Const str_Template_List="风格列表"
+Const str_Template_Add="添加风格"
+Const str_Template_Css_Info = "全套风格公用的css设定"
 Const str_Template_Head_Info = "页面头部"
 Const str_Template_Foot_Info = "页面底部"
 Const str_Template_Index_Info = "首页专用"
@@ -504,18 +504,18 @@ Const str_Template_MemberList_Info = "会员列表页专用"
 Const str_Template_Error_Info = "错误提示页专用"
 Const str_Template_Success_Info = "成功提示页专用"
 Const str_Template_Login_Info = "会员页专用"
-Const str_Template_CheckForm = "请至少选择一个项目提交.\n如为新增模版，请选择填写模版名称后提交。"
+Const str_Template_CheckForm = "请至少选择一个项目提交.\n如为新增风格，请选择填写风格名称后提交。"
 Const str_Template_CurrentEdit = "当前编辑："
 
 'admin_loadskin.asp
-Const str_Skin_Help="①导出功能可以将数据库内的模版复制到包含有特定结构的数据库内。你可以使用manager/databackup/NB_Template.mdb这个文件。<br />②导入功能可以将具有特定结构的数据库内的模版复制到网站数据库中。建议使用系统自带的manager/databackup/NB_Template.mdb作为相互间模版传递的载体。"
+Const str_Skin_Help="①导出功能可以将数据库内的风格复制到包含有特定结构的数据库内。你可以使用manager/databackup/NB_Template.mdb这个文件。<br />②导入功能可以将具有特定结构的数据库内的风格复制到网站数据库中。建议使用系统自带的manager/databackup/NB_Template.mdb作为相互间风格传递的载体。"
 Const str_Skin_Database="数据库"
 Const str_Skin_Choice="选择"
-Const str_Skin_InputTemplate="导入模版"
-Const str_Skin_OutputTemplate="导入模版"
+Const str_Skin_InputTemplate="导入风格"
+Const str_Skin_OutputTemplate="导出风格"
 Const str_Skin_Input="导入"
 Const str_Skin_Output="导出"
-Const str_Skin_CopyComplete="模版复制成功！"
+Const str_Skin_CopyComplete="风格复制成功！"
 
 'admin_makejs.asp
 Const str_Js_Help="①在这里，您可以新建和修改Js生成文件，操作时请按照相关页面提示完整填写表单信息。<br>②图片显示参数格式：宽&高，如160&90<br />③<a href=""http://forum.nbarticle.com/forum_posts.asp?TID=138"" target=""_blank"">论坛使用介绍</a><br />④系统Js文件：指js目录下的 friend.js(友情连接)、menu.js(栏目导航)、searchbar.js(搜索栏)"
@@ -584,7 +584,7 @@ Const str_UpFile_UploadTime="上传日期"
 Const str_UpFile_CurrentPath="当前目录"
 
 'admin_adsense.asp
-Const str_AdSense_Help="①相关模版调用标签说明。<a href='http://help.nbarticle.com/tags_adsense.html' target='_blank'>查看</a>"
+Const str_AdSense_Help="①相关风格标签说明。<a href='http://help.nbarticle.com/tags_adsense.html' target='_blank'>查看</a>"
 Const str_AdSense_Title="广告标题"
 Const str_AdSense_Content="广告内容"
 Const str_AdSense_Input_Template="输入广告内容"
