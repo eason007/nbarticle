@@ -48,7 +48,7 @@ Sub Main
 
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
 	Call EA_M_XML.AppElements("Language_Theme_Info",str_Theme_Info)
-	Call EA_M_XML.AppElements("Language_Theme_Edit",str_Theme_Edit)
+	Call EA_M_XML.AppElements("Language_Theme_Edit",str_Theme_Add)
 
 	Call EA_M_XML.AppElements("Language_Theme_Name",str_Theme_Name)
 	Call EA_M_XML.AppElements("Language_Theme_Default",str_Theme_Default)
@@ -101,11 +101,14 @@ Sub Edit
 	
 	ThemeId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Call EA_M_XML.AppInfo("ID",ThemeId)
+	Call EA_M_XML.AppElements("Language_Theme_Edit",str_Theme_Edit)
 	
-	TempStr=EA_M_DBO.Get_Theme_Info(ThemeId)
+	If ThemeId > 0 Then
+		TempStr=EA_M_DBO.Get_Theme_Info(ThemeId)
 
-	Call EA_M_XML.AppInfo("title",TempStr(1,0))
-	Call EA_M_XML.AppInfo("isdefault",TempStr(2,0))
+		Call EA_M_XML.AppInfo("title",TempStr(1,0))
+		Call EA_M_XML.AppInfo("isdefault",TempStr(2,0))
+	End If
 
 	Page = EA_M_XML.make("","",0)
 	Call EA_M_XML.Out(Page)
