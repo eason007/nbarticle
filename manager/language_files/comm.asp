@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-19
+'= 最后日期：2008-02-20
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -485,9 +485,9 @@ Const str_ReLoad_MakeBaiduNewsop="生成百度新闻开放协议文件"
 Const str_ReLoad_MakeBaiduNewsop_Desc="协议文件生成于网站根目录下的baidu-newsop.xml，请在 <a href='http://news.baidu.com/newsop.html#ks5' target=_blank>这里</a> 提交，将可能有助于百度对您网站页面的收录。"
 
 'admin_template.asp
-Const str_Template_Info="①在这里，您可以新建和修改模板，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认模板不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
+Const str_Template_Info="①在这里，您可以新建和修改风格，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认风格不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
 Const str_Template_TempName="风格名称"
-Const str_Template_Default="默认风格"
+Const str_Template_Default="默认"
 Const str_Template_CopyTemp="复制"
 Const str_Template_Manager="编辑风格"
 Const str_Template_List="风格列表"
