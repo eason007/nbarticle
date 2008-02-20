@@ -2,30 +2,37 @@
 //objTable.debug = true;
 objTable.setURL("./admin_theme.asp");
 objTable.dateVal = "action=";
-objTable.action = "<a href='javascript:vod();' onclick='edit($ID);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTheme($ID);'>"+defaultTheme+"</a>";
+objTable.action = "<a href='javascript:vod();' onclick='editTheme($ID);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTheme($ID);'>"+defaultTheme+"</a>";
 objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
 objTable.doResponseOther = "sw_help_topic_init()";
-
-//FormEdit.debug = true;
-FormEdit.formName = "form2";
-FormEdit.postUrl = "./admin_theme.asp";
-FormEdit.dateVal = "action=add";
 
 //objForm.debug = true;
 objForm.formName = "form2"
 objForm.postUrl = "./admin_theme.asp";
-objForm.doResponseMethod = getAddPostResult;
 objForm.doResponseOther = "initTabContent()";
+
+editSuccessUrl = './templates/admin_theme_list.htm';
 
 function initTabContent(){
 	setTabTitle(currentTab, tabTitle[200]);
 
 	objTable.start();
-}
 
+	objForm.doResponseMethod = getAddPostResult;
+}
 
 function setDefaultTheme(id){
 	ajaxPostDate("./admin_theme.asp","action=default&ID=" + id, initTabContent);
+}
+
+function editTheme (id) {
+	objForm.doResponseMethod = getEditPostResult;
+
+	//FormEdit.debug = true;
+	FormEdit.postUrl = "./admin_theme.asp";
+	FormEdit.formName = "form2";
+	FormEdit.dateVal = "action=add&ID=" + id;
+	FormEdit.start();
 }
 </script>
 
@@ -76,7 +83,7 @@ function setDefaultTheme(id){
 				  <input type="radio" name="isdefault" value="0" dataType="Group"></td>
 			  </tr>
 			  <tr bgcolor="efefef">
-			  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReset" id="btnReset" onclick="javascript: $('form2').reset();"></td>
+			  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReset" id="btnReset" onclick="$('form2').reset();"></td>
 			</tr>
 			</table>
 		</fieldset>

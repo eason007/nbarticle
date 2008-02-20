@@ -96,62 +96,16 @@ Sub Main
 End Sub
 
 Sub Edit
-	Dim TemplateName,TempStr,StyleId
+	Dim TempStr,ThemeId
 	Dim i
 	
-	StyleId=EA_Pub.SafeRequest(2,"ID",0,0,0)
-	Call EA_M_XML.AppInfo("ID",StyleId)
+	ThemeId=EA_Pub.SafeRequest(2,"ID",0,0,0)
+	Call EA_M_XML.AppInfo("ID",ThemeId)
 	
-	TempStr=EA_M_DBO.Get_Template_Info(StyleId)
+	TempStr=EA_M_DBO.Get_Theme_Info(ThemeId)
 
-	If IsArray(TempStr) Then TemplateName=TempStr(1,0)
-	If Not IsArray(TempStr) Then ReDim TempStr(13,1)
-
-	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
-	Call EA_M_XML.AppElements("Language_Template_Info",str_Template_Info)
-	Call EA_M_XML.AppElements("Language_Template_Manager",str_Template_Manager)
-
-	Call EA_M_XML.AppElements("Language_Template_TempName",str_Template_TempName)
-
-	Call EA_M_XML.AppElements("Language_Template_Css_Info",str_Template_Css_Info)
-	Call EA_M_XML.AppElements("Language_Template_Head_Info",str_Template_Head_Info)
-	Call EA_M_XML.AppElements("Language_Template_Foot_Info",str_Template_Foot_Info)
-	Call EA_M_XML.AppElements("Language_Template_Index_Info",str_Template_Index_Info)
-	Call EA_M_XML.AppElements("Language_Template_List_Info",str_Template_List_Info)
-	Call EA_M_XML.AppElements("Language_Template_View_Info",str_Template_View_Info)
-	Call EA_M_XML.AppElements("Language_Template_Search_Info",str_Template_Search_Info)
-	Call EA_M_XML.AppElements("Language_Template_ImgList_Info",str_Template_ImgList_Info)
-	Call EA_M_XML.AppElements("Language_Template_MemberList_Info",str_Template_MemberList_Info)
-	Call EA_M_XML.AppElements("Language_Template_Error_Info",str_Template_Error_Info)
-	Call EA_M_XML.AppElements("Language_Template_Success_Info",str_Template_Success_Info)
-	Call EA_M_XML.AppElements("Language_Template_MemberList_Info",str_Template_MemberList_Info)
-	Call EA_M_XML.AppElements("Language_Template_Login_Info",str_Template_Login_Info)
-
-	Call EA_M_XML.AppElements("Language_Template_CheckForm",str_Template_CheckForm)
-	Call EA_M_XML.AppElements("Language_Template_CurrentEdit",str_Template_CurrentEdit)
-
-	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
-	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)
-
-	Call EA_M_XML.AppElements("TemplateName1",TemplateName)
-
-	For i = 1 To 13
-		Call EA_M_XML.AppElements("Comm_Edit_" & i,str_Comm_Edit_Operation)
-	Next
-
-	Call EA_M_XML.AppInfo("TemplateName",TemplateName)
-	Call EA_M_XML.AppInfo("TemplateCSS",TempStr(2,0))
-	Call EA_M_XML.AppInfo("TemplateHead",TempStr(3,0))
-	Call EA_M_XML.AppInfo("TemplateFoot",TempStr(4,0))
-	Call EA_M_XML.AppInfo("TemplateIndex",TempStr(5,0))
-	Call EA_M_XML.AppInfo("TemplateList",TempStr(6,0))
-	Call EA_M_XML.AppInfo("TemplateView",TempStr(7,0))
-	Call EA_M_XML.AppInfo("TemplateSearch",TempStr(8,0))
-	Call EA_M_XML.AppInfo("TemplateMemberList",TempStr(9,0))
-	Call EA_M_XML.AppInfo("TemplateImgList",TempStr(10,0))
-	Call EA_M_XML.AppInfo("TemplateError",TempStr(11,0))
-	Call EA_M_XML.AppInfo("TemplateSuccess",TempStr(12,0))
-	Call EA_M_XML.AppInfo("TemplateLogin",TempStr(13,0))
+	Call EA_M_XML.AppInfo("title",TempStr(1,0))
+	Call EA_M_XML.AppInfo("isdefault",TempStr(2,0))
 
 	Page = EA_M_XML.make("","",0)
 	Call EA_M_XML.Out(Page)
