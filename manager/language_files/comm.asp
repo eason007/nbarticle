@@ -488,11 +488,12 @@ Const str_ReLoad_MakeBaiduNewsop_Desc="协议文件生成于网站根目录下�
 Const str_Theme_Info="①在这里，您可以新建和修改风格，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认风格不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
 Const str_Theme_Name="风格名称"
 Const str_Theme_Default="默认"
+
 Const str_Theme_ModuleName="模块名称"
 Const str_Theme_ModuleDesc="模块简介"
 Const str_Theme_ModuleType="模块类型"
+Const str_Theme_ModuleEdit="编辑模块"
 
-Const str_Template_Manager="编辑风格"
 Const str_Template_Add="添加风格"
 Const str_Template_CheckForm = "请至少选择一个项目提交.\n如为新增风格，请选择填写风格名称后提交。"
 Const str_Template_CurrentEdit = "当前编辑："
