@@ -7,7 +7,7 @@ objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
 objTable.doResponseOther = "sw_help_topic_init()";
 
 //FormEdit.debug = true;
-FormEdit.formName = "form1";
+FormEdit.formName = "form2";
 FormEdit.postUrl = "./admin_theme.asp";
 FormEdit.dateVal = "action=add";
 
@@ -76,7 +76,7 @@ function setDefaultTheme(id){
 				  <input type="radio" name="isdefault" value="0" dataType="Group"></td>
 			  </tr>
 			  <tr bgcolor="efefef">
-			  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReset" id="btnReset"></td>
+			  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReset" id="btnReset" onclick="javascript: $('form2').reset();"></td>
 			</tr>
 			</table>
 		</fieldset>
