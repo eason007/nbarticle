@@ -485,7 +485,7 @@ Const str_ReLoad_MakeBaiduNewsop="生成百度新闻开放协议文件"
 Const str_ReLoad_MakeBaiduNewsop_Desc="协议文件生成于网站根目录下的baidu-newsop.xml，请在 <a href='http://news.baidu.com/newsop.html#ks5' target=_blank>这里</a> 提交，将可能有助于百度对您网站页面的收录。"
 
 'admin_template.asp
-Const str_Theme_Info="①在这里，您可以新建和修改风格，操作时请按照相关页面提示完整填写表单信息。<BR>②系统当前正在使用的默认风格不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
+Const str_Theme_Info="①在这里，您可以添加和编辑风格，操作时请按照相关页面提示完整填写表单信息。<BR>②默认风格不能删除<br>③<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
 Const str_Theme_Name="风格名称"
 Const str_Theme_Default="默认风格"
 Const str_Theme_Add="添加风格"
