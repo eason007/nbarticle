@@ -101,9 +101,8 @@ function ajaxObject() {
 						}
 					}
 					else{
-						if (obj.debug == true){
-							alert("Request Fail\nMethod:"+obj.objType+"\nUrl:"+obj.URL+"\nData:"+obj.dateVal);
-						}
+						alert("Request Fail\nMethod:"+obj.objType+"\nUrl:"+obj.URL+"\nData:"+obj.dateVal);
+						$("divLoading").style.display="NONE";
 						
 						errCount = 0;
 						return false;
