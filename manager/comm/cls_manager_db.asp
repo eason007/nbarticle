@@ -265,88 +265,34 @@ Class Cls_Manager_DBOperation
 	End Function
 	
 	Public Sub Set_Template_Delete(iTemplate_Id)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Delete_Manager_Template "&iTemplate_Id
-		Case 1
-			SQL="DELETE"
-			SQL=SQL&" FROM NB_Template"
-			SQL=SQL&" WHERE Id="&iTemplate_Id
-		Case 2
-			SQL="Exec sp_EliteArticle_Template_Delete"
-			SQL=SQL&" @Template_Id="&iTemplate_Id
-		End Select
+		SQL="DELETE"
+		SQL=SQL&" FROM NB_Themes"
+		SQL=SQL&" WHERE Id="&iTemplate_Id
 		
 		DB_Execute SQL
 	End Sub
 	
 	Public Sub Set_DefaultTemplate(iTemplate_Id)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_UpDate_Manager_FormatTemplateDefautlState"
-			DB_Execute SQL
-			
-			SQL="Exec vi_UpDate_Manager_SetDefaultTemplate "&iTemplate_Id
-			DB_Execute SQL
-		Case 1
-			SQL="UPDATE NB_Template SET isDefault = 0"
-			DB_Execute SQL
-			
-			SQL="UPDATE NB_Template SET isDefault = 1"
-			SQL=SQL&" WHERE Id="&iTemplate_Id
-			DB_Execute SQL
-		Case 2
-			SQL="Exec sp_EliteArticle_Template_SetDefault_UpDate"
-			SQL=SQL&" @Template_Id="&iTemplate_Id
-
-			DB_Execute SQL
-		End Select
+		SQL="UPDATE NB_Themes SET IsDefault = 0"
+		DB_Execute SQL
+		
+		SQL="UPDATE NB_Themes SET IsDefault = 1"
+		SQL=SQL&" WHERE Id="&iTemplate_Id
+		DB_Execute SQL
 	End Sub
 	
-	Public Function Set_Template_Clone(iTemplate_Id)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Insert_Manager_CloneTemplate "&iTemplate_Id
-		Case 1
-			SQL="INSERT INTO NB_Template ( Temp_Name, Page_Css, Page_Head, Page_Foot, Page_Index, Page_List, Page_View, Page_Search, Page_Error, Page_Success, Page_MemberList, Page_ImgList )"
-			SQL=SQL&" SELECT '复制'+Temp_Name, Page_Css, Page_Head, Page_Foot, Page_Index, Page_List, Page_View, Page_Search, Page_Error, Page_Success, Page_MemberList, Page_ImgList"
-			SQL=SQL&" FROM NB_Template"
-			SQL=SQL&" WHERE Id="&iTemplate_Id
-		Case 2
-			SQL="Exec sp_EliteArticle_Template_Clone_Insert"
-			SQL=SQL&" @Template_Id="&iTemplate_Id
-		End Select
-		
-		DB_Execute SQL
-	End Function
-	
 	Public Function Get_Template_Info(iTemplate_Id)
-		Select Case iDataBaseType
-		Case 0
-			Sql="Exec vi_Select_Manager_TemplateInfo "&iTemplate_Id
-		Case 1
-			SQL="SELECT Id, Temp_Name, Page_Css, Page_Head, Page_Foot, Page_Index, Page_List, Page_View, Page_Search, Page_MemberList, Page_ImgList, Page_Error, Page_Success, IsDefault"
-			SQL=SQL&" FROM NB_Template"
-			SQL=SQL&" WHERE Id="&iTemplate_Id
-		Case 2
-			SQL="Exec sp_EliteArticle_Template_Info_Manager_Select"
-			SQL=SQL&" @Template_Id="&iTemplate_Id
-		End Select
+		SQL="SELECT Id, Title, IsDefault"
+		SQL=SQL&" FROM NB_Themes"
+		SQL=SQL&" WHERE Id="&iTemplate_Id
 		
 		Get_Template_Info=DB_Query(SQL)
 	End Function
 	
 	Public Function Get_Template_List()
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Manager_TemplateList"
-		Case 1
-			SQL="SELECT Id, Temp_Name, IsDefault"
-			SQL=SQL&" FROM NB_Template"
-		Case 2
-			SQL="Exec sp_EliteArticle_Template_List_Manager_Select"
-		End Select
-		
+		SQL="SELECT Id, Title, IsDefault"
+		SQL=SQL&" FROM NB_Themes"
+
 		Get_Template_List=DB_Query(SQL)
 	End Function
 	

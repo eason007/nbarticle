@@ -201,24 +201,11 @@ Sub Save
 	Response.End
 End Sub
 
-Sub CloneTemplate
-	Dim TempId
-	TempId=EA_Pub.SafeRequest(2,"ID",0,0,0)
-	
-	EA_M_DBO.Set_Template_Clone TempId
-	
-	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
-	
-	Response.Write "1"
-	Response.End
-End Sub
-
 Sub SaveDefaultTemplate
 	Dim DefId
 	DefId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	
-	If DefId>0 Then EA_M_DBO.Set_DefaultTemplate DefId
+	If DefId > 0 Then EA_M_DBO.Set_DefaultTemplate DefId
 	
 	Call EA_Pub.Close_Obj
 	Set EA_Pub=Nothing
@@ -244,7 +231,7 @@ Sub DelTemplate
 
 		TempStr=EA_M_DBO.Get_Template_Info(Tmp)
 		If IsArray(TempStr) Then 
-			If TempStr(13,0)=0 Then 
+			If TempStr(2,0)=0 Then 
 				IsDel=True
 			Else
 				IsDel=False

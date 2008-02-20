@@ -4,7 +4,7 @@ var editUrl = "./templates/admin_template_option.htm";
 //objTable.debug = true;
 objTable.setURL("./admin_template.asp");
 objTable.dateVal = "action=";
-objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setCopyTemplate($ID);'>"+copyTemplate+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTemplate($ID);'>"+defaultTemplate+"</a>";
+objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTemplate($ID);'>"+defaultTemplate+"</a>";
 objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
 objTable.doResponseOther = "sw_help_topic_init()";
 
@@ -14,9 +14,6 @@ function initTabContent(){
 	objTable.start();
 }
 
-function setCopyTemplate(id){
-	ajaxPostDate("./admin_template.asp","action=clone&ID=" + id, initTabContent);
-}
 
 function setDefaultTemplate(id){
 	ajaxPostDate("./admin_template.asp","action=default&ID=" + id, initTabContent);
