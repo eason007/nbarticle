@@ -296,11 +296,12 @@ Class Cls_Manager_DBOperation
 		Get_Theme_List=DB_Query(SQL)
 	End Function
 
-	Public Function Get_Template_List()
-		SQL="SELECT Id, Title, Desc, ThemesID, Code, Type"
-		SQL=SQL&" FROM NB_Template"
+	Public Function Get_Module_List(iThemeId)
+		SQL="SELECT Id, Title, Desc, ThemesID, [Code], [Type]"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE ThemesID="&iThemeId
 
-		Get_Template_List=DB_Query(SQL)
+		Get_Module_List=DB_Query(SQL)
 	End Function
 	
 	Public Sub Set_Review_Pass(iValue,iReview_Id)

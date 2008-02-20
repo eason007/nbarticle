@@ -44,7 +44,7 @@ Sub Main
 	Dim i
 	Dim TopicList
 	Dim ListName(6),ListValue()
-	Dim ForTotal
+	Dim ForTotal,ThemeId
 
 	Call EA_M_XML.AppElements("Language_Theme_ModuleName",str_Theme_ModuleName)
 	Call EA_M_XML.AppElements("Language_Theme_ModuleDesc",str_Theme_ModuleDesc)
@@ -52,10 +52,13 @@ Sub Main
 
 	Call EA_M_XML.AppElements("Comm_Add_Operation",str_Comm_Add_Operation)
 	Call EA_M_XML.AppElements("Comm_Del_Operation",str_Comm_Del_Operation)
+	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)
 
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
-	TopicList=EA_M_DBO.Get_Theme_List()
+	ThemeId=EA_Pub.SafeRequest(2,"ID",0,0,0)
+
+	TopicList=EA_M_DBO.Get_Module_List(ThemeId)
 
 	ListName(0) = "checkbox"
 	ListName(1) = "ID"
@@ -73,12 +76,9 @@ Sub Main
 		ListValue(1,i) = TopicList(0,i)
 		ListValue(2,i) = TopicList(0,i)
 		ListValue(3,i) = TopicList(1,i)
-		If TopicList(2,i) Then
-			ListValue(4,i) = "<strong>√</strong>"
-		Else
-			ListValue(4,i) = "<font color=""red""><strong>×</strong></font>"
-		End If
-		ListValue(5,i) = "action"
+		ListValue(4,i) = TopicList(2,i)
+		ListValue(5,i) = TopicList(5,i)
+		ListValue(6,i) = "action"
 	Next
 
 	Page = EA_M_XML.make(ListName,ListValue,Ubound(TopicList,2)+1)

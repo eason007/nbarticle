@@ -6,9 +6,8 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	//objTable.debug = true;
 	objTable.setURL("./admin_module.asp");
 	objTable.dateVal = "action=&ID=" + tabFormID[currentTab];
-	objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTheme($ID);'>"+defaultTheme+"</a>";
+	objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>";
 	objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
-	objTable.doResponseOther = "sw_help_topic_init()";
 
 	setTabTitle(currentTab, tabTitle[203]);
 }
@@ -32,10 +31,13 @@ function initTabContent(){
 			<th>ID</th>
 			<th><span id="Language_Theme_ModuleName"></span></th>
 			<th><span id="Language_Theme_ModuleDesc"></span></th>
-			<th><span id="Language_Theme_ModuleDesc"></span></th>
+			<th><span id="Language_Theme_ModuleType"></span></th>
 			<th><span id="Language_Comm_Bar_Operation"></span></th>
 		  </tr>
 		</table>
+		<div style="BACKGROUND: #efefef;height:25px;">
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_module_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_theme.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
+		</div>
 	</div>
 </div>
 
