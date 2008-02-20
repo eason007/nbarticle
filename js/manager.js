@@ -167,10 +167,9 @@ function edit(ID, url) {
 /*删除信息*/
 function del(url, formid, name) {
     if(!formid){
-		var form=$('form1');
-	}else{
-		var form=$(formid);
+		formid = 'form1';
 	}
+	var form=$(formid);
 
 	if(!name){
 		name="checkbox";
@@ -191,6 +190,7 @@ function del(url, formid, name) {
 		str = str.substr(0, str.length-1);
 		if (confirmMessage(delConfim))
 		{
+			objForm.formName = formid;
 			objForm.postUrl = url;
 			objForm.dateVal = "action=del&ID="+str;
 			objForm.doResponseMethod = getDeletePostResult;
