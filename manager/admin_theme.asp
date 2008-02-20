@@ -48,12 +48,19 @@ Sub Main
 
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
 	Call EA_M_XML.AppElements("Language_Theme_Info",str_Theme_Info)
+	Call EA_M_XML.AppElements("Language_Theme_Edit",str_Theme_Edit)
 
 	Call EA_M_XML.AppElements("Language_Theme_Name",str_Theme_Name)
 	Call EA_M_XML.AppElements("Language_Theme_Default",str_Theme_Default)
+	Call EA_M_XML.AppElements("Language_Theme_Name1",str_Theme_Name)
+	Call EA_M_XML.AppElements("Language_Theme_Default1",str_Theme_Default)
 
 	Call EA_M_XML.AppElements("Comm_Add_Operation",str_Comm_Add_Operation)
 	Call EA_M_XML.AppElements("Comm_Del_Operation",str_Comm_Del_Operation)
+	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
+
+	Call EA_M_XML.AppElements("Language_Comm_Yes",str_Comm_Yes)
+	Call EA_M_XML.AppElements("Language_Comm_No",str_Comm_No)
 
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
