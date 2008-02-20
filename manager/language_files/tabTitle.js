@@ -64,6 +64,7 @@ tabTitle[190] = "生成内容页";
 tabTitle[200] = "风格管理";
 tabTitle[201] = "添加风格";
 tabTitle[202] = "编辑风格";
+tabTitle[203] = "模块管理";
 
 tabTitle[210] = "导出风格";
 tabTitle[211] = "导入风格";
