@@ -58,6 +58,7 @@ Sub Main
 	Call EA_M_XML.AppElements("Comm_Add_Operation",str_Comm_Add_Operation)
 	Call EA_M_XML.AppElements("Comm_Del_Operation",str_Comm_Del_Operation)
 	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
+	Call EA_M_XML.AppElements("btnReset",str_Comm_Reset_Button)
 
 	Call EA_M_XML.AppElements("Language_Comm_Yes",str_Comm_Yes)
 	Call EA_M_XML.AppElements("Language_Comm_No",str_Comm_No)
@@ -157,52 +158,38 @@ Sub Edit
 End Sub
 
 Sub Save
-	If rs.state=1 Then rs.close
+	Dim ThemeID, Title, IsDefault
 
-	Dim TemplateContent,TemplateTag
-	Dim TemplateID
+	FoundErr = False
 	
-	TemplateID		= EA_Pub.SafeRequest(2,"ID",0,0,0)
-	TemplateContent = EA_Pub.SafeRequest(2,"TemplateContent",1,"",-1)
-	TemplateTag		= EA_Pub.SafeRequest(2,"TemplateTag",1,"",-1)
-
-	If TemplateTag = "" Then Response.Write "-1":Response.End
+	ThemeID		= EA_Pub.SafeRequest(1,"ID",0,0,0)
+	Title		= EA_Pub.SafeRequest(1,"Title",1,"",0)
+	IsDefault	= EA_Pub.SafeRequest(1,"isdefault",0,0,0)
 	
-	If TemplateID<>0 Then
-		rs.open "select * from NB_Template where id="&TemplateID,conn,2,3
+	If Title="" Or Len(Title)>50 Then FoundErr = True
+	
+	If FoundErr Then
+		Response.Write "-1"
 	Else
-		rs.open "select * from NB_Template",conn,2,3
-		rs.addnew
-	End If
-	
-	If TemplateTag = "Name" Then
-		rs("Temp_" & TemplateTag)=TemplateContent
-	Else
-		rs("Page_" & TemplateTag)=TemplateContent
-
-		If LCase(TemplateTag) = "css" Then
-			Dim re
-			Set re=new RegExp
-			re.IgnoreCase =true
-			re.Global=True
-
-			re.Pattern="<style([^>]*)>"
-			TemplateContent=re.Replace(TemplateContent,"")
-
-			TemplateContent=Replace(TemplateContent,"</style>","")
-
-			TemplateContent=Replace(TemplateContent,"{$SystemPath$}",SystemFolder)
-
-			Call EA_Pub.Save_HtmlFile("../common/css/style_" & TemplateID & ".css",TemplateContent)
+		If ThemeID<>0 Then
+			Sql="Select * From [NB_Themes] Where [Id]="&ThemeID
+			rs.Open Sql,Conn,2,2
+		Else
+			rs.Open "NB_Themes",Conn,2,2
+			rs.AddNew
 		End If
-	End If
-	rs.update
+
+		rs("Title")=Title
+		rs("IsDefault")=IsDefault
+		rs.update
+		Rs.Close:Set Rs=Nothing
 		
-	Rs.Close:Set Rs=Nothing
-	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
+		Call EA_Pub.Close_Obj
+		Set EA_Pub=Nothing
 	
-	Response.Write "1"
+		Response.Write ThemeID
+	End If
+
 	Response.End
 End Sub
 
