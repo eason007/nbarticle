@@ -59,7 +59,7 @@ Sub Main
 
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
-	TopicList=EA_M_DBO.Get_Template_List()
+	TopicList=EA_M_DBO.Get_Theme_List()
 
 	ListName(0) = "checkbox"
 	ListName(1) = "ID"
@@ -205,7 +205,7 @@ Sub SaveDefaultTemplate
 	Dim DefId
 	DefId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	
-	If DefId > 0 Then EA_M_DBO.Set_DefaultTemplate DefId
+	If DefId > 0 Then EA_M_DBO.Set_DefaultTheme DefId
 	
 	Call EA_Pub.Close_Obj
 	Set EA_Pub=Nothing
@@ -229,7 +229,7 @@ Sub DelTemplate
 
 		Tmp = EA_Pub.SafeRequest(5,IDs(i),0,0,0)
 
-		TempStr=EA_M_DBO.Get_Template_Info(Tmp)
+		TempStr=EA_M_DBO.Get_Theme_Info(Tmp)
 		If IsArray(TempStr) Then 
 			If TempStr(2,0)=0 Then 
 				IsDel=True
@@ -238,7 +238,7 @@ Sub DelTemplate
 			End If
 		End If
 
-		If IsDel Then EA_M_DBO.Set_Template_Delete Tmp
+		If IsDel Then EA_M_DBO.Set_Theme_Delete Tmp
 	Next
 	
 	Call EA_Pub.Close_Obj

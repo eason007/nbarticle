@@ -43,7 +43,7 @@ str_LeftMenu(4,0)="风格管理"
 str_LeftMenu(4,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeindex_main.htm\');"">生成首页</a>"
 str_LeftMenu(4,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makelist_main.htm\');"">生成列表</a>"
 str_LeftMenu(4,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeview_main.htm\');"">生成内容页</a>"
-str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_list.htm\');"">风格管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_theme_list.htm\');"">风格管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_template_option.htm\', \'pageAdd\');"">添加</a>"
 str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_main.htm\');"">导出风格</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_input.htm\');"">导入</a>"
 str_LeftMenu(4,6)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_list.htm\');"">Js文件管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_option.htm\', \'pageAdd\');"">添加</a>"
 

@@ -264,34 +264,41 @@ Class Cls_Manager_DBOperation
 		Get_Group_List=DB_Query(SQL)
 	End Function
 	
-	Public Sub Set_Template_Delete(iTemplate_Id)
+	Public Sub Set_Theme_Delete(iTheme_Id)
 		SQL="DELETE"
 		SQL=SQL&" FROM NB_Themes"
-		SQL=SQL&" WHERE Id="&iTemplate_Id
+		SQL=SQL&" WHERE Id="&iTheme_Id
 		
 		DB_Execute SQL
 	End Sub
 	
-	Public Sub Set_DefaultTemplate(iTemplate_Id)
+	Public Sub Set_DefaultTheme(iTheme_Id)
 		SQL="UPDATE NB_Themes SET IsDefault = 0"
 		DB_Execute SQL
 		
 		SQL="UPDATE NB_Themes SET IsDefault = 1"
-		SQL=SQL&" WHERE Id="&iTemplate_Id
+		SQL=SQL&" WHERE Id="&iTheme_Id
 		DB_Execute SQL
 	End Sub
 	
-	Public Function Get_Template_Info(iTemplate_Id)
+	Public Function Get_Theme_Info(iTheme_Id)
 		SQL="SELECT Id, Title, IsDefault"
 		SQL=SQL&" FROM NB_Themes"
-		SQL=SQL&" WHERE Id="&iTemplate_Id
+		SQL=SQL&" WHERE Id="&iTheme_Id
 		
-		Get_Template_Info=DB_Query(SQL)
+		Get_Theme_Info=DB_Query(SQL)
 	End Function
 	
-	Public Function Get_Template_List()
+	Public Function Get_Theme_List()
 		SQL="SELECT Id, Title, IsDefault"
 		SQL=SQL&" FROM NB_Themes"
+
+		Get_Theme_List=DB_Query(SQL)
+	End Function
+
+	Public Function Get_Template_List()
+		SQL="SELECT Id, Title, Desc, ThemesID, Code, Type"
+		SQL=SQL&" FROM NB_Template"
 
 		Get_Template_List=DB_Query(SQL)
 	End Function
