@@ -8,11 +8,11 @@
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
 '=-------------------------------------------------------------------
-'= 文件名称：/Manager/Admin_Template.asp
-'= 摘    要：后台-模版管理文件
+'= 文件名称：/Manager/Admin_Theme.asp
+'= 摘    要：后台-风格管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-10-27
+'= 最后日期：2008-02-20
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -31,11 +31,9 @@ Case "add"
 Case "save"
 	Call Save
 Case "del"
-	Call DelTemplate
+	Call DelTheme
 Case "default"
-	Call SaveDefaultTemplate
-Case "clone"
-	Call CloneTemplate
+	Call SaveDefaultTheme
 Case Else
 	Call Main
 End Select
@@ -49,10 +47,10 @@ Sub Main
 	Dim ForTotal
 
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
-	Call EA_M_XML.AppElements("Language_Template_Info",str_Template_Info)
+	Call EA_M_XML.AppElements("Language_Theme_Info",str_Theme_Info)
 
-	Call EA_M_XML.AppElements("Language_Template_TempName",str_Template_TempName)
-	Call EA_M_XML.AppElements("Language_Template_Default",str_Template_Default)
+	Call EA_M_XML.AppElements("Language_Theme_Name",str_Theme_Name)
+	Call EA_M_XML.AppElements("Language_Theme_Default",str_Theme_Default)
 
 	Call EA_M_XML.AppElements("Comm_Add_Operation",str_Comm_Add_Operation)
 	Call EA_M_XML.AppElements("Comm_Del_Operation",str_Comm_Del_Operation)
@@ -201,7 +199,7 @@ Sub Save
 	Response.End
 End Sub
 
-Sub SaveDefaultTemplate
+Sub SaveDefaultTheme
 	Dim DefId
 	DefId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	
@@ -214,7 +212,7 @@ Sub SaveDefaultTemplate
 	Response.End
 End Sub
 
-Sub DelTemplate
+Sub DelTheme
 	Dim IDs
 	Dim i,Tmp
 	Dim TempStr

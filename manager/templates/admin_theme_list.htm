@@ -2,9 +2,9 @@
 var editUrl = "./templates/admin_template_option.htm";
 
 //objTable.debug = true;
-objTable.setURL("./admin_template.asp");
+objTable.setURL("./admin_theme.asp");
 objTable.dateVal = "action=";
-objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTemplate($ID);'>"+defaultTemplate+"</a>";
+objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>&nbsp;<a href='javascript:vod();' onclick='setDefaultTheme($ID);'>"+defaultTheme+"</a>";
 objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
 objTable.doResponseOther = "sw_help_topic_init()";
 
@@ -15,8 +15,8 @@ function initTabContent(){
 }
 
 
-function setDefaultTemplate(id){
-	ajaxPostDate("./admin_template.asp","action=default&ID=" + id, initTabContent);
+function setDefaultTheme(id){
+	ajaxPostDate("./admin_theme.asp","action=default&ID=" + id, initTabContent);
 }
 </script>
 <form id="form1" name="form1" method="get" onsubmit="return false;">
@@ -24,7 +24,7 @@ function setDefaultTemplate(id){
 <div class="mainWindows">
 	<div>
 		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
-        <div id="help_topic"><span id="Language_Template_Info"></span></div>
+        <div id="help_topic"><span id="Language_Theme_Info"></span></div>
         </fieldset>
 	</div>
 
@@ -33,13 +33,13 @@ function setDefaultTemplate(id){
 		  <tr>
 			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);"></th>
 			<th>ID</th>
-			<th><span id="Language_Template_TempName"></span></th>
-			<th><span id="Language_Template_Default"></span></th>
+			<th><span id="Language_Theme_Name"></span></th>
+			<th><span id="Language_Theme_Default"></span></th>
 			<th><span id="Language_Comm_Bar_Operation"></span></th>
 		  </tr>
 		</table>
 		<div style="BACKGROUND: #efefef;height:25px;">
-			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_template_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_template.asp');"></div>
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_template_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_theme.asp');"></div>
 		</div>
 	</div>
 </div>
