@@ -92,6 +92,11 @@ function formObject() {
 				aoForm.targetArea = this;
 				aoForm.doResponseMethod = this.getReturnValue;
 				aoForm.ajaxPostDate(aoForm);
+
+				if (this.debug)
+				{
+					alert(aoForm.dateVal);
+				}
 			} else {
 				return postStr;
 			}
