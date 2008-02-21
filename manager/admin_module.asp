@@ -41,7 +41,7 @@ Call EA_Pub.Close_Obj
 Set EA_Pub=Nothing
 
 Sub Main
-	Dim i
+	Dim i, Count
 	Dim TopicList
 	Dim ListName(6),ListValue()
 	Dim ForTotal,ThemeId
@@ -68,33 +68,38 @@ Sub Main
 
 	ThemeId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 
-	TopicList=EA_M_DBO.Get_Module_List(ThemeId)
+	Count=EA_M_DBO.Get_Module_Total(ThemeId)(0,0)
+	If Count>0 Then 
+		TopicList=EA_M_DBO.Get_Module_List(ThemeId)
 
-	ListName(0) = "checkbox"
-	ListName(1) = "ID"
-	ListName(2) = "IDs"
-	ListName(3) = "Name"
-	ListName(4) = "Desc"
-	ListName(5) = "Type"
-	ListName(6) = "action"
-	ForTotal = Ubound(TopicList,2)
-	
-	For i=0 To ForTotal
-		ReDim Preserve ListValue(6,i)
+		ListName(0) = "checkbox"
+		ListName(1) = "ID"
+		ListName(2) = "IDs"
+		ListName(3) = "Name"
+		ListName(4) = "Desc"
+		ListName(5) = "Type"
+		ListName(6) = "action"
+		ForTotal = Ubound(TopicList,2)
+		
+		For i=0 To ForTotal
+			ReDim Preserve ListValue(6,i)
 
-		ListValue(0,i) = "checkbox"
-		ListValue(1,i) = TopicList(0,i)
-		ListValue(2,i) = TopicList(0,i)
-		ListValue(3,i) = TopicList(1,i)
-		ListValue(4,i) = TopicList(2,i)
-		Select Case TopicList(5,i)
-		Case 0
-			ListValue(5,i) = str_Theme_ModuleHome
-		End Select
-		ListValue(6,i) = "action"
-	Next
+			ListValue(0,i) = "checkbox"
+			ListValue(1,i) = TopicList(0,i)
+			ListValue(2,i) = TopicList(0,i)
+			ListValue(3,i) = TopicList(1,i)
+			ListValue(4,i) = TopicList(2,i)
+			Select Case TopicList(5,i)
+			Case 0
+				ListValue(5,i) = str_Theme_ModuleHome
+			End Select
+			ListValue(6,i) = "action"
+		Next
 
-	Page = EA_M_XML.make(ListName,ListValue,Ubound(TopicList,2)+1)
+		Page = EA_M_XML.make(ListName,ListValue,Ubound(TopicList,2)+1)
+	Else
+		Page = EA_M_XML.make("","",0)
+	End If
 
 	Call EA_M_XML.Out(Page)
 End Sub
@@ -104,7 +109,7 @@ Sub Edit
 	Dim ModuleName, ModuleDesc, ModuleType, ModuleCode
 	Dim i, TempStr, Tmp
 	
-	ModuleID=EA_Pub.SafeRequest(2,"ID",0,0,0)
+	ModuleID=EA_Pub.SafeRequest(1,"ID",0,0,0)
 	Call EA_M_XML.AppInfo("ID",ModuleID)
 	
 	If ModuleID > 0 Then

@@ -297,6 +297,14 @@ Class Cls_Manager_DBOperation
 		Get_Theme_List=DB_Query(SQL)
 	End Function
 
+	Public Function Get_Module_Total(iThemeId)
+		SQL="SELECT COUNT(ID)"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE ThemesID="&iThemeId
+
+		Get_Module_Total=DB_Query(SQL)
+	End Function
+
 	Public Function Get_Module_List(iThemeId)
 		SQL="SELECT Id, Title, Desc, ThemesID, [Code], [Type]"
 		SQL=SQL&" FROM NB_Module"
