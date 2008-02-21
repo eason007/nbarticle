@@ -1,15 +1,19 @@
 <script type="text/javascript">
 if (typeof(tabFormID[currentTab]) != "undefined")
 {
-	var editUrl = "./templates/admin_module_option.htm";
+	editSuccessUrl = './templates/admin_module_list.htm';
 
 	//objTable.debug = true;
 	objTable.setURL("./admin_module.asp");
 	objTable.dateVal = "action=&ID=" + tabFormID[currentTab];
-	objTable.action = "<a href='javascript:vod();' onclick='edit($ID,editUrl);'>"+editStr+"</a>";
+	objTable.action = "<a href='javascript:vod();' onclick='editModule($ID);'>"+editStr+"</a>";
 	objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
+	objTable.doResponseOther = "sw_help_topic_init()";
 
-	setTabTitle(currentTab, tabTitle[203]);
+	//objForm.debug = true;
+	objForm.formName = "form2"
+	objForm.postUrl = "./admin_theme.asp";
+	objForm.doResponseOther = "initTabContent()";
 }
 else{
 	ajaxChangeRightContent('./templates/admin_theme_list.htm');
@@ -17,14 +21,33 @@ else{
 
 
 function initTabContent(){
+	setTabTitle(currentTab, tabTitle[203]);
+
 	objTable.start();
+
+	objForm.doResponseMethod = getAddPostResult;
 }
 
+function editModule (id) {
+	objForm.doResponseMethod = getEditPostResult;
+
+	//FormEdit.debug = true;
+	FormEdit.postUrl = "./admin_module.asp";
+	FormEdit.formName = "form2";
+	FormEdit.dateVal = "action=add&ID=" + id;
+	FormEdit.start();
+}
 </script>
-<form id="form1" name="form1" method="get" onsubmit="return false;">
 
 <div class="mainWindows">
-	<div style="margin-top: 5px;">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Theme_ModuleInfo"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin: 5px 5px 0 0; width: 43%;" class="left">
+	<form id="form1" name="form1" method="get" onsubmit="return false;">
 		<table width="100%" id="listTable">
 		  <tr>
 			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);"></th>
@@ -38,7 +61,41 @@ function initTabContent(){
 		<div style="BACKGROUND: #efefef;height:25px;">
 			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_module_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_theme.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
 		</div>
+	</form>
+	</div>
+
+	<div style="margin: 5px; width: 55%;" class="left">
+		<form id="form2" name="form2" method="get" onsubmit="return false;">
+
+		<input type="hidden" name="">
+		<input type="hidden" name="ID">
+		<input type="hidden" name="action" value="save">
+
+		<fieldset><legend><span id="Language_Theme_ModuleEdit"></span></legend>
+			<table width="100%" id="edittable">
+			  <tr>
+				<td width="80" align="right"><span id="Language_Theme_ModuleName1"></span>:</td>
+				<td>&nbsp;<input type="text" name="Title" dataType="Require"></td>
+			  </tr>
+			  <tr>
+				<td align="right"><span id="Language_Theme_ModuleCode"></span>:</td>
+				<td>&nbsp;<textarea name="Code" id="Code" cols="58" rows="15" wrap="VIRTUAL" dataType="Require"></textarea><br>&nbsp;<a href="javascript:vod();" onclick="javascript:change($('Code'),-20)"><img src="images/minus.gif" alt="" /></a>&nbsp;&nbsp;<a href="javascript:vod();" onclick="javascript:change($('Code'),20)"><img src="images/plus.gif" alt="" /></a></td>
+			  </tr>
+			  <tr>
+				<td align="right"><span id="Language_Theme_ModuleDesc1"></span>:</td>
+				<td>&nbsp;<textarea name="Desc" cols="58" rows="3" wrap="VIRTUAL"></textarea></td>
+			  </tr>
+			  <tr>
+				<td align="right"><span id="Language_Theme_ModuleType1"></span>:</td>
+				<td>&nbsp;<select name="Typer" dataType="Require"></select></td>
+			  </tr>
+			  <tr bgcolor="efefef">
+			  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReset" id="btnReset" onclick="$('form2').reset();"></td>
+			</tr>
+			</table>
+		</fieldset>
+
+		</form>
 	</div>
 </div>
 
-</form>

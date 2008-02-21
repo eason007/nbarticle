@@ -10,7 +10,7 @@
 '= 摘    要：管理-数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2005-10-17
+'= 最后日期：2008-02-21
 '====================================================================
 
 Class Cls_Manager_DBOperation
@@ -302,6 +302,14 @@ Class Cls_Manager_DBOperation
 		SQL=SQL&" WHERE ThemesID="&iThemeId
 
 		Get_Module_List=DB_Query(SQL)
+	End Function
+
+	Public Function Get_Module_Info(iModule_Id)
+		SQL="SELECT Id, Title, Desc, [Code], [Type]"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE Id="&iModule_Id
+		
+		Get_Module_Info=DB_Query(SQL)
 	End Function
 	
 	Public Sub Set_Review_Pass(iValue,iReview_Id)

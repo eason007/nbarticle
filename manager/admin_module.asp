@@ -46,13 +46,23 @@ Sub Main
 	Dim ListName(6),ListValue()
 	Dim ForTotal,ThemeId
 
+	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
+	Call EA_M_XML.AppElements("Language_Theme_ModuleInfo",str_Theme_ModuleInfo)
+
+	Call EA_M_XML.AppElements("Language_Theme_ModuleEdit",str_Theme_ModuleAdd)
 	Call EA_M_XML.AppElements("Language_Theme_ModuleName",str_Theme_ModuleName)
 	Call EA_M_XML.AppElements("Language_Theme_ModuleDesc",str_Theme_ModuleDesc)
 	Call EA_M_XML.AppElements("Language_Theme_ModuleType",str_Theme_ModuleType)
+	Call EA_M_XML.AppElements("Language_Theme_ModuleName1",str_Theme_ModuleName)
+	Call EA_M_XML.AppElements("Language_Theme_ModuleDesc1",str_Theme_ModuleDesc)
+	Call EA_M_XML.AppElements("Language_Theme_ModuleType1",str_Theme_ModuleType)
+	Call EA_M_XML.AppElements("Language_Theme_ModuleCode",str_Theme_ModuleCode)
 
 	Call EA_M_XML.AppElements("Comm_Add_Operation",str_Comm_Add_Operation)
 	Call EA_M_XML.AppElements("Comm_Del_Operation",str_Comm_Del_Operation)
 	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)
+	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
+	Call EA_M_XML.AppElements("btnReset",str_Comm_Reset_Button)
 
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
@@ -77,7 +87,10 @@ Sub Main
 		ListValue(2,i) = TopicList(0,i)
 		ListValue(3,i) = TopicList(1,i)
 		ListValue(4,i) = TopicList(2,i)
-		ListValue(5,i) = TopicList(5,i)
+		Select Case TopicList(5,i)
+		Case 0
+			ListValue(5,i) = str_Theme_ModuleHome
+		End Select
 		ListValue(6,i) = "action"
 	Next
 
@@ -87,62 +100,23 @@ Sub Main
 End Sub
 
 Sub Edit
-	Dim TemplateName,TempStr,StyleId
-	Dim i
+	Dim ModuleID
+	Dim ModuleName, ModuleDesc, ModuleType, ModuleCode
+	Dim i, TempStr, Tmp
 	
-	StyleId=EA_Pub.SafeRequest(2,"ID",0,0,0)
-	Call EA_M_XML.AppInfo("ID",StyleId)
+	ModuleID=EA_Pub.SafeRequest(1,"ID",0,0,0)
+	Call EA_M_XML.AppInfo("ID",ModuleID)
 	
-	TempStr=EA_M_DBO.Get_Template_Info(StyleId)
+	If ModuleID > 0 Then
+		TempStr=EA_M_DBO.Get_Module_Info(ModuleID)
 
-	If IsArray(TempStr) Then TemplateName=TempStr(1,0)
-	If Not IsArray(TempStr) Then ReDim TempStr(13,1)
+		Call EA_M_XML.AppInfo("Title",TempStr(1,0))
+		Call EA_M_XML.AppInfo("Desc",TempStr(2,0))
+		Call EA_M_XML.AppInfo("Code",TempStr(3,0))
 
-	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
-	Call EA_M_XML.AppElements("Language_Template_Info",str_Template_Info)
-	Call EA_M_XML.AppElements("Language_Template_Manager",str_Template_Manager)
-
-	Call EA_M_XML.AppElements("Language_Template_TempName",str_Template_TempName)
-
-	Call EA_M_XML.AppElements("Language_Template_Css_Info",str_Template_Css_Info)
-	Call EA_M_XML.AppElements("Language_Template_Head_Info",str_Template_Head_Info)
-	Call EA_M_XML.AppElements("Language_Template_Foot_Info",str_Template_Foot_Info)
-	Call EA_M_XML.AppElements("Language_Template_Index_Info",str_Template_Index_Info)
-	Call EA_M_XML.AppElements("Language_Template_List_Info",str_Template_List_Info)
-	Call EA_M_XML.AppElements("Language_Template_View_Info",str_Template_View_Info)
-	Call EA_M_XML.AppElements("Language_Template_Search_Info",str_Template_Search_Info)
-	Call EA_M_XML.AppElements("Language_Template_ImgList_Info",str_Template_ImgList_Info)
-	Call EA_M_XML.AppElements("Language_Template_MemberList_Info",str_Template_MemberList_Info)
-	Call EA_M_XML.AppElements("Language_Template_Error_Info",str_Template_Error_Info)
-	Call EA_M_XML.AppElements("Language_Template_Success_Info",str_Template_Success_Info)
-	Call EA_M_XML.AppElements("Language_Template_MemberList_Info",str_Template_MemberList_Info)
-	Call EA_M_XML.AppElements("Language_Template_Login_Info",str_Template_Login_Info)
-
-	Call EA_M_XML.AppElements("Language_Template_CheckForm",str_Template_CheckForm)
-	Call EA_M_XML.AppElements("Language_Template_CurrentEdit",str_Template_CurrentEdit)
-
-	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
-	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)
-
-	Call EA_M_XML.AppElements("TemplateName1",TemplateName)
-
-	For i = 1 To 13
-		Call EA_M_XML.AppElements("Comm_Edit_" & i,str_Comm_Edit_Operation)
-	Next
-
-	Call EA_M_XML.AppInfo("TemplateName",TemplateName)
-	Call EA_M_XML.AppInfo("TemplateCSS",TempStr(2,0))
-	Call EA_M_XML.AppInfo("TemplateHead",TempStr(3,0))
-	Call EA_M_XML.AppInfo("TemplateFoot",TempStr(4,0))
-	Call EA_M_XML.AppInfo("TemplateIndex",TempStr(5,0))
-	Call EA_M_XML.AppInfo("TemplateList",TempStr(6,0))
-	Call EA_M_XML.AppInfo("TemplateView",TempStr(7,0))
-	Call EA_M_XML.AppInfo("TemplateSearch",TempStr(8,0))
-	Call EA_M_XML.AppInfo("TemplateMemberList",TempStr(9,0))
-	Call EA_M_XML.AppInfo("TemplateImgList",TempStr(10,0))
-	Call EA_M_XML.AppInfo("TemplateError",TempStr(11,0))
-	Call EA_M_XML.AppInfo("TemplateSuccess",TempStr(12,0))
-	Call EA_M_XML.AppInfo("TemplateLogin",TempStr(13,0))
+		Tmp = "(build-select)," & TempStr(4,0) & " " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5"
+		Call EA_M_XML.AppInfo("Typer",Tmp)
+	End If
 
 	Page = EA_M_XML.make("","",0)
 	Call EA_M_XML.Out(Page)
