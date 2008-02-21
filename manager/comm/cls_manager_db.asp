@@ -292,6 +292,7 @@ Class Cls_Manager_DBOperation
 	Public Function Get_Theme_List()
 		SQL="SELECT Id, Title, IsDefault"
 		SQL=SQL&" FROM NB_Themes"
+		SQL=SQL&" ORDER BY IsDefault DESC, ID ASC"
 
 		Get_Theme_List=DB_Query(SQL)
 	End Function

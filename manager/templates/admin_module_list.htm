@@ -60,7 +60,7 @@ function editModule (id) {
 		  </tr>
 		</table>
 		<div style="BACKGROUND: #efefef;height:25px;">
-			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_module_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_theme.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:$('form2').reset();FormEdit.dateVal = 'action=add&ID=0';FormEdit.start();">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_theme.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
 		</div>
 	</form>
 	</div>
