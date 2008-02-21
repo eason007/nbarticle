@@ -320,6 +320,14 @@ Class Cls_Manager_DBOperation
 		
 		Get_Module_Info=DB_Query(SQL)
 	End Function
+
+	Public Sub Set_Module_Delete(iModule_Id)
+		SQL="DELETE"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE Id="&iModule_Id
+		
+		DB_Execute SQL
+	End Sub
 	
 	Public Sub Set_Review_Pass(iValue,iReview_Id)
 		Select Case iDataBaseType

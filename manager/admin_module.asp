@@ -31,9 +31,7 @@ Case "add"
 Case "save"
 	Call Save
 Case "del"
-	Call DelTheme
-Case "default"
-	Call SaveDefaultTheme
+	Call Del
 Case Else
 	Call Main
 End Select
@@ -92,6 +90,16 @@ Sub Main
 			Select Case TopicList(5,i)
 			Case 0
 				ListValue(5,i) = str_Theme_ModuleHome
+			Case 1
+				ListValue(5,i) = str_Theme_ModuleCss
+			Case 2
+				ListValue(5,i) = str_Theme_ModuleHead
+			Case 3
+				ListValue(5,i) = str_Theme_ModuleFoot
+			Case 4
+				ListValue(5,i) = str_Theme_ModulePage
+			Case 5
+				ListValue(5,i) = str_Theme_ModuleContent
 			End Select
 			ListValue(6,i) = "action"
 		Next
@@ -135,69 +143,42 @@ Sub Edit
 End Sub
 
 Sub Save
-	If rs.state=1 Then rs.close
-
-	Dim TemplateContent,TemplateTag
-	Dim TemplateID
+	Dim Title,Desc, Code, Typer, ThemesID
+	Dim ModuleID
 	
-	TemplateID		= EA_Pub.SafeRequest(2,"ID",0,0,0)
-	TemplateContent = EA_Pub.SafeRequest(2,"TemplateContent",1,"",-1)
-	TemplateTag		= EA_Pub.SafeRequest(2,"TemplateTag",1,"",-1)
+	Title		= EA_Pub.SafeRequest(2,"Title",1,"",-1)
+	Desc		= EA_Pub.SafeRequest(2,"Desc",1,"",-1)
+	Code		= EA_Pub.SafeRequest(2,"Code",1,"",-1)
+	Typer		= EA_Pub.SafeRequest(2,"Typer",0,0,0)
+	ThemesID	= EA_Pub.SafeRequest(2,"ThemesID",0,0,0)
+	ModuleID	= EA_Pub.SafeRequest(2,"ModuleID",0,0,0)
 
-	If TemplateTag = "" Then Response.Write "-1":Response.End
+	If Title = "" Then Response.Write "-1":Response.End
 	
-	If TemplateID<>0 Then
-		rs.open "select * from NB_Template where id="&TemplateID,conn,2,3
+	If ModuleID<>0 Then
+		Sql="Select * From [NB_Module] Where [Id]="&ModuleID
+		rs.Open Sql,Conn,2,2
 	Else
-		rs.open "select * from NB_Template",conn,2,3
-		rs.addnew
+		rs.Open "NB_Module",Conn,2,2
+		rs.AddNew
 	End If
-	
-	If TemplateTag = "Name" Then
-		rs("Temp_" & TemplateTag)=TemplateContent
-	Else
-		rs("Page_" & TemplateTag)=TemplateContent
 
-		If LCase(TemplateTag) = "css" Then
-			Dim re
-			Set re=new RegExp
-			re.IgnoreCase =true
-			re.Global=True
-
-			re.Pattern="<style([^>]*)>"
-			TemplateContent=re.Replace(TemplateContent,"")
-
-			TemplateContent=Replace(TemplateContent,"</style>","")
-
-			TemplateContent=Replace(TemplateContent,"{$SystemPath$}",SystemFolder)
-
-			Call EA_Pub.Save_HtmlFile("../common/css/style_" & TemplateID & ".css",TemplateContent)
-		End If
-	End If
+	rs("Title")=Title
+	rs("Desc")=Desc
+	rs("Code")=Code
+	rs("Type")=Typer
+	rs("ThemesID")=ThemesID
 	rs.update
-		
 	Rs.Close:Set Rs=Nothing
+	
 	Call EA_Pub.Close_Obj
 	Set EA_Pub=Nothing
-	
+	response.write sql
 	Response.Write "1"
 	Response.End
 End Sub
 
-Sub SaveDefaultTheme
-	Dim DefId
-	DefId=EA_Pub.SafeRequest(2,"ID",0,0,0)
-	
-	If DefId > 0 Then EA_M_DBO.Set_DefaultTheme DefId
-	
-	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
-	
-	Response.Write "1"
-	Response.End
-End Sub
-
-Sub DelTheme
+Sub Del
 	Dim IDs
 	Dim i,Tmp
 	Dim TempStr
@@ -212,16 +193,7 @@ Sub DelTheme
 
 		Tmp = EA_Pub.SafeRequest(5,IDs(i),0,0,0)
 
-		TempStr=EA_M_DBO.Get_Theme_Info(Tmp)
-		If IsArray(TempStr) Then 
-			If TempStr(2,0)=0 Then 
-				IsDel=True
-			Else
-				IsDel=False
-			End If
-		End If
-
-		If IsDel Then EA_M_DBO.Set_Theme_Delete Tmp
+		EA_M_DBO.Set_Module_Delete Tmp
 	Next
 	
 	Call EA_Pub.Close_Obj
