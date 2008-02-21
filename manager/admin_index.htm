@@ -88,9 +88,13 @@ function showSubMenu (iMenu) {
 	}
 }
 
-for (var i = 0; i < mainMenu.length ; i++ )
+
+if (typeof(mainMenu) != "undefined")
 {
-	$("menu").innerHTML += "<a href='javascript: vod();' class='title' onclick='javascript: showSubMenu(" + i + ");'>" + mainMenu[i].title + "</a>";
+	for (var i = 0; i < mainMenu.length ; i++ )
+	{
+		$("menu").innerHTML += "<a href='javascript: vod();' class='title' onclick='javascript: showSubMenu(" + i + ");'>" + mainMenu[i].title + "</a>";
+	}
 }
 </script>
 
