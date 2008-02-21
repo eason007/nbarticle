@@ -102,6 +102,7 @@
 }
 
 #contentDiv {
+	padding-bottom: 5px;
 	background: #fff;
 	width: 99.8%;
 	border-bottom: 1px #c5d7e2 solid;
