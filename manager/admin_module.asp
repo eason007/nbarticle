@@ -104,7 +104,7 @@ Sub Edit
 	Dim ModuleName, ModuleDesc, ModuleType, ModuleCode
 	Dim i, TempStr, Tmp
 	
-	ModuleID=EA_Pub.SafeRequest(1,"ID",0,0,0)
+	ModuleID=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Call EA_M_XML.AppInfo("ID",ModuleID)
 	
 	If ModuleID > 0 Then
@@ -115,6 +115,13 @@ Sub Edit
 		Call EA_M_XML.AppInfo("Code",TempStr(3,0))
 
 		Tmp = "(build-select)," & TempStr(4,0) & " " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5"
+		Call EA_M_XML.AppInfo("Typer",Tmp)
+
+		Call EA_M_XML.AppElements("Language_Theme_ModuleEdit",str_Theme_ModuleEdit)
+	Else
+		Call EA_M_XML.AppElements("Language_Theme_ModuleEdit",str_Theme_ModuleAdd)
+
+		Tmp = "(build-select),0 " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5"
 		Call EA_M_XML.AppInfo("Typer",Tmp)
 	End If
 

@@ -8,12 +8,16 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	objTable.dateVal = "action=&ID=" + tabFormID[currentTab];
 	objTable.action = "<a href='javascript:vod();' onclick='editModule($ID);'>"+editStr+"</a>";
 	objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
-	objTable.doResponseOther = "sw_help_topic_init()";
+	objTable.doResponseOther = "FormEdit.formName = 'form2';FormEdit.start();sw_help_topic_init()";
 
 	//objForm.debug = true;
 	objForm.formName = "form2"
 	objForm.postUrl = "./admin_theme.asp";
 	objForm.doResponseOther = "initTabContent()";
+
+	//FormEdit.debug = true;
+	FormEdit.postUrl = "./admin_module.asp";
+	FormEdit.dateVal = "action=add&ID=";
 }
 else{
 	ajaxChangeRightContent('./templates/admin_theme_list.htm');
@@ -31,9 +35,6 @@ function initTabContent(){
 function editModule (id) {
 	objForm.doResponseMethod = getEditPostResult;
 
-	//FormEdit.debug = true;
-	FormEdit.postUrl = "./admin_module.asp";
-	FormEdit.formName = "form2";
 	FormEdit.dateVal = "action=add&ID=" + id;
 	FormEdit.start();
 }

@@ -12,7 +12,7 @@
 '= 摘    要：后台-风格管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-20
+'= 最后日期：2008-02-21
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -119,9 +119,9 @@ Sub Save
 
 	FoundErr = False
 	
-	ThemeID		= EA_Pub.SafeRequest(1,"ID",0,0,0)
-	Title		= EA_Pub.SafeRequest(1,"Title",1,"",0)
-	IsDefault	= EA_Pub.SafeRequest(1,"isdefault",0,0,0)
+	ThemeID		= EA_Pub.SafeRequest(2,"ID",0,0,0)
+	Title		= EA_Pub.SafeRequest(2,"Title",1,"",0)
+	IsDefault	= EA_Pub.SafeRequest(2,"isdefault",0,0,0)
 	
 	If Title="" Or Len(Title)>50 Then FoundErr = True
 	
