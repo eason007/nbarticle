@@ -35,17 +35,17 @@ Class cls_Template
 	'输入参数：
 	'	1、模版id
 	'***********************************************
-	Public Function Load_Template(TemplateId)
+	Public Function Load_Template(TemplateId, TemplateType)
 		FoundErr=False
 
 		Dim Temp
-		Temp=EA_DBO.Get_Template_Info(TemplateId)
+		Temp=EA_DBO.Get_Template_Info(TemplateId, TemplateType)
 		If IsArray(Temp) Then 
-			PageArray(0)=Temp(0,0)			'template name
-			PageArray(1)=Temp(1,0)			'template css
-			PageArray(2)=Temp(2,0)			'template head
-			PageArray(3)=Temp(3,0)			'template foot
-			Load_Template=Temp(4,0)
+			'PageArray(0)=EA_DBO.Get_Template_Info(TemplateId, )(0,0)			'template name
+			PageArray(1)=EA_DBO.Get_Template_Info(TemplateId, 1)(0,0)			'template css
+			PageArray(2)=EA_DBO.Get_Template_Info(TemplateId, 2)(0,0)			'template head
+			PageArray(3)=EA_DBO.Get_Template_Info(TemplateId, 3)(0,0)			'template foot
+			Load_Template=Temp(0,0)
 		Else
 			FoundErr=True
 		End If

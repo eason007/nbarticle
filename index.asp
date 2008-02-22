@@ -36,7 +36,7 @@ If EA_Pub.SysInfo(18)="0" Then
 	End If
 End If
 
-PageContent=EA_Temp.Load_Template(0,"index")
+PageContent=EA_Temp.Load_Template(0, 0)
 
 EA_Temp.Title=EA_Pub.SysInfo(0)&" - 首页"
 EA_Temp.Nav="<a href=""./""><b>"&EA_Pub.SysInfo(0)&"</b></a> - 首页"
