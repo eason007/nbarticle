@@ -12,7 +12,7 @@
 '= 摘    要：后台-栏目管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-08-24
+'= 最后日期：2008-02-22
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -24,7 +24,7 @@ End If
 
 Dim Action
 Dim ForTotal
-Action=Request.Form("action")
+Action=Request("action")
 
 Select Case LCase(Action)
 Case "save"
@@ -106,7 +106,7 @@ Sub Add
 	Dim PostId
 	Dim i,Level
 	Dim Temp,Tmp
-	Dim Code,Style,List_TempId,Article_TempId,Typer
+	Dim Code,Style,List_TempId,Article_TempId
 	
 	PostId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Call EA_M_XML.AppInfo("ID",PostId)
@@ -131,7 +131,6 @@ Sub Add
 		Style			= Temp(8,0)
 		List_TempId		= Temp(9,0)
 		Article_TempId	= Temp(10,0)
-		Typer			= Temp(11,0)
 	Else
 		Call EA_M_XML.AppInfo("Power","0")
 		Call EA_M_XML.AppInfo("PageSize","10")
@@ -175,16 +174,11 @@ Sub Add
 	Call EA_M_XML.AppInfo("Article_TempId",Tmp)
 
 
-	Tmp = "(build-select)," & Typer & " " & str_Column_Type_Normal & ",0 " & str_Column_Type_Diss & ",1"
-	Call EA_M_XML.AppInfo("Typer",Tmp)
-
-
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
 	Call EA_M_XML.AppElements("Language_Column_Help",str_Column_Help)
 	Call EA_M_XML.AppElements("Language_Column_Input_Column",str_Column_Input_Column)
 
 	Call EA_M_XML.AppElements("Language_Column_Title",str_Column_Title)
-	Call EA_M_XML.AppElements("Language_Column_Type",str_Column_Type)
 	Call EA_M_XML.AppElements("Language_Column_Attrib",str_Column_Attrib)
 	Call EA_M_XML.AppElements("Language_Column_Info",str_Column_Info)
 	Call EA_M_XML.AppElements("Language_Column_OutURL",str_Column_OutURL)
@@ -303,7 +297,7 @@ Sub MoveColumn(IsUp)
 End Sub
 
 Sub Save
-	Dim Name,Power,Info,IsHide,Typer,IsOut,OutUrl,Style,IsReview,IsPost,IsTop,List_TempId,Article_TempId,PageSize
+	Dim Name,Power,Info,IsHide,IsOut,OutUrl,Style,IsReview,IsPost,IsTop,List_TempId,Article_TempId,PageSize
 	Dim MatchStr,ParentCode,TypeCode,SelfCode,StepLeng
 	Dim EditCode,SourCode
 	Dim PostId
@@ -318,7 +312,6 @@ Sub Save
 	Power			= EA_Pub.SafeRequest(2,"Power",0,0,0)
 	Info			= EA_Pub.SafeRequest(2,"Info",1,"",0)
 	IsHide			= EA_Pub.SafeRequest(2,"IsHide",0,0,0)
-	Typer			= EA_Pub.SafeRequest(2,"Typer",0,0,0)
 	OutUrl			= EA_Pub.SafeRequest(2,"OutUrl",1,"",0)
 	ParentCode		= EA_Pub.SafeRequest(2,"ColumnList",1,"",0)
 	Style			= EA_Pub.SafeRequest(2,"Style",0,0,0)
@@ -368,10 +361,10 @@ Sub Save
 	If PostId=0 Then 
 		EA_DBO.Set_System_ColumnTotal 1
 			
-		Sql="INSERT INTO NB_Column ( Title, Code, Info, Type, IsOut, OutUrl, StyleId, IsReview, IsPost, IsTop, List_TempId, Article_TempId, PageSize, ListPower, IsHide )"
-		Sql=Sql&" VALUES ( '"&Name&"','"&TypeCode&"','"&Info&"',"&Typer&","&IsOut&",'"&OutUrl&"',"&Style&","&IsReview&","&IsPost&","&IsTop&","&List_TempId&","&Article_TempId&","&PageSize&","&Power&","&IsHide&")"
+		Sql="INSERT INTO NB_Column ( Title, Code, Info, IsOut, OutUrl, StyleId, IsReview, IsPost, IsTop, List_TempId, Article_TempId, PageSize, ListPower, IsHide )"
+		Sql=Sql&" VALUES ( '"&Name&"','"&TypeCode&"','"&Info&"',"&IsOut&",'"&OutUrl&"',"&Style&","&IsReview&","&IsPost&","&IsTop&","&List_TempId&","&Article_TempId&","&PageSize&","&Power&","&IsHide&")"
 	ElseIf IsNumeric(PostId) And PostId<>"" And PostId<>"0" Then
-		Sql="Update [NB_Column] Set Title='"&Name&"',Info='"&Info&"',Type="&Typer&",IsOut="&IsOut&",OutUrl='"&OutUrl&"',StyleId="&Style&",IsReview="&IsReview&",IsPost="&IsPost&",IsTop="&IsTop&",List_TempId="&List_TempId&",Article_TempId="&Article_TempId&",PageSize="&PageSize&",ListPower="&Power&",IsHide="&IsHide
+		Sql="Update [NB_Column] Set Title='"&Name&"',Info='"&Info&"',IsOut="&IsOut&",OutUrl='"&OutUrl&"',StyleId="&Style&",IsReview="&IsReview&",IsPost="&IsPost&",IsTop="&IsTop&",List_TempId="&List_TempId&",Article_TempId="&Article_TempId&",PageSize="&PageSize&",ListPower="&Power&",IsHide="&IsHide
 		If EditCode Then Sql=Sql&",Code='"&TypeCode&"'"
 		Sql=Sql&" Where Id="&PostId
 	End If
