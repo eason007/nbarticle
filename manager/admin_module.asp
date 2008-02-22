@@ -173,7 +173,7 @@ Sub Save
 	
 	Call EA_Pub.Close_Obj
 	Set EA_Pub=Nothing
-	response.write sql
+
 	Response.Write "1"
 	Response.End
 End Sub

@@ -36,6 +36,7 @@ function initTabContent(){
 function editModule (id) {
 	objForm.doResponseMethod = getEditPostResult;
 
+	FormEdit.formName = 'form2';
 	FormEdit.dateVal = "action=add&ID=" + id;
 	FormEdit.start();
 }
