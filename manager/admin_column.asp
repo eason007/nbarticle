@@ -151,7 +151,7 @@ Sub Add
 	Call EA_M_XML.AppInfo("ColumnList",Tmp)
 
 
-	Temp=EA_M_DBO.Get_Template_List()
+	Temp=EA_M_DBO.Get_DefaultModule_List()
 	Tmp = "(build-select)," & List_TempId & " " & str_Comm_Select & ",0"
 	If IsArray(Temp) Then
 		ForTotal = UBound(Temp,2)
@@ -163,7 +163,7 @@ Sub Add
 	Call EA_M_XML.AppInfo("List_TempId",Tmp)
 
 
-	Temp=EA_M_DBO.Get_Template_List()
+	Temp=EA_M_DBO.Get_DefaultModule_List()
 	Tmp = "(build-select)," & Article_TempId & " " & str_Comm_Select & ",0"
 	If IsArray(Temp) Then
 		ForTotal = UBound(Temp,2)

@@ -305,6 +305,15 @@ Class Cls_Manager_DBOperation
 		Get_Module_Total=DB_Query(SQL)
 	End Function
 
+	Public Function Get_DefaultModule_List()
+		SQL="SELECT Id, Title"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 Id FROM NB_Themes WHERE IsDefault=1)"
+		SQL=SQL&" AND [Type] > 3"
+
+		Get_DefaultModule_List=DB_Query(SQL)
+	End Function
+
 	Public Function Get_Module_List(iThemeId)
 		SQL="SELECT Id, Title, Desc, ThemesID, [Code], [Type]"
 		SQL=SQL&" FROM NB_Module"
