@@ -13,7 +13,7 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	//objForm.debug = true;
 	objForm.formName = "form2"
 	objForm.postUrl = "./admin_module.asp";
-	objForm.doResponseOther = "initTabContent()";
+	objForm.doResponseOther = "initTabContent();objForm.formName = 'form2';";
 
 	//FormEdit.debug = true;
 	FormEdit.postUrl = "./admin_module.asp";
@@ -61,7 +61,7 @@ function editModule (id) {
 		  </tr>
 		</table>
 		<div style="BACKGROUND: #efefef;height:25px;">
-			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:$('form2').reset();FormEdit.dateVal = 'action=add&ID=0';FormEdit.start();">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_module.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:$('form2').reset();$('ThemesID').value = tabFormID[currentTab];FormEdit.dateVal = 'action=add&ID=0';FormEdit.start();">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_module.asp');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_theme_list.htm','pageContent');"></div>
 		</div>
 	</form>
 	</div>

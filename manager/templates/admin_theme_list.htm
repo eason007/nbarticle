@@ -12,7 +12,7 @@ objTable.doResponseOther = "sw_help_topic_init()";
 //objForm.debug = true;
 objForm.formName = "form2"
 objForm.postUrl = "./admin_theme.asp";
-objForm.doResponseOther = "initTabContent()";
+objForm.doResponseOther = "initTabContent();objForm.formName = 'form2';";
 
 function initTabContent(){
 	setTabTitle(currentTab, tabTitle[200]);

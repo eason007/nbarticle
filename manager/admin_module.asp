@@ -12,7 +12,7 @@
 '= 摘    要：后台-管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-21
+'= 最后日期：2008-02-22
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -151,7 +151,7 @@ Sub Save
 	Code		= EA_Pub.SafeRequest(2,"Code",1,"",-1)
 	Typer		= EA_Pub.SafeRequest(2,"Typer",0,0,0)
 	ThemesID	= EA_Pub.SafeRequest(2,"ThemesID",0,0,0)
-	ModuleID	= EA_Pub.SafeRequest(2,"ModuleID",0,0,0)
+	ModuleID	= EA_Pub.SafeRequest(2,"ID",0,0,0)
 
 	If Title = "" Then Response.Write "-1":Response.End
 	
