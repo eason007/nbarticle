@@ -195,7 +195,7 @@ function del(url, formid, name) {
 			objForm.dateVal = "action=del&ID="+str;
 			objForm.doResponseMethod = getDeletePostResult;
 			objForm.ajaxPost();
-			objTable.start(); 
+			objTable.start();
 		}
 	}
 

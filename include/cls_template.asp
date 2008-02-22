@@ -34,13 +34,12 @@ Class cls_Template
 	'加载模版过程
 	'输入参数：
 	'	1、模版id
-	'	2、页面名称
 	'***********************************************
-	Public Function Load_Template(TemplateId,Fields)
+	Public Function Load_Template(TemplateId)
 		FoundErr=False
 
 		Dim Temp
-		Temp=EA_DBO.Get_Template_Info(TemplateId,Fields)
+		Temp=EA_DBO.Get_Template_Info(TemplateId)
 		If IsArray(Temp) Then 
 			PageArray(0)=Temp(0,0)			'template name
 			PageArray(1)=Temp(1,0)			'template css

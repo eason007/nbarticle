@@ -130,11 +130,10 @@ Class cls_DBOperation
 		Get_AdSense=DB_Query(SQL)
 	End Function
 	
-	Public Function Get_Template_Info(iTemplateId,sTempateField)
-		SQL="SELECT TOP 1 Temp_Name,Page_Css,Page_Head,Page_Foot,Page_"&sTempateField
-		SQL=SQL&" FROM NB_Template"
-		SQL=SQL&" WHERE [Id]="&iTemplateId&" Or IsDefault=1"
-		SQL=SQL&" ORDER BY IsDefault"
+	Public Function Get_Template_Info(iTemplateId)
+		SQL="SELECT TOP 1 Code"
+		SQL=SQL&" FROM NB_Module"
+		SQL=SQL&" WHERE [Id]="&iTemplateId&" Or (ThemesID=(SELECT TOP 1 ID FROM NB_Themes WHERE IsDefault = 1) AND [Type] = 0)"
 		
 		Get_Template_Info=DB_Query(SQL)
 	End Function
