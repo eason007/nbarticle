@@ -10,12 +10,13 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-22
+'= 最后日期：2008-02-24
 '====================================================================
 
 Class cls_DBOperation
 	Private Rs
 	Private SQL
+	Private Debug
 
 	Public TrueValue
 	Public ExecuteTotal,QueryTotal
@@ -26,6 +27,7 @@ Class cls_DBOperation
 		ExecuteTotal=0
 		QueryTotal=0
 		T_SQL_List = ""
+		Debug = True
 
 		Select Case iDataBaseType
 		Case 0
@@ -97,24 +99,6 @@ Class cls_DBOperation
 		Get_Ip_LockInfo=DB_Query(SQL)
 	End Function
 	
-	Public Function Get_DisColumn(iTop,sWay)
-		SQL="Select Top "&iTop&" [Id],Title,CountNum,(Select Count([Id]) From [NB_Content]"
-		If iDataBaseType=0 Then 
-			SQL=SQL&" Where ColumnId=[NB_Column].Id And DateDiff('d',Now(),AddDate)=0)"
-		Else
-			SQL=SQL&" Where ColumnId=[NB_Column].Id And DateDiff(d,GetDate(),AddDate)=0)"
-		End If
-		SQL=SQL&" From [NB_Column]"
-		SQL=SQL&" Where Type=1"
-		If sWay="0" Then 
-			SQL=SQL&" Order By [Id] Desc"
-		Else
-			SQL=SQL&" Order By ViewNum Desc"
-		End If
-		
-		Get_DisColumn=DB_Query(SQL)
-	End Function
-	
 	Public Function Get_AdSense(iAdSense)
 		Select Case iDataBaseType
 		Case 0
@@ -133,7 +117,11 @@ Class cls_DBOperation
 	Public Function Get_Template_Info(iTemplateId, iTemplateType)
 		SQL="SELECT TOP 1 Code, ThemesID"
 		SQL=SQL&" FROM NB_Module"
-		SQL=SQL&" WHERE [Id]="&iTemplateId&" Or (ThemesID=(SELECT TOP 1 ID FROM NB_Themes WHERE IsDefault = 1) AND [Type] = "&iTemplateType&")"
+		If iTemplateId > 0 Then
+			SQL=SQL&" WHERE [Id]="&iTemplateId
+		Else 
+			SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 ID FROM NB_Themes WHERE IsDefault = 1) AND [Type] = "&iTemplateType
+		End If
 		
 		Get_Template_Info=DB_Query(SQL)
 	End Function
@@ -617,10 +605,8 @@ Class cls_DBOperation
 '*******************************************************************
 	Public Function Get_Column_Info(iColumnId)
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ColumnInfo "&iColumnId
-		Case 1
-			SQL="SELECT Title, Code, Info, CountNum, MangerNum, ViewNum, IsOut, OutUrl, StyleId, List_TempId, Article_TempId, Type, ListPower, IsHide, IsReview, IsPost, IsTop, PageSize"
+		Case 0, 1
+			SQL="SELECT Title, Code, Info, CountNum, MangerNum, ViewNum, IsOut, OutUrl, StyleId, List_TempId, Article_TempId, 0, ListPower, IsHide, IsReview, IsPost, IsTop, PageSize"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE [Id]="&iColumnId
 		Case 2
@@ -660,7 +646,7 @@ Class cls_DBOperation
 		Case 1
 			Temp=Len(sColumnCode)
 			
-			SQL="SELECT [Id], Code, Title, Info, [Type], CountNum"
+			SQL="SELECT [Id], Code, Title, Info, CountNum"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE (Left(Code,"&Temp&"-4)=Left('"&sColumnCode&"',"&Temp&"-4) And Len(Code)<="&Temp&") Or (Left(Code,"&Temp&")='"&sColumnCode&"' And Len(Code)="&Temp&"+4) Or Len(Code)=4"
 			SQL=SQL&" ORDER BY Code"
@@ -674,10 +660,8 @@ Class cls_DBOperation
 
 	Public Function Get_Column_List()
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ColumnList"
-		Case 1
-			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, Case Type When 0 Then '' Else '[专题]' End, Case IsTop When 0 Then '' Else '[导航]' End"
+		Case 0, 1
+			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, Case IsTop When 0 Then '' Else '[导航]' End"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" ORDER BY Code"
 		Case 2
@@ -919,18 +903,6 @@ Class cls_DBOperation
 '*******************************************************************
 'myappear list
 	Public Function Get_Member_AppearTotal(iAccountId)
-		'Select Case iDataBaseType
-		'Case 0
-		'	SQL="Exec vi_Select_Member_AppearStat "&iAccountId
-		'Case 1
-		'	SQL="SELECT Count(Id)"
-		'	SQL=SQL&" FROM NB_Content"
-		'	SQL=SQL&" WHERE AuthorId="&iAccountId
-		'Case 2
-		'	SQL="Exec sp_EliteArticle_Member_AppearTotal_Select"
-		'	SQL=SQL&" @Member_Id="&iAccountId
-		'End Select
-
 		SQL="SELECT Count(Id)"
 		SQL=SQL&" FROM NB_Content"
 		SQL=SQL&" WHERE AuthorId="&iAccountId&" AND IsDel = 0"
@@ -979,30 +951,6 @@ Class cls_DBOperation
 			Set_Column_ManagerTopicTotal iColumnId,1
 		End If
 		'end
-		
-		'Select Case iDataBaseType
-		'Case 0
-		'	SQL="Exec vi_Delete_Member_Appear "&iAppearId&","&iAccountId&","&iColumnId
-		'	DB_Execute(SQL)
-		'	
-		'	If iIsPass=0 Then 
-		'		Set_System_ManagerTopicTotal -1
-		'	
-		'		Set_Column_ManagerTopicTotal iColumnId,-1
-		'	Else
-		'		Set_System_TopicTotal -1
-		'	
-		'		Set_Column_TopicTotal iColumnId,-1
-		'	End If
-		'Case 1
-		'	SQL="DELETE NB_Content WHERE [ID]="&iAppearId&" AND AuthorId="&iAccountId&" AND ColumnId="&iColumnId
-		'	DB_Execute(SQL)
-		'Case 2
-		'	SQL="Exec sp_EliteArticle_Article_Delete"
-		'	SQL=SQL&" @Article_Id="&iAppearId
-		'	SQL=SQL&",@Author_Id="&iAccountId
-		'	DB_Execute(SQL)
-		'End Select
 	End Sub
 
 	Public Function Set_Member_Info(iMemberId,vMemberInfo,sMemberName)
@@ -1263,10 +1211,8 @@ Class cls_DBOperation
 	
 	Public Function Get_MemberAppearColumnList()
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Member_AppearColumnList"
-		Case 1
-			SQL="SELECT [Id], Title, Code, Case Type When 0 Then '' Else '[专题]' End, Case IsTop When 0 Then '' Else '[导航]' End"
+		Case 0, 1
+			SQL="SELECT [Id], Title, Code, Case IsTop When 0 Then '' Else '[导航]' End"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE IsPost=1"
 			SQL=SQL&" ORDER BY Code"
@@ -1526,12 +1472,9 @@ Class cls_DBOperation
 				If Get_IsFavedByArticleId(iArticleId,iAccountId) Then 
 					Flag=1
 				Else
-					'If iDataBaseType=0 Then 
-					'	SQL="Exec vi_Insert_AddFav "&iArticleId&","&iAccountId
-					'Else
-						SQL="INSERT INTO NB_MyFavorites (ArticleId, UserId, Title)"
-						SQL=SQL&" VALUES ("&iArticleId&","&iAccountId&",'')"
-					'End If
+					SQL="INSERT INTO NB_MyFavorites (ArticleId, UserId, Title)"
+					SQL=SQL&" VALUES ("&iArticleId&","&iAccountId&",'')"
+
 					DB_Execute(SQL)
 					
 					Flag=0
@@ -1656,7 +1599,7 @@ Class cls_DBOperation
 		T_SQL_List = T_SQL_List & sSQL & "<br />"
 		
 		If Err Then 
-			If EA_Pub.SysInfo(25)="1" Then
+			If Debug Then
 				ErrMsg="在执行以下语句：<br>"
 				ErrMsg=ErrMsg&"&nbsp;&nbsp;<font color=800000>"&sSQL&"</font><br>"
 				ErrMsg=ErrMsg&"时，发生以下错误：<br>"
@@ -1686,7 +1629,7 @@ Class cls_DBOperation
 		T_SQL_List = T_SQL_List & sSQL & "<br />"
 		
 		If Err Then 
-			If EA_Pub.SysInfo(25)="1" Then
+			If Debug Then
 				ErrMsg="在执行以下语句：<br>"
 				ErrMsg=ErrMsg&"&nbsp;&nbsp;<font color=800000>"&sSQL&"</font><br>"
 				ErrMsg=ErrMsg&"时，发生以下错误：<br>"
@@ -1716,7 +1659,7 @@ Class cls_DBOperation
 		T_SQL_List = T_SQL_List & sSQL & "<br />"
 		
 		If Err Then 
-			If EA_Pub.SysInfo(25)="1" Then
+			If Debug Then
 				ErrMsg="在执行以下语句：<br>"
 				ErrMsg=ErrMsg&"&nbsp;&nbsp;<font color=800000>"&sSQL&"</font><br>"
 				ErrMsg=ErrMsg&"时，发生以下错误：<br>"

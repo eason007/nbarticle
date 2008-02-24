@@ -42,9 +42,9 @@ Class cls_Template
 		Temp=EA_DBO.Get_Template_Info(TemplateId, TemplateType)
 		If IsArray(Temp) Then 
 			'PageArray(0)=EA_DBO.Get_Template_Info(TemplateId, )(0,0)			'template name
-			PageArray(1)=EA_DBO.Get_Template_Info(TemplateId, 1)(0,0)			'template css
-			PageArray(2)=EA_DBO.Get_Template_Info(TemplateId, 2)(0,0)			'template head
-			PageArray(3)=EA_DBO.Get_Template_Info(TemplateId, 3)(0,0)			'template foot
+			PageArray(1)=EA_DBO.Get_Template_Info(0, 1)(0,0)			'template css
+			PageArray(2)=EA_DBO.Get_Template_Info(0, 2)(0,0)			'template head
+			PageArray(3)=EA_DBO.Get_Template_Info(0, 3)(0,0)			'template foot
 			Load_Template=Temp(0,0)
 		Else
 			FoundErr=True

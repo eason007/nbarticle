@@ -67,7 +67,7 @@ If CLng(PageNum)>PageCount And PageCount>0 Then PageNum=PageCount
 'load article list
 If ColumnInfo(3,0)>0 Then ArticleList=EA_DBO.Get_Article_ByColumnId(ColumnId,PageNum,PageSize)
 
-PageContent=EA_Temp.Load_Template(ColumnInfo(9,0),"list")
+PageContent=EA_Temp.Load_Template(ColumnInfo(9,0), 4)
 
 'make article list
 ListBlock=Template.GetBlock("list",PageContent)
