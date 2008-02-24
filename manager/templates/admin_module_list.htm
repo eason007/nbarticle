@@ -13,7 +13,7 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	//objForm.debug = true;
 	objForm.formName = "form2"
 	objForm.postUrl = "./admin_module.asp";
-	objForm.doResponseOther = "initTabContent();objForm.formName = 'form2';";
+	objForm.doResponseOther = "initTabContent();objForm.formName = 'form2';FormEdit.dateVal = 'action=add&ID=';FormEdit.start();";
 
 	//FormEdit.debug = true;
 	FormEdit.postUrl = "./admin_module.asp";
