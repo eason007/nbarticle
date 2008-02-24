@@ -274,6 +274,7 @@ function getEditPostResult(returnResult) {
 	}
 	else {
 		alertMessage(editFail);
+		objForm.resetForm();
 	}
 }
 
