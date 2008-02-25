@@ -2,6 +2,7 @@
 <!--#Include File="tag_placard.asp"-->
 <!--#Include File="tag_review.asp"-->
 <!--#Include File="tag_vote.asp"-->
+<!--#Include File="tag_column.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -104,6 +105,7 @@ Class cls_Template
 		If InStr(PageContent,"{$GetArticleList")>0 Then Call Find_TemplateTags("GetArticleList",PageContent)
 		If InStr(PageContent,"{$AdSense")>0 Then Call Find_TemplateTags("AdSense",PageContent)
 		If InStr(PageContent,"{$Friend")>0 Then Call Find_TemplateTags("Friend",PageContent)
+		If InStr(PageContent,"{$ShowColumn")>0 Then Call Find_TemplateTags("ShowColumn",PageContent)
 		
 		Replace_PublicTag=PageContent
 	End Function
@@ -174,6 +176,8 @@ Class cls_Template
 						ReplaceStr=Load_AdSense(ParameterArray)
 					Case "SiteVote"
 						ReplaceStr=Load_Vote(ParameterArray)
+					Case "ShowColumn"
+						ReplaceStr=Load_Column(ParameterArray)
 					End Select
 
 					ReplaceLen=Len(ReplaceStr)

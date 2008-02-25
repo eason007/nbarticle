@@ -29,8 +29,6 @@ Class page_Index
 		EA_Temp.ReplaceTag "SiteReviewTotal", EA_Pub.SysStat(4), PageContent
 		EA_Temp.ReplaceTag "MemberTopPost", EA_Temp.Load_MemberTopPost, PageContent
 
-		Call EA_Temp.Find_TemplateTag("ColumnNav", PageContent)
-		Call EA_Temp.Find_TemplateTag("DisList", PageContent)
 		Call EA_Temp.Find_TemplateTag("NewReview", PageContent)
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)

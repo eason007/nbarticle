@@ -661,7 +661,7 @@ Class cls_DBOperation
 	Public Function Get_Column_List()
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, IsTop"
+			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, '', IsTop"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" ORDER BY Code"
 		Case 2
