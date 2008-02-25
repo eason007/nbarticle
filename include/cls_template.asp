@@ -1,3 +1,7 @@
+<!--#Include File="tag_friend.asp"-->
+<!--#Include File="tag_placard.asp"-->
+<!--#Include File="tag_review.asp"-->
+<!--#Include File="tag_vote.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -125,10 +129,6 @@ Class cls_Template
 				ParameterArray=Split(TempStr,",")
 				
 				Select Case KeyStr
-				Case "ColumnNav"
-					ReplaceStr=Load_ColumnList(ParameterArray)
-				Case "DisList"
-					ReplaceStr=Load_DisArticle(ParameterArray)
 				Case "SitePlacard"
 					ReplaceStr=Load_Placard(ParameterArray)
 				Case "NewReview"
