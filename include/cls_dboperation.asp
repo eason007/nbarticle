@@ -661,7 +661,7 @@ Class cls_DBOperation
 	Public Function Get_Column_List()
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, Case IsTop When 0 Then '' Else '[导航]' End"
+			SQL="SELECT [Id], Title, Code, Info, CountNum, MangerNum, IsTop"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" ORDER BY Code"
 		Case 2
@@ -1212,7 +1212,7 @@ Class cls_DBOperation
 	Public Function Get_MemberAppearColumnList()
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT [Id], Title, Code, Case IsTop When 0 Then '' Else '[导航]' End"
+			SQL="SELECT [Id], Title, Code, Case When IsTop = 0 Then '' Else '[导航]' End"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE IsPost=1"
 			SQL=SQL&" ORDER BY Code"
