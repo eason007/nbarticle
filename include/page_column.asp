@@ -71,7 +71,6 @@ Class page_Column
 		EA_Temp.Title	= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
 		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
 
-		PageContent		= Replace(PageContent, "{$ColumnTitleNav$}", "")
 		PageContent		= Replace(PageContent, "{$ColumnId$}", ID)
 		PageContent		= Replace(PageContent, "{$ColumnName$}", Info(0, 0))
 		PageContent		= Replace(PageContent, "{$Info$}", Info(2, 0))
