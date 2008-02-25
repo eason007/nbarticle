@@ -24,6 +24,7 @@ Class page_Column
 		Dim Temp,ListBlock
 		Dim ForTotal
 		Dim PageContent
+		Dim ArticleUrlType
 
 		Set Template = New cls_NEW_TEMPLATE
 
@@ -41,7 +42,11 @@ Class page_Column
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
-		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then EA_Pub.SysInfo(18) = 1
+		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then 
+			ArticleUrlType = 1
+		Else
+			ArticleUrlType = 0
+		End If
 
 		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
 		ListBlock	= Template.GetBlock("list", PageContent)
@@ -52,7 +57,7 @@ Class page_Column
 			For i  =0 To ForTotal
 				Temp = ListBlock
 		  
-				Template.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), EA_Pub.SysInfo(18)), Temp
+				Template.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), ArticleUrlType), Temp
 				Template.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
 				Template.SetVariable "Date", ArticleList(3, i), Temp
 				Template.SetVariable "CommentNum", ArticleList(4, i), Temp
