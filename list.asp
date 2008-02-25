@@ -18,30 +18,30 @@
 
 Dim PageContent
 Dim clsColumn
+Dim ColumnId,ColumnInfo
 
-'check system state
-If EA_Pub.SysInfo(18)="0" Then
-	PageContent = EA_Pub.Cov_ColumnPath(Request("classid"),EA_Pub.SysInfo(18))
+'get column info
+ColumnId	= EA_Pub.SafeRequest(3, "classid", 0, 0, 0)
+ColumnInfo	= EA_DBO.Get_Column_Info(ColumnId)
+If Not IsArray(ColumnInfo) Then Call EA_Pub.ShowErrMsg(9, 1)
 
+'redirect the url
+If ColumnInfo(6, 0) Then 
 	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
+	Set EA_Pub = Nothing
 
-	Response.Redirect PageContent
+	Response.Redirect ColumnInfo(7, 0)
 	Response.End 
 End If
 
-Dim ColumnId,ColumnInfo
-'load column data
-ColumnId	= EA_Pub.SafeRequest(3,"classid",0,0,0)
-ColumnInfo	= EA_DBO.Get_Column_Info(ColumnId)
-If Not IsArray(ColumnInfo) Then Call EA_Pub.ShowErrMsg(9,1)
+'check system state
+If EA_Pub.SysInfo(18) = "0" Then
+	PageContent = EA_Pub.Cov_ColumnPath(Request("classid"), EA_Pub.SysInfo(18))
 
-'jump to out url
-If ColumnInfo(6,0) Then 
 	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
+	Set EA_Pub = Nothing
 
-	Response.Redirect ColumnInfo(7,0)
+	Response.Redirect PageContent
 	Response.End 
 End If
 

@@ -612,6 +612,8 @@ Class cls_DBOperation
 
 '*******************************************************************
 	Public Function Get_Column_Info(iColumnId)
+	'0=title,1=code,2=info,3=coumnnum,4=managernum,5=viewnum,6=isout,7=outurl,8=styleid,9=list_tempid,10=article_tempid
+	'11=0,12=listpower,13=ishide,14=isreview,15=ispost,16=istop,17=pagesize
 		Select Case iDataBaseType
 		Case 0, 1
 			SQL="SELECT Title, Code, Info, CountNum, MangerNum, ViewNum, IsOut, OutUrl, StyleId, List_TempId, Article_TempId, 0, ListPower, IsHide, IsReview, IsPost, IsTop, PageSize"

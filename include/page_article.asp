@@ -1,4 +1,3 @@
-<!--#include file="_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -14,7 +13,7 @@
 '= 最后日期：2008-02-25
 '====================================================================
 
-Class page_Column
+Class page_Article
 	Public Function Make (ID, Info)
 		Dim ArticleList
 		Dim FieldName(0),FieldValue(0)
@@ -40,8 +39,6 @@ Class page_Column
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
-
-		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then EA_Pub.SysInfo(18) = 1
 
 		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
 		ListBlock	= Template.GetBlock("list", PageContent)
@@ -88,59 +85,6 @@ Class page_Column
 	End Function
 
 
-	Private Function TagList (Keyword)
-		Dim TempArray,i
-		Dim ForTotal
-		Dim OutStr
-
-		If Len(Keyword) > 0 Then
-			TempArray= Split(Keyword,",")
-
-			ForTotal = UBound(TempArray)
-
-			For i=0 To ForTotal
-				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&field=1&keyword=" & server.urlencode(Trim(TempArray(i))) & "' rel='external'>" & Trim(TempArray(i)) & "</a>&nbsp;"
-			Next
-		End If
-
-		TagList = OutStr
-	End Function
-
-	Private Function ChildColumnNav(ColumnCode)
-		Dim ChilColumnConfig
-		Dim Temp,OutStr,Column,j
-		Dim TempArray, ForTotal, i, StepLen
-		Dim ChildColumnList
-
-		TempArray=EA_DBO.Get_Column_Nav(ColumnCode)
-		If IsArray(TempArray) Then 
-			ForTotal = UBound(TempArray,2)
-			For i=0 To ForTotal
-				StepLen=(Len(TempArray(1,i))/4)*2-2
-				If Len(TempArray(1,i)) = Len(ColumnCode)+4 And ColumnCode = Left(TempArray(1,i),Len(ColumnCode)) Then ChildColumnList = ChildColumnList & TempArray(0,i) & "," & TempArray(2,i) & "|"
-			Next
-		End If
-
-		Temp = Split(ChildColumnList,"|")
-
-		ChilColumnConfig = EA_Temp.Find_TemplateTagValues("ChildColumnNav",PageContent)
-		If Not IsArray(ChilColumnConfig) Then Exit Function
-
-		j = 1
-		ForTotal = UBound(Temp)-1
-
-		For i=0 To ForTotal
-			Column = Split(Temp(i),",")
-
-			OutStr = OutStr & "<a href="""&EA_Pub.Cov_ColumnPath(Column(0),EA_Pub.SysInfo(18))&""">"&Column(1)
-			OutStr = OutStr & "</a>&nbsp;"
-
-			If j = CLng(ChilColumnConfig(1)) Then Exit For
-			j = j + 1
-			If (i+1) Mod ChilColumnConfig(0) = 0 And (i+1) <= (UBound(Temp)-1) Then OutStr = OutStr & "<br>"
-		Next
-
-		ChildColumnNav = OutStr
-	End Function
+	
 End Class
 %>

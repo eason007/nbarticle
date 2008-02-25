@@ -32,10 +32,7 @@ If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(9,1)
 If Not ArticleInfo(20,0) Or ArticleInfo(21,0) Then Call EA_Pub.ShowErrMsg(9,1)
 
 If EA_Pub.SysInfo(18)="0" Then
-	If ArticleInfo(22,0)<=0 And ArticleInfo(23,0)=0 Then
-		Folder="ArticleView/"&FormatDateTime(ArticleInfo(13,0),2)
-		If Not(EA_Pub.CheckDir(Folder)) Then EA_Pub.MakeNewsDir Folder
-	
+	If ArticleInfo(22,0) <= 0 And ArticleInfo(23,0) = 0 Then
 		sHTMLFilePath=EA_Pub.Cov_ArticlePath(ArticleId,ArticleInfo(13,0),"0")
 		
 		If ArticleInfo(10,0) Then
