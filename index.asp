@@ -1,5 +1,6 @@
 <!--#Include File="conn.asp" -->
 <!--#Include File="include/inc.asp"-->
+<!--#Include File="include/page_index.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -17,6 +18,7 @@
 
 Dim PageContent
 Dim MakeHtml
+Dim clsIndex
 
 MakeHtml=False
 
@@ -36,24 +38,9 @@ If EA_Pub.SysInfo(18)="0" Then
 	End If
 End If
 
-PageContent=EA_Temp.Load_Template(0, 0)
+Set clsIndex = New page_Index
 
-EA_Temp.Title=EA_Pub.SysInfo(0)&" - 首页"
-EA_Temp.Nav="<a href=""./""><b>"&EA_Pub.SysInfo(0)&"</b></a> - 首页"
-
-EA_Temp.ReplaceTag "SiteColumnTotal",EA_Pub.SysStat(0),PageContent
-EA_Temp.ReplaceTag "SiteTopicTotal",EA_Pub.SysStat(1),PageContent
-EA_Temp.ReplaceTag "SiteUserTotal",EA_Pub.SysStat(3),PageContent
-EA_Temp.ReplaceTag "SiteMangerTopicTotal",EA_Pub.SysStat(2),PageContent
-EA_Temp.ReplaceTag "SiteReviewTotal",EA_Pub.SysStat(4),PageContent
-
-EA_Temp.ReplaceTag "MemberTopPost",EA_Temp.Load_MemberTopPost,PageContent
-
-Call EA_Temp.Find_TemplateTag("ColumnNav",PageContent)
-Call EA_Temp.Find_TemplateTag("DisList",PageContent)
-Call EA_Temp.Find_TemplateTag("NewReview",PageContent)
-
-PageContent=EA_Temp.Replace_PublicTag(PageContent)
+PageContent = clsIndex.Make()
 
 If MakeHtml Then 
 	Call EA_Pub.Save_HtmlFile("default.htm",PageContent)
