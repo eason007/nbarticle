@@ -115,7 +115,7 @@ Class cls_DBOperation
 	End Function
 	
 	Public Function Get_Template_Info(iTemplateId, iTemplateType)
-		SQL="SELECT TOP 1 Code, ThemesID"
+		SQL="SELECT TOP 1 Code, ThemesID, ID"
 		SQL=SQL&" FROM NB_Module"
 		If iTemplateId > 0 Then
 			SQL=SQL&" WHERE [Id]="&iTemplateId
@@ -124,6 +124,14 @@ Class cls_DBOperation
 		End If
 		
 		Get_Template_Info=DB_Query(SQL)
+	End Function
+
+	Public Function Get_Theme_Name(iModuleID)
+		SQL="SELECT Title"
+		SQL=SQL&" FROM NB_Themes"
+		SQL=SQL&" WHERE ID=(SELECT ThemesID FROM NB_Module WHERE ID=" & iModuleID & ")"
+		
+		Get_Theme_Name=DB_Query(SQL)
 	End Function
 
 	Public Function Get_System_Info()

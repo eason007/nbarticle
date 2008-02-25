@@ -170,6 +170,21 @@ Sub Save
 	rs("ThemesID")=ThemesID
 	rs.update
 	Rs.Close:Set Rs=Nothing
+
+	If Typer = 1 Then
+		Dim re
+		Set re=new RegExp
+		re.IgnoreCase =true
+		re.Global=True
+
+		re.Pattern="<style([^>]*)>"
+		Code=re.Replace(Code,"")
+
+		Code=Replace(Code,"</style>","")
+		Code=Replace(Code,"{$SystemPath$}",SystemFolder)
+
+		Call EA_Pub.Save_HtmlFile("../themes/css/style_" & ThemesID & ".css",Code)
+	End If
 	
 	Call EA_Pub.Close_Obj
 	Set EA_Pub=Nothing

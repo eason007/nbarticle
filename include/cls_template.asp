@@ -46,7 +46,9 @@ Class cls_Template
 		Dim Temp
 		Temp=EA_DBO.Get_Template_Info(TemplateId, TemplateType)
 		If IsArray(Temp) Then 
-			'PageArray(0)=EA_DBO.Get_Template_Info(TemplateId, )(0,0)			'template name
+			TemplateId = Temp(2, 0)
+
+			PageArray(0)=EA_DBO.Get_Theme_Name(TemplateId)(0,0)			'template name
 			PageArray(1)=EA_DBO.Get_Template_Info(0, 1)(0,0)			'template css
 			PageArray(2)=EA_DBO.Get_Template_Info(0, 2)(0,0)			'template head
 			PageArray(3)=EA_DBO.Get_Template_Info(0, 3)(0,0)			'template foot
