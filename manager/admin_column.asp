@@ -84,7 +84,7 @@ Sub Main
 			ListValue(0,i) = "checkbox"
 			ListValue(1,i) = List(0,i)
 			ListValue(2,i) = List(0,i)
-			ListValue(3,i) = ColumnRetract & "<a href='" & EA_Pub.Cov_ColumnPath(List(0,i),EA_Pub.SysInfo(18)) & "' target='_blank'>" & List(1,i)  & "</a>" & "&nbsp;" & List(6,i) & "&nbsp;" & List(7,i)
+			ListValue(3,i) = ColumnRetract & "<a href='" & EA_Pub.Cov_ColumnPath(List(0,i),EA_Pub.SysInfo(18)) & "' target='_blank'>" & List(1,i)  & "</a>"
 			If List(5,i)>0 Then
 				ListValue(4,i) = "<font color=red><strong>" & List(5,i) & "</strong></font>"
 			Else

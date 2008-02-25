@@ -243,7 +243,7 @@ Const str_InsideLink_Input_Info="输入站内连接资料"
 Const str_InsideLink_All="全站"
 
 'admin_column.asp
-Const str_Column_Help="①新添加的栏目，必须先到安全管理-=><a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_master_list.htm\');"">管理员管理</a>中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关风格标签说明。<a href='http://help.nbarticle.com/template_tags.html' target='_blank'>查看</a>"
+Const str_Column_Help="①新添加的栏目，必须先到安全管理-=>管理员管理中给管理员赋于相应的管理权限后，才能在添加文章时显示在所属栏目中出现。<br />②相关风格标签说明。<a href=""http://help.nbarticle.com/template_tags.html"" target=""_blank"">查看</a>"
 Const str_Column_ColumnList="栏目列表"
 Const str_Column_AddColumn="添加栏目"
 Const str_Column_Title="栏目名称"
@@ -323,7 +323,7 @@ Const str_Content_ArticleTemplate="文章模版"
 
 'admin_columnbath.asp
 Const str_Bath_Move_Help="①这里只是移动文章，而不是拷贝或者删除！ <br />②您可以将一个下属栏目的文章移动到上级栏目，也可以将上级栏目的文章移动到下级栏目<br />③当使用该功能之后，建议更新一次系统及栏目数据"
-Const str_Bath_Del_Help="①如果选择了不入回收站，本操作将批量删除栏目文章，<font color=red>则所有操作不可恢复。</font>如需还原文章，请到<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_list.htm\');"">回收站</a>。<br />②如果您确定这样做，请仔细检查您输入的信息。<br />③当使用该功能之后，建议更新一次系统及栏目数据"
+Const str_Bath_Del_Help="①如果选择了不入回收站，本操作将批量删除栏目文章，<font color=red>则所有操作不可恢复。</font>如需还原文章，请到回收站。<br />②如果您确定这样做，请仔细检查您输入的信息。<br />③当使用该功能之后，建议更新一次系统及栏目数据"
 Const str_Bath_BathMove="批量移动"
 Const str_Bath_From="从"
 Const str_Bath_To="到"
