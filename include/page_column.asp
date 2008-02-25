@@ -1,3 +1,4 @@
+<!--#include file="_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -10,106 +11,135 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-24
+'= 最后日期：2008-02-25
 '====================================================================
 
-	Function Load_ColumnList(Parameter)
-		Dim TempStr,ds8,i,j,MainId,URL,URL2,IsCrlf
+Class page_Column
+	Public Function Make (ID, Info)
+		Dim ArticleList
+		Dim FieldName(0),FieldValue(0)
+		Dim i
+		Dim PageNum,PageCount,PageSize
+		Dim Template
+		Dim Temp,ListBlock
 		Dim ForTotal
+		Dim PageContent
 
-		ds8=EA_DBO.Get_Column_List()
-		
-		If IsArray(ds8) Then
-			TempStr="<table>"
-			ForTotal = Ubound(ds8,2)
+		Set Template = New cls_NEW_TEMPLATE
 
-			For i=0 To ForTotal
-				URL=EA_Pub.Cov_ColumnPath(ds8(0,i),EA_Pub.SysInfo(18))
-				URL2=EA_Pub.Cov_ColumnPath(MainId,EA_Pub.SysInfo(18))
+		FieldName(0)	= "classid"
+		FieldValue(0)	= ID
 
-				If Parameter(0)="0" Then 
-					If Len(ds8(2,i))=4 Then
-						TempStr=TempStr&"<tr>"
-						TempStr=TempStr&"<td>&nbsp;*&nbsp;<a href="""&URL&""" title="""&ds8(3,i)&"""><strong>"&ds8(1,i)&"</strong></a></td>"
-						TempStr=TempStr&"</tr>"
+		PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
+		PageSize	= Info(17, 0)
+		PageCount	= EA_Pub.Stat_Page_Total(PageSize, Info(3, 0))
+		If CLng(PageNum) > PageCount And PageCount > 0 Then PageNum = PageCount
 
-						If i+1<=UBound(ds8,2) Then
-							If Len(ds8(2,i+1))>4 Then
-								TempStr=TempStr&"<tr>"
-								TempStr=TempStr&"<td>&nbsp;</td>"
-								TempStr=TempStr&"<td><table>"
-								TempStr=TempStr&"<tr style=""HEIGHT: 20px;"">"
-							End If
-						End If
-						j=1
+		'load article list
+		If Info(3, 0) > 0 Then ArticleList = EA_DBO.Get_Article_ByColumnId(ID, PageNum, PageSize)
 
-						IsCrlf = 0
-					Else
-						TempStr=TempStr&"<td><a href="""&URL&""" title="""&ds8(3,i)&""">"
-						TempStr=TempStr&ds8(1,i)&"</a></td>"
-						j=j+1
+		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
+		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
-						If j>=CInt(Parameter(1))+1 Then TempStr=TempStr&"</tr><tr><td colspan="""&Parameter(1)&""" style=""height: 1px;BACKGROUND: #000;""></td></tr>":j=1:IsCrlf = 1
+		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
+		ListBlock	= Template.GetBlock("list", PageContent)
 
-						If i+1<=UBound(ds8,2) Then
-							If Len(ds8(2,i+1))=4 Then
-								If IsCrlf = 0 Then TempStr=TempStr&"</tr>"
+		If IsArray(ArticleList) Then
+			ForTotal = UBound(ArticleList, 2)
 
-								TempStr=TempStr&"</table></td></tr>"
-								j=0
-							ElseIf IsCrlf = 1 Then
-								TempStr=TempStr&"<tr>"
-								IsCrlf = 0
-							End if
-						ElseIf i+1>UBound(ds8,2) Then 
-							If IsCrlf = 0 Then TempStr=TempStr&"</tr>"
+			For i  =0 To ForTotal
+				Temp = ListBlock
+		  
+				Template.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), EA_Pub.SysInfo(18)), Temp
+				Template.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
+				Template.SetVariable "Date", ArticleList(3, i), Temp
+				Template.SetVariable "CommentNum", ArticleList(4, i), Temp
+				Template.SetVariable "Summary", ArticleList(5, i), Temp
+				Template.SetVariable "LastComment", ArticleList(6, i), Temp
+				Template.SetVariable "ViewNum", ArticleList(7, i), Temp
+				Template.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i),ArticleList(10, i)), Temp
+				Template.SetVariable "Img", ArticleList(9, i), Temp
+				Template.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "' rel=""external"">" & ArticleList(11, i) & "</a>", Temp
+				Template.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
 
-							TempStr=TempStr&"</table></td></tr>"
-						End If
-					End If
-				Else
-					If Len(ds8(2,i))=4 Then
-						MainId=ds8(0,i)
-						TempStr=TempStr&"<tr>"
-						TempStr=TempStr&"<td style=""WIDTH: 25%;"">&nbsp;*&nbsp;<a href="""&URL&""" title="""&ds8(3,i)&"""><strong>"&ds8(1,i)&"</strong></a></td>"
-						j=1
-						
-						If i+1<=UBound(ds8,2) Then
-							If Len(ds8(2,i+1))=4 Then 
-								TempStr=TempStr&"</tr>"
-							Else
-								TempStr=TempStr&"<td>"
-							End If
-						Else
-							TempStr=TempStr&"<td></td></tr>"
-						End If
-					Else
-						If j<>0 Then 
-							TempStr=TempStr&"<a href="""&URL&""" title="""&ds8(3,i)&""">"
-							TempStr=TempStr&ds8(1,i)&"</a>&nbsp;|&nbsp;"
-							j=j+1
-						
-							If j-1>=CInt(Parameter(1)) Then 
-								TempStr=TempStr&"<a href="""&URL2&""">更多&gt;&gt;</a></td></tr>"
-								j=0
-							Else
-								If (i+1) > UBound(ds8,2) Then 
-									TempStr=TempStr&"</td></tr>"
-								Else
-									If Len(ds8(2,i+1))=4 Then TempStr=TempStr&"</td></tr>"
-								End If
-							End If
-						End If
-					End If
-				End If			
+				Template.SetBlock "list", Temp, PageContent
 			Next
-			
-			TempStr=TempStr&"</table>"
-		Else
-			TempStr = ""
+
+			Template.CloseBlock "list", PageContent
 		End If
-		
-		Load_ColumnList=TempStr
+
+		EA_Temp.Title	= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
+		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
+
+		PageContent		= Replace(PageContent, "{$ColumnTitleNav$}", "")
+		PageContent		= Replace(PageContent, "{$ColumnId$}", ID)
+		PageContent		= Replace(PageContent, "{$ColumnName$}", Info(0, 0))
+		PageContent		= Replace(PageContent, "{$Info$}", Info(2, 0))
+		PageContent		= Replace(PageContent, "{$ColumnTopicTotal$}", Info(3, 0))
+		PageContent		= Replace(PageContent, "{$ColumnMangerTotal$}", Info(4, 0))
+		PageContent		= Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
+
+		EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
+
+		PageContent = EA_Temp.Replace_PublicTag(PageContent)
+
+		Make = PageContent
 	End Function
 
+
+	Private Function TagList (Keyword)
+		Dim TempArray,i
+		Dim ForTotal
+		Dim OutStr
+
+		If Len(Keyword) > 0 Then
+			TempArray= Split(Keyword,",")
+
+			ForTotal = UBound(TempArray)
+
+			For i=0 To ForTotal
+				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&field=1&keyword=" & server.urlencode(Trim(TempArray(i))) & "' rel='external'>" & Trim(TempArray(i)) & "</a>&nbsp;"
+			Next
+		End If
+
+		TagList = OutStr
+	End Function
+
+	Private Function ChildColumnNav(ColumnCode)
+		Dim ChilColumnConfig
+		Dim Temp,OutStr,Column,j
+		Dim TempArray, ForTotal, i, StepLen
+		Dim ChildColumnList
+
+		TempArray=EA_DBO.Get_Column_Nav(ColumnCode)
+		If IsArray(TempArray) Then 
+			ForTotal = UBound(TempArray,2)
+			For i=0 To ForTotal
+				StepLen=(Len(TempArray(1,i))/4)*2-2
+				If Len(TempArray(1,i)) = Len(ColumnCode)+4 And ColumnCode = Left(TempArray(1,i),Len(ColumnCode)) Then ChildColumnList = ChildColumnList & TempArray(0,i) & "," & TempArray(2,i) & "|"
+			Next
+		End If
+
+		Temp = Split(ChildColumnList,"|")
+
+		ChilColumnConfig = EA_Temp.Find_TemplateTagValues("ChildColumnNav",PageContent)
+		If Not IsArray(ChilColumnConfig) Then Exit Function
+
+		j = 1
+		ForTotal = UBound(Temp)-1
+
+		For i=0 To ForTotal
+			Column = Split(Temp(i),",")
+
+			OutStr = OutStr & "<a href="""&EA_Pub.Cov_ColumnPath(Column(0),EA_Pub.SysInfo(18))&""">"&Column(1)
+			OutStr = OutStr & "</a>&nbsp;"
+
+			If j = CLng(ChilColumnConfig(1)) Then Exit For
+			j = j + 1
+			If (i+1) Mod ChilColumnConfig(0) = 0 And (i+1) <= (UBound(Temp)-1) Then OutStr = OutStr & "<br>"
+		Next
+
+		ChildColumnNav = OutStr
+	End Function
+End Class
 %>
