@@ -19,10 +19,10 @@ Response.Charset= "UTF-8"
 Response.Buffer	= True
 
 Const iDataBaseType	= 0						'定义数据库类别，0为Access，1为SQL数据库，2=SQL Pro
-Const BowelVersion	= "EAS-300-F-070310"
-Const SysVersion	= "EliteArticle System Version 3.00 Beta2"
+Const BowelVersion	= "ECMS-301-F-080226"
+Const SysVersion	= "EliteCMS Version 3.01 Beta1"
 
-Dim StarTime,EndTime
+Dim StarTime, EndTime
 Dim FoundErr
 
 StarTime = Timer()
