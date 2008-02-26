@@ -11,7 +11,7 @@
 '= 摘    要：安装文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-14
+'= 最后日期：2008-02-26
 '====================================================================
 
 Dim dis
@@ -49,7 +49,6 @@ function testDBConnection () {
 	var iDatabaseType = $('DataType').value;
 
 	var postDal = "action=testDBConnection&DataType=" + iDatabaseType;
-	postDal+= "&Key=" + $('Key').value;
 
 	if (iDatabaseType == "0")
 	{
@@ -223,11 +222,7 @@ img {
 		End If
 		GoCode = "location.href = '?Step="& StepNum + 1 &"'"
 	Case 3
-		Dim RndNum
 		Dim AllPath,Folder,Index
-		
-		Randomize Timer
-		RndNum = "NB" & (1+Int(rnd*1000000000))
 		
 		Folder=Replace(Request.ServerVariables ("URL"), "install/install.asp", "")
 
@@ -286,7 +281,6 @@ Sub Step1
 <div id="title">检测服务器环境</div>
 
 <div id="text">
-	<input type="hidden" name="Key" id="Key" value="<%=RndNum%>" />
 	<input type="hidden" name="DataType" id="DataType" value="<%=iDataBaseType%>" />
 	<input type="hidden" name="Folder" id="Folder" value="<%=Folder%>" />
 
@@ -313,7 +307,6 @@ Sub Access_Step2
 <div id="title">连接数据库</div>
 
 <div id="text">
-	<input type="hidden" name="Key" id="Key" value="<%=RndNum%>" />
 	<input type="hidden" name="DataType" id="DataType" value="<%=iDataBaseType%>" />
 	<input type="hidden" name="Folder" id="Folder" value="<%=Folder%>" />
 
@@ -329,7 +322,6 @@ Sub SQL_Step2
 <div id="title">连接数据库</div>
 
 <div id="text">
-	<input type="hidden" name="Key" id="Key" value="<%=RndNum%>" />
 	<input type="hidden" name="DataType" id="DataType" value="<%=iDataBaseType%>" />
 
 	<p>>>请输入你的SQL Server 2000数据库信息：
@@ -362,7 +354,10 @@ End Sub
 
 Sub testDBConnection()
 	On Error Resume Next
+	
 	Err.Clear
+
+	Dim Conn
 	Set Conn = Server.CreateObject("ADODB.Connection")
 
 	If Request("DataType")="0" Then 
@@ -376,25 +371,33 @@ Sub testDBConnection()
 	If Err.Number <> 0 Then
 		Response.Write "1"
 		Response.End
+	Else
+		Conn.Close
+		Set Conn = Nothing
 	End If
 
 	Dim Content
+	Dim RndNum
+
+	Randomize Timer
+	RndNum = "NB" & (1+Int(rnd*1000000000))
+
 	If Request("DataType")<>"0" Then 
 		Content = "<" & CHR(37) & VBCrlf
 		Content = Content & "Dim ConnStr" & VBCrlf
 		Content = Content & "ConnStr = ""Provider=Sqloledb;server="& Request("DataHost") &";uid="& Request("DataUser") &";pwd="& Request("DataPass") &";database="& Request("DataName") &"""" & VBCrlf
-		Content = Content & "Const sCacheName=""" & Request("key") & """" & VBCrlf
-		Content = Content & "Const SystemFolder=""" & Request("folder") & """" & VBCrlf
+		Content = Content & "Const sCacheName	= """ & RndNum & """" & VBCrlf
+		Content = Content & "Const SystemFolder = """ & Request("folder") & """" & VBCrlf
 		Content = Content & CHR(37) & ">" & VBCrlf
 	Else
 		Content = "<" & CHR(37) & VBCrlf
 		Content = Content & "Dim ConnStr" & VBCrlf
-		Content = Content & "Dim DataBaseFilePath" & VBCrlf
-		Content = Content & "DataBaseFilePath=""" &Request("DataName") & """" & VBCrlf
-		Content = Content & "ConnStr=""Provider = Microsoft.Jet.OLEDB.4.0;Data Source ="""
-		Content = Content & " & Server.MapPath(DataBaseFilePath)"& VBCrlf
-		Content = Content & "Const sCacheName=""" & Request("key") & """" & VBCrlf
-		Content = Content & "Const SystemFolder=""" & Request("folder") & """" & VBCrlf
+		Content = Content & "Dim DataBaseFilePath" & VBCrlf & VBCrlf
+		Content = Content & "DataBaseFilePath	= """ &Request("DataName") & """" & VBCrlf
+		Content = Content & "ConnStr				= ""Provider = Microsoft.Jet.OLEDB.4.0;Data Source ="""
+		Content = Content & " & Server.MapPath(DataBaseFilePath)"& VBCrlf & VBCrlf
+		Content = Content & "Const sCacheName	= """ & RndNum & """" & VBCrlf
+		Content = Content & "Const SystemFolder	= """ & Request("folder") & """" & VBCrlf
 		Content = Content & CHR(37) & ">" & VBCrlf
 	End If
 	
