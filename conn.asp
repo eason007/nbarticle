@@ -28,4 +28,4 @@ Dim FoundErr
 StarTime = Timer()
 FoundErr = False
 %>
-<!--#include file="connection.asp"-->
+<!--#Include File="connection.asp"-->
