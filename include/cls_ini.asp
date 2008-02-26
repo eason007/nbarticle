@@ -78,9 +78,8 @@ Class cls_Ini
 	'// 设置文件路径
 	Property Let OpenFile(INIFilePath)
 		FilePath = INIFilePath
-		On Error Resume Next
+
 		With Stream
-			.Close
 			.Open
 			.LoadFromFile(FilePath)
 		End With
@@ -206,10 +205,7 @@ Class cls_Ini
 	
 	'// 保存文件数据
 	Public Sub Save()
-		On Error Resume Next
-
 		With Stream
-			.Close
 			.Open
 			.WriteText Content
 			.SaveToFile FilePath, 2
