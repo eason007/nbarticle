@@ -64,6 +64,19 @@ Class cls_NEW_TEMPLATE
 		Bytes2bStr = StringReturn
 	End Function
 
+	Public Function ChkBlock (ByRef sBlockName,ByRef sContent)
+		Dim sBlockBeginStr,sBlockEndStr
+
+		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
+		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
+
+		If InStr(1,sContent,sBlockBeginStr) And InStr(1,sContent,sBlockEndStr)
+			ChkBlock = True
+		Else
+			ChkBlock = False
+		End If
+	End Function
+
 	Public Function GetBlock(ByRef sBlockName,ByRef sContent)
 		Dim iBlockBegin,iBlockEnd
 		Dim sBlockBeginStr,sBlockEndStr
