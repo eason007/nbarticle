@@ -29,66 +29,65 @@ Class cls_Public
 		Dim sIniFilePath
 		
 		Set EA_Ini		= New cls_Ini
-		sIniFilePath	= Server.MapPath (SystemFolder&"include/config.ini")
+		sIniFilePath	= Server.MapPath (SystemFolder & "include/config.ini")
 		EA_Ini.OpenFile	= sIniFilePath
 		
 		If EA_Ini.IsTrue Then 
-			If Application(sCacheName&"IsFlush")<>1 Then
-				vTemp=EA_Ini.ReadNode("System","Info")
-				SysInfo=Split(vTemp,",")
+			If Application(sCacheName & "IsFlush") <> 1 Then
+				vTemp	= EA_Ini.ReadNode("System", "Info")
+				SysInfo	= Split(vTemp, ",")
 
-				If UBound(SysInfo)<26 Then FoundErr=True
+				If UBound(SysInfo) < 26 Then FoundErr = True
 			
-				SysStat(0)=EA_Ini.ReadNode("System","Column_Total")
-				SysStat(1)=EA_Ini.ReadNode("System","Topic_Total")
-				SysStat(2)=EA_Ini.ReadNode("System","M_Topic_Total")
-				SysStat(3)=EA_Ini.ReadNode("System","User_Total")
-				SysStat(4)=EA_Ini.ReadNode("System","Review_Total")
+				SysStat(0) = EA_Ini.ReadNode("System", "Column_Total")
+				SysStat(1) = EA_Ini.ReadNode("System", "Topic_Total")
+				SysStat(2) = EA_Ini.ReadNode("System", "M_Topic_Total")
+				SysStat(3) = EA_Ini.ReadNode("System", "User_Total")
+				SysStat(4) = EA_Ini.ReadNode("System", "Review_Total")
 			Else
-				FoundErr=True
+				FoundErr = True
 			End If
 		Else
-			FoundErr=True
+			FoundErr = True
 		End If
 
 		If FoundErr Then 
-			vTemp=EA_DBO.Get_System_Info()
+			vTemp = EA_DBO.Get_System_Info()
+
 			If IsArray(vTemp) Then 
-				SysInfo=Split(vTemp(5,0),",")
+				SysInfo = Split(vTemp(5, 0), ",")
 				
-				SysStat(0)=vTemp(0,0)
-				SysStat(1)=vTemp(1,0)
-				SysStat(2)=vTemp(2,0)
-				SysStat(3)=vTemp(3,0)
-				SysStat(4)=vTemp(4,0)
+				SysStat(0) = vTemp(0, 0)
+				SysStat(1) = vTemp(1, 0)
+				SysStat(2) = vTemp(2, 0)
+				SysStat(3) = vTemp(3, 0)
+				SysStat(4) = vTemp(4, 0)
 				
-				Call EA_Ini.WriteNode("System","Column_Total",SysStat(0))
-				Call EA_Ini.WriteNode("System","Topic_Total",SysStat(1))
-				Call EA_Ini.WriteNode("System","M_Topic_Total",SysStat(2))
-				Call EA_Ini.WriteNode("System","User_Total",SysStat(3))
-				Call EA_Ini.WriteNode("System","Review_Total",SysStat(4))
+				Call EA_Ini.WriteNode("System", "Column_Total", SysStat(0))
+				Call EA_Ini.WriteNode("System", "Topic_Total", SysStat(1))
+				Call EA_Ini.WriteNode("System", "M_Topic_Total", SysStat(2))
+				Call EA_Ini.WriteNode("System", "User_Total", SysStat(3))
+				Call EA_Ini.WriteNode("System", "Review_Total", SysStat(4))
 
 				vTemp = SysInfo
 				vTemp(14) = ""
-				vTemp = Join(vTemp,",")
+				vTemp = Join(vTemp, ",")
 
-				Call EA_Ini.WriteNode("System","Info",vTemp)
-				
+				EA_Ini.WriteNode "System", "Info", vTemp
 				EA_Ini.Save
 				
 				Application.Lock 
-				Application(sCacheName&"IsFlush")=0
+				Application(sCacheName & "IsFlush") = 0
 				Application.UnLock 
 
 				FoundErr = False
 			Else
-				ErrMsg="加载站点配置数据错误，系统已关闭。"
-				Call ShowErrMsg(0,0)
+				ErrMsg = "加载站点配置数据错误，系统已关闭。"
+				Call ShowErrMsg(0, 0)
 			End If
 		End If
 
 		EA_Ini.Close
-		'Set EA_Ini = Nothing
 		
 		Call Chk_IsMember
 		Call Chk_LockIp()
