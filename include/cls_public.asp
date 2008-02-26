@@ -55,13 +55,13 @@ Class cls_Public
 			vTemp = EA_DBO.Get_System_Info()
 
 			If IsArray(vTemp) Then 
-				SysInfo = Split(vTemp(5, 0), ",")
+				SysInfo		= Split(vTemp(5, 0), ",")
 				
-				SysStat(0) = vTemp(0, 0)
-				SysStat(1) = vTemp(1, 0)
-				SysStat(2) = vTemp(2, 0)
-				SysStat(3) = vTemp(3, 0)
-				SysStat(4) = vTemp(4, 0)
+				SysStat(0)	= vTemp(0, 0)
+				SysStat(1)	= vTemp(1, 0)
+				SysStat(2)	= vTemp(2, 0)
+				SysStat(3)	= vTemp(3, 0)
+				SysStat(4)	= vTemp(4, 0)
 				
 				Call EA_Ini.WriteNode("System", "Column_Total", SysStat(0))
 				Call EA_Ini.WriteNode("System", "Topic_Total", SysStat(1))
