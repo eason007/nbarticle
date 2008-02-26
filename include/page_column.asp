@@ -104,35 +104,6 @@ Class page_Column
 		PageContent		= Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
 	End Function
 
-	Private Function MakePlacardList ()
-		Dim RCount
-		Dim PlacardArray
-		Dim ForTotal
-		Dim Temp,ListBlock
-
-		RCount=EA_DBO.Get_PlacardStat()(0,0)
-
-		ListBlock	= Template.GetBlock("placard", PageContent)
-
-		If RCount>0 Then 
-			PlacardArray=EA_DBO.Get_PlacardList(1, 100)
-			ForTotal = UBound(PlacardArray,2)
-
-			For i=0 To ForTotal
-				Temp = ListBlock
-		  
-				Template.SetVariable "ID", "viewplacard.asp?postid="&PlacardArray(0,i), Temp
-				Template.SetVariable "Title", PlacardArray(1,i), Temp
-				Template.SetVariable "AddTime", PlacardArray(2, i), Temp
-				Template.SetVariable "OverTime", PlacardArray(3, i), Temp
-
-				Template.SetBlock "placard", Temp, PageContent
-			Next
-
-			Template.CloseBlock "placard", PageContent
-		End If
-	End Function
-
 	Private Function TagList (Keyword)
 		Dim TempArray,i
 		Dim ForTotal
