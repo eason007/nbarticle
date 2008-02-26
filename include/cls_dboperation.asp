@@ -20,21 +20,20 @@ Class cls_DBOperation
 	Private Debug
 
 	Public TrueValue
-	Public ExecuteTotal,QueryTotal
+	Public ExecuteTotal, QueryTotal
 	Public T_SQL_List
 	
 	Private Sub Class_Initialize()
-		Set Rs=Server.CreateObject("adodb.recordSet")
-		ExecuteTotal=0
-		QueryTotal=0
-		T_SQL_List = ""
-		Debug = True
+		ExecuteTotal	= 0
+		QueryTotal		= 0
+		T_SQL_List		= ""
+		Debug			= True
 
 		Select Case iDataBaseType
 		Case 0
-			TrueValue="-1"
+			TrueValue = "-1"
 		Case 1,2
-			TrueValue="1"
+			TrueValue = "1"
 		End Select
 	End Sub
 
@@ -1603,7 +1602,11 @@ Class cls_DBOperation
 
 '*******************************************************************
 	Private Function chkDB ()
-		If Not IsObject(Conn) Then ConnectionDatabase
+		If Not IsObject(Conn) Then 
+			ConnectionDatabase
+
+			Set Rs=Server.CreateObject("adodb.recordSet")
+		End If
 	End Function
 
 	Public Function DB_Execute(sSQL)

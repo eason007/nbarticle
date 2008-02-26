@@ -91,6 +91,7 @@ Class cls_Ini
 		End if
 		Content = Stream.ReadText(Stream.Size)
 		if Not IsAnsi Then Content=Bytes2bStr(Content)
+		Stream.Close
 	End Property
 	
 	
@@ -205,11 +206,13 @@ Class cls_Ini
 	
 	'// 保存文件数据
 	Public Sub Save()
+		On Error Resume Next
+
 		With Stream
 			.Close
 			.Open
 			.WriteText Content
-			.SaveToFile FilePath,2
+			.SaveToFile FilePath, 2
 			.Close
 		End With
 	End Sub

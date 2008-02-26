@@ -194,9 +194,6 @@ Class cls_Public
 	Public Sub Get_Member_GroupSetting(GroupId)
 		Dim vTemp,TempArray
 
-		If Not IsObject(EA_Ini) Then Set EA_Ini=New cls_Ini
-		EA_Ini.OpenFile	= sIniFilePath
-		
 		vTemp=EA_Ini.ReadNode("GroupSetting","Group_"&GroupId)
 		
 		If vTemp="" Then 
