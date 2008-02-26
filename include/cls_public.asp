@@ -123,8 +123,6 @@ Class cls_Public
 		End If
 
 		If IsObject(tmpFsoObj) Then Set tmpFsoObj = Nothing
-
-		CloseDataBase
 	End Sub
 	
 	'**********************

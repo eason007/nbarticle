@@ -14,6 +14,7 @@
 '====================================================================
 
 Class cls_DBOperation
+	Private Conn
 	Private Rs
 	Private SQL
 	Private Debug
@@ -38,6 +39,8 @@ Class cls_DBOperation
 	End Sub
 
 	Public Sub Close_DB()
+		CloseDataBase
+
 		If Rs.State = 1 Then Rs.Close
 		Set Rs=Nothing
 	End Sub
@@ -1689,6 +1692,35 @@ Class cls_DBOperation
 			End If
 			Call EA_Pub.ShowErrMsg(0,0)
 		End If
+	End Function
+
+
+	Function ConnectionDatabase
+		On Error Resume Next
+
+		Set Conn = Server.CreateObject("ADODB.Connection")
+		Conn.Open ConnStr
+		If Err Then	
+			Response.Clear
+			CloseDataBase
+			Response.Write "对不起，数据连接错误！如果第一次使用，请先运行setup.asp进行系统配置。"
+			Err.Clear
+			Response.End
+		End If
+	End Function
+
+	Function CloseDataBase
+		If IsObject(EA_Temp) Then 
+			EA_Temp.Close_Obj
+			Set EA_Temp=Nothing
+		End If
+		If IsObject(Rs) Then
+			If Rs.State=1 Then Rs.Close
+			Set Rs=Nothing
+		End If
+
+		If Conn.State=1 Then Conn.Close
+		Set Conn = Nothing
 	End Function
 '-------------------------------------------------------------------
 End Class

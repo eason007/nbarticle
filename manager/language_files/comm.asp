@@ -97,15 +97,6 @@ Const str_PassDataError="传递数据时发生错误,操作已暂停."
 Const str_BatchOperationMessageForError="有 $1 篇文章因没有权限而没有处理."
 Const str_BatchOperationMessageForSucess="所有操作已经完成."
 
-'admin_top.asp
-Const str_ControlPanel="控制面板"
-Const str_Exit="退出"
-Const str_SiteIndexLink="站点首页"
-Const str_CommunionLink="技术交流"
-Const str_InformationLink="使用资料"
-Const str_BugReportLink="报告Bug"
-Const str_HelpCenter="帮助中心"
-
 'admin_left.asp
 Const str_Thruway="快速通道"
 
