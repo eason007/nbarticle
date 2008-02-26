@@ -11,7 +11,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-25
+'= 最后日期：2008-02-26
 '====================================================================
 
 Class page_Column
@@ -43,9 +43,9 @@ Class page_Column
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
 		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then 
-			ArticleUrlType = 1
-		Else
 			ArticleUrlType = 0
+		Else
+			ArticleUrlType = 1
 		End If
 
 		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
