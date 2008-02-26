@@ -158,7 +158,7 @@ Sub Main
 	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Submit_Button)
 
 	SQL="Select Count(Id) From [NB_Content]"&WStr
-	Count=EA_M_DBO.DB_Execute(SQL)(0)
+	Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 	If Count>0 Then 
 		If Rs.State=1 Then Rs.Close
 		SQL="Select Id,Title,ColumnName,AddDate,ViewNum,CommentNum,IsPass,ColumnId From [NB_Content] "&WStr&" Order By TrueTime Desc"
@@ -594,7 +594,7 @@ Sub Del
 		
 			'删除评论及更新系统统计
 			SQL="Select Count(Id) From [NB_Review] Where ArticleId="&Tmp
-			ReviewTotal=EA_M_DBO.DB_Execute(SQL)(0)
+			ReviewTotal=EA_M_DBO.DB_Query(SQL)(0, 0)
 			SQL="Delete From [NB_Review] Where ArticleId="&Tmp
 			EA_M_DBO.DB_Execute(SQL)
 

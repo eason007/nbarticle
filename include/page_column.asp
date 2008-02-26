@@ -15,18 +15,49 @@
 '====================================================================
 
 Class page_Column
-	Public Function Make (ID, Info)
-		Dim ArticleList
-		Dim FieldName(0),FieldValue(0)
-		Dim i
-		Dim PageNum,PageCount,PageSize
-		Dim Template
-		Dim Temp,ListBlock
-		Dim ForTotal
-		Dim PageContent
-		Dim ArticleUrlType
+	Private PageContent
+	Private Template
+	Private Info, ID
+
+	Public Function Make (iID, ByVal aInfo)
+		Info = aInfo
+		ID = iID
 
 		Set Template = New cls_NEW_TEMPLATE
+
+		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
+
+		If Template.ChkBlock("list", PageContent) Then MakeArticleList()
+		If Template.ChkBlock("placard", PageContent) Then MakePlacardList()
+
+
+		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
+		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
+
+		EA_Temp.Title	= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
+		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
+
+		PageContent		= Replace(PageContent, "{$ColumnId$}", ID)
+		PageContent		= Replace(PageContent, "{$ColumnName$}", Info(0, 0))
+		PageContent		= Replace(PageContent, "{$Info$}", Info(2, 0))
+		PageContent		= Replace(PageContent, "{$ColumnTopicTotal$}", Info(3, 0))
+		PageContent		= Replace(PageContent, "{$ColumnMangerTotal$}", Info(4, 0))
+
+		EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
+
+		PageContent = EA_Temp.Replace_PublicTag(PageContent)
+
+		Make = PageContent
+	End Function
+
+	Private Function MakeArticleList ()
+		Dim FieldName(0),FieldValue(0)
+		Dim ArticleList
+		Dim PageNum,PageCount,PageSize
+		Dim Temp,ListBlock
+		Dim ForTotal
+		Dim ArticleUrlType
+		Dim i
 
 		FieldName(0)	= "classid"
 		FieldValue(0)	= ID
@@ -39,16 +70,12 @@ Class page_Column
 		'load article list
 		If Info(3, 0) > 0 Then ArticleList = EA_DBO.Get_Article_ByColumnId(ID, PageNum, PageSize)
 
-		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
-		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
-
 		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then 
 			ArticleUrlType = 0
 		Else
 			ArticleUrlType = 1
 		End If
 
-		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
 		ListBlock	= Template.GetBlock("list", PageContent)
 
 		If IsArray(ArticleList) Then
@@ -75,23 +102,37 @@ Class page_Column
 			Template.CloseBlock "list", PageContent
 		End If
 
-		EA_Temp.Title	= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
-
-		PageContent		= Replace(PageContent, "{$ColumnId$}", ID)
-		PageContent		= Replace(PageContent, "{$ColumnName$}", Info(0, 0))
-		PageContent		= Replace(PageContent, "{$Info$}", Info(2, 0))
-		PageContent		= Replace(PageContent, "{$ColumnTopicTotal$}", Info(3, 0))
-		PageContent		= Replace(PageContent, "{$ColumnMangerTotal$}", Info(4, 0))
 		PageContent		= Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
-
-		EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
-
-		PageContent = EA_Temp.Replace_PublicTag(PageContent)
-
-		Make = PageContent
 	End Function
 
+	Private Function MakePlacardList ()
+		Dim RCount
+		Dim PlacardArray
+		Dim ForTotal
+		Dim Temp,ListBlock
+
+		RCount=EA_DBO.Get_PlacardStat()(0,0)
+
+		ListBlock	= Template.GetBlock("placard", PageContent)
+
+		If RCount>0 Then 
+			PlacardArray=EA_DBO.Get_PlacardList(1, 100)
+			ForTotal = UBound(PlacardArray,2)
+
+			For i=0 To ForTotal
+				Temp = ListBlock
+		  
+				Template.SetVariable "ID", "viewplacard.asp?postid="&PlacardArray(0,i), Temp
+				Template.SetVariable "Title", PlacardArray(1,i), Temp
+				Template.SetVariable "AddTime", PlacardArray(2, i), Temp
+				Template.SetVariable "OverTime", PlacardArray(3, i), Temp
+
+				Template.SetBlock "placard", Temp, PageContent
+			Next
+
+			Template.CloseBlock "placard", PageContent
+		End If
+	End Function
 
 	Private Function TagList (Keyword)
 		Dim TempArray,i

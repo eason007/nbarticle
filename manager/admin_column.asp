@@ -247,10 +247,10 @@ Sub MoveColumn(IsUp)
 		If CodeLen>4 Then WStr="and left(code,"&CodeLen-4&")='"&Left(ColumnCode,CodeLen-4)&"'"
 		If IsUp Then 
 			SQL="select top 1 code from [NB_Column] where len(code)="&CodeLen&" and code<'"&ColumnCode&"' "&WStr&" order by code desc"
-			TempStr=EA_M_DBO.DB_Execute(sql)(0)
+			TempStr=EA_M_DBO.DB_Query(sql)(0, 0)
 		Else
 			SQL="select top 1 code from [NB_Column] where len(code)="&CodeLen&" and code>'"&ColumnCode&"' "&WStr&" order by code"
-			TempStr=EA_M_DBO.DB_Execute(sql)(0)
+			TempStr=EA_M_DBO.DB_Query(sql)(0, 0)
 		End If
 
 		If Err Then 
@@ -392,7 +392,7 @@ Sub Del
 	If TxtCount>0 Then DelBool=True:ErrMsg=str_Column_ColumnIsNotEmpty
 		
 	Sql="Select Count(Id) From [NB_Column] Where Code Like (Select Code From [NB_Column] Where Id="&PostId&")+'%' And Id<>"&PostId
-	Under=EA_M_DBO.DB_Execute(SQL)(0)
+	Under=EA_M_DBO.DB_Query(SQL)(0, 0)
 	If Under>0 Then DelBool=True:ErrMsg=str_Column_ColumnHaveUnder
 		
 	If Not DelBool Then 

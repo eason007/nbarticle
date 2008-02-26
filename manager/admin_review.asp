@@ -99,7 +99,7 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
 	SQL="Select Count([Id]) From [NB_Review] a"&WStr
-	Count=EA_M_DBO.DB_Execute(SQL)(0)
+	Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 	If Count>0 Then 
 		If Rs.State=1 Then Rs.Close
 		'0=Id,1=Ip,2=Content,3=UserName,4=AddDate,5=IsPass,6=Article_Title,7=Article_Id,8=Article_AddDate

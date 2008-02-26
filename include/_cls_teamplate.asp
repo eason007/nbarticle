@@ -70,7 +70,7 @@ Class cls_NEW_TEMPLATE
 		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
 		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
 
-		If InStr(1,sContent,sBlockBeginStr) And InStr(1,sContent,sBlockEndStr)
+		If InStr(1,sContent,sBlockBeginStr) And InStr(1,sContent,sBlockEndStr) Then
 			ChkBlock = True
 		Else
 			ChkBlock = False

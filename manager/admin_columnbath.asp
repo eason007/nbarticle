@@ -142,7 +142,7 @@ Sub BathMove
 			Select Case Where
 			Case 0
 				Sql="Select Count([Id]) From [NB_Content] Where ColumnId="&Sour
-				Count=EA_M_DBO.DB_Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 					
 				Sql="UpDate [NB_Column] Set CountNum=0 Where [Id]="&Sour
 				EA_M_DBO.DB_Execute(SQL)
@@ -157,7 +157,7 @@ Sub BathMove
 				Time=EA_Pub.SafeRequest(2,"date",2,"1900",0)
 				
 				Sql="Select Count([Id]) From [NB_Content] Where DateDiff('d',AddDate,'"&Time&"')=0 And ColumnId="&Sour
-				Count=EA_M_DBO.DB_Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
 				EA_M_DBO.DB_Execute(SQL)
@@ -190,7 +190,7 @@ Sub BathMove
 				
 					Sql="Select Count([Id]) From [NB_Content]"&WSQL
 					'Response.Write sql
-					Count=EA_M_DBO.DB_Execute(SQL)(0)
+					Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 					
 					Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
 					EA_M_DBO.DB_Execute(SQL)
@@ -225,7 +225,7 @@ Sub BathDel
 			WSQL=" Where [ColumnId]="&Sour
 			
 			Sql="Select Count([Id]) From [NB_Content]"&WSQL
-			Count=EA_M_DBO.DB_Execute(SQL)(0)
+			Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 				
 			Sql="UpDate [NB_Column] Set CountNum=0 Where [Id]="&Sour
 			EA_M_DBO.DB_Execute(SQL)
@@ -236,7 +236,7 @@ Sub BathDel
 			WSQL=" where datediff('d',adddate,'"&Time&"')=0 And ColumnId="&Sour
 				
 			Sql="Select Count([Id]) From [NB_Content]"&WSQL
-			Count=EA_M_DBO.DB_Execute(SQL)(0)
+			Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 				
 			Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
 			EA_M_DBO.DB_Execute(SQL)
@@ -262,7 +262,7 @@ Sub BathDel
 				End Select
 			
 				Sql="Select Count([Id]) From [NB_Content]"&WSQL
-				Count=EA_M_DBO.DB_Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
 				EA_M_DBO.DB_Execute(SQL)

@@ -84,7 +84,7 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
 	SQL="Select Count([Id]) From [NB_User] "&WSQL
-	Count=EA_M_DBO.DB_Execute(SQL)(0)
+	Count=EA_M_DBO.DB_Query(SQL)(0, 0)
 	If Count>0 Then 
 		If Rs.State=1 Then Rs.Close
 		If iDataBaseType=0 Then
