@@ -25,11 +25,10 @@ Class page_Column
 
 		Set Template = New cls_NEW_TEMPLATE
 
-		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
+		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
 
 		If Template.ChkBlock("list", PageContent) Then MakeArticleList()
 		If Template.ChkBlock("placard", PageContent) Then MakePlacardList()
-
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
