@@ -215,7 +215,7 @@ Sub ResetAllBoard()
 
 		For i=0 To ForTotal
 			SQL="UpDate [NB_Column] Set Code='"&Right("0000"&(i+1),4)&"' Where [Id]="&Temp(0,i)
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 		Next
 	End If
 	
@@ -247,10 +247,10 @@ Sub MoveColumn(IsUp)
 		If CodeLen>4 Then WStr="and left(code,"&CodeLen-4&")='"&Left(ColumnCode,CodeLen-4)&"'"
 		If IsUp Then 
 			SQL="select top 1 code from [NB_Column] where len(code)="&CodeLen&" and code<'"&ColumnCode&"' "&WStr&" order by code desc"
-			TempStr=conn.execute(sql)(0)
+			TempStr=EA_M_DBO.DB_Execute(sql)(0)
 		Else
 			SQL="select top 1 code from [NB_Column] where len(code)="&CodeLen&" and code>'"&ColumnCode&"' "&WStr&" order by code"
-			TempStr=conn.execute(sql)(0)
+			TempStr=EA_M_DBO.DB_Execute(sql)(0)
 		End If
 
 		If Err Then 
@@ -264,7 +264,7 @@ Sub MoveColumn(IsUp)
 		Else
 			SQL="update nb_column set code='"&NBStr&"'+SUBSTRING(code,"&CodeLen+1&",len(code)) where left(code,"&CodeLen&")='"&TempStr&"'"
 		End If
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 
 		'Update Target Column
 		If iDataBaseType = 0 Then
@@ -272,7 +272,7 @@ Sub MoveColumn(IsUp)
 		Else
 			SQL="update nb_column set code='"&TempStr&"'+SUBSTRING(code,"&CodeLen+1&",len(code)) where left(code,"&CodeLen&")='"&ColumnCode&"'"
 		End If
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 
 		'Update Under Column
 		If iDataBaseType = 0 Then
@@ -280,12 +280,12 @@ Sub MoveColumn(IsUp)
 		Else
 			SQL="update nb_column set code='"&ColumnCode&"'+SUBSTRING(code,"&CodeLen+1&",len(code)) where left(code,"&CodeLen&")='"&NBStr&"'"
 		End If
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 
 		If iDataBaseType<>2 Then
 			'Update Table Of Article's Column Information
 			SQL="update [NB_Content] left join [NB_Column] c on [NB_Content].columnid=c.id set columncode=c.code,columnname=c.title where columncode like '"&ColumnCode&"%'"
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 		End If
 	End If
 	
@@ -368,11 +368,11 @@ Sub Save
 		If EditCode Then Sql=Sql&",Code='"&TypeCode&"'"
 		Sql=Sql&" Where Id="&PostId
 	End If
-	Conn.Execute(SQL)
+	EA_M_DBO.DB_Execute(SQL)
 
 	If EditCode And PostId<>0 Then 
 		SQL="update [NB_Column] Set Code='"&TypeCode&"'+Right(Code,Len(Code)-"&Len(SourCode)&") Where Code Like '"&SourCode&"%'"
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	End If
 		
 	Set Rs=Nothing
@@ -392,7 +392,7 @@ Sub Del
 	If TxtCount>0 Then DelBool=True:ErrMsg=str_Column_ColumnIsNotEmpty
 		
 	Sql="Select Count(Id) From [NB_Column] Where Code Like (Select Code From [NB_Column] Where Id="&PostId&")+'%' And Id<>"&PostId
-	Under=Conn.Execute(SQL)(0)
+	Under=EA_M_DBO.DB_Execute(SQL)(0)
 	If Under>0 Then DelBool=True:ErrMsg=str_Column_ColumnHaveUnder
 		
 	If Not DelBool Then 

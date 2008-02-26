@@ -142,31 +142,31 @@ Sub BathMove
 			Select Case Where
 			Case 0
 				Sql="Select Count([Id]) From [NB_Content] Where ColumnId="&Sour
-				Count=Conn.Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Execute(SQL)(0)
 					
 				Sql="UpDate [NB_Column] Set CountNum=0 Where [Id]="&Sour
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum+"&Count&" Where [Id]="&Dest
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 				
 				Sql="UpDate [NB_Content] Set ColumnId="&Dest&",ColumnName='"&DestColumn_Name&"',ColumnCode='"&DestColumn_Code&"' Where ColumnId="&Sour
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			Case 1
 				Dim Time
 				Time=EA_Pub.SafeRequest(2,"date",2,"1900",0)
 				
 				Sql="Select Count([Id]) From [NB_Content] Where DateDiff('d',AddDate,'"&Time&"')=0 And ColumnId="&Sour
-				Count=Conn.Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Execute(SQL)(0)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum+"&Count&" Where [Id]="&Dest
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 				
 				Sql="UpDate [NB_Content] Set ColumnId="&Dest&",ColumnName='"&DestColumn_Name&"',ColumnCode='"&DestColumn_Code&"' Where DateDiff('d',AddDate,'"&Time&"')=0 And ColumnId="&Sour
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			Case 2
 				Dim KeyWord,Field,WSQL
 				KeyWord=EA_Pub.SafeRequest(2,"keyword",1,"",0)
@@ -190,17 +190,17 @@ Sub BathMove
 				
 					Sql="Select Count([Id]) From [NB_Content]"&WSQL
 					'Response.Write sql
-					Count=Conn.Execute(SQL)(0)
+					Count=EA_M_DBO.DB_Execute(SQL)(0)
 					
 					Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
-					Conn.Execute(SQL)
+					EA_M_DBO.DB_Execute(SQL)
 				
 					Sql="UpDate [NB_Column] Set CountNum=CountNum+"&Count&" Where [Id]="&Dest
-					Conn.Execute(SQL)
+					EA_M_DBO.DB_Execute(SQL)
 				
 					Sql="UpDate [NB_Content] Set ColumnId="&Dest&",ColumnName='"&DestColumn_Name&"',ColumnCode='"&DestColumn_Code&"' "&WSQL
 					'Response.Write sql
-					Conn.Execute(SQL)
+					EA_M_DBO.DB_Execute(SQL)
 				End If
 			End Select
 		End If
@@ -225,10 +225,10 @@ Sub BathDel
 			WSQL=" Where [ColumnId]="&Sour
 			
 			Sql="Select Count([Id]) From [NB_Content]"&WSQL
-			Count=Conn.Execute(SQL)(0)
+			Count=EA_M_DBO.DB_Execute(SQL)(0)
 				
 			Sql="UpDate [NB_Column] Set CountNum=0 Where [Id]="&Sour
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 		Case 1
 			Dim Time
 			Time=EA_Pub.SafeRequest(2,"date",2,"1900",0)
@@ -236,10 +236,10 @@ Sub BathDel
 			WSQL=" where datediff('d',adddate,'"&Time&"')=0 And ColumnId="&Sour
 				
 			Sql="Select Count([Id]) From [NB_Content]"&WSQL
-			Count=Conn.Execute(SQL)(0)
+			Count=EA_M_DBO.DB_Execute(SQL)(0)
 				
 			Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 		Case 2
 			Dim KeyWord,Field
 			KeyWord=EA_Pub.SafeRequest(2,"keyword",1,"",0)
@@ -262,22 +262,22 @@ Sub BathDel
 				End Select
 			
 				Sql="Select Count([Id]) From [NB_Content]"&WSQL
-				Count=Conn.Execute(SQL)(0)
+				Count=EA_M_DBO.DB_Execute(SQL)(0)
 				
 				Sql="UpDate [NB_Column] Set CountNum=CountNum-"&Count&" Where [Id]="&Sour
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			End If
 		End Select
 		
 		Sql="UpDate [NB_System] Set TopicNum=TopicNum-"&Count
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 		
 		If Back=0 Then 
 			Sql="UpDate [NB_Content] Set IsDel=1"&WSQL
 		Else
 			Sql="Delete From [NB_Content]"&WSQL
 		End If
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 		
 	End If
 	

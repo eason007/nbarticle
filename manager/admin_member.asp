@@ -84,7 +84,7 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Comm_Bar_Operation",str_Comm_Bar_Operation)
 
 	SQL="Select Count([Id]) From [NB_User] "&WSQL
-	Count=Conn.Execute(SQL)(0)
+	Count=EA_M_DBO.DB_Execute(SQL)(0)
 	If Count>0 Then 
 		If Rs.State=1 Then Rs.Close
 		If iDataBaseType=0 Then
@@ -209,7 +209,7 @@ Sub Save
 		SQL="UPDATE NB_User SET User_Group = "&UserGroup&", State = "&State
 		If Password <> "" Then SQL = SQL & ",Reg_Pass = '" & Md5(Password) & "'"
 		SQL=SQL&" WHERE Id="&PostId
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	End If
 	
 	Set Rs=Nothing

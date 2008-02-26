@@ -158,7 +158,7 @@ Sub Main
 	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Submit_Button)
 
 	SQL="Select Count(Id) From [NB_Content]"&WStr
-	Count=Conn.Execute(SQL)(0)
+	Count=EA_M_DBO.DB_Execute(SQL)(0)
 	If Count>0 Then 
 		If Rs.State=1 Then Rs.Close
 		SQL="Select Id,Title,ColumnName,AddDate,ViewNum,CommentNum,IsPass,ColumnId From [NB_Content] "&WStr&" Order By TrueTime Desc"
@@ -538,7 +538,7 @@ Sub Batch()
 				
 				SQL="UpDate [NB_Content] Set ColumnId="&ColumnId&",ColumnCode='"&ColumnCode&"',ColumnName='"&ColumnName&"' Where [Id] In ("&Id&")"
 				'Response.Write sql
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			End If
 		End If
 	Case "make"
@@ -594,9 +594,9 @@ Sub Del
 		
 			'删除评论及更新系统统计
 			SQL="Select Count(Id) From [NB_Review] Where ArticleId="&Tmp
-			ReviewTotal=Conn.Execute(SQL)(0)
+			ReviewTotal=EA_M_DBO.DB_Execute(SQL)(0)
 			SQL="Delete From [NB_Review] Where ArticleId="&Tmp
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 
 			'更新系统信息
 			EA_DBO.Set_System_ReviewTotal ReviewTotal-(ReviewTotal*2)

@@ -199,7 +199,7 @@ Sub Del
 		Tmp = EA_Pub.SafeRequest(5,IDs(i),0,0,0)
 
 		SQL="delete from [NB_Interface] where ID="&Tmp
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	Next
 	
 	Call EA_Pub.Close_Obj

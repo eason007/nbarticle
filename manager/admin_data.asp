@@ -56,7 +56,7 @@ Case "exe"
 	Err.Clear 
 	On Error Resume Next
 	SQL=Request.Form("text")
-	Conn.Execute(SQL)
+	EA_M_DBO.DB_Execute(SQL)
 	If Err.number=0 Then 
 		Response.Write "1"
 	Else

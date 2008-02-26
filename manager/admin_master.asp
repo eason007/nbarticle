@@ -244,7 +244,7 @@ Sub Save
 	
 	If UserId<>0 Then
 		Sql="UpDate NB_Master Set Master_Name='"&Account&"',State="&State&""&PSQL&",Column_Setting = '"&Power&"', Setting = '"&Admin_Power&"' Where Master_Id="&UserId
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	Else
 		Sql="Select Master_Id From NB_Master Where Master_Name='"&Account&"'"
 		Set rs=Conn.Execute(SQL)
@@ -255,7 +255,7 @@ Sub Save
 		Else
 			SQL="INSERT INTO NB_Master ( Master_Name, Master_Password, State, Column_Setting, Setting )"
 			SQL=SQL&" VALUES ('"&Account&"', '"&PassWord&"', "&State&", '"&Power&"', '"&Admin_Power&"')"
-			Conn.Execute(SQL)
+			EA_M_DBO.DB_Execute(SQL)
 		End If
 		If FoundErr Then Response.Write "-1":Response.End
 	End If
@@ -281,7 +281,7 @@ Sub Del
 		SQL = "DELETE"
 		SQL = SQL&" FROM NB_Master"
 		SQL = SQL&" WHERE Master_Id="&Tmp&" And Master_Name<>'"&Session(sCacheName&"master_name")&"'"
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	Next
 	
 	Call EA_Pub.Close_Obj

@@ -201,7 +201,7 @@ Sub Save
 	Setting=Setting&EA_Pub.SafeRequest(2,"index",1,"",0)&","
 	
 	SQL="UpDate [NB_System] Set Info='"&Setting&"',Source='"&Source&"',BadWord='"&BadWord&"'"
-	Conn.Execute(SQL)
+	EA_M_DBO.DB_Execute(SQL)
 
 	Setting = Split(Setting,",")
 	Setting(14) = ""

@@ -86,19 +86,19 @@ Sub UpData()
 		Dim i,TempTotal_A,TempTotal_B,TempArray
 		
 		SQL="Select Count([Id]) From [NB_Content] Where IsPass="&EA_M_DBO.TrueValue&" And IsDel=0"
-		ArticleTotal=Conn.Execute(SQL)(0)
+		ArticleTotal=EA_M_DBO.DB_Execute(SQL)(0)
 		
 		SQL="Select Count([Id]) From [NB_Content] Where IsPass=0 And IsDel=0"
-		MangerArticleTotal=Conn.Execute(SQL)(0)
+		MangerArticleTotal=EA_M_DBO.DB_Execute(SQL)(0)
 		
 		SQL="Select Count([Id]) From [NB_Review] Where IsPass="&EA_M_DBO.TrueValue
-		ReviewTotal=Conn.Execute(SQL)(0)
+		ReviewTotal=EA_M_DBO.DB_Execute(SQL)(0)
 		
 		SQL="Select Count([Id]) From [NB_Column]"
-		ColumnTotal=Conn.Execute(SQL)(0)
+		ColumnTotal=EA_M_DBO.DB_Execute(SQL)(0)
 		
 		SQL="Select Count([Id]) From [NB_User]"
-		MemberTotal=Conn.Execute(SQL)(0)
+		MemberTotal=EA_M_DBO.DB_Execute(SQL)(0)
 		
 		SQL="UpDate [NB_System] Set "
 		SQL=SQL&" RegUser="&MemberTotal
@@ -106,7 +106,7 @@ Sub UpData()
 		SQL=SQL&",ColumnNum="&ColumnTotal
 		SQL=SQL&",MangerTopicNum="&MangerArticleTotal
 		SQL=SQL&",ReviewNum="&ReviewTotal
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 		
 		Call EA_Ini.WriteNode("System","Column_Total",ColumnTotal)
 		Call EA_Ini.WriteNode("System","Topic_Total",ArticleTotal)
@@ -123,13 +123,13 @@ Sub UpData()
 
 			For i=0 To ForTotal
 				SQL="Select Count([Id]) From [NB_Content] Where ColumnId="&TempArray(0,i)&" And IsPass="&EA_M_DBO.TrueValue&" And IsDel=0"
-				TempTotal_A=Conn.Execute(SQL)(0)
+				TempTotal_A=EA_M_DBO.DB_Execute(SQL)(0)
 				
 				SQL="Select Count([Id]) From [NB_Content] Where ColumnId="&TempArray(0,i)&" And IsPass=0 And IsDel=0"
-				TempTotal_B=Conn.Execute(SQL)(0)
+				TempTotal_B=EA_M_DBO.DB_Execute(SQL)(0)
 				
 				SQL="UpDate [NB_Column] Set CountNum="&TempTotal_A&",MangerNum="&TempTotal_B&" Where [Id]="&TempArray(0,i)
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			Next
 		End If
 		
@@ -139,10 +139,10 @@ Sub UpData()
 
 			For i=0 To ForTotal
 				SQL="Select Count([Id]) From [NB_User] Where User_Group="&TempArray(0,i)
-				TempTotal_A=Conn.Execute(SQL)(0)
+				TempTotal_A=EA_M_DBO.DB_Execute(SQL)(0)
 				
 				SQL="UpDate [NB_UserGroup] Set UserTotal="&TempTotal_A&" Where [Id]="&TempArray(0,i)
-				Conn.Execute(SQL)
+				EA_M_DBO.DB_Execute(SQL)
 			Next
 		End If
 		
@@ -151,7 +151,7 @@ Sub UpData()
 		Else
 			SQL="UpDate [NB_Content] Set ColumnName=b.Title,ColumnCode=b.Code From [NB_Content] a Join [NB_Column] b On a.ColumnId=b.[Id] "
 		End If
-		Conn.Execute(SQL)
+		EA_M_DBO.DB_Execute(SQL)
 	
 	Set Rs=Nothing
 	

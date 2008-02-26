@@ -10,7 +10,7 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-24
+'= 最后日期：2008-02-26
 '====================================================================
 
 Class cls_DBOperation
@@ -1599,7 +1599,13 @@ Class cls_DBOperation
 
 
 '*******************************************************************
+	Private Function chkDB ()
+		If Not IsObject(Conn) Then ConnectionDatabase
+	End Function
+
 	Public Function DB_Execute(sSQL)
+		chkDB()
+
 		On Error Resume Next
 		Err.Clear 
 		
@@ -1624,6 +1630,8 @@ Class cls_DBOperation
 	End Function
 	
 	Public Function DB_Query(sSQL)
+		chkDB()
+
 		On Error Resume Next
 		Err.Clear 
 
@@ -1652,6 +1660,8 @@ Class cls_DBOperation
 	End Function
 	
 	Public Function DB_CutPageQuery(sSQL,iPageNum,iPageSize)
+		chkDB()
+
 		On Error Resume Next
 		Err.Clear 
 		If Rs.State=1 Then Rs.Close
