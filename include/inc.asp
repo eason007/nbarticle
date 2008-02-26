@@ -17,7 +17,7 @@
 '= 最后日期：2008-02-26
 '====================================================================
 
-Dim EA_Pub,EA_Temp,EA_DBO
+Dim EA_Pub, EA_Temp, EA_DBO
 
 Set EA_DBO=New cls_DBOperation
 Set EA_Pub=New cls_Public
