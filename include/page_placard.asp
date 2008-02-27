@@ -24,15 +24,15 @@ Function MakePlacardList (ByRef objTemplate, ByRef sPageContent)
 	ListBlock = objTemplate.GetBlock("placard", sPageContent)
 
 	If RCount > 0 Then 
-		PlacardArray=EA_DBO.Get_PlacardList(1, 100)
+		PlacardArray = EA_DBO.Get_PlacardList(1, 100)
 
-		ForTotal = UBound(PlacardArray,2)
+		ForTotal = UBound(PlacardArray, 2)
 
-		For i=0 To ForTotal
+		For i = 0 To ForTotal
 			Temp = ListBlock
 	  
-			objTemplate.SetVariable "Title", PlacardArray(1,i), Temp
-			objTemplate.SetVariable "Content", PlacardArray(4,i), Temp
+			objTemplate.SetVariable "Title", PlacardArray(1, i), Temp
+			objTemplate.SetVariable "Content", PlacardArray(4, i), Temp
 			objTemplate.SetVariable "AddTime", PlacardArray(2, i), Temp
 			objTemplate.SetVariable "OverTime", PlacardArray(3, i), Temp
 
