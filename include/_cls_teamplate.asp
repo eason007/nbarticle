@@ -8,7 +8,7 @@
 '= License: GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
 '=-------------------------------------------------------------------
 '= Author:		eason007
-'= LastDate:	2006-11-12
+'= LastDate:	2008-02-27
 '====================================================================
 
 Class cls_NEW_TEMPLATE
