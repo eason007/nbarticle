@@ -657,7 +657,7 @@ Class cls_DBOperation
 			
 			SQL="SELECT [ID], Title, [CountNum], [ViewNum]"
 			SQL=SQL&" FROM NB_Column"
-			SQL=SQL&" WHERE Left(Code,"&Temp&")='"&sMainCode&"' And Len(Code)="&Temp&"+4 And CountNum>0"
+			SQL=SQL&" WHERE Left(Code,"&Temp&")='"&sMainCode&"' And Len(Code)="&Temp&"+4"
 		Case 2
 			SQL="Exec sp_EliteArticle_Column_ChildList_Select"
 			SQL=SQL&" @Main_Code='"&sMainCode&"'"

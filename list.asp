@@ -52,5 +52,5 @@ PageContent = clsColumn.Make(ColumnId, ColumnInfo)
 Response.Write PageContent
 
 Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
+Set EA_Pub = Nothing
 %>
