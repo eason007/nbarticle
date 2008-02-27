@@ -13,34 +13,33 @@
 '= 最后日期：2008-02-26
 '====================================================================
 
-Class page_Placard
-	Private Function MakePlacardList ()
-		Dim RCount
-		Dim PlacardArray
-		Dim ForTotal
-		Dim Temp,ListBlock
+Function MakePlacardList (ByRef objTemplate, ByRef sPageContent)
+	Dim RCount
+	Dim PlacardArray
+	Dim ForTotal
+	Dim Temp, ListBlock, i
 
-		RCount=EA_DBO.Get_PlacardStat()(0,0)
+	RCount = EA_DBO.Get_PlacardStat()(0, 0)
 
-		ListBlock	= Template.GetBlock("placard", PageContent)
+	ListBlock = objTemplate.GetBlock("placard", sPageContent)
 
-		If RCount>0 Then 
-			PlacardArray=EA_DBO.Get_PlacardList(1, 100)
-			ForTotal = UBound(PlacardArray,2)
+	If RCount > 0 Then 
+		PlacardArray=EA_DBO.Get_PlacardList(1, 100)
 
-			For i=0 To ForTotal
-				Temp = ListBlock
-		  
-				Template.SetVariable "ID", "viewplacard.asp?postid="&PlacardArray(0,i), Temp
-				Template.SetVariable "Title", PlacardArray(1,i), Temp
-				Template.SetVariable "AddTime", PlacardArray(2, i), Temp
-				Template.SetVariable "OverTime", PlacardArray(3, i), Temp
+		ForTotal = UBound(PlacardArray,2)
 
-				Template.SetBlock "placard", Temp, PageContent
-			Next
+		For i=0 To ForTotal
+			Temp = ListBlock
+	  
+			objTemplate.SetVariable "Title", PlacardArray(1,i), Temp
+			objTemplate.SetVariable "Content", PlacardArray(4,i), Temp
+			objTemplate.SetVariable "AddTime", PlacardArray(2, i), Temp
+			objTemplate.SetVariable "OverTime", PlacardArray(3, i), Temp
 
-			Template.CloseBlock "placard", PageContent
-		End If
-	End Function
-End Class
+			objTemplate.SetBlock "placard", Temp, sPageContent
+		Next
+
+		objTemplate.CloseBlock "placard", sPageContent
+	End If
+End Function
 %>

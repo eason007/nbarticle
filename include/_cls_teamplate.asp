@@ -19,7 +19,7 @@ Class cls_NEW_TEMPLATE
 		TemplatePath="templates/"
 	End Sub
 	
-	Public Function LoadTemplate(ByRef sFileName)
+	Public Sub LoadTemplate(ByRef sFileName)
 		Err.Clear 
 		On Error Resume Next
 		
@@ -41,7 +41,7 @@ Class cls_NEW_TEMPLATE
 			Response.Write Err.Description 
 			Response.End 
 		End If
-	End Function
+	End Sub
 	
 	Private Function Bytes2bStr(ByVal vin)
 	'二进制转换为字符串

@@ -33,6 +33,22 @@ Class Cls_Manager_DBOperation
 		End Select
 	End Sub
 
+	Private Sub ConnectionDatabase
+		'On Error Resume Next
+
+		Set Conn = Server.CreateObject("ADODB.Connection")
+		Conn.Open ConnStr
+		If Err Then	
+			Response.Clear
+			Err.Clear
+
+			CloseDataBase
+
+			Response.Write "对不起，数据连接错误！如果第一次使用，请先运行setup.asp进行系统配置。"
+			Response.End
+		End If
+	End Sub
+
 	Public Sub Close_DB()
 		Set Rs=Nothing
 	End Sub
@@ -956,8 +972,18 @@ Class Cls_Manager_DBOperation
 	End Function
 	
 '*******************************************************************
+	Private Sub chkDB ()
+		If Not IsObject(Conn) Then 
+			ConnectionDatabase
+
+			Set Rs=Server.CreateObject("adodb.recordSet")
+		End If
+	End Sub
+
 	Public Function DB_Execute(sSQL)
-		On Error Resume Next
+		chkDB()
+
+		'On Error Resume Next
 		Err.Clear 
 		
 		Conn.Execute(sSQL)
@@ -980,7 +1006,9 @@ Class Cls_Manager_DBOperation
 	End Function
 	
 	Public Function DB_Query(sSQL)
-		On Error Resume Next
+		chkDB()
+
+		'On Error Resume Next
 		Err.Clear 
 
 		Set Rs=Conn.Execute(sSQL)
@@ -1007,7 +1035,9 @@ Class Cls_Manager_DBOperation
 	End Function
 	
 	Public Function DB_CutPageQuery(sSQL,iPageNum,iPageSize)
-		On Error Resume Next
+		chkDB()
+
+		'On Error Resume Next
 		Err.Clear 
 		If Rs.State=1 Then Rs.Close
 

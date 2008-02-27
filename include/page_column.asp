@@ -1,4 +1,5 @@
 <!--#include file="_cls_teamplate.asp"-->
+<!--#include file="page_placard.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -15,11 +16,11 @@
 '====================================================================
 
 Class page_Column
-	Private PageContent
-	Private Template
+	Public PageContent
+	Public Template
 	Private Info, ID
 
-	Public Function Make (iID, ByVal aInfo)
+	Public Function Make (iID, ByRef aInfo)
 		Info = aInfo
 		ID = iID
 
@@ -28,7 +29,7 @@ Class page_Column
 		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
 
 		If Template.ChkBlock("list", PageContent) Then MakeArticleList()
-		If Template.ChkBlock("placard", PageContent) Then MakePlacardList()
+		If Template.ChkBlock("placard", PageContent) Then Call MakePlacardList(Template, PageContent)
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)

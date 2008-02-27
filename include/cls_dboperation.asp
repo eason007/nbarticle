@@ -794,11 +794,8 @@ Class cls_DBOperation
 		Dim Temp
 		
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Manager_PlacardList"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 1
-			SQL="SELECT Id, Title, AddTime, OverTime"
+		Case 0, 1
+			SQL="SELECT Id, Title, AddTime, OverTime, Content"
 			SQL=SQL&" FROM NB_Placard"
 			SQL=SQL&" ORDER BY OverTime DESC"
 			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
@@ -1618,13 +1615,13 @@ Class cls_DBOperation
 
 
 '*******************************************************************
-	Private Function chkDB ()
+	Private Sub chkDB ()
 		If Not IsObject(Conn) Then 
 			ConnectionDatabase
 
 			Set Rs=Server.CreateObject("adodb.recordSet")
 		End If
-	End Function
+	End Sub
 
 	Public Function DB_Execute(sSQL)
 		chkDB()
