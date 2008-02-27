@@ -11,7 +11,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-26
+'= 最后日期：2008-02-27
 '====================================================================
 
 Class page_Column
@@ -42,14 +42,14 @@ Class page_Column
 		PageContent		= Replace(PageContent, "{$ColumnTopicTotal$}", Info(3, 0))
 		PageContent		= Replace(PageContent, "{$ColumnMangerTotal$}", Info(4, 0))
 
-		EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
+		If EA_Temp.ChkTag("ChildColumnNav", PageContent) Then EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
 		Make = PageContent
 	End Function
 
-	Private Function MakeArticleList ()
+	Private Sub MakeArticleList ()
 		Dim FieldName(0),FieldValue(0)
 		Dim ArticleList
 		Dim PageNum,PageCount,PageSize
@@ -102,7 +102,7 @@ Class page_Column
 		End If
 
 		PageContent		= Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
-	End Function
+	End Sub
 
 	Private Function TagList (Keyword)
 		Dim TempArray,i

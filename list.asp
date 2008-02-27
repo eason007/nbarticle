@@ -13,12 +13,11 @@
 '= 摘    要：列表页文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-25
+'= 最后日期：2008-02-27
 '====================================================================
 
 Dim PageContent
-Dim clsColumn
-Dim ColumnId,ColumnInfo
+Dim ColumnId, ColumnInfo
 
 'get column info
 ColumnId	= EA_Pub.SafeRequest(3, "classid", 0, 0, 0)
@@ -45,6 +44,7 @@ If EA_Pub.SysInfo(18) = "0" Then
 	Response.End 
 End If
 
+Dim clsColumn
 Set clsColumn = New page_Column
 
 PageContent = clsColumn.Make(ColumnId, ColumnInfo)
