@@ -16,21 +16,19 @@
 '= 最后日期：2008-02-25
 '====================================================================
 
-Dim PageContent
 Dim MakeHtml
-Dim clsIndex
 
-MakeHtml=False
+MakeHtml = False
 
-If EA_Pub.SysInfo(18)="0" Then
-	If EA_Pub.SysInfo(26)="0" Then
-		EA_Pub.SysInfo(18)="1"
+If EA_Pub.SysInfo(18) = "0" Then
+	If EA_Pub.SysInfo(26) = "0" Then
+		EA_Pub.SysInfo(18) = "1"
 	Else
 		If Not EA_Pub.Chk_IsExistsHtmlFile("default.htm") Then 
-			MakeHtml=True
+			MakeHtml = True
 		Else
 			Call EA_Pub.Close_Obj
-			Set EA_Pub=Nothing
+			Set EA_Pub = Nothing
 
 			Response.Redirect "default.htm"
 			Response.End 
@@ -38,15 +36,18 @@ If EA_Pub.SysInfo(18)="0" Then
 	End If
 End If
 
+Dim PageContent
+Dim clsIndex
+
 Set clsIndex = New page_Index
 
-PageContent = clsIndex.Make()
+PageContent	 = clsIndex.Make()
 
 If MakeHtml Then 
-	Call EA_Pub.Save_HtmlFile("default.htm",PageContent)
+	Call EA_Pub.Save_HtmlFile("default.htm", PageContent)
 	
 	Call EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
+	Set EA_Pub = Nothing
 
 	Response.Redirect "default.htm"
 	Response.End 
@@ -55,5 +56,5 @@ Else
 End If
 
 Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
+Set EA_Pub = Nothing
 %>
