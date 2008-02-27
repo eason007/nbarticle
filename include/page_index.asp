@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-24
+'= 最后日期：2008-02-27
 '====================================================================
 
 Class page_Index
@@ -27,9 +27,10 @@ Class page_Index
 		EA_Temp.ReplaceTag "SiteUserTotal", EA_Pub.SysStat(3), PageContent
 		EA_Temp.ReplaceTag "SiteMangerTopicTotal", EA_Pub.SysStat(2), PageContent
 		EA_Temp.ReplaceTag "SiteReviewTotal", EA_Pub.SysStat(4), PageContent
-		EA_Temp.ReplaceTag "MemberTopPost", EA_Temp.Load_MemberTopPost, PageContent
 
-		Call EA_Temp.Find_TemplateTag("NewReview", PageContent)
+		If EA_Temp.ChkTag("MemberTopPost", PageContent) Then EA_Temp.ReplaceTag "MemberTopPost", EA_Temp.Load_MemberTopPost, PageContent
+
+		If EA_Temp.ChkTag("NewReview", PageContent) Then EA_Temp.Find_TemplateTag "NewReview", PageContent
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 

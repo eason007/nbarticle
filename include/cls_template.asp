@@ -63,8 +63,16 @@ Class cls_Template
 		End If
 	End Function
 
-	Public Sub ReplaceTag(sTag,sReplaceValue,ByRef sPageContent)
-		If InStr(sPageContent,"{$"&sTag&"$}")>0 Then
+	Public Function ChkTag (sTag, ByRef sPageContent)
+		If InStr(sPageContent,"{$"&sTag&"$}") > 0 Then
+			ChkTag = True
+		Else
+			ChkTag = False
+		End If
+	End Function
+	
+	Public Sub ReplaceTag(sTag, ByRef sReplaceValue, ByRef sPageContent)
+		If InStr(sPageContent,"{$"&sTag&"$}") > 0 Then
 			sPageContent=Replace(sPageContent,"{$"&sTag&"$}",sReplaceValue&"")
 		End If
 	End Sub
@@ -93,7 +101,6 @@ Class cls_Template
 		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", "&", "&amp;")
 	
 		ReplaceTag "PageCSS",PageArray(1),PageContent
-
 		ReplaceTag "PageDesc",EA_Pub.SysInfo(17),PageContent
 		ReplaceTag "PageKeyword",Replace(EA_Pub.SysInfo(16),"|",","),PageContent
 
