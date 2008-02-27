@@ -23,13 +23,13 @@ Dim ErrMsg
 Set EA_DBO = New cls_DBOperation
 Set EA_Pub = New cls_Public
 
-If EA_Pub.SysInfo(1)="0" Then
+If EA_Pub.SysInfo(1) = "0" Then
 	ErrMsg = EA_Pub.SysInfo(2)
-	Call EA_Pub.ShowErrMsg(0,0)
+	Call EA_Pub.ShowErrMsg(0, 0)
 End If
 
-If EA_Pub.SysInfo(3)="1" Then 
-	If EA_Pub.Chk_SystemTimer(EA_Pub.SysInfo(4)) Then Call EA_Pub.ShowErrMsg(0,0)
+If EA_Pub.SysInfo(3) = "1" Then 
+	If EA_Pub.Chk_SystemTimer(EA_Pub.SysInfo(4)) Then Call EA_Pub.ShowErrMsg(0, 0)
 End If
 
 Set EA_Temp = New cls_Template
