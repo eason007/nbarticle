@@ -19,6 +19,7 @@
 '= 最后更新：eason007
 '= 最后日期：2006-11-12
 '====================================================================
+Session.Timeout = 30
 
 Dim Admin_Power,Column_Power
 Dim Login_Key
