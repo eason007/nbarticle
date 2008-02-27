@@ -14,16 +14,17 @@
 '= 摘    要：头文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-26
+'= 最后日期：2008-02-27
 '====================================================================
 
 Dim EA_Pub, EA_Temp, EA_DBO
+Dim ErrMsg
 
-Set EA_DBO=New cls_DBOperation
-Set EA_Pub=New cls_Public
+Set EA_DBO = New cls_DBOperation
+Set EA_Pub = New cls_Public
 
 If EA_Pub.SysInfo(1)="0" Then
-	ErrMsg=EA_Pub.SysInfo(2)
+	ErrMsg = EA_Pub.SysInfo(2)
 	Call EA_Pub.ShowErrMsg(0,0)
 End If
 
@@ -31,16 +32,5 @@ If EA_Pub.SysInfo(3)="1" Then
 	If EA_Pub.Chk_SystemTimer(EA_Pub.SysInfo(4)) Then Call EA_Pub.ShowErrMsg(0,0)
 End If
 
-Set EA_Temp=New cls_Template
-
-Function IsObjInstalled(strClassString)
-	On Error Resume Next
-	IsObjInstalled = False
-	Err = 0
-	Dim xTestObj
-	Set xTestObj = Server.CreateObject(strClassString)
-	If 0 = Err Then IsObjInstalled = True
-	Set xTestObj = Nothing
-	Err = 0
-End Function
+Set EA_Temp = New cls_Template
 %>

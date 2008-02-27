@@ -194,4 +194,15 @@ Sub Cdonts(email,topic,MailBody)
 	SendFlag=True
 	If err then SendFlag=False 
 End Sub
+
+Function IsObjInstalled(strClassString)
+	On Error Resume Next
+	IsObjInstalled = False
+	Err = 0
+	Dim xTestObj
+	Set xTestObj = Server.CreateObject(strClassString)
+	If 0 = Err Then IsObjInstalled = True
+	Set xTestObj = Nothing
+	Err = 0
+End Function
 %>

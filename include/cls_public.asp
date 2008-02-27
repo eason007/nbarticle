@@ -105,7 +105,7 @@ Class cls_Public
 		Erase Mem_GroupSetting
 
 		If IsObject(EA_Temp) Then 
-			EA_Temp.Close_Obj
+			EA_Temp.Close
 			Set EA_Temp=Nothing
 		End If
 		
@@ -114,7 +114,7 @@ Class cls_Public
 			Set EA_Ini=Nothing
 		End If
 
-		EA_DBO.Close_DB
+		EA_DBO.Close
 		Set EA_DBO=Nothing
 
 		If IsObject(EA_M_DBO) Then
