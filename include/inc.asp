@@ -1,3 +1,4 @@
+<!--#Include File="../language/zh-cn.asp"-->
 <!--#Include File="cls_public.asp"-->
 <!--#Include File="cls_template.asp"-->
 <!--#Include File="cls_ini.asp"-->
