@@ -583,20 +583,19 @@ Class cls_DBOperation
 	Public Function Get_Friend_List(iTop,iColumnId,iStyle)
 		SQL="SELECT Top "&iTop&" LINKNAME,LINKURL,LINKIMGPATH,LINKINFO"
 		SQL=SQL&" FROM [NB_FriendLink]"
-		SQL=SQL&" Where ColumnId="&iColumnId&" And Style="&iStyle&" And State="&TrueValue
-		SQL=SQL&" Order By OrderNum Desc,Id"
+		SQL=SQL&" Where Style="&iStyle&" And State="&TrueValue
+		If iColumnId >= 0 Then SQL = SQL & " AND ColumnId=" & iColumnId
+		SQL=SQL&" Order By ColumnId ASC, OrderNum Desc,Id ASC"
 		
 		Get_Friend_List=DB_Query(SQL)
 	End Function
 
-	Public Function Get_FriendList_All()
+	Public Function Get_FriendList_All(iStyle)
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Friend_All"
-		Case 1
+		Case 0, 1
 			SQL="SELECT a.ColumnId, IsNull(b.Title,'首页'), LinkUrl, LinkInfo, LinkImgPath, LinkName, a.Style"
 			SQL=SQL&" FROM NB_FriendLink AS a LEFT JOIN NB_Column AS b ON a.ColumnId=b.Id"
-			SQL=SQL&" WHERE a.State=1"
+			SQL=SQL&" WHERE a.State = " & TrueValue & " And Style = " & iStyle
 			SQL=SQL&" ORDER BY a.ColumnId, a.Style DESC , a.OrderNum DESC"
 		Case 2
 			SQL="Exec sp_EliteArticle_FriendLink_All_Select"
