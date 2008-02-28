@@ -232,6 +232,8 @@ Class cls_Public
 	'	2、显示类型
 	'**********************************
 	Public Sub ShowErrMsg(ErrNum,Types)
+		Call Close_Obj()
+
 		Response.Clear
 		Select Case CInt(Types)
 		Case 0

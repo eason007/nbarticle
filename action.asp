@@ -12,7 +12,7 @@
 '= 摘    要：申请友情连接文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-27
+'= 最后日期：2008-02-28
 '====================================================================
 
 Dim Action
@@ -20,14 +20,12 @@ Action = Request.QueryString ("action")
 
 Select Case LCase(Action)
 Case "save_link"
-	Call SaveLink
+	Call SetLink
 Case "viewtotal", "commenttotal"
-	Call ArticleInfo()
+	Call GetArticleInfo()
 End Select
-Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
 
-Sub SaveLink()
+Sub SetLink()
 	Call EA_Pub.Chk_Post
 
 	If EA_Pub.Chk_PostTime(30, "s", Session("lastpost")) Then
@@ -35,7 +33,7 @@ Sub SaveLink()
 		Call EA_Pub.ShowErrMsg(0, 2)
 	End If
 		
-	Dim LinkName,LinkImg,LinkUrl,LinkInfo,ColumnId,Style
+	Dim LinkName, LinkImg, LinkUrl, LinkInfo, ColumnId, Style
 
 	LinkName= EA_Pub.SafeRequest(2, "name", 1, "", 1)
 	LinkImg = EA_Pub.SafeRequest(2, "logo", 1, "", 1)
@@ -61,80 +59,80 @@ Sub SaveLink()
 	Call EA_Pub.ShowErrMsg(0, 2)
 End Sub
 
-Sub ArticleInfo()
-	Response.Buffer = True 
+Sub GetArticleInfo()
+	Response.Buffer			 = True 
 	Response.ExpiresAbsolute = Now() - 1 
-	Response.Expires = 0 
-	Response.CacheControl = "no-cache"
+	Response.Expires		 = 0 
+	Response.CacheControl	 = "no-cache"
 
 	Call EA_Pub.Chk_Post
 
 	Dim ArticleId
-	Dim Action
 	Dim ArticleInfo
-	ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,3)
-	Action=Request.QueryString ("action")
 
-	ArticleInfo=EA_DBO.Get_Article_Info(ArticleId,0)
+	ArticleId	= EA_Pub.SafeRequest(3, "articleid", 0, 0, 3)
+	ArticleInfo	= EA_DBO.Get_Article_Info(ArticleId,0)
+
 	If IsArray(ArticleInfo) Then
 		Select Case LCase(Action)
 		Case "viewtotal"
-			Response.Write "document.write ("""&ArticleInfo(6,0)&""");"
+			Response.Write "document.write (""" & ArticleInfo(6, 0) & """);"
 			Call EA_DBO.Set_Article_ViewNum_UpDate(ArticleId)
 		Case "commenttotal"
-			Response.Write "document.write ("""&ArticleInfo(9,0)&""");"
-
+			Response.Write "document.write (""" & ArticleInfo(9, 0) & """);"
 			Call EA_DBO.Set_Article_CommentNum_UpDate(ArticleId)
 		End Select
 	End If
 
-	EA_Pub.Close_Obj
-	Set EA_Pub=Nothing
+	Call EA_Pub.Close_Obj
+	Set EA_Pub = Nothing
 End Sub
 
 
 Sub Save_Review
 	Call EA_Pub.Chk_Post
 	
-	Dim RUserId,RUserName,RContent,RState,R_IsGhost
+	Dim RUserId, RUserName, RContent, RState, R_IsGhost
 	Dim IP
 	Dim ArticleId
 	
-	ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,3)
-	IP=EA_Pub.Get_UserIp
-	RContent=EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2,"review",1,"",2))
+	ArticleId	= EA_Pub.SafeRequest(3, "articleid", 0, 0, 3)
+	RContent	= EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2, "review", 1, "", 2))
+	IP			= EA_Pub.Get_UserIp
+	
 	
 	If EA_Pub.IsMember Then 
-		If EA_Pub.Mem_GroupSetting(8)="0" Then 
-			ErrMsg = SysMsg(3)
-			FoundErr=True
+		If EA_Pub.Mem_GroupSetting(8) = "0" Then 
+			ErrMsg	= SysMsg(3)
+			FoundErr= True
 		End If
-		If EA_Pub.Mem_GroupSetting(7)>"0" Then 
-			If EA_Pub.Chk_PostTime(CLng(EA_Pub.Mem_GroupSetting(7)),"n",EA_Pub.Mem_Info(2)) Then 
-				ErrMsg = Replace(SysMsg(4), "$1", EA_Pub.Mem_GroupSetting(7))
+		If EA_Pub.Mem_GroupSetting(7) > "0" Then 
+			If EA_Pub.Chk_PostTime(CLng(EA_Pub.Mem_GroupSetting(7)), "n", EA_Pub.Mem_Info(2)) Then 
+				ErrMsg	= Replace(SysMsg(4), "$1", EA_Pub.Mem_GroupSetting(7))
 				FoundErr=True
 			End If
 		End If
-		If EA_Pub.Mem_GroupSetting(9)="0" Then 
-			RState=1
+		If EA_Pub.Mem_GroupSetting(9) = "0" Then 
+			RState = 1
 		Else
-			RState=0
+			RState = 0
 		End If
-		RUserId=EA_Pub.Mem_Info(0)
-		RUserName=EA_Pub.Mem_Info(1)
+
+		RUserId	 = EA_Pub.Mem_Info(0)
+		RUserName= EA_Pub.Mem_Info(1)
 	Else
-		If EA_Pub.SysInfo(19)="0" Then 
-			ErrMsg = SysMsg(5)
-			FoundErr=True
+		If EA_Pub.SysInfo(19) = "0" Then 
+			ErrMsg	= SysMsg(5)
+			FoundErr= True
 		Else
-			If EA_Pub.SysInfo(20)="0" Then 
-				RState=1
+			If EA_Pub.SysInfo(20) = "0" Then 
+				RState = 1
 			Else
-				RState=0
+				RState = 0
 			End If
 		End If
-		RUserId=0
-		RUserName=EA_Pub.SafeRequest(2,"name",1,"",2)
+		RUserId	 = 0
+		RUserName= EA_Pub.SafeRequest(2, "name", 1, "", 2)
 	End If
 	
 	If Len(RContent)<5 Then
