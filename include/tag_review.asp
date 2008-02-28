@@ -12,29 +12,28 @@
 '= 最后更新：eason007
 '= 最后日期：2008-02-24
 '====================================================================
-	Function Load_NewReview(Parameter)
-		Dim TempStr,TempArray
-		Dim i
-		Dim ForTotal
-		
-		TempArray=EA_DBO.Get_Review_NewList(Parameter(0),Parameter(1))
-		If IsArray(TempArray) Then 
-			TempStr="<table>"
-			ForTotal = UBound(TempArray,2)
-
-			For i=0 To ForTotal
-				TempStr=TempStr&"<tr>"
-				TempStr=TempStr&"<td style=""TEXT-ALIGN: left;""><a href=""review.asp?articleid="&TempArray(0,i)&""">"&EA_Pub.Un_Full_HTMLFilter(TempArray(1,i))&"</a></td>"
-				TempStr=TempStr&"<td style=""TEXT-ALIGN: center;"">"&TempArray(2,i)&"</td>"
-				TempStr=TempStr&"<td style=""COLOR: #800000;TEXT-ALIGN: center;"">"&TempArray(3,i)&"</font></td>"
-				TempStr=TempStr&"</tr>"
-			Next
-			TempStr=TempStr&"</table>"
-		Else
-			TempStr=""
-		End If
-		
-		Load_NewReview=TempStr
-	End Function
+Function Load_NewReview(Parameter)
+	Dim TempStr,TempArray
+	Dim i
+	Dim ForTotal
 	
+	TempArray=EA_DBO.Get_Review_NewList(Parameter(0),Parameter(1))
+	If IsArray(TempArray) Then 
+		TempStr="<table>"
+		ForTotal = UBound(TempArray,2)
+
+		For i=0 To ForTotal
+			TempStr=TempStr&"<tr>"
+			TempStr=TempStr&"<td style=""TEXT-ALIGN: left;""><a href=""review.asp?articleid="&TempArray(0,i)&""">"&EA_Pub.Un_Full_HTMLFilter(TempArray(1,i))&"</a></td>"
+			TempStr=TempStr&"<td style=""TEXT-ALIGN: center;"">"&TempArray(2,i)&"</td>"
+			TempStr=TempStr&"<td style=""COLOR: #800000;TEXT-ALIGN: center;"">"&TempArray(3,i)&"</font></td>"
+			TempStr=TempStr&"</tr>"
+		Next
+		TempStr=TempStr&"</table>"
+	Else
+		TempStr=""
+	End If
+	
+	Load_NewReview=TempStr
+End Function
 %>
