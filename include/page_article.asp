@@ -21,7 +21,6 @@ Class page_Article
 		Dim FirstArticle,NextArticle
 		Dim i,TempStr
 
-
 		PageContent=EA_Temp.Load_Template(ArticleInfo(24,0),"view")
 
 		EA_Temp.Title=ArticleInfo(3,0)&" - "&ArticleInfo(2,0)&" - "&EA_Pub.SysInfo(0)
