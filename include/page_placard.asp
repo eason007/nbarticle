@@ -10,10 +10,10 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-27
+'= 最后日期：2008-02-28
 '====================================================================
 
-Function MakePlacardList (ByRef objTemplate, ByRef sPageContent)
+Sub MakePlacardList (ByRef objTemplate, ByRef sPageContent)
 	Dim RCount
 	Dim PlacardArray
 	Dim ForTotal
@@ -41,5 +41,5 @@ Function MakePlacardList (ByRef objTemplate, ByRef sPageContent)
 
 		objTemplate.CloseBlock "placard", sPageContent
 	End If
-End Function
+End Sub
 %>

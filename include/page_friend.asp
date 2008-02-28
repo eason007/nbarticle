@@ -10,35 +10,56 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-26
+'= 最后日期：2008-02-28
 '====================================================================
 
-Class page_Friend
-	Private Function MakePlacardList ()
-		Dim RCount
-		Dim PlacardArray
-		Dim ForTotal
-		Dim Temp,ListBlock
+Sub MakeFriendList (ByRef objTemplate, ByRef sPageContent, iColumnID)
+	Dim TopicList
+	Dim ForTotal
+	Dim Temp, ListBlock
+	Dim i
+
+	TopicList = EA_DBO.Get_Friend_List(50, 0, 0)
+
+	ListBlock = objTemplate.GetBlock("txt-link", sPageContent)
+
+	If IsArray(TopicList)  Then
+		ForTotal = UBound(TopicList, 2)
+
+		For i = 0 To ForTotal
+			Temp = ListBlock
+	  
+			objTemplate.SetVariable "Url", TopicList(2,i), Temp
+			objTemplate.SetVariable "Img", TopicList(2,i), Temp
+			objTemplate.SetVariable "Title", TopicList(0, i), Temp
+			objTemplate.SetVariable "Info", TopicList(3, i), Temp
+
+			objTemplate.SetBlock "txt-link", Temp, PageContent
+		Next
+
+		objTemplate.CloseBlock "txt-link", sPageContent
+	End If
 
 
-			TopicList=EA_DBO.Get_FriendList_All()
+	TopicList = EA_DBO.Get_Friend_List(50, 0, 1)
 
-			If IsArray(TopicList) Then
-				ForTotal = UBound(PlacardArray,2)
+	ListBlock = objTemplate.GetBlock("img-link", sPageContent)
 
-				For i=0 To ForTotal
-					Temp = ListBlock
-			  
-					Template.SetVariable "Url", TopicList(2,i), Temp
-					Template.SetVariable "Img", TopicList(4,i), Temp
-					Template.SetVariable "Title", TopicList(5, i), Temp
-					Template.SetVariable "Info", TopicList(3, i), Temp
+	If IsArray(TopicList) Then
+		ForTotal = UBound(TopicList, 2)
 
-					Template.SetBlock "placard", Temp, PageContent
-				Next
+		For i = 0 To ForTotal
+			Temp = ListBlock
+	  
+			objTemplate.SetVariable "Url", TopicList(2,i), Temp
+			objTemplate.SetVariable "Img", TopicList(2,i), Temp
+			objTemplate.SetVariable "Title", TopicList(0, i), Temp
+			objTemplate.SetVariable "Info", TopicList(3, i), Temp
 
-				Template.CloseBlock "placard", PageContent
-			End If
-	End Function
-End Class
+			objTemplate.SetBlock "img-link", Temp, PageContent
+		Next
+
+		objTemplate.CloseBlock "img-link", sPageContent
+	End If
+End Sub
 %>

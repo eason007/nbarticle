@@ -28,7 +28,7 @@ Class page_Column
 
 		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
 
-		If Template.ChkBlock("list", PageContent) Then MakeArticleList()
+		If Template.ChkBlock("list", PageContent) Then Call MakeArticleList()
 		If Template.ChkBlock("placard", PageContent) Then Call MakePlacardList(Template, PageContent)
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
