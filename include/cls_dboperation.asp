@@ -10,7 +10,7 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-27
+'= 最后日期：2008-02-28
 '====================================================================
 
 Class cls_DBOperation
@@ -489,8 +489,6 @@ Class cls_DBOperation
 	End Function
 
 	Public Function Get_Article_CorrList(sWSQL,iArticleId,iColumnId,iTopNum)
-		If Not IsNumeric(iTopNum) Then iTopNum = 5
-
 		SQL="SELECT TOP " & iTopNum & " [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary"
 		SQL=SQL&" FROM [NB_CONTENT]"
 		SQL=SQL&" WHERE ISPass="&TrueValue&" And ID<>"&iArticleId&" And ("&sWSQL&"1=0) And IsDel=0 AND COLUMNID="&iColumnId

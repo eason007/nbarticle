@@ -69,86 +69,29 @@ Class page_Article
 			If IsArray(FirstArticle) Then
 				PageContent = Replace(PageContent, "{$FirstArticle$}", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>")
 			Else
-				PageContent = Replace(PageContent, "{$FirstArticle$}", "<span style=""color: #800000;"">已到尽头</span>")
+				PageContent = Replace(PageContent, "{$FirstArticle$}", "暂无")
 			End If
 		End If
 
 		If InStr(PageContent, "{$NextArticle$}") > 0 Then
-			NextArticle=EA_DBO.Get_Article_NextArticle(ArticleInfo(0,0),ArticleInfo(25,0),ArticleId)
+			NextArticle  =EA_DBO.Get_Article_NextArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(NextArticle) Then
-				PageContent=Replace(PageContent,"{$NextArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(NextArticle(0,0),NextArticle(3,0),EA_Pub.SysInfo(18))&"'>"&EA_Pub.Add_ArticleColor(NextArticle(2,0),NextArticle(1,0))&"</a>")
+				PageContent = Replace(PageContent, "{$NextArticle$}", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>")
 			Else
-				PageContent=Replace(PageContent,"{$NextArticle$}","<span style=""color: #800000;"">已到尽头</span>")
+				PageContent = Replace(PageContent, "{$NextArticle$}", "暂无")
 			End If
 		End If
 
-		
+		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
+		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
 
-		EA_Pub.SysInfo(16)=ArticleInfo(12,0)&","&EA_Pub.SysInfo(16)
-		EA_Pub.SysInfo(17)=ArticleInfo(4,0)
+		Call CorrList(ArticleInfo(12, 0), ArticleInfo(0, 0), PageContent)
+		Call TagList(ArticleInfo(12, 0), PageContent)
 
-		Call CorrList(ArticleInfo(12,0),ArticleInfo(0,0))
-		Call TagList(ArticleInfo(12,0))
-
-		PageContent=EA_Temp.Replace_PublicTag(PageContent)
+		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
 		Make = PageContent
-	End Function
-
-
-	Function TagList (Keyword)
-		Dim TempArray,i
-		Dim ForTotal
-		Dim OutStr
-
-		If Len(Trim(Keyword)) > 0 And Not IsNull(Keyword) Then
-			TempArray= Split(Keyword,",")
-
-			ForTotal = UBound(TempArray)
-
-			For i=0 To ForTotal
-				If Len(Trim(TempArray(i))) > 0 And Not IsNull(TempArray(i)) Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & EA_Pub.c(Trim(TempArray(i))) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
-			Next
-		End If
-
-		Call EA_Temp.ReplaceTag("TagList",OutStr,PageContent)
-	End Function
-
-	Function CorrList(Keyword,ColumnId)
-		Dim ConfigParameterArray
-
-		ConfigParameterArray=EA_Temp.Find_TemplateTagValues("CorrList",PageContent)
-
-		If IsArray(ConfigParameterArray) Then 
-			If UBound(ConfigParameterArray) < 8 Then 
-				ReDim Preserve ConfigParameterArray(8)
-				ConfigParameterArray(8) = "5"
-			End If
-
-			If Keyword <> "" Then
-				Dim TempArray,i,TempStr,SearchKeyWord
-				Dim ForTotal
-				
-				TempArray= Split(Keyword,",")
-				ForTotal = UBound(TempArray)
-
-				For i=0 To ForTotal
-					Select Case iDataBaseType
-					Case 0
-						SearchKeyWord=SearchKeyWord&"InStr(','+keyword+',',',"&TempArray(i)&",')>0 or "
-					Case 1
-						SearchKeyWord=SearchKeyWord&" CharIndex(',"&TempArray(i)&",',','+keyword+',')>0 or "
-					End Select
-				Next
-
-				TempArray=EA_DBO.Get_Article_CorrList(SearchKeyWord,ArticleId,ColumnId,CInt(ConfigParameterArray(8)))
-			End If
-
-			TempStr=EA_Temp.Text_List(TempArray,CInt(ConfigParameterArray(0)),CInt(ConfigParameterArray(1)),CInt(ConfigParameterArray(2)),CInt(ConfigParameterArray(3)),CInt(ConfigParameterArray(4)),CInt(ConfigParameterArray(5)),CInt(ConfigParameterArray(6)),CInt(ConfigParameterArray(7)),CInt(ConfigParameterArray(8)))
-
-			Call EA_Temp.Find_TemplateTagByInput("CorrList",TempStr,PageContent)
-		End If 
 	End Function
 
 	Private Function PageNav (iCount, iCurrentPage)
@@ -167,6 +110,60 @@ Class page_Article
 
 		PageNav = OutStr
 	End Function
+
+	Private Sub TagList (Keyword, ByRef PageContent)
+		Dim TempArray, i
+		Dim ForTotal
+		Dim OutStr
+
+		If Len(Trim(Keyword)) > 0 And Not IsNull(Keyword) Then
+			TempArray= Split(Keyword, ",")
+
+			ForTotal = UBound(TempArray)
+
+			For i = 0 To ForTotal
+				If Len(Trim(TempArray(i))) > 0 And Not IsNull(TempArray(i)) Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & Trim(TempArray(i)) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
+			Next
+		End If
+
+		Call EA_Temp.ReplaceTag("TagList", OutStr, PageContent)
+	End Sub
+
+	Private Sub CorrList(Keyword, ColumnId, ByRef PageContent)
+		Dim ConfigParameterArray
+
+		ConfigParameterArray = EA_Temp.Find_TemplateTagValues("CorrList", PageContent)
+
+		If IsArray(ConfigParameterArray) Then 
+			If UBound(ConfigParameterArray) < 8 Then 
+				ReDim Preserve ConfigParameterArray(8)
+				ConfigParameterArray(8) = "5"
+			End If
+
+			If Keyword <> "" Then
+				Dim TempArray, i, TempStr, SearchKeyWord
+				Dim ForTotal
+				
+				TempArray= Split(Keyword, ",")
+				ForTotal = UBound(TempArray)
+
+				For i = 0 To ForTotal
+					Select Case iDataBaseType
+					Case 0
+						SearchKeyWord = SearchKeyWord & "InStr(','+keyword+',','," & TempArray(i) & ",')>0 OR "
+					Case 1
+						SearchKeyWord = SearchKeyWord & " CharIndex('," & TempArray(i) & ",',','+keyword+',')>0 OR "
+					End Select
+				Next
+
+				TempArray = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(ConfigParameterArray(8)))
+			End If
+
+			TempStr	= EA_Temp.Text_List(TempArray, CInt(ConfigParameterArray(0)), CInt(ConfigParameterArray(1)), CInt(ConfigParameterArray(2)), CInt(ConfigParameterArray(3)), CInt(ConfigParameterArray(4)), CInt(ConfigParameterArray(5)), CInt(ConfigParameterArray(6)), CInt(ConfigParameterArray(7)), CInt(ConfigParameterArray(8)))
+
+			Call EA_Temp.Find_TemplateTagByInput("CorrList", TempStr, PageContent)
+		End If 
+	End Sub
 
 	Private Sub CutContent(patrn, strng) 
 		Dim regEx, Match, Matches			' 建立变量。 
