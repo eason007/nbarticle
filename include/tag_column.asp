@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-24
+'= 最后日期：2008-02-28
 '====================================================================
 
 	Function Load_Column(Parameter)
@@ -20,7 +20,7 @@
 		ColumnId	= Parameter(0)
 		ColumnInfo	= EA_DBO.Get_Column_Info(ColumnId)
 
-		Url = "<a href='" & EA_Pub.Cov_ColumnPath(ColumnId,EA_Pub.SysInfo(18)) & "' rel=""external"">"
+		Url = "<a href='" & EA_Pub.Cov_ColumnPath(ColumnId,EA_Pub.SysInfo(18)) & "'>"
 		Url = Url & ColumnInfo(0,0) & "</a>"
 
 		Load_Column = Url

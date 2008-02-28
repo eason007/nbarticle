@@ -15,7 +15,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-27
+'= 最后日期：2008-02-28
 '====================================================================
 
 Class cls_Template
@@ -326,13 +326,13 @@ Class cls_Template
 
 				TempStr=TempStr&"<td style=""width: " & RowSize & "%;"">"
 				
-				If IsShowSort=1 Then TempStr=TempStr&"[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" rel=""external"" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
+				If IsShowSort=1 Then TempStr=TempStr&"[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
 				
 				If IsShowFileType=1 Then TempStr=TempStr&EA_Pub.Chk_ArticleType(DataArray(6,i),DataArray(7,i))&"&nbsp;"
 				
 				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
 
-				If IsNewTarget=1 Then TempStr=TempStr&" rel=""external"""
+				If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
 
 				TempStr=TempStr&" title=""" & EA_Pub.Base_HTMLFilter(DataArray(3,i)) & """>"
 				DataArray(3,i)=EA_Pub.Base_HTMLFilter(DataArray(3,i))
@@ -379,18 +379,18 @@ Class cls_Template
 				TempStr=TempStr&"<tr><td>"
 				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
 				
-				If IsNewTarget=1 Then TempStr=TempStr&" rel=""external"""
+				If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
 
 				TempStr=TempStr&"><img src="""&DataArray(8,i)&""" alt="""&DataArray(3,i)&""" class=""midImg"" /></a></td></tr>"
 
 				If TitleLen > 1 Then
 					TempStr=TempStr&"<tr><td>"
 					
-					If IsShowSort=1 Then TempStr=TempStr&"&nbsp;[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" rel=""external"" class=""link-Column"">"&DataArray(2,i)&"</a>]"
+					If IsShowSort=1 Then TempStr=TempStr&"&nbsp;[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]"
 
 					TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
 					
-					If IsNewTarget=1 Then TempStr=TempStr&" rel=""external"""
+					If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
 					
 					TempStr=TempStr&" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""">"
 					DataArray(3,i)=EA_Pub.Base_HTMLFilter(DataArray(3,i))

@@ -12,7 +12,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-27
+'= 最后日期：2008-02-28
 '====================================================================
 
 Class page_Column
@@ -93,7 +93,7 @@ Class page_Column
 				Template.SetVariable "ViewNum", ArticleList(7, i), Temp
 				Template.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i),ArticleList(10, i)), Temp
 				Template.SetVariable "Img", ArticleList(9, i), Temp
-				Template.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "' rel=""external"">" & ArticleList(11, i) & "</a>", Temp
+				Template.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
 				Template.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
 
 				Template.SetBlock "list", Temp, PageContent
@@ -116,7 +116,7 @@ Class page_Column
 			ForTotal = UBound(TempArray)
 
 			For i = 0 To ForTotal
-				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&field=1&keyword=" & server.urlencode(Trim(TempArray(i))) & "' rel='external'>" & Trim(TempArray(i)) & "</a>&nbsp;"
+				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&field=1&keyword=" & server.urlencode(Trim(TempArray(i))) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
 			Next
 		End If
 

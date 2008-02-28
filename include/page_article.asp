@@ -28,7 +28,7 @@ Class page_Article
 
 		If Not IsView Then 
 			TempStr = ArticleInfo(4, 0)
-			TempStr = TempStr & "<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp' rel=""external"">登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp' rel=""external"">注册</a>]。</b>"
+			TempStr = TempStr & "<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp'>登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp'>注册</a>]。</b>"
 		Else
 			Call CutContent("\[NextPage([^\]])*\]", ArticleInfo(5, 0))
 
@@ -46,28 +46,30 @@ Class page_Article
 			End If
 		End If
 
-		PageContent=Replace(PageContent,"{$ColumnId$}",ArticleInfo(0,0))
-		PageContent=Replace(PageContent,"{$ArticleId$}",ArticleId)
-		PageContent=Replace(PageContent,"{$ArticleTitle$}",EA_Pub.Add_ArticleColor(ArticleInfo(17,0),ArticleInfo(3,0)))
-		PageContent=Replace(PageContent,"{$ArticlePostTime$}",ArticleInfo(13,0))
-		PageContent=Replace(PageContent,"{$ArticleText$}",TempStr)
-		PageContent=Replace(PageContent,"{$ArticleSummary$}",ArticleInfo(4,0))
+		PageContent = Replace(PageContent, "{$ColumnId$}", ArticleInfo(0, 0))
+		PageContent = Replace(PageContent, "{$ArticleId$}", ArticleId)
+		PageContent = Replace(PageContent, "{$ArticleTitle$}", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)))
+		PageContent = Replace(PageContent, "{$ArticlePostTime$}", ArticleInfo(13, 0))
+		PageContent = Replace(PageContent, "{$ArticleText$}", TempStr)
+		PageContent = Replace(PageContent, "{$ArticleSummary$}", ArticleInfo(4, 0))
 
-		PageContent=Replace(PageContent,"{$ArticleAuthor$}","<a href='"&SystemFolder&"florilegium.asp?a_name="&ArticleInfo(8,0)&"&amp;a_id="&ArticleInfo(7,0)&"' rel=""external"">"&ArticleInfo(8,0)&"</a>")
+		PageContent = Replace(PageContent, "{$ArticleAuthor$}", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleInfo(8, 0) & "&amp;a_id=" & ArticleInfo(7, 0) & "'>" & ArticleInfo(8, 0) & "</a>")
+		PageContent = Replace(PageContent, "{$ArticleViewTotal$}", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ArticleId & """></script>")
+		PageContent = Replace(PageContent, "{$ArticleCommentTotal$}","<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ArticleId & """></script>")
 
-		If Len(ArticleInfo(16,0))>0 Then
-			PageContent=Replace(PageContent,"{$ArticleFrom$}","<a href='"&ArticleInfo(16,0)&"' rel=""external"">"&ArticleInfo(15,0)&"</a>")
+		If Len(ArticleInfo(16, 0)) > 0 Then
+			PageContent = Replace(PageContent, "{$ArticleFrom$}", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>")
 		Else
-			PageContent=Replace(PageContent,"{$ArticleFrom$}","本站")
+			PageContent = Replace(PageContent, "{$ArticleFrom$}", "本站")
 		End If
 
 		If InStr(PageContent, "{$FirstArticle$}") > 0 Then
-			FirstArticle=EA_DBO.Get_Article_FirstArticle(ArticleInfo(0,0),ArticleInfo(25,0),ArticleId)
+			FirstArticle = EA_DBO.Get_Article_FirstArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(FirstArticle) Then
-				PageContent=Replace(PageContent,"{$FirstArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(FirstArticle(0,0),FirstArticle(3,0),EA_Pub.SysInfo(18))&"' rel=""external"">"&EA_Pub.Add_ArticleColor(FirstArticle(2,0),FirstArticle(1,0))&"</a>")
+				PageContent = Replace(PageContent, "{$FirstArticle$}", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>")
 			Else
-				PageContent=Replace(PageContent,"{$FirstArticle$}","<span style=""color: #800000;"">已到尽头</span>")
+				PageContent = Replace(PageContent, "{$FirstArticle$}", "<span style=""color: #800000;"">已到尽头</span>")
 			End If
 		End If
 
@@ -75,14 +77,13 @@ Class page_Article
 			NextArticle=EA_DBO.Get_Article_NextArticle(ArticleInfo(0,0),ArticleInfo(25,0),ArticleId)
 
 			If IsArray(NextArticle) Then
-				PageContent=Replace(PageContent,"{$NextArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(NextArticle(0,0),NextArticle(3,0),EA_Pub.SysInfo(18))&"' rel=""external"">"&EA_Pub.Add_ArticleColor(NextArticle(2,0),NextArticle(1,0))&"</a>")
+				PageContent=Replace(PageContent,"{$NextArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(NextArticle(0,0),NextArticle(3,0),EA_Pub.SysInfo(18))&"'>"&EA_Pub.Add_ArticleColor(NextArticle(2,0),NextArticle(1,0))&"</a>")
 			Else
 				PageContent=Replace(PageContent,"{$NextArticle$}","<span style=""color: #800000;"">已到尽头</span>")
 			End If
 		End If
 
-		PageContent=Replace(PageContent,"{$ArticleViewTotal$}","<script type=""text/javascript"" src="""&SystemFolder&"articleinfo.asp?action=viewtotal&amp;articleid="&ArticleId&"""></script>")
-		PageContent=Replace(PageContent,"{$ArticleCommentTotal$}","<script type=""text/javascript"" src="""&SystemFolder&"articleinfo.asp?action=commenttotal&amp;articleid="&ArticleId&"""></script>")
+		
 
 		EA_Pub.SysInfo(16)=ArticleInfo(12,0)&","&EA_Pub.SysInfo(16)
 		EA_Pub.SysInfo(17)=ArticleInfo(4,0)
@@ -107,7 +108,7 @@ Class page_Article
 			ForTotal = UBound(TempArray)
 
 			For i=0 To ForTotal
-				If Len(Trim(TempArray(i))) > 0 And Not IsNull(TempArray(i)) Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & EA_Pub.c(Trim(TempArray(i))) & "' rel='external'>" & Trim(TempArray(i)) & "</a>&nbsp;"
+				If Len(Trim(TempArray(i))) > 0 And Not IsNull(TempArray(i)) Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & EA_Pub.c(Trim(TempArray(i))) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
 			Next
 		End If
 
@@ -216,7 +217,7 @@ Class page_Article
 			ForTotal = UBound(TempArray, 2)
 
 			For i = 0 To ForTotal
-				StrContent = Replace(StrContent, TempArray(0, i),"<a href=""" & TempArray(1, i)&""" rel=""external"" class=""a_link"">" & TempArray(0, i) & "</a>")
+				StrContent = Replace(StrContent, TempArray(0, i),"<a href=""" & TempArray(1, i)&""" class=""a_link"">" & TempArray(0, i) & "</a>")
 			Next
 		End If
 	End Sub

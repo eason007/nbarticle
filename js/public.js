@@ -1,16 +1,3 @@
-function externallinks() {
-//将rel=external的超连接，改为新开窗口
-	if (!document.getElementsByTagName) return; 
-	var anchors = document.getElementsByTagName("a"); 
-	for (var i=0; i<anchors.length; i++) { 
-		var anchor = anchors[i]; 
-		if (anchor.getAttribute("href") && anchor.getAttribute("rel") == "external") 
-			anchor.target = "_blank"; 
-	}
-}
-
-window.onload = externallinks;
-
 function vod() {
 	//空函数
 }

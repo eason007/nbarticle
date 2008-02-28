@@ -10,7 +10,7 @@
 '= 摘    要：生成自定义js类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-08-19
+'= 最后日期：2008-02-28
 '====================================================================
 
 Class Cls_MakeJs
@@ -28,7 +28,7 @@ Class Cls_MakeJs
 				TempStr=TempStr&" [<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
 			End If
 			TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""""
-			If OpenStyle=1 Then TempStr=TempStr&" rel=""external"""
+			If OpenStyle=1 Then TempStr=TempStr&" target=""_blank"""
 			TempStr=TempStr&">"
 			TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),EA_Pub.Cut_Title(EA_Pub.Base_HTMLFilter(DataArray(3,i)),TitleLen))
 			TempStr=TempStr&"</a>"
@@ -58,7 +58,7 @@ Class Cls_MakeJs
 		TempStr=TempStr&"document.write ('<tr>');"&chr(10)
 		TempStr=TempStr&"document.write ('<td style=""width: "&ImgWidth+2&"px;"">"
 		If DataArray(6,0) Then 
-			TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,0),DataArray(5,0),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""" rel=""external"">"
+			TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,0),DataArray(5,0),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""">"
 			TempStr=TempStr&"<img src="""&DataArray(8,0)&""""
 			If ImgWidth<>0 Then TempStr=TempStr&" width="""&ImgWidth&""""
 			If ImgHeight<>0 Then TempStr=TempStr&" height="""&ImgHeight&""""
@@ -79,7 +79,7 @@ Class Cls_MakeJs
 					TempStr=TempStr&" [<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]"
 				End If
 				TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""""
-				If OpenStyle=1 Then TempStr=TempStr&" rel=""external"""
+				If OpenStyle=1 Then TempStr=TempStr&" target=""_blank"""
 				TempStr=TempStr&">"
 				TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),EA_Pub.Cut_Title(EA_Pub.Base_HTMLFilter(DataArray(3,i)),TitleLen))
 				TempStr=TempStr&"</a>"
@@ -114,7 +114,7 @@ Class Cls_MakeJs
 		For i=0 To UBound(DataArray,2)
 			TempStr=TempStr&"document.write ('<td style=""width: "&ImgWidth+2&"px;"">"
 			If DataArray(6,i) Then 
-				TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""" rel=""external"">"
+				TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""">"
 				TempStr=TempStr&"<img src="""&DataArray(8,i)&""""
 				If ImgWidth<>0 Then TempStr=TempStr&" width="""&ImgWidth&""""
 				If ImgHeight<>0 Then TempStr=TempStr&" height="""&ImgHeight&""""
@@ -130,7 +130,7 @@ Class Cls_MakeJs
 					TempStr=TempStr&"[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
 				End If
 				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""""
-				If OpenStyle=1 Then TempStr=TempStr&" rel=""external"""
+				If OpenStyle=1 Then TempStr=TempStr&" target=""_blank"""
 				TempStr=TempStr&">"
 				TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),EA_Pub.Cut_Title(EA_Pub.Base_HTMLFilter(DataArray(3,i)),TitleLen))
 				TempStr=TempStr&"</a>"
@@ -173,7 +173,7 @@ Class Cls_MakeJs
 					TempStr=TempStr&"[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
 				End If
 				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""""
-				If OpenStyle=1 Then TempStr=TempStr&" rel=""external"""
+				If OpenStyle=1 Then TempStr=TempStr&" target=""_blank"""
 				TempStr=TempStr&">"
 				TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),EA_Pub.Cut_Title(EA_Pub.Base_HTMLFilter(DataArray(3,i)),TitleLen))&"</a>"
 				If CBool(IsShowNew) Then TempStr=TempStr&EA_Pub.Chk_ArticleTime(DataArray(5,i)) 
@@ -184,7 +184,7 @@ Class Cls_MakeJs
 				TempStr=TempStr&"document.write ('<tr>');"&chr(10)
 				TempStr=TempStr&"document.write ('<td style=""width: "&ImgWidth+2&"px;"">"
 				If DataArray(6,i) Then 
-					TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""" rel=""external"">"
+					TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""">"
 					TempStr=TempStr&"<img src="""&DataArray(8,i)&""""
 					If ImgWidth<>0 Then TempStr=TempStr&" width="""&ImgWidth&""""
 					If ImgHeight<>0 Then TempStr=TempStr&" height="""&ImgHeight&""""
