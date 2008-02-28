@@ -489,32 +489,6 @@ Class cls_Public
 	Public Function Chk_ArticleTime(PostTime)
 		If DateDiff("h",PostTime,Now())<=24 Then Chk_ArticleTime="&nbsp;<img src="""&SystemFolder&"images/public/new.gif"" border=0 align=absmiddle alt=""24小时内新文章"">"
 	End Function
-
-	'**************************************************
-	'替换文章正文中的内部连接函数
-	'输入参数：
-	'	1、文章内容
-	'	2、文章地址[栏目id]
-	'**************************************************
-	Public Function Cov_InsideLink(ByRef StrContent,ColumnId)
-		Dim i
-		Dim TempArray
-		Dim WordIndex
-		Dim ForTotal
-		
-		TempArray=EA_DBO.Get_InsideLink_ByColumn(ColumnId)
-		If IsArray(TempArray) Then 
-			ForTotal = UBound(TempArray,2)
-
-			For i=0 To ForTotal
-				WordIndex=InStr(1,StrContent,TempArray(0,i))
-				
-				If WordIndex>0 Then StrContent=Replace(StrContent,TempArray(0,i),"<a href="""&TempArray(1,i)&""" rel=""external"" class=""a_link"">"&TempArray(0,i)&"</a>")
-			Next
-		End If
-		
-		Cov_InsideLink=StrContent
-	End Function
 	
 	'************************************************
 	'转换栏目路径函数

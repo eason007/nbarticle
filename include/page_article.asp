@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-26
+'= 最后日期：2008-02-28
 '====================================================================
 
 Class page_Article
@@ -18,26 +18,29 @@ Class page_Article
 
 
 	Public Function Make (ID, Info, Page)
-		Dim FirstArticle,NextArticle
-		Dim i,TempStr
+		Dim FirstArticle, NextArticle
+		Dim i, TempStr
 
-		PageContent=EA_Temp.Load_Template(ArticleInfo(24,0),"view")
+		PageContent  = EA_Temp.Load_Template(ArticleInfo(24, 0), 5)
 
-		EA_Temp.Title=ArticleInfo(3,0)&" - "&ArticleInfo(2,0)&" - "&EA_Pub.SysInfo(0)
-		EA_Temp.Nav="<a href="""&SystemFolder&"""><b>"&EA_Pub.SysInfo(0)&"</b></a>"&EA_Pub.Get_NavByColumnCode(ArticleInfo(1,0))&" -=> 正文"
-
-		ArticleInfo(5,0)=EA_Pub.Cov_InsideLink(ArticleInfo(5,0),ArticleInfo(0,0))
+		EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
+		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0)) & " -=> 正文"
 
 		If Not IsView Then 
-			TempStr=ArticleInfo(4,0)
-			TempStr=TempStr&"<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='"&SystemFolder&"member/login.asp' rel=""external"">登陆</a>] 或 [<a href='"&SystemFolder&"member/register.asp' rel=""external"">注册</a>]。</b>"
+			TempStr = ArticleInfo(4, 0)
+			TempStr = TempStr & "<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp' rel=""external"">登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp' rel=""external"">注册</a>]。</b>"
 		Else
-			Call RegExpTest("\[NextPage([^\]])*\]", ArticleInfo(5,0))
+			Call CutContent("\[NextPage([^\]])*\]", ArticleInfo(5, 0))
 
 			If UBound(PageIndex) = 1 Then
-				TempStr="<div id=""article"">"&ArticleInfo(5,0)&"</div>"
+				Call Cov_InsideLink(ArticleInfo(5, 0), ArticleInfo(0, 0))
+
+				TempStr = "<div id=""article"">" & ArticleInfo(5, 0) & "</div>"
 			Else
-				TempStr = Mid(ArticleInfo(5,0), PageIndex(Page - 1) + Len(PageStr(Page - 1)) + 1, PageIndex(Page) - PageIndex(Page - 1) - Len(PageStr(Page - 1)))
+				TempStr = Mid(ArticleInfo(5, 0), PageIndex(Page - 1) + Len(PageStr(Page - 1)) + 1, PageIndex(Page) - PageIndex(Page - 1) - Len(PageStr(Page - 1)))
+
+				Call Cov_InsideLink(TempStr, ArticleInfo(0, 0))
+
 				TempStr = "<div id=""article"">" & TempStr & "</div>"
 				TempStr = TempStr & "<div style='TEXT-ALIGN: center;margin-bottom: 5px;'>" & PageNav(UBound(PageIndex), Page) & "</div>"
 			End If
@@ -147,15 +150,33 @@ Class page_Article
 		End If 
 	End Function
 
-	Function RegExpTest(patrn, strng) 
+	Private Function PageNav (iCount, iCurrentPage)
+		Dim i
+		Dim OutStr
+
+		For i = 1 To iCount
+			If i = iCurrentPage Then 
+				OutStr = OutStr & "<span style='color: red;'>[" & i & "]</span>&nbsp;"
+			ElseIf i = 1 Then
+				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "'>[" & i & "]</a>&nbsp;"
+			Else
+				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "&amp;page=" & i & "'>[" & i & "]</a>&nbsp;"
+			End If
+		Next
+
+		PageNav = OutStr
+	End Function
+
+	Private Sub CutContent(patrn, strng) 
 		Dim regEx, Match, Matches			' 建立变量。 
 		Dim i
 
 		Set regEx = New RegExp				' 建立正则表达式。 
 
-		regEx.Pattern = patrn				' 设置模式。 
+		regEx.Pattern	 = patrn			' 设置模式。 
 		regEx.IgnoreCase = True				' 设置是否区分字符大小写。 
-		regEx.Global = True					' 设置全局可用性。 
+		regEx.Global	 = True				' 设置全局可用性。 
+
 		Set Matches = regEx.Execute(strng)	' 执行搜索。 
 
 		ReDim PageIndex(Matches.Count + 1)
@@ -173,23 +194,31 @@ Class page_Article
 		Next
 
 		PageIndex(i) = Len(strng)
-	End Function
 
-	Function PageNav (iCount, iCurrentPage)
+		Set regEx	= Nothing
+		Set Matches = Nothing
+	End Sub
+
+	'**************************************************
+	'替换文章正文中的内部连接函数
+	'输入参数：
+	'	1、文章内容
+	'	2、文章地址[栏目id]
+	'**************************************************
+	Private Sub Cov_InsideLink(ByRef StrContent, ColumnId)
 		Dim i
-		Dim OutStr
+		Dim TempArray
+		Dim WordIndex
+		Dim ForTotal
+		
+		TempArray = EA_DBO.Get_InsideLink_ByColumn(ColumnId)
+		If IsArray(TempArray) Then 
+			ForTotal = UBound(TempArray, 2)
 
-		For i = 1 To iCount
-			If i = iCurrentPage Then 
-				OutStr = OutStr & "<span style='color: red;'>[" & i & "]</span>&nbsp;"
-			ElseIf i = 1 Then
-				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "'>[" & i & "]</a>&nbsp;"
-			Else
-				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "&amp;page=" & i & "'>[" & i & "]</a>&nbsp;"
-			End If
-		Next
-
-		PageNav = OutStr
-	End Function
+			For i = 0 To ForTotal
+				StrContent = Replace(StrContent, TempArray(0, i),"<a href=""" & TempArray(1, i)&""" rel=""external"" class=""a_link"">" & TempArray(0, i) & "</a>")
+			Next
+		End If
+	End Sub
 End Class
 %>
