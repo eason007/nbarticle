@@ -61,7 +61,7 @@ Class cls_Template
 		End If
 	End Function
 
-	Public Sub LoadTemplate(ByRef sFileName)
+	Public Function Load_Template_File(ByRef sFileName)
 		Err.Clear 
 		On Error Resume Next
 		
@@ -71,7 +71,7 @@ Class cls_Template
 			.Type = 2
 			.Open
 			.LoadFromFile(Server.MapPath(TemplatePath&sFileName))
-			LoadTemplate = Bytes2bStr(.ReadText)
+			Load_Template_File = Bytes2bStr(.ReadText)
 			.Close
 		End With
 		Set S = Nothing
@@ -81,6 +81,72 @@ Class cls_Template
 			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
 			Call EA_Pub.ShowErrMsg(0, 0)
 		End If
+	End Function
+
+	Private Function Bytes2bStr(ByVal vin)
+	'二进制转换为字符串
+		If lenb(vin) = 0 Then
+			Bytes2bStr = ""
+			Exit Function
+		End If
+	
+		Dim StringReturn
+		Set S = Server.CreateObject("ADOD" & "B.S" & "tream")
+		With S
+			.Type = 2 
+			.Open
+			.WriteText vin
+			.Position = 0
+			.Charset = "gb2312"
+			.Position = 2
+			StringReturn = S.ReadText
+			.Close
+		End With
+		Set S = Nothing
+
+		Bytes2bStr = StringReturn
+	End Function
+
+	Public Function ChkBlock (ByRef sBlockName,ByRef sContent)
+		Dim sBlockBeginStr,sBlockEndStr
+
+		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
+		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
+
+		If InStr(1,sContent,sBlockBeginStr) And InStr(1,sContent,sBlockEndStr) Then
+			ChkBlock = True
+		Else
+			ChkBlock = False
+		End If
+	End Function
+
+	Public Function GetBlock(ByRef sBlockName,ByRef sContent)
+		Dim iBlockBegin,iBlockEnd
+		Dim sBlockBeginStr,sBlockEndStr
+
+		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
+		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
+
+		iBlockBegin	= InStr(1,sContent,sBlockBeginStr)
+		If iBlockBegin > 0 Then
+			iBlockEnd	= InStr(iBlockBegin,sContent,sBlockEndStr)
+
+			GetBlock	= Mid(sContent,iBlockBegin + Len(sBlockBeginStr),iBlockEnd - (iBlockBegin + Len(sBlockBeginStr)))
+			
+			sContent	= Left(sContent,iBlockBegin-1) & VBCrlf & "<!-- " & sBlockName & "s -->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
+		End If
+	End Function
+
+	Public Sub SetBlock(ByRef sBlockName,ByRef sBlockContent,ByRef sContent)
+		sContent=Replace(sContent & "","<!-- " & sBlockName & "s -->",sBlockContent & VBCrlf & "<!-- " & sBlockName & "s -->")
+	End Sub
+
+	Public Sub CloseBlock(ByRef sBlockName,ByRef sContent)
+		sContent=Replace(sContent & "","<!-- " & sBlockName & "s -->","")
+	End Sub
+
+	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
+		sContent=Replace(sContent & "","{$" & sVariableName & "$}",sVariableContent & "")
 	End Sub
 
 	Public Function ChkTag (sTag, ByRef sPageContent)
@@ -136,8 +202,27 @@ Class cls_Template
 		If InStr(PageContent,"{$Friend")>0 Then Call Find_TemplateTags("Friend",PageContent)
 		If InStr(PageContent,"{$ShowColumn")>0 Then Call Find_TemplateTags("ShowColumn",PageContent)
 		
+		Dim re
+		Set re=new RegExp
+		re.IgnoreCase =true
+		re.Global=True
+
+		re.Pattern="\{\$(\w+)\$\}"
+		PageContent=re.Replace(PageContent,"")
+
+		re.Pattern="<%(\w+)%\>"
+		PageContent=re.Replace(PageContent,"")
+		Set re=Nothing
+
 		Replace_PublicTag=PageContent
 	End Function
+
+	Public Sub OutStr(ByRef sContent)
+		Response.Clear
+		Response.Write sContent
+		Set sContent = Nothing
+		Response.End
+	End Sub
 	
 	Public Function Find_TemplateTag(KeyStr,ByRef PageStr)
 		Dim TempStr,PageLen
