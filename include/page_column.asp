@@ -11,24 +11,21 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-28
+'= 最后日期：2008-02-29
 '====================================================================
 
 Class page_Column
 	Public PageContent
-	Public Template
 	Private Info, ID
 
 	Public Function Make (iID, ByRef aInfo)
 		Info = aInfo
 		ID = iID
 
-		Set Template = New cls_NEW_TEMPLATE
-
 		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
 
-		If Template.ChkBlock("list", PageContent) Then Call MakeArticleList()
-		If Template.ChkBlock("placard", PageContent) Then Call MakePlacardList(Template, PageContent)
+		If EA_Temp.ChkBlock("list", PageContent) Then Call MakeArticleList()
+		If EA_Temp.ChkBlock("placard", PageContent) Then Call MakePlacardList(EA_Temp, PageContent)
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
@@ -75,7 +72,7 @@ Class page_Column
 			ArticleUrlType = 1
 		End If
 
-		ListBlock = Template.GetBlock("list", PageContent)
+		ListBlock = EA_Temp.GetBlock("list", PageContent)
 
 		If IsArray(ArticleList) Then
 			ForTotal = UBound(ArticleList, 2)
@@ -83,22 +80,22 @@ Class page_Column
 			For i = 0 To ForTotal
 				Temp = ListBlock
 		  
-				Template.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), ArticleUrlType), Temp
-				Template.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
-				Template.SetVariable "Date", ArticleList(3, i), Temp
-				Template.SetVariable "CommentNum", ArticleList(4, i), Temp
-				Template.SetVariable "Summary", ArticleList(5, i), Temp
-				Template.SetVariable "LastComment", ArticleList(6, i), Temp
-				Template.SetVariable "ViewNum", ArticleList(7, i), Temp
-				Template.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i),ArticleList(10, i)), Temp
-				Template.SetVariable "Img", ArticleList(9, i), Temp
-				Template.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
-				Template.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
+				EA_Temp.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), ArticleUrlType), Temp
+				EA_Temp.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
+				EA_Temp.SetVariable "Date", ArticleList(3, i), Temp
+				EA_Temp.SetVariable "CommentNum", ArticleList(4, i), Temp
+				EA_Temp.SetVariable "Summary", ArticleList(5, i), Temp
+				EA_Temp.SetVariable "LastComment", ArticleList(6, i), Temp
+				EA_Temp.SetVariable "ViewNum", ArticleList(7, i), Temp
+				EA_Temp.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i),ArticleList(10, i)), Temp
+				EA_Temp.SetVariable "Img", ArticleList(9, i), Temp
+				EA_Temp.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
+				EA_Temp.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
 
-				Template.SetBlock "list", Temp, PageContent
+				EA_Temp.SetBlock "list", Temp, PageContent
 			Next
 
-			Template.CloseBlock "list", PageContent
+			EA_Temp.CloseBlock "list", PageContent
 		End If
 
 		If EA_Temp.ChkTag("ColumnPageNumNav", PageContent) Then PageContent = Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
