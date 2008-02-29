@@ -129,24 +129,24 @@ Class cls_Template
 
 		iBlockBegin	= InStr(1,sContent,sBlockBeginStr)
 		If iBlockBegin > 0 Then
-			iBlockEnd	= InStr(iBlockBegin,sContent,sBlockEndStr)
+			iBlockEnd = InStr(iBlockBegin,sContent,sBlockEndStr)
 
-			GetBlock	= Mid(sContent,iBlockBegin + Len(sBlockBeginStr),iBlockEnd - (iBlockBegin + Len(sBlockBeginStr)))
+			GetBlock  = Mid(sContent,iBlockBegin + Len(sBlockBeginStr),iBlockEnd - (iBlockBegin + Len(sBlockBeginStr)))
 			
-			sContent	= Left(sContent,iBlockBegin-1) & VBCrlf & "<!-- " & sBlockName & "s -->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
+			sContent  = Left(sContent,iBlockBegin-1) & VBCrlf & "<!-- " & sBlockName & "s -->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
 		End If
 	End Function
 
 	Public Sub SetBlock(ByRef sBlockName,ByRef sBlockContent,ByRef sContent)
-		sContent=Replace(sContent & "","<!-- " & sBlockName & "s -->",sBlockContent & VBCrlf & "<!-- " & sBlockName & "s -->")
+		sContent = Replace(sContent & "", "<!-- " & sBlockName & "s -->", sBlockContent & VBCrlf & "<!-- " & sBlockName & "s -->")
 	End Sub
 
 	Public Sub CloseBlock(ByRef sBlockName,ByRef sContent)
-		sContent=Replace(sContent & "","<!-- " & sBlockName & "s -->","")
+		sContent = Replace(sContent & "", "<!-- " & sBlockName & "s -->", "")
 	End Sub
 
 	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
-		sContent=Replace(sContent & "","{$" & sVariableName & "$}",sVariableContent & "")
+		If InStr(sContent, "{$" & sVariableName & "$}") > 0 Then sContent = Replace(sContent & "", "{$" & sVariableName & "$}", sVariableContent & "")
 	End Sub
 
 	Public Function ChkTag (sTag, ByRef sPageContent)
@@ -157,26 +157,20 @@ Class cls_Template
 		End If
 	End Function
 	
-	Public Sub ReplaceTag(sTag, ByRef sReplaceValue, ByRef sPageContent)
-		If InStr(sPageContent,"{$"&sTag&"$}") > 0 Then
-			sPageContent=Replace(sPageContent,"{$"&sTag&"$}",sReplaceValue&"")
-		End If
-	End Sub
-	
 	Public Function Replace_PublicTag(ByRef PageContent)
 		PageContent = PageContent & ""
 
-		ReplaceTag "Head",PageArray(2),PageContent
-		ReplaceTag "Foot",PageArray(3),PageContent
+		SetVariable "Head",PageArray(2),PageContent
+		SetVariable "Foot",PageArray(3),PageContent
 
-		ReplaceTag "PageTitle",Title,PageContent
-		ReplaceTag "PageNav",Nav,PageContent
+		SetVariable "PageTitle",Title,PageContent
+		SetVariable "PageNav",Nav,PageContent
 
-		ReplaceTag "SiteName",EA_Pub.SysInfo(0),PageContent
-		ReplaceTag "SiteUrl",EA_Pub.SysInfo(11),PageContent
-		ReplaceTag "SiteEMail",EA_Pub.SysInfo(12),PageContent
-		ReplaceTag "SystemVersion",SysVersion,PageContent
-		ReplaceTag "SkinName",PageArray(0),PageContent
+		SetVariable "SiteName",EA_Pub.SysInfo(0),PageContent
+		SetVariable "SiteUrl",EA_Pub.SysInfo(11),PageContent
+		SetVariable "SiteEMail",EA_Pub.SysInfo(12),PageContent
+		SetVariable "SystemVersion",SysVersion,PageContent
+		SetVariable "SkinName",PageArray(0),PageContent
 
 		EA_Pub.SysInfo(17) = Replace(EA_Pub.SysInfo(17) & "", "<", "&lt;")
 		EA_Pub.SysInfo(17) = Replace(EA_Pub.SysInfo(17) & "", ">", "&gt;")
@@ -186,13 +180,13 @@ Class cls_Template
 		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", ">", "&gt;")
 		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", "&", "&amp;")
 	
-		ReplaceTag "PageCSS",PageArray(1),PageContent
-		ReplaceTag "PageDesc",EA_Pub.SysInfo(17),PageContent
-		ReplaceTag "PageKeyword",Replace(EA_Pub.SysInfo(16),"|",","),PageContent
+		SetVariable "PageCSS",PageArray(1),PageContent
+		SetVariable "PageDesc",EA_Pub.SysInfo(17),PageContent
+		SetVariable "PageKeyword",Replace(EA_Pub.SysInfo(16),"|",","),PageContent
 
 		PageContent=Replace(PageContent,"</title>","</title>"&Chr(13)&Chr(10)&"<meta name=""generator"" content=""NB文章系统(NBArticle) "&SysVersion&""" />",1,-1,0)
 
-		ReplaceTag "SystemPath",SystemFolder,PageContent
+		SetVariable "SystemPath",SystemFolder,PageContent
 		
 		If InStr(PageContent,"{$SitePlacard")>0 Then Call Find_TemplateTag("SitePlacard",PageContent)
 

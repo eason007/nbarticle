@@ -126,7 +126,7 @@ Class page_Article
 			Next
 		End If
 
-		Call EA_Temp.ReplaceTag("TagList", OutStr, PageContent)
+		Call EA_Temp.SetVariable("TagList", OutStr, PageContent)
 	End Sub
 
 	Private Sub CorrList(Keyword, ColumnId, ByRef PageContent)
