@@ -20,15 +20,17 @@
 
 Class cls_Template
 	Public Title,Nav
+	Public TemplatePath
 
 	Private PageArray(4)
 	Private i
+	Private S
 	
 	'*****************************
 	'对象类初始化过程
 	'*****************************
 	Private Sub Class_Initialize()
-
+		TemplatePath = "templates/"
 	End Sub
 
 	Public Sub Close()
@@ -41,27 +43,45 @@ Class cls_Template
 	'	1、模版id
 	'***********************************************
 	Public Function Load_Template(TemplateId, TemplateType)
-		FoundErr=False
-
 		Dim Temp
-		Temp=EA_DBO.Get_Template_Info(TemplateId, TemplateType)
+		Temp = EA_DBO.Get_Template_Info(TemplateId, TemplateType)
+
 		If IsArray(Temp) Then 
 			TemplateId = Temp(2, 0)
 
-			PageArray(0)=EA_DBO.Get_Theme_Name(TemplateId)(0,0)			'template name
-			PageArray(1)=EA_DBO.Get_Template_Info(0, 1)(0,0)			'template css
-			PageArray(2)=EA_DBO.Get_Template_Info(0, 2)(0,0)			'template head
-			PageArray(3)=EA_DBO.Get_Template_Info(0, 3)(0,0)			'template foot
-			Load_Template=Temp(0,0)
+			PageArray(0) = EA_DBO.Get_Theme_Name(TemplateId)(0, 0)		'template name
+			PageArray(1) = EA_DBO.Get_Template_Info(0, 1)(0, 0)			'template css
+			PageArray(2) = EA_DBO.Get_Template_Info(0, 2)(0, 0)			'template head
+			PageArray(3) = EA_DBO.Get_Template_Info(0, 3)(0, 0)			'template foot
+			Load_Template= Temp(0, 0)
 		Else
-			FoundErr=True
-		End If
-		
-		If Err.Number<>0 Or FoundErr Then 
-			ErrMsg="读取模版["&Fields&"]时发生错误"&FoundErr
-			Call EA_Pub.ShowErrMsg(0,0)
+			ErrMsg = Replace(SysMsg(9), "$1", Fields)
+			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
+			Call EA_Pub.ShowErrMsg(0, 0)
 		End If
 	End Function
+
+	Public Sub LoadTemplate(ByRef sFileName)
+		Err.Clear 
+		On Error Resume Next
+		
+		Set S = Server.CreateObject("ADOD" & "B.S" & "TREAM")
+		With S
+			.Mode = 3
+			.Type = 2
+			.Open
+			.LoadFromFile(Server.MapPath(TemplatePath&sFileName))
+			LoadTemplate = Bytes2bStr(.ReadText)
+			.Close
+		End With
+		Set S = Nothing
+		
+		If Err Then 
+			ErrMsg = Replace(SysMsg(9), "$1", sFileName)
+			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
+			Call EA_Pub.ShowErrMsg(0, 0)
+		End If
+	End Sub
 
 	Public Function ChkTag (sTag, ByRef sPageContent)
 		If InStr(sPageContent,"{$"&sTag&"$}") > 0 Then

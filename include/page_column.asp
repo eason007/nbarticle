@@ -1,4 +1,3 @@
-<!--#include file="_cls_teamplate.asp"-->
 <!--#include file="page_placard.asp"-->
 <%
 '====================================================================
