@@ -242,31 +242,7 @@ Class cls_XML_RPC
 		sStructFileContent = objStream.ReadText(objStream.Size)
 		objStream.Close
 
-		Load_XMLStructFile=Bytes2bStr(sStructFileContent)
-	End Function
-
-	'// 二进制流转换为字符串
-	Private Function Bytes2bStr(bStr)
-		if Lenb(bStr)=0 Then
-			Bytes2bStr = ""
-			Exit Function
-		End if
-		
-		Dim BytesStream,StringReturn
-		Set BytesStream = Server.CreateObject("ADOD" & "B.S" & "tream")
-		With BytesStream
-			.Type        = 2
-			.Open
-			.WriteText   bStr
-			.Position    = 0
-			.Charset     = "gb2312"
-			.Position    = 2
-			StringReturn = .ReadText
-			.Close
-		End With
-		Bytes2bStr       = StringReturn
-		Set BytesStream	 = Nothing
-		Set StringReturn = Nothing
+		Load_XMLStructFile = EA_Pub.Bytes2bStr(sStructFileContent, "gb2312")
 	End Function
 End Class
 %>

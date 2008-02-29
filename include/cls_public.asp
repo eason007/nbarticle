@@ -880,5 +880,31 @@ Class cls_Public
 			Stat_Page_Total= CLng((ReCount \ PageSize)+1)
 		End If
 	End Function
+
+
+	'// 二进制流转换为字符串
+	Public Function Bytes2bStr(ByRef bStr, CodeSet)
+		if Lenb(bStr)=0 Then
+			Bytes2bStr = ""
+			Exit Function
+		End if
+		
+		Dim BytesStream,StringReturn
+		Set BytesStream = Server.CreateObject("ADOD" & "B.S" & "tream")
+		With BytesStream
+			.Type        = 2
+			.Open
+			.WriteText   bStr
+			.Position    = 0
+			.Charset     = CodeSet
+			.Position    = 2
+			StringReturn = .ReadText
+			.Close
+		End With
+		Bytes2bStr       = StringReturn
+
+		Set BytesStream	 = Nothing
+		Set StringReturn = Nothing
+	End Function
 End Class
 %>

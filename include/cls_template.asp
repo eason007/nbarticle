@@ -71,7 +71,7 @@ Class cls_Template
 			.Type = 2
 			.Open
 			.LoadFromFile(Server.MapPath(TemplatePath&sFileName))
-			Load_Template_File = Bytes2bStr(.ReadText)
+			Load_Template_File = EA_Pub.Bytes2bStr(.ReadText, "gb2312")
 			.Close
 		End With
 		Set S = Nothing
@@ -83,29 +83,6 @@ Class cls_Template
 		End If
 	End Function
 
-	Private Function Bytes2bStr(ByVal vin)
-	'二进制转换为字符串
-		If lenb(vin) = 0 Then
-			Bytes2bStr = ""
-			Exit Function
-		End If
-	
-		Dim StringReturn
-		Set S = Server.CreateObject("ADOD" & "B.S" & "tream")
-		With S
-			.Type = 2 
-			.Open
-			.WriteText vin
-			.Position = 0
-			.Charset = "gb2312"
-			.Position = 2
-			StringReturn = S.ReadText
-			.Close
-		End With
-		Set S = Nothing
-
-		Bytes2bStr = StringReturn
-	End Function
 
 	Public Function ChkBlock (ByRef sBlockName,ByRef sContent)
 		Dim sBlockBeginStr,sBlockEndStr

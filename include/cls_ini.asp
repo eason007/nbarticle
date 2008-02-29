@@ -50,31 +50,6 @@ Class cls_Ini
 	End Sub
 	
 	
-	'// 二进制流转换为字符串
-	Private Function Bytes2bStr(bStr)
-		if Lenb(bStr)=0 Then
-			Bytes2bStr = ""
-			Exit Function
-		End if
-		
-		Dim BytesStream,StringReturn
-		Set BytesStream = Server.CreateObject("ADOD" & "B.S" & "tream")
-		With BytesStream
-			.Type        = 2
-			.Open
-			.WriteText   bStr
-			.Position    = 0
-			.Charset     = CodeSet
-			.Position    = 2
-			StringReturn = .ReadText
-			.Close
-		End With
-		Bytes2bStr       = StringReturn
-		Set BytesStream	 = Nothing
-		Set StringReturn = Nothing
-	End Function
-	
-	
 	'// 设置文件路径
 	Property Let OpenFile(INIFilePath)
 		FilePath = INIFilePath
@@ -89,7 +64,7 @@ Class cls_Ini
 			Err.Clear
 		End if
 		Content = Stream.ReadText(Stream.Size)
-		if Not IsAnsi Then Content=Bytes2bStr(Content)
+		if Not IsAnsi Then Content = EA_Pub.Bytes2bStr(Content, CodeSet)
 		Stream.Close
 	End Property
 	
