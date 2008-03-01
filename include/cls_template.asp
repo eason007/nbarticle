@@ -87,10 +87,10 @@ Class cls_Template
 	Public Function ChkBlock (ByRef sBlockName,ByRef sContent)
 		Dim sBlockBeginStr,sBlockEndStr
 
-		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
-		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
+		sBlockBeginStr	= "<!--" & sBlockName & " Begin-->"
+		sBlockEndStr	= "<!--" & sBlockName & " End-->"
 
-		If InStr(1,sContent,sBlockBeginStr) And InStr(1,sContent,sBlockEndStr) Then
+		If InStr(1, sContent, sBlockBeginStr) And InStr(1, sContent, sBlockEndStr) Then
 			ChkBlock = True
 		Else
 			ChkBlock = False
@@ -101,8 +101,8 @@ Class cls_Template
 		Dim iBlockBegin,iBlockEnd
 		Dim sBlockBeginStr,sBlockEndStr
 
-		sBlockBeginStr	= "<!-- " & sBlockName & " Begin -->"
-		sBlockEndStr	= "<!-- " & sBlockName & " End -->"
+		sBlockBeginStr	= "<!--" & sBlockName & "Begin -->"
+		sBlockEndStr	= "<!--" & sBlockName & "End -->"
 
 		iBlockBegin	= InStr(1,sContent,sBlockBeginStr)
 		If iBlockBegin > 0 Then
@@ -110,24 +110,32 @@ Class cls_Template
 
 			GetBlock  = Mid(sContent,iBlockBegin + Len(sBlockBeginStr),iBlockEnd - (iBlockBegin + Len(sBlockBeginStr)))
 			
-			sContent  = Left(sContent,iBlockBegin-1) & VBCrlf & "<!-- " & sBlockName & "s -->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
+			sContent  = Left(sContent,iBlockBegin-1) & VBCrlf & "<!--" & sBlockName & "s-->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
 		End If
 	End Function
 
 	Public Sub SetBlock(ByRef sBlockName,ByRef sBlockContent,ByRef sContent)
-		sContent = Replace(sContent & "", "<!-- " & sBlockName & "s -->", sBlockContent & VBCrlf & "<!-- " & sBlockName & "s -->")
+		sContent = Replace(sContent & "", "<!--" & sBlockName & "s-->", sBlockContent & VBCrlf & "<!--" & sBlockName & "s-->")
 	End Sub
 
 	Public Sub CloseBlock(ByRef sBlockName,ByRef sContent)
-		sContent = Replace(sContent & "", "<!-- " & sBlockName & "s -->", "")
+		sContent = Replace(sContent & "", "<!--" & sBlockName & "s-->", "")
 	End Sub
 
 	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
 		If InStr(sContent, "<!--" & sVariableName & "-->") > 0 Then sContent = Replace(sContent & "", "<!--" & sVariableName & "-->", sVariableContent & "")
 	End Sub
 
-	Public Function ChkTag (sTag, ByRef sPageContent)
+	Public Function ChkTag_Prefix (sTag, ByRef sPageContent)
 		If InStr(sPageContent, "<!--" & sTag & ".") > 0 Then
+			ChkTag = True
+		Else
+			ChkTag = False
+		End If
+	End Function
+
+	Public Function ChkTag (sTag, ByRef sPageContent)
+		If InStr(sPageContent, "<!--" & sTag) > 0 Then
 			ChkTag = True
 		Else
 			ChkTag = False
@@ -155,13 +163,13 @@ Class cls_Template
 		PageContent = Replace(PageContent, "</title>", "</title>" & Chr(13) & Chr(10) & "<meta name=""generator"" content=""NB文章系统(NBArticle) " & SysVersion & """ />", 1, -1, 0)
 		
 
-		If ChkTag("Info", PageContent) Then Call MakeInfo(PageContent)
-		If ChkTag("Placard", PageContent) Then Call MakePlaCard(PageContent)
-		If ChkTag("Vote", PageContent) Then Call MakeVote(PageContent)
-		If ChkTag("Friend", PageContent) Then Call MakeFriend(PageContent)
-		If ChkTag("AdSense", PageContent) Then Call MakeAdSense(PageContent)
-		If ChkTag("Article", PageContent) Then Call MakeArticle(PageContent)
-		If ChkTag("Column", PageContent) Then Call MakeColumn(PageContent)
+		If ChkTag_Prefix("Info", PageContent) Then Call MakeInfo(PageContent)
+		If ChkTag_Prefix("Placard", PageContent) Then Call MakePlaCard(PageContent)
+		If ChkTag_Prefix("Vote", PageContent) Then Call MakeVote(PageContent)
+		If ChkTag_Prefix("Friend", PageContent) Then Call MakeFriend(PageContent)
+		If ChkTag_Prefix("AdSense", PageContent) Then Call MakeAdSense(PageContent)
+		If ChkTag_Prefix("Article", PageContent) Then Call MakeArticle(PageContent)
+		If ChkTag_Prefix("Column", PageContent) Then Call MakeColumn(PageContent)
 
 
 		Replace_PublicTag=PageContent
