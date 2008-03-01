@@ -32,6 +32,7 @@ Sub CommentList (ByRef PageContent)
 		If Not IsArray(Parameter) Then Exit Do
 
 		List = EA_DBO.Get_Review_List(Parameter(0), Parameter(1), Parameter(2))
+		If Not IsArray(List) Then Exit Do
 		
 		ForTotal = UBound(List, 2)
 
@@ -39,8 +40,10 @@ Sub CommentList (ByRef PageContent)
 			Temp = Block
 	  
 			EA_Temp.SetVariable "UserName", List(2, i), Temp
+			EA_Temp.SetVariable "Content", List(1, i), Temp
 			EA_Temp.SetVariable "Date", List(3, i), Temp
-			EA_Temp.SetVariable "ArticleUrl", EA_Pub.Cov_ArticlePath(List(0, i), List(3, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "ArticleUrl", EA_Pub.Cov_ArticlePath(List(0, i), List(4, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "ArticleTitle", List(5, i), Temp
 
 			EA_Temp.SetBlock "Comment.List", Temp, PageContent
 		Next

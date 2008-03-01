@@ -286,12 +286,12 @@ Class cls_DBOperation
 	Public Function Get_Review_List(iTop, iArticleId, iContentLen)
 		Select Case iDataBaseType
 		Case 0
-			SQL="Select Top "&iTop&" a.ArticleId, a.Left(Content,"&iContentLen&"), IIF(a.UserId=0, '游客', '[会员]'+UserName), a.AddDate, b.AddDate"
+			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"), IIF(a.UserId=0, '游客', '[会员]'+UserName), a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" LEFT JOIN [NB_Content] b ON a.ArticleId = b.id"
 			SQL=SQL&" Where a.IsPass=" & TrueValue & " Order By a.Id Desc"
 		Case 1, 2
-			SQL="Select Top "&iTop&" a.ArticleId,a. Left(Content,"&iContentLen&"),Case a.UserId When 0 Then '游客' Else '[会员]'+UserName End As [UserName], a.AddDate, b.AddDate"
+			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"),Case a.UserId When 0 Then '游客' Else '[会员]'+UserName End As [UserName], a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" LEFT JOIN [NB_Content] b ON a.ArticleId = b.id"
 			SQL=SQL&" Where a.IsPass=" & TrueValue

@@ -36,6 +36,7 @@ Sub PlacardList (ByRef PageContent)
 		Else
 			List = EA_DBO.Get_PlacardTopList(Parameter(0))
 		End If
+		If Not IsArray(List) Then Exit Do
 		
 		ForTotal = UBound(List, 2)
 

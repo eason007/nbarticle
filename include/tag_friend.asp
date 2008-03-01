@@ -32,6 +32,7 @@ Sub FriendList (ByRef PageContent)
 		If Not IsArray(Parameter) Then Exit Do
 
 		List = EA_DBO.Get_Friend_List(Parameter(1), Parameter(0), Parameter(2))
+		If Not IsArray(List) Then Exit Do
 		
 		ForTotal = UBound(List, 2)
 

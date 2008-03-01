@@ -37,6 +37,7 @@ Sub ColumnList (ByRef PageContent)
 			Temp = EA_DBO.Get_Column_Info(Parameter(0))
 			List = EA_DBO.Get_Column_ChildList(Temp(1, 0))
 		End If
+		If Not IsArray(List) Then Exit Do
 		
 		ForTotal = UBound(List, 2)
 
