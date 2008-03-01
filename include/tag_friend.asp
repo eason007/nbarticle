@@ -14,41 +14,37 @@
 '====================================================================
 
 Sub MakeFriend(ByRef PageContent)
-	If EA_Temp.ChkBlock("Column.List", PageContent) Then
-		ColumnList PageContent
+	If EA_Temp.ChkBlock("Friend.List", PageContent) Then
+		FriendList PageContent
 	End If
 End Sub
 
-Function Load_Friend(Parameter)
-	Dim FriendList,WidthPercent
-	Dim TempStr,i
-	Dim ForTotal
-	
-	WidthPercent=100/CLng(Parameter(3))
+Sub FriendList (ByRef PageContent)
+	Dim Block, Parameter
+	Dim List
+	Dim Temp, ForTotal, i
 
-	FriendList=EA_DBO.Get_Friend_List(Parameter(1),Parameter(0),Parameter(2))
-	
-	If IsArray(FriendList) Then 
-		TempStr="<table>"
-		TempStr=TempStr&"<tr>"
-		ForTotal = UBound(FriendList,2)
+	Do 
+		Block = EA_Temp.GetBlock("Friend.List", PageContent)
+		If Block = "" Then Exit Do
 
-		For i=0 To ForTotal
-			If Parameter(2)="1" Then 
-				TempStr=TempStr&"<td style""WIDTH: "&WidthPercent&"%;""><a href="""&FriendList(1,i)&"""><img src="""&FriendList(2,i)&""" alt="""&FriendList(0,i)&""" /></a></td>"
-			Else
-				TempStr=TempStr&"<td style""WIDTH: "&WidthPercent&"%;""><a href="""&FriendList(1,i)&""" title="""&FriendList(0,i)&""">"&FriendList(0,i)&"</a></td>"
-			End If
+		Parameter = EA_Temp.GetBlockParameter(Block)
+		List = EA_DBO.Get_Friend_List(Parameter(1), Parameter(0), Parameter(2))
+		
+		ForTotal = UBound(List, 2)
 
-			If (i+1) Mod CLng(Parameter(3))=0 Then TempStr=TempStr&"</tr><tr>"
+		For i = 0 To ForTotal
+			Temp = Block
+	  
+			EA_Temp.SetVariable "Title", List(1, i), Temp
+			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "Info", List(4, i), Temp
+			EA_Temp.SetVariable "Total", List(2, i), Temp
+
+			EA_Temp.SetBlock "Friend.List", Temp, PageContent
 		Next
-		If i Mod CLng(Parameter(3))=0 Then TempStr=TempStr&"</tr>"
 
-		TempStr=TempStr&"</table>"
-	Else
-		TempStr = ""
-	End If
-
-	Load_Friend=TempStr
-End Function
+		EA_Temp.CloseBlock "Friend.List", PageContent
+	Loop While 1 = 1
+End Sub
 %>
