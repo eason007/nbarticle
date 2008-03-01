@@ -29,14 +29,14 @@ Sub PlacardList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
-		If Not IsArray(Parameter) Then Exit Do
+		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Placard.List", PageContent: Exit Do
 
 		If InStr(1, Parameter(0), "ID=") Then
 			List = EA_DBO.Get_PlacardInfo(Replace(Parameter(0), "ID=", ""))
 		Else
 			List = EA_DBO.Get_PlacardTopList(Parameter(0))
 		End If
-		If Not IsArray(List) Then Exit Do
+		If Not IsArray(List) Then EA_Temp.CloseBlock "Placard.List", PageContent: Exit Do
 		
 		ForTotal = UBound(List, 2)
 

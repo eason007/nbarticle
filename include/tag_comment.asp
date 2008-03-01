@@ -29,10 +29,10 @@ Sub CommentList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
-		If Not IsArray(Parameter) Then Exit Do
+		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Comment.List", PageContent: Exit Do
 
 		List = EA_DBO.Get_Review_List(Parameter(0), Parameter(1), Parameter(2))
-		If Not IsArray(List) Then Exit Do
+		If Not IsArray(List) Then EA_Temp.CloseBlock "Comment.List", PageContent: Exit Do
 		
 		ForTotal = UBound(List, 2)
 

@@ -29,7 +29,7 @@ Sub ColumnList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
-		If Not IsArray(Parameter) Then Exit Do
+		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Column.List", PageContent: Exit Do
 
 		If CInt(Parameter(0)) = 0 Then
 			List = EA_DBO.Get_Column_ChildList("")
@@ -37,7 +37,7 @@ Sub ColumnList (ByRef PageContent)
 			Temp = EA_DBO.Get_Column_Info(Parameter(0))
 			List = EA_DBO.Get_Column_ChildList(Temp(1, 0))
 		End If
-		If Not IsArray(List) Then Exit Do
+		If Not IsArray(List) Then EA_Temp.CloseBlock "Column.List", PageContent: Exit Do
 		
 		ForTotal = UBound(List, 2)
 
