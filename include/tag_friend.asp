@@ -29,6 +29,8 @@ Sub FriendList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
+		If Not IsArray(Parameter) Then Exit Do
+
 		List = EA_DBO.Get_Friend_List(Parameter(1), Parameter(0), Parameter(2))
 		
 		ForTotal = UBound(List, 2)
@@ -36,10 +38,10 @@ Sub FriendList (ByRef PageContent)
 		For i = 0 To ForTotal
 			Temp = Block
 	  
-			EA_Temp.SetVariable "Title", List(1, i), Temp
-			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
-			EA_Temp.SetVariable "Info", List(4, i), Temp
-			EA_Temp.SetVariable "Total", List(2, i), Temp
+			EA_Temp.SetVariable "Name", List(0, i), Temp
+			EA_Temp.SetVariable "Url", List(1, i), Temp
+			EA_Temp.SetVariable "Img", List(2, i), Temp
+			EA_Temp.SetVariable "Info", List(3, i), Temp
 
 			EA_Temp.SetBlock "Friend.List", Temp, PageContent
 		Next

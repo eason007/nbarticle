@@ -21,6 +21,11 @@ function formObject() {
 	this.ajaxPost = function(returnStr,appendArg){
 		$("divLoading").style.display = "";
 
+		if (!$(this.formName))
+		{
+			this.formName = "form1";
+		}
+
 		vForm = $(this.formName);
 		if(vForm) {
 		    if(!Validator.Validate(vForm, 3)) {

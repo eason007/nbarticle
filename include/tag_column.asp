@@ -29,6 +29,8 @@ Sub ColumnList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
+		If Not IsArray(Parameter) Then Exit Do
+
 		If CInt(Parameter(0)) = 0 Then
 			List = EA_DBO.Get_Column_ChildList("")
 		Else

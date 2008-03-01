@@ -18,6 +18,7 @@ if (typeof(tabFormID[currentTab]) != "undefined")
 	//FormEdit.debug = true;
 	FormEdit.postUrl = "./admin_module.asp";
 	FormEdit.dateVal = "action=add&ID=";
+	FormEdit.doResponseMethodOther = "";
 }
 else{
 	ajaxChangeRightContent('./templates/admin_theme_list.htm');

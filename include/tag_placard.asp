@@ -29,6 +29,8 @@ Sub PlacardList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
+		If Not IsArray(Parameter) Then Exit Do
+
 		If InStr(1, Parameter(0), "ID=") Then
 			List = EA_DBO.Get_PlacardInfo(Replace(Parameter(0), "ID=", ""))
 		Else
