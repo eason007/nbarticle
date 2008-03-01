@@ -17,10 +17,6 @@ Sub MakePlacard(ByRef PageContent)
 	If EA_Temp.ChkBlock("Placard.List", PageContent) Then
 		PlacardList PageContent
 	End If
-
-	If EA_Temp.ChkTag("Placard.Single", PageContent) Then
-
-	End If
 End Sub
 
 Function PlacardList (ByRef PageContent)
@@ -33,7 +29,11 @@ Function PlacardList (ByRef PageContent)
 		If Block = "" Then Exit Do
 
 		Parameter = EA_Temp.GetBlockParameter(Block)
-		List = EA_DBO.Get_PlacardTopList(Parameter(0))
+		If InStr(1, Parameter(0), "ID=") Then
+			List = EA_DBO.Get_PlacardInfo(Replace(Parameter(0), "ID=", ""))
+		Else
+			List = EA_DBO.Get_PlacardTopList(Parameter(0))
+		End If
 		
 		ForTotal = UBound(List, 2)
 
@@ -50,6 +50,5 @@ Function PlacardList (ByRef PageContent)
 
 		EA_Temp.CloseBlock "Placard.List", PageContent
 	Loop While 1 = 1
-
 End Function
 %>

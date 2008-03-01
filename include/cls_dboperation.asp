@@ -757,10 +757,8 @@ Class cls_DBOperation
 	
 	Public Function Get_PlacardInfo(iPlacardId)
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Manager_PlacardInfo "&iPlacardId
-		Case 1
-			SQL="SELECT Title, Content, OverTime, AddTime"
+		Case 0, 1
+			SQL="SELECT [Id], Title, AddTime, OverTime, Content"
 			SQL=SQL&" FROM NB_Placard"
 			SQL=SQL&" WHERE Id="&iPlacardId
 		Case 2
