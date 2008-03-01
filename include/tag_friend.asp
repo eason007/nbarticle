@@ -13,6 +13,12 @@
 '= 最后日期：2008-02-28
 '====================================================================
 
+Sub MakeFriend(ByRef PageContent)
+	If EA_Temp.ChkBlock("Column.List", PageContent) Then
+		ColumnList PageContent
+	End If
+End Sub
+
 Function Load_Friend(Parameter)
 	Dim FriendList,WidthPercent
 	Dim TempStr,i

@@ -13,7 +13,7 @@
 '= 最后日期：2008-03-01
 '====================================================================
 
-Sub MakePlacard(ByRef PageContent)
+Sub MakeColumn(ByRef PageContent)
 	If EA_Temp.ChkBlock("Column.List", PageContent) Then
 		ColumnList PageContent
 	End If

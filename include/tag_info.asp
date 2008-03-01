@@ -22,6 +22,6 @@ Sub MakeInfo(ByRef PageContent)
 	EA_Temp.SetVariable "Info.SiteUrl", EA_Pub.SysInfo(11), PageContent
 	EA_Temp.SetVariable "Info.SiteMail", EA_Pub.SysInfo(12), PageContent
 	EA_Temp.SetVariable "Info.Version", SysVersion, PageContent
-	EA_Temp.SetVariable "Info.ThemeName", PageArray(0), PageContent
+	EA_Temp.SetVariable "Info.ThemeName", EA_Temp.PageArray(0), PageContent
 End Sub
 %>

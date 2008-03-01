@@ -3,6 +3,7 @@
 <!--#Include File="tag_review.asp"-->
 <!--#Include File="tag_vote.asp"-->
 <!--#Include File="tag_column.asp"-->
+<!--#Include File="tag_info.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -21,10 +22,10 @@
 Class cls_Template
 	Public Title,Nav
 	Public TemplatePath
+	Public PageArray(4)
 
 	Public P_Prefix, P_Suffix
 
-	Private PageArray(4)
 	Private i
 	Private S
 	
