@@ -6,8 +6,8 @@
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
 '=-------------------------------------------------------------------
-'= 文件名称：cls_template.asp
-'= 摘    要：模版类文件
+'= 文件名称：tag_column.asp
+'= 摘    要：column模版标签文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
 '= 最后日期：2008-03-01
@@ -44,7 +44,7 @@ Sub ColumnList (ByRef PageContent)
 			EA_Temp.SetVariable "Title", List(1, i), Temp
 			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
 			EA_Temp.SetVariable "Info", List(4, i), Temp
-			EA_Temp.SetVariable "Info", List(2, i), Temp
+			EA_Temp.SetVariable "Total", List(2, i), Temp
 
 			EA_Temp.SetBlock "Column.List", Temp, PageContent
 		Next
