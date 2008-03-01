@@ -123,7 +123,7 @@ Class cls_Template
 	End Sub
 
 	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
-		If InStr(sContent, "<!--" & sVariableName & "-->") > 0 Then sContent = Replace(sContent & "", "{$" & sVariableName & "$}", sVariableContent & "")
+		If InStr(sContent, "<!--" & sVariableName & "-->") > 0 Then sContent = Replace(sContent & "", "<!--" & sVariableName & "-->", sVariableContent & "")
 	End Sub
 
 	Public Function ChkTag (sTag, ByRef sPageContent)

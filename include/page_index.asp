@@ -22,11 +22,7 @@ Class page_Index
 		EA_Temp.Title	= EA_Pub.SysInfo(0) & " - 首页"
 		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a> - 首页"
 
-		EA_Temp.SetVariable "SiteColumnTotal", EA_Pub.SysStat(0), PageContent
-		EA_Temp.SetVariable "SiteTopicTotal", EA_Pub.SysStat(1), PageContent
-		EA_Temp.SetVariable "SiteUserTotal", EA_Pub.SysStat(3), PageContent
-		EA_Temp.SetVariable "SiteMangerTopicTotal", EA_Pub.SysStat(2), PageContent
-		EA_Temp.SetVariable "SiteReviewTotal", EA_Pub.SysStat(4), PageContent
+		
 
 		If EA_Temp.ChkTag("MemberTopPost", PageContent) Then EA_Temp.SetVariable "MemberTopPost", EA_Temp.Load_MemberTopPost, PageContent
 
