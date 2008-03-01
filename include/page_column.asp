@@ -1,4 +1,3 @@
-<!--#include file="page_placard.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
