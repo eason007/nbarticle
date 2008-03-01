@@ -27,6 +27,7 @@ Class cls_Template
 
 	Public P_Prefix, P_Suffix
 
+	Private LastPosition
 	Private i
 	Private S
 	
@@ -157,11 +158,17 @@ Class cls_Template
 				ParameterArray = Split(TempStr, ",")
 
 				PageStr = Left(PageStr, StartTag - 1) & Right(PageStr, (Len(PageStr) - EndTag - Len(ParameterSuffix)) + 1)
+
+				LastPosition = StartTag - 1
 			End If
 		End If
 		
 		GetParameter = ParameterArray
 	End Function
+
+	Public Sub SetSingle(ByRef Content, ByRef PageStr)
+		PageStr = Left(PageStr, LastPosition) & Content & Right(PageStr, Len(PageStr) - LastPosition)
+	End Sub
 
 	Public Function ChkTag_Prefix (sTag, ByRef sPageContent)
 		If InStr(sPageContent, P_Prefix & sTag & ".") > 0 Then

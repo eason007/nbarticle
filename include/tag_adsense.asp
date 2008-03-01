@@ -32,8 +32,7 @@ Sub AdSenseSingle (ByRef PageContent)
 		If Not IsArray(List) Then 
 			Exit Do
 		Else
-			response.write PageContent
-			response.end
+			Call EA_Temp.SetSingle(List(1, 0), PageContent)
 		End If
 	Loop While 1 = 1
 End Sub
