@@ -10,7 +10,7 @@
 '= 摘    要：共用类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-28
+'= 最后日期：2008-03-01
 '====================================================================
 
 Class cls_Public
@@ -563,6 +563,7 @@ Class cls_Public
 		If Len(sInputStr)>0 Then 
 			sInputStr=Replace(sInputStr, ">", "&gt;")
 			sInputStr=Replace(sInputStr, "<", "&lt;")
+			sInputStr=Replace(sInputStr, "&", "&amp;")
 			sInputStr=Replace(sInputStr, """", "&quot;")
 			sInputStr=Replace(sInputStr, CHR(32), "&nbsp;")
 			sInputStr=Replace(sInputStr, CHR(9), "&nbsp;")

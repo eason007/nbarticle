@@ -123,11 +123,11 @@ Class cls_Template
 	End Sub
 
 	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
-		If InStr(sContent, "{$" & sVariableName & "$}") > 0 Then sContent = Replace(sContent & "", "{$" & sVariableName & "$}", sVariableContent & "")
+		If InStr(sContent, "<!--" & sVariableName & "-->") > 0 Then sContent = Replace(sContent & "", "{$" & sVariableName & "$}", sVariableContent & "")
 	End Sub
 
 	Public Function ChkTag (sTag, ByRef sPageContent)
-		If InStr(sPageContent,"{$"&sTag&"$}") > 0 Then
+		If InStr(sPageContent, "<!--" & sTag & ".") > 0 Then
 			ChkTag = True
 		Else
 			ChkTag = False
@@ -137,53 +137,32 @@ Class cls_Template
 	Public Function Replace_PublicTag(ByRef PageContent)
 		PageContent = PageContent & ""
 
-		SetVariable "Head",PageArray(2),PageContent
-		SetVariable "Foot",PageArray(3),PageContent
+		EA_Pub.SysInfo(16) = Replace(EA_Pub.Full_HTMLFilter(EA_Pub.SysInfo(16)), "|", ",")
+		EA_Pub.SysInfo(17) = EA_Pub.Full_HTMLFilter(EA_Pub.SysInfo(17))
 
-		SetVariable "PageTitle",Title,PageContent
-		SetVariable "PageNav",Nav,PageContent
+		SetVariable "Page.Head", PageArray(2), PageContent
+		SetVariable "Page.Foot", PageArray(3), PageContent
+		SetVariable "Page.CSS", PageArray(1), PageContent
 
-		SetVariable "SiteName",EA_Pub.SysInfo(0),PageContent
-		SetVariable "SiteUrl",EA_Pub.SysInfo(11),PageContent
-		SetVariable "SiteEMail",EA_Pub.SysInfo(12),PageContent
-		SetVariable "SystemVersion",SysVersion,PageContent
-		SetVariable "SkinName",PageArray(0),PageContent
+		SetVariable "Page.Title", Title, PageContent
+		SetVariable "Page.Keyword", EA_Pub.SysInfo(16), PageContent
+		SetVariable "Page.Description", EA_Pub.SysInfo(17), PageContent
 
-		EA_Pub.SysInfo(17) = Replace(EA_Pub.SysInfo(17) & "", "<", "&lt;")
-		EA_Pub.SysInfo(17) = Replace(EA_Pub.SysInfo(17) & "", ">", "&gt;")
-		EA_Pub.SysInfo(17) = Replace(EA_Pub.SysInfo(17) & "", "&", "&amp;")
-
-		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", "<", "&lt;")
-		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", ">", "&gt;")
-		EA_Pub.SysInfo(16) = Replace(EA_Pub.SysInfo(16) & "", "&", "&amp;")
-	
-		SetVariable "PageCSS",PageArray(1),PageContent
-		SetVariable "PageDesc",EA_Pub.SysInfo(17),PageContent
-		SetVariable "PageKeyword",Replace(EA_Pub.SysInfo(16),"|",","),PageContent
-
-		PageContent=Replace(PageContent,"</title>","</title>"&Chr(13)&Chr(10)&"<meta name=""generator"" content=""NB文章系统(NBArticle) "&SysVersion&""" />",1,-1,0)
-
-		SetVariable "SystemPath",SystemFolder,PageContent
+		SetVariable "Page.Nav", Nav, PageContent
+		SetVariable "Page.Path", SystemFolder, PageContent
 		
-		If InStr(PageContent,"{$SitePlacard")>0 Then Call Find_TemplateTag("SitePlacard",PageContent)
 
-		If InStr(PageContent,"{$SiteVote")>0 Then Call Find_TemplateTags("SiteVote",PageContent)
-		If InStr(PageContent,"{$GetArticleList")>0 Then Call Find_TemplateTags("GetArticleList",PageContent)
-		If InStr(PageContent,"{$AdSense")>0 Then Call Find_TemplateTags("AdSense",PageContent)
-		If InStr(PageContent,"{$Friend")>0 Then Call Find_TemplateTags("Friend",PageContent)
-		If InStr(PageContent,"{$ShowColumn")>0 Then Call Find_TemplateTags("ShowColumn",PageContent)
+		PageContent = Replace(PageContent, "</title>", "</title>" & Chr(13) & Chr(10) & "<meta name=""generator"" content=""NB文章系统(NBArticle) " & SysVersion & """ />", 1, -1, 0)
 		
-		Dim re
-		Set re=new RegExp
-		re.IgnoreCase =true
-		re.Global=True
 
-		re.Pattern="\{\$(\w+)\$\}"
-		PageContent=re.Replace(PageContent,"")
+		If ChkTag("Info", PageContent) Then Call MakeInfo(PageContent)
+		If ChkTag("Placard", PageContent) Then Call MakePlaCard(PageContent)
+		If ChkTag("Vote", PageContent) Then Call MakeVote(PageContent)
+		If ChkTag("Friend", PageContent) Then Call MakeFriend(PageContent)
+		If ChkTag("AdSense", PageContent) Then Call MakeAdSense(PageContent)
+		If ChkTag("Article", PageContent) Then Call MakeArticle(PageContent)
+		If ChkTag("Column", PageContent) Then Call MakeColumn(PageContent)
 
-		re.Pattern="<%(\w+)%\>"
-		PageContent=re.Replace(PageContent,"")
-		Set re=Nothing
 
 		Replace_PublicTag=PageContent
 	End Function
