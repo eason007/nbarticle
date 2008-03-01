@@ -22,6 +22,8 @@ Class cls_Template
 	Public Title,Nav
 	Public TemplatePath
 
+	Public P_Prefix, P_Suffix
+
 	Private PageArray(4)
 	Private i
 	Private S
@@ -31,6 +33,8 @@ Class cls_Template
 	'*****************************
 	Private Sub Class_Initialize()
 		TemplatePath = "templates/"
+		P_Prefix = "<!--"
+		P_Suffix = "-->"
 	End Sub
 
 	Public Sub Close()
@@ -55,7 +59,7 @@ Class cls_Template
 			PageArray(3) = EA_DBO.Get_Template_Info(0, 3)(0, 0)			'template foot
 			Load_Template= Temp(0, 0)
 		Else
-			ErrMsg = Replace(SysMsg(9), "$1", Fields)
+			ErrMsg = Replace(SysMsg(9), "$1", "")
 			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
 			Call EA_Pub.ShowErrMsg(0, 0)
 		End If
@@ -87,8 +91,8 @@ Class cls_Template
 	Public Function ChkBlock (ByRef sBlockName,ByRef sContent)
 		Dim sBlockBeginStr,sBlockEndStr
 
-		sBlockBeginStr	= "<!--" & sBlockName & " Begin-->"
-		sBlockEndStr	= "<!--" & sBlockName & " End-->"
+		sBlockBeginStr	= P_Prefix & sBlockName & " Begin" & P_Suffix
+		sBlockEndStr	= P_Prefix & sBlockName & " End" & P_Suffix
 
 		If InStr(1, sContent, sBlockBeginStr) And InStr(1, sContent, sBlockEndStr) Then
 			ChkBlock = True
@@ -101,8 +105,8 @@ Class cls_Template
 		Dim iBlockBegin,iBlockEnd
 		Dim sBlockBeginStr,sBlockEndStr
 
-		sBlockBeginStr	= "<!--" & sBlockName & "Begin -->"
-		sBlockEndStr	= "<!--" & sBlockName & "End -->"
+		sBlockBeginStr	= P_Prefix & sBlockName & " Begin" & P_Suffix
+		sBlockEndStr	= P_Prefix & sBlockName & " End" & P_Suffix
 
 		iBlockBegin	= InStr(1,sContent,sBlockBeginStr)
 		If iBlockBegin > 0 Then
@@ -110,32 +114,63 @@ Class cls_Template
 
 			GetBlock  = Mid(sContent,iBlockBegin + Len(sBlockBeginStr),iBlockEnd - (iBlockBegin + Len(sBlockBeginStr)))
 			
-			sContent  = Left(sContent,iBlockBegin-1) & VBCrlf & "<!--" & sBlockName & "s-->" & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
+			sContent  = Left(sContent,iBlockBegin-1) & VBCrlf & P_Prefix & sBlockName & "s" & P_Suffix & VBCrlf &  Right(sContent,Len(sContent)-(iBlockEnd+Len(sBlockEndStr)-1))
 		End If
 	End Function
 
 	Public Sub SetBlock(ByRef sBlockName,ByRef sBlockContent,ByRef sContent)
-		sContent = Replace(sContent & "", "<!--" & sBlockName & "s-->", sBlockContent & VBCrlf & "<!--" & sBlockName & "s-->")
+		sContent = Replace(sContent & "", P_Prefix & sBlockName & "s" & P_Suffix, sBlockContent & VBCrlf & P_Prefix & sBlockName & "s" & P_Suffix)
 	End Sub
 
 	Public Sub CloseBlock(ByRef sBlockName,ByRef sContent)
-		sContent = Replace(sContent & "", "<!--" & sBlockName & "s-->", "")
+		sContent = Replace(sContent & "", P_Prefix & sBlockName & "s" & P_Suffix, "")
 	End Sub
 
 	Public Sub SetVariable(ByRef sVariableName,ByRef sVariableContent,ByRef sContent)
-		If InStr(sContent, "<!--" & sVariableName & "-->") > 0 Then sContent = Replace(sContent & "", "<!--" & sVariableName & "-->", sVariableContent & "")
+		If InStr(sContent, P_Prefix & sVariableName & P_Suffix) > 0 Then sContent = Replace(sContent & "", P_Prefix & sVariableName & P_Suffix, sVariableContent & "")
 	End Sub
 
+	Public Function GetBlockParameter(ByRef PageStr)
+		Dim TempStr, PageLen
+		Dim CurrentTag, StartTag, EndTag
+		Dim ParameterArray
+		Dim ParameterPrefix, ParameterSuffix
+
+		CurrentTag	= 0
+		StartTag	= 1
+		PageLen		= Len(PageStr)
+
+		ParameterPrefix = "<!--Parameter("
+		ParameterSuffix = ")-->"
+
+		CurrentTag	= InStr(StartTag, PageStr, ParameterPrefix)
+
+		If CurrentTag <> 0 Then
+			StartTag = CurrentTag
+			EndTag	 = InStr(StartTag, PageStr, ParameterSuffix)
+
+			If EndTag <> 0 Then
+				TempStr = Mid(PageStr, StartTag + Len(ParameterPrefix), EndTag - StartTag - Len(ParameterPrefix))
+
+				ParameterArray = Split(TempStr, ",")
+
+				PageStr = Left(PageStr, StartTag - 1) & Right(PageStr, Len(PageStr) - EndTag - Len(ParameterSuffix))
+			End If
+		End If
+		
+		GetBlockParameter = ParameterArray
+	End Function
+
 	Public Function ChkTag_Prefix (sTag, ByRef sPageContent)
-		If InStr(sPageContent, "<!--" & sTag & ".") > 0 Then
-			ChkTag = True
+		If InStr(sPageContent, P_Prefix & sTag & ".") > 0 Then
+			ChkTag_Prefix = True
 		Else
-			ChkTag = False
+			ChkTag_Prefix = False
 		End If
 	End Function
 
 	Public Function ChkTag (sTag, ByRef sPageContent)
-		If InStr(sPageContent, "<!--" & sTag) > 0 Then
+		If InStr(sPageContent, P_Prefix & sTag) > 0 Then
 			ChkTag = True
 		Else
 			ChkTag = False
@@ -168,7 +203,7 @@ Class cls_Template
 		If ChkTag_Prefix("Vote", PageContent) Then Call MakeVote(PageContent)
 		If ChkTag_Prefix("Friend", PageContent) Then Call MakeFriend(PageContent)
 		If ChkTag_Prefix("AdSense", PageContent) Then Call MakeAdSense(PageContent)
-		If ChkTag_Prefix("Article", PageContent) Then Call MakeArticle(PageContent)
+		If ChkTag_Prefix("Topic", PageContent) Then Call MakeTopic(PageContent)
 		If ChkTag_Prefix("Column", PageContent) Then Call MakeColumn(PageContent)
 
 
@@ -266,30 +301,7 @@ Class cls_Template
 		Find_TemplateTags=PageStr
 	End Function
 
-	Public Function Find_TemplateTagValues(KeyStr,ByRef PageStr)
-		Dim TempStr,PageLen
-		Dim CurrentTag,StartTag,EndTag
-		Dim ParameterArray
-
-		CurrentTag=0
-		StartTag=1
-		PageLen=Len(PageStr)
-
-		CurrentTag=InStr(StartTag,PageStr,"{$"&KeyStr&"(")
-
-		If CurrentTag<>0 Then
-			StartTag=CurrentTag
-			EndTag=InStr(StartTag,PageStr,")$}")
-
-			If EndTag <> 0 Then
-				TempStr=Mid(PageStr,StartTag+3+Len(KeyStr),EndTag-(StartTag+3+Len(KeyStr)))
-
-				ParameterArray=Split(TempStr,",")
-			End If
-		End If
-		
-		Find_TemplateTagValues=ParameterArray
-	End Function
+	
 
 	Public Sub Find_TemplateTagByInput(KeyStr,ReplaceStr,ByRef PageStr)
 		Dim PageLen

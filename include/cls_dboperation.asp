@@ -747,9 +747,9 @@ Class cls_DBOperation
 	Public Function Get_PlacardTopList(iTop)
 		Select Case iDataBaseType
 		Case 0
-			SQL="SELECT Top "&iTop&" [Id], Title,AddTime FROM NB_Placard Where OverTime>=Now() ORDER BY Id DESC"
-		Case 1,2
-			SQL="SELECT Top "&iTop&" [Id], Title,AddTime FROM NB_Placard Where OverTime>=GetDate() ORDER BY Id DESC"
+			SQL="SELECT Top "&iTop&" [Id], Title, AddTime, OverTime, Content FROM NB_Placard Where OverTime>=Now() ORDER BY Id DESC"
+		Case 1, 2
+			SQL="SELECT Top "&iTop&" [Id], Title, AddTime, OverTime, Content FROM NB_Placard Where OverTime>=GetDate() ORDER BY Id DESC"
 		End Select
 
 		Get_PlacardTopList=DB_Query(SQL)
