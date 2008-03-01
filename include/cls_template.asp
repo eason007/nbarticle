@@ -1,6 +1,6 @@
 <!--#Include File="tag_friend.asp"-->
 <!--#Include File="tag_placard.asp"-->
-<!--#Include File="tag_review.asp"-->
+<!--#Include File="tag_comment.asp"-->
 <!--#Include File="tag_vote.asp"-->
 <!--#Include File="tag_column.asp"-->
 <!--#Include File="tag_info.asp"-->
@@ -206,6 +206,7 @@ Class cls_Template
 		If ChkTag_Prefix("AdSense", PageContent) Then Call MakeAdSense(PageContent)
 		If ChkTag_Prefix("Topic", PageContent) Then Call MakeTopic(PageContent)
 		If ChkTag_Prefix("Column", PageContent) Then Call MakeColumn(PageContent)
+		If ChkTag_Prefix("Comment", PageContent) Then Call MakeComment(PageContent)
 
 
 		Replace_PublicTag=PageContent

@@ -12,28 +12,40 @@
 '= 最后更新：eason007
 '= 最后日期：2008-02-24
 '====================================================================
-Function Load_NewReview(Parameter)
-	Dim TempStr,TempArray
-	Dim i
-	Dim ForTotal
-	
-	TempArray=EA_DBO.Get_Review_NewList(Parameter(0),Parameter(1))
-	If IsArray(TempArray) Then 
-		TempStr="<table>"
-		ForTotal = UBound(TempArray,2)
 
-		For i=0 To ForTotal
-			TempStr=TempStr&"<tr>"
-			TempStr=TempStr&"<td style=""TEXT-ALIGN: left;""><a href=""review.asp?articleid="&TempArray(0,i)&""">"&EA_Pub.Un_Full_HTMLFilter(TempArray(1,i))&"</a></td>"
-			TempStr=TempStr&"<td style=""TEXT-ALIGN: center;"">"&TempArray(2,i)&"</td>"
-			TempStr=TempStr&"<td style=""COLOR: #800000;TEXT-ALIGN: center;"">"&TempArray(3,i)&"</font></td>"
-			TempStr=TempStr&"</tr>"
-		Next
-		TempStr=TempStr&"</table>"
-	Else
-		TempStr=""
+Sub MakeComment(ByRef PageContent)
+	If EA_Temp.ChkBlock("Comment.List", PageContent) Then
+		CommentList PageContent
 	End If
-	
-	Load_NewReview=TempStr
-End Function
+End Sub
+
+Sub CommentList (ByRef PageContent)
+	Dim Block, Parameter
+	Dim List
+	Dim Temp, ForTotal, i
+
+	Do 
+		Block = EA_Temp.GetBlock("Comment.List", PageContent)
+		If Block = "" Then Exit Do
+
+		Parameter = EA_Temp.GetBlockParameter(Block)
+		If Not IsArray(Parameter) Then Exit Do
+
+		List = EA_DBO.Get_Review_List(Parameter(0), Parameter(1), Parameter(2))
+		
+		ForTotal = UBound(List, 2)
+
+		For i = 0 To ForTotal
+			Temp = Block
+	  
+			EA_Temp.SetVariable "UserName", List(2, i), Temp
+			EA_Temp.SetVariable "Date", List(3, i), Temp
+			EA_Temp.SetVariable "ArticleUrl", EA_Pub.Cov_ArticlePath(List(0, i), List(3, i), EA_Pub.SysInfo(18)), Temp
+
+			EA_Temp.SetBlock "Comment.List", Temp, PageContent
+		Next
+
+		EA_Temp.CloseBlock "Comment.List", PageContent
+	Loop While 1 = 1
+End Sub
 %>

@@ -283,36 +283,22 @@ Class cls_DBOperation
 		Set_Review_Insert=Flag
 	End Function
 
-	Public Function Get_Review_List(iArticleId)
+	Public Function Get_Review_List(iTop, iArticleId, iContentLen)
 		Select Case iDataBaseType
 		Case 0
-			SQL="Exec vi_Select_ReviewList "&iArticleId
-		Case 1
-			SQL="SELECT Case UserId When 0 Then '游客' Else '[会员]'+UserName End As [UserName], AddDate, Content"
-			SQL=SQL&" FROM NB_Review"
-			SQL=SQL&" WHERE ArticleId="&iArticleId&" And IsPass=1"
-			SQL=SQL&" ORDER BY [Id] DESC"
-		Case 2
-			SQL="Exec sp_EliteArticle_Review_ListByArticleId_Select"
-			SQL=SQL&" @Article_Id="&iArticleId
+			SQL="Select Top "&iTop&" a.ArticleId, a.Left(Content,"&iContentLen&"), IIF(a.UserId=0, '游客', '[会员]'+UserName), a.AddDate, b.AddDate"
+			SQL=SQL&" From [NB_Review] a"
+			SQL=SQL&" LEFT JOIN [NB_Content] b ON a.ArticleId = b.id"
+			SQL=SQL&" Where a.IsPass=" & TrueValue & " Order By a.Id Desc"
+		Case 1, 2
+			SQL="Select Top "&iTop&" a.ArticleId,a. Left(Content,"&iContentLen&"),Case a.UserId When 0 Then '游客' Else '[会员]'+UserName End As [UserName], a.AddDate, b.AddDate"
+			SQL=SQL&" From [NB_Review] a"
+			SQL=SQL&" LEFT JOIN [NB_Content] b ON a.ArticleId = b.id"
+			SQL=SQL&" Where a.IsPass=" & TrueValue
+			SQL=SQL&" Order By a.Id Desc"
 		End Select
 		
 		Get_Review_List=DB_Query(SQL)
-	End Function
-	
-	Public Function Get_Review_NewList(iTop,iContentLen)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Select Top "&iTop&" ArticleId,Left(Content,"&iContentLen&"),IIF(UserId=0,'游客','[会员]'+UserName),AddDate"
-			SQL=SQL&" From [NB_Review] Where IsPass=-1 Order By Id Desc"
-		Case 1,2
-			SQL="Select Top "&iTop&" ArticleId,Left(Content,"&iContentLen&"),Case UserId When 0 Then '游客' Else '[会员]'+UserName End As [UserName],AddDate"
-			SQL=SQL&" From [NB_Review]"
-			SQL=SQL&" Where IsPass=1"
-			SQL=SQL&" Order By Id Desc"
-		End Select
-		
-		Get_Review_NewList=DB_Query(SQL)
 	End Function
 
 '*******************************************************************
