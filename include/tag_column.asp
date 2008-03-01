@@ -44,6 +44,7 @@ Sub ColumnList (ByRef PageContent)
 			EA_Temp.SetVariable "Title", List(1, i), Temp
 			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
 			EA_Temp.SetVariable "Info", List(4, i), Temp
+			EA_Temp.SetVariable "Info", List(2, i), Temp
 
 			EA_Temp.SetBlock "Column.List", Temp, PageContent
 		Next
