@@ -588,12 +588,10 @@ Class cls_DBOperation
 		Dim Temp
 		
 		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ColumnChild '"&sMainCode&"'"
-		Case 1
+		Case 0, 1
 			Temp=Len(sMainCode)
 			
-			SQL="SELECT [ID], Title, [CountNum], [ViewNum]"
+			SQL="SELECT [ID], Title, [CountNum], [ViewNum], Info"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE Left(Code,"&Temp&")='"&sMainCode&"' And Len(Code)="&Temp&"+4"
 		Case 2

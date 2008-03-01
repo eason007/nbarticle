@@ -19,7 +19,7 @@ Sub MakePlacard(ByRef PageContent)
 	End If
 End Sub
 
-Function PlacardList (ByRef PageContent)
+Sub PlacardList (ByRef PageContent)
 	Dim Block, Parameter
 	Dim List
 	Dim Temp, ForTotal, i
@@ -50,5 +50,5 @@ Function PlacardList (ByRef PageContent)
 
 		EA_Temp.CloseBlock "Placard.List", PageContent
 	Loop While 1 = 1
-End Function
+End Sub
 %>
