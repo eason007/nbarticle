@@ -28,7 +28,7 @@ Sub CommentList (ByRef PageContent)
 		Block = EA_Temp.GetBlock("Comment.List", PageContent)
 		If Block = "" Then Exit Do
 
-		Parameter = EA_Temp.GetBlockParameter(Block)
+		Parameter = EA_Temp.GetParameter("Parameter", Block)
 		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Comment.List", PageContent: Exit Do
 
 		List = EA_DBO.Get_Review_List(Parameter(0), Parameter(1), Parameter(2))

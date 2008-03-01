@@ -28,7 +28,7 @@ Sub FriendList (ByRef PageContent)
 		Block = EA_Temp.GetBlock("Friend.List", PageContent)
 		If Block = "" Then Exit Do
 
-		Parameter = EA_Temp.GetBlockParameter(Block)
+		Parameter = EA_Temp.GetParameter("Parameter", Block)
 		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Friend.List", PageContent: Exit Do
 
 		List = EA_DBO.Get_Friend_List(Parameter(1), Parameter(0), Parameter(2))

@@ -4,6 +4,7 @@
 <!--#Include File="tag_vote.asp"-->
 <!--#Include File="tag_column.asp"-->
 <!--#Include File="tag_info.asp"-->
+<!--#Include File="tag_adsense.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -131,7 +132,7 @@ Class cls_Template
 		If InStr(sContent, P_Prefix & sVariableName & P_Suffix) > 0 Then sContent = Replace(sContent & "", P_Prefix & sVariableName & P_Suffix, sVariableContent & "")
 	End Sub
 
-	Public Function GetBlockParameter(ByRef PageStr)
+	Public Function GetParameter(ParameterName, ByRef PageStr)
 		Dim TempStr, PageLen
 		Dim CurrentTag, StartTag, EndTag
 		Dim ParameterArray
@@ -141,7 +142,7 @@ Class cls_Template
 		StartTag	= 1
 		PageLen		= Len(PageStr)
 
-		ParameterPrefix = "<!--Parameter("
+		ParameterPrefix = "<!--" & ParameterName & "("
 		ParameterSuffix = ")-->"
 
 		CurrentTag	= InStr(StartTag, PageStr, ParameterPrefix)
@@ -155,11 +156,11 @@ Class cls_Template
 
 				ParameterArray = Split(TempStr, ",")
 
-				PageStr = Left(PageStr, StartTag - 1) & Right(PageStr, Len(PageStr) - EndTag - Len(ParameterSuffix))
+				PageStr = Left(PageStr, StartTag - 1) & Right(PageStr, (Len(PageStr) - EndTag - Len(ParameterSuffix)) + 1)
 			End If
 		End If
 		
-		GetBlockParameter = ParameterArray
+		GetParameter = ParameterArray
 	End Function
 
 	Public Function ChkTag_Prefix (sTag, ByRef sPageContent)
@@ -218,42 +219,6 @@ Class cls_Template
 		Set sContent = Nothing
 		Response.End
 	End Sub
-	
-	Public Function Find_TemplateTag(KeyStr,ByRef PageStr)
-		Dim TempStr,PageLen
-		Dim CurrentTag,StartTag,EndTag
-		Dim ParameterArray,ReplaceStr,ReplaceLen
-
-		CurrentTag=0
-		StartTag=1
-		PageLen=Len(PageStr)
-
-		CurrentTag=InStr(StartTag,PageStr,"{$"&KeyStr&"(")
-
-		If CurrentTag<>0 Then 
-			StartTag=CurrentTag
-			EndTag=InStr(StartTag,PageStr,")$}")
-
-			If EndTag <> 0 Then
-				TempStr=Mid(PageStr,StartTag+3+Len(KeyStr),EndTag-(StartTag+3+Len(KeyStr)))
-
-				ParameterArray=Split(TempStr,",")
-				
-				Select Case KeyStr
-				Case "SitePlacard"
-					ReplaceStr=Load_Placard(ParameterArray)
-				Case "NewReview"
-					ReplaceStr=Load_NewReview(ParameterArray)
-				End Select
-
-				ReplaceLen=Len(ReplaceStr)
-
-				PageStr=Left(PageStr,StartTag-1)&ReplaceStr&Right(PageStr,PageLen-(EndTag+2))
-			End If
-		End If
-		
-		Find_TemplateTag=PageStr
-	End Function
 
 	Public Function Find_TemplateTags(KeyStr,ByRef PageStr)
 		Dim TempStr,PageLen
@@ -302,8 +267,6 @@ Class cls_Template
 		
 		Find_TemplateTags=PageStr
 	End Function
-
-	
 
 	Public Sub Find_TemplateTagByInput(KeyStr,ReplaceStr,ByRef PageStr)
 		Dim PageLen

@@ -28,7 +28,7 @@ Sub ColumnList (ByRef PageContent)
 		Block = EA_Temp.GetBlock("Column.List", PageContent)
 		If Block = "" Then Exit Do
 
-		Parameter = EA_Temp.GetBlockParameter(Block)
+		Parameter = EA_Temp.GetParameter("Parameter", Block)
 		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Column.List", PageContent: Exit Do
 
 		If CInt(Parameter(0)) = 0 Then

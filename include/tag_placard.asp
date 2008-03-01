@@ -28,7 +28,7 @@ Sub PlacardList (ByRef PageContent)
 		Block = EA_Temp.GetBlock("Placard.List", PageContent)
 		If Block = "" Then Exit Do
 
-		Parameter = EA_Temp.GetBlockParameter(Block)
+		Parameter = EA_Temp.GetParameter("Parameter", Block)
 		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Placard.List", PageContent: Exit Do
 
 		If InStr(1, Parameter(0), "ID=") Then
