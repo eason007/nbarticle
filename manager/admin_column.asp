@@ -359,7 +359,7 @@ Sub Save
 	End If
 	
 	If PostId=0 Then 
-		EA_DBO.Set_System_ColumnTotal 1
+		EA_M_DBO.Set_System_ColumnTotal 1
 			
 		Sql="INSERT INTO NB_Column ( Title, Code, Info, IsOut, OutUrl, StyleId, IsReview, IsPost, IsTop, List_TempId, Article_TempId, PageSize, ListPower, IsHide )"
 		Sql=Sql&" VALUES ( '"&Name&"','"&TypeCode&"','"&Info&"',"&IsOut&",'"&OutUrl&"',"&Style&","&IsReview&","&IsPost&","&IsTop&","&List_TempId&","&Article_TempId&","&PageSize&","&Power&","&IsHide&")"
@@ -397,7 +397,7 @@ Sub Del
 		
 	If Not DelBool Then 
 		EA_M_DBO.Set_Column_Delete PostId
-		EA_DBO.Set_System_ColumnTotal -1
+		EA_M_DBO.Set_System_ColumnTotal -1
 
 		Application.Lock 
 		Application(sCacheName&"IsFlush")=1

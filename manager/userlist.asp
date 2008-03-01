@@ -141,8 +141,8 @@ Function Move
 			EA_M_DBO.Get_Group_ChanngeMemberGroup Dest,UserArray(i)
 		Next
 		
-		EA_DBO.Set_Group_MemberTotal "-"&Ubound(UserArray)+1,PostId
-		EA_DBO.Set_Group_MemberTotal Ubound(UserArray)+1,Dest
+		EA_M_DBO.Set_Group_MemberTotal "-"&Ubound(UserArray)+1,PostId
+		EA_M_DBO.Set_Group_MemberTotal Ubound(UserArray)+1,Dest
 	End If
 End Function
 %>

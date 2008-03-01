@@ -316,66 +316,7 @@ Class cls_DBOperation
 	End Function
 
 '*******************************************************************
-'img article list
-	Public Function Get_Article_ImgStat()
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ImgTotal"
-		Case 1
-			SQL="SELECT Count(Id)"
-			SQL=SQL&" FROM NB_Content"
-			SQL=SQL&" WHERE IsImg=1 And IsPass=1 And IsDel=0"
-		Case 2
-			SQL="Exec sp_EliteArticle_EspecialArticle_Total_Select"
-			SQL=SQL&" @ArticleType=1"
-		End Select
-		
-		Get_Article_ImgStat=DB_Query(SQL)
-	End Function
-	
-	Public Function Get_Article_ImgList(iPageNum,iPageSize)
-		Dim Temp
-		
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ImgList"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 1
-			SQL="SELECT [Id], Title, Img, TColor, Summary, AddDate"
-			SQL=SQL&" FROM NB_Content"
-			SQL=SQL&" WHERE IsImg=1 And IsPass=1 And IsDel=0"
-			SQL=SQL&" ORDER BY TrueTime DESC"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 2
-			SQL="Exec sp_EliteArticle_EspecialArticle_List_Select"
-			SQL=SQL&" @ArticleType=1"
-			SQL=SQL&",@List_PageNum="&iPageNum
-			SQL=SQL&",@List_PageSize="&iPageSize
-			Temp=DB_Query(SQL)
-		End Select
-		
-		Get_Article_ImgList=Temp
-	End Function
-'-------------------------------------------------------------------
-
-'*******************************************************************
 'article
-	Public Sub Set_Article_Del(iArticle_Id)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Delete_Manager_Article "&iArticle_Id
-		Case 1
-			SQL="DELETE"
-			SQL=SQL&" FROM NB_Content"
-			SQL=SQL&" WHERE Id="&iArticle_Id
-		Case 2
-			SQL="Exec sp_EliteArticle_Article_Delete"
-			SQL=SQL&" @Article_Id="&iArticle_Id
-		End Select
-		
-		DB_Execute SQL
-	End Sub
-	
 	Public Function Set_Article_Insert(iArticleId,vArticleInfo)
 		On Error Resume Next
 		Dim Flag
@@ -663,27 +604,6 @@ Class cls_DBOperation
 		Get_Column_ChildList=DB_Query(SQL)
 	End Function
 
-	Public Function Get_Column_Nav(sColumnCode)
-		Dim Temp
-		
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_ColumnNav '"&sColumnCode&"'"
-		Case 1
-			Temp=Len(sColumnCode)
-			
-			SQL="SELECT [Id], Code, Title, Info, CountNum"
-			SQL=SQL&" FROM NB_Column"
-			SQL=SQL&" WHERE (Left(Code,"&Temp&"-4)=Left('"&sColumnCode&"',"&Temp&"-4) And Len(Code)<="&Temp&") Or (Left(Code,"&Temp&")='"&sColumnCode&"' And Len(Code)="&Temp&"+4) Or Len(Code)=4"
-			SQL=SQL&" ORDER BY Code"
-		Case 2
-			SQL="Exec sp_EliteArticle_Column_NavWithChildColumn_Select"
-			SQL=SQL&" @Current_Code='"&sColumnCode&"'"
-		End Select
-		
-		Get_Column_Nav=DB_Query(SQL)
-	End Function
-
 	Public Function Get_Column_List()
 		Select Case iDataBaseType
 		Case 0, 1
@@ -715,31 +635,6 @@ Class cls_DBOperation
 		
 		Get_FlorilegiumStat=DB_Query(SQL)
 	End Function
-	
-	Public Function Get_FlorilegiumStatList(s_AName,i_AId,iPageNum,iPageSize)
-	'0=[Id],  1=Title, 2=ColumnId, 3=ColumnName, 4=ViewNum, 5=CommentNum, 6=AddDate
-		Dim Temp
-		
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_FlorilegiumList "&i_AId&",'"&s_AName&"'"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 1
-			SQL="SELECT [Id], Title, ColumnId, ColumnName, ViewNum, CommentNum, AddDate"
-			SQL=SQL&" FROM NB_Content"
-			SQL=SQL&" WHERE AuthorId="&i_AId&" And Author='"&s_AName&"' And IsPass=1 And IsDel=0"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 2
-			SQL="Exec sp_EliteArticle_Florilegium_List_Select"
-			SQL=SQL&" @Florilegium_AuthorName='"&s_AName&"'"
-			SQL=SQL&",@Florilegium_AuthorId="&i_AId
-			SQL=SQL&",@List_PageNum="&iPageNum
-			SQL=SQL&",@List_PageSize="&iPageSize
-			Temp=DB_Query(SQL)
-		End Select
-		
-		Get_FlorilegiumStatList=Temp
-	End Function
 '-------------------------------------------------------------------
 	
 '*******************************************************************
@@ -768,41 +663,6 @@ Class cls_DBOperation
 		
 		Get_PlacardInfo=DB_Query(SQL)
 	End Function
-	
-	Public Function Get_PlacardStat()
-		Dim Temp
-		
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Manager_PlacardStat"
-		Case 1
-			SQL="SELECT Count(Id)"
-			SQL=SQL&" FROM NB_Placard"
-		Case 2
-			SQL="Exec sp_EliteArticle_Placard_Total_Select"
-		End Select
-
-		Get_PlacardStat=DB_Query(SQL)
-	End Function
-	
-	Public Function Get_PlacardList(iPageNum,iPageSize)
-		Dim Temp
-		
-		Select Case iDataBaseType
-		Case 0, 1
-			SQL="SELECT Id, Title, AddTime, OverTime, Content"
-			SQL=SQL&" FROM NB_Placard"
-			SQL=SQL&" ORDER BY OverTime DESC"
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 2
-			SQL="Exec sp_EliteArticle_Placard_List_Select"
-			SQL=SQL&" @List_PageNum="&iPageNum
-			SQL=SQL&",@List_PageSize="&iPageSize
-			Temp=DB_Query(SQL)
-		End Select
-		
-		Get_PlacardList=Temp
-	End Function
 '-------------------------------------------------------------------
 	Public Function Get_MemberTopPostList()
 		Select Case iDataBaseType
@@ -817,59 +677,6 @@ Class cls_DBOperation
 		End Select
 		
 		Get_MemberTopPostList=DB_Query(SQL)
-	End Function
-
-	Public Function Get_Member_Total()
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_Member_Total"
-		Case 1
-			SQL="SELECT Count(Id)"
-			SQL=SQL&" FROM NB_User"
-		Case 2
-			SQL="Exec sp_EliteArticle_Member_Total_Select"
-		End Select
-		
-		Get_Member_Total=DB_Query(SQL)
-	End Function
-
-	Public Function Get_Member_List(sAction,sKeyword,iPageNum,iPageSize)
-		Dim OSQL,Temp,OType
-
-		Select Case LCase(Action)
-		Case "by_name"
-			OSQL=" Order By Reg_Name"
-			OType=1
-		Case "by_post"
-			OSQL=" Order By PostTotal Desc"
-			OType=2
-		Case "by_group"
-			OSQL=" Order By User_Group"
-			OType=3
-		Case "by_regtime"
-			OSQL=" Order By RegTime"
-			OType=4
-		Case Else
-			OSQL=" Order By a.Id Desc"
-			OType=0
-		End Select
-
-		Select Case iDataBaseType
-		Case 0
-			SQL="Select a.[ID],Reg_Name,IIF(Sex<>0,'男','女'),Email,QQ,b.GroupName,RegTime,HomePage,(Select Count([Id]) From [NB_Content] Where Author=a.Reg_Name And IsPass=-1 And AuthorId=a.[Id]) From [NB_User] a Left Join [NB_UserGroup] b On a.User_Group=b.[Id]"&OSQL
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 1
-			SQL="Select a.[ID],Reg_Name,Case When Sex<>0 Then '男' Else '女' End ,Email,QQ,b.GroupName,RegTime,HomePage,(Select Count([Id]) From [NB_Content] Where Author=a.Reg_Name And IsPass=1 And AuthorId=a.[Id]) From [NB_User] a Left Join [NB_UserGroup] b On a.User_Group=b.[Id]"&OSQL
-			Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 2
-			SQL="Exec sp_EliteArticle_Member_List_Select"
-			SQL=SQL&" @OrderType="&OType
-			SQL=SQL&",@List_PageNum="&iPageNum
-			SQL=SQL&",@List_PageSize="&iPageSize
-			Temp=DB_Query(SQL)
-		End Select
-		
-		Get_Member_List=Temp
 	End Function
 
 	Public Sub Set_MemberLoginKey(sIp,sKey,iMemberId)
@@ -1357,42 +1164,6 @@ Class cls_DBOperation
 	End Function
 
 '*******************************************************************
-	Public Sub Set_Group_MemberTotal(iValue,iGroup_Id)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_UpDate_Manager_GroupMemberTotal "&iValue&","&iGroup_Id
-		Case 1,2
-			SQL="UPDATE NB_UserGroup SET UserTotal = UserTotal+"&iValue
-			SQL=SQL&" WHERE Id="&iGroup_Id
-		End Select
-
-		DB_Execute SQL
-	End Sub
-
-	Public Sub Set_Article_ReviewStat(iValue,iArticleId)
-		Select Case iDataBaseType
-		Case 0
-			SQL="vi_UpDate_Article_ReviewTotal "&iValue&","&iArticleId
-		Case 1
-			SQL="UPDATE NB_Content SET CommentNum = CommentNum+"&iValue
-			SQL=SQL&" WHERE [Id]="&iValue
-		End Select
-
-		DB_Execute SQL
-	End Sub
-
-	Public Sub Set_Member_PostTotal(iMember_Id,iValue)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_UpDate_UserStat "&iValue&","&iMember_Id
-		Case 1
-			SQL="UPDATE NB_User SET PostTotal = PostTotal+"&iValue
-			SQL=SQL&" WHERE [Id]="&iMember_Id
-		End Select
-	
-		DB_Execute SQL
-	End Sub
-	
 	Public Sub Set_Column_ManagerTopicTotal(iColumnId,iValue)
 		Select Case iDataBaseType
 		Case 0
@@ -1442,17 +1213,6 @@ Class cls_DBOperation
 			SQL="Exec vi_UpDate_System_TopicTotal "&iValue
 		Case 1
 			SQL="UPDATE NB_System SET TopicNum = TopicNum+"&iValue
-		End Select
-	
-		DB_Execute SQL
-	End Sub
-	
-	Public Sub Set_System_ColumnTotal(iValue)
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_UpDate_System_ColumnTotal "&iValue
-		Case 1
-			SQL="UPDATE NB_System SET ColumnNum = ColumnNum+"&iValue
 		End Select
 	
 		DB_Execute SQL

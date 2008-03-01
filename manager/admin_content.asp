@@ -590,7 +590,7 @@ Sub Del
 
 		If iDataBaseType<>2 Then
 			'更新会员发表统计
-			EA_DBO.Set_Member_PostTotal -1,AuthroId
+			EA_M_DBO.Set_Member_PostTotal -1,AuthroId
 		
 			'删除评论及更新系统统计
 			SQL="Select Count(Id) From [NB_Review] Where ArticleId="&Tmp
@@ -609,7 +609,7 @@ Sub Del
 			End If
 		End If
 		
-		EA_DBO.Set_Article_Del Tmp
+		EA_M_DBO.Set_Article_Del Tmp
 		
 		On Error Resume Next
 		'Delete HTML File

@@ -634,6 +634,41 @@ Class Cls_Manager_DBOperation
 		
 		DB_Execute SQL
 	End Sub
+
+	Public Sub Set_Group_MemberTotal(iValue,iGroup_Id)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Exec vi_UpDate_Manager_GroupMemberTotal "&iValue&","&iGroup_Id
+		Case 1,2
+			SQL="UPDATE NB_UserGroup SET UserTotal = UserTotal+"&iValue
+			SQL=SQL&" WHERE Id="&iGroup_Id
+		End Select
+
+		DB_Execute SQL
+	End Sub
+
+	Public Sub Set_Member_PostTotal(iMember_Id,iValue)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Exec vi_UpDate_UserStat "&iValue&","&iMember_Id
+		Case 1
+			SQL="UPDATE NB_User SET PostTotal = PostTotal+"&iValue
+			SQL=SQL&" WHERE [Id]="&iMember_Id
+		End Select
+	
+		DB_Execute SQL
+	End Sub
+
+	Public Sub Set_System_ColumnTotal(iValue)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Exec vi_UpDate_System_ColumnTotal "&iValue
+		Case 1
+			SQL="UPDATE NB_System SET ColumnNum = ColumnNum+"&iValue
+		End Select
+	
+		DB_Execute SQL
+	End Sub
 	
 	Public Function Get_InsideLink_Info(iInsideLink_Id)
 		Select Case iDataBaseType
@@ -970,6 +1005,22 @@ Class Cls_Manager_DBOperation
 		
 		Get_Interface_Info=DB_Query(SQL)
 	End Function
+
+	Public Sub Set_Article_Del(iArticle_Id)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Exec vi_Delete_Manager_Article "&iArticle_Id
+		Case 1
+			SQL="DELETE"
+			SQL=SQL&" FROM NB_Content"
+			SQL=SQL&" WHERE Id="&iArticle_Id
+		Case 2
+			SQL="Exec sp_EliteArticle_Article_Delete"
+			SQL=SQL&" @Article_Id="&iArticle_Id
+		End Select
+		
+		DB_Execute SQL
+	End Sub
 	
 '*******************************************************************
 	Private Sub chkDB ()
