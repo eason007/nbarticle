@@ -18,7 +18,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-01
+'= 最后日期：2008-03-03
 '====================================================================
 
 Class cls_Template
@@ -279,7 +279,7 @@ Class cls_Template
 			PageFoot=iCurrentPage+4
 		End If
 		
-		OutStr="<div id=""pageList""><span class=""total"">共 "&PageCount&" 页</span>&nbsp;"
+		OutStr="<div id=""pageNav""><span class=""total"">共 "&PageCount&" 页</span>&nbsp;"
 		
 		If iCurrentPage > 1 Then 
 			OutStr=OutStr&"<a href=""?page=1"
@@ -310,7 +310,7 @@ Class cls_Template
 			OutStr=OutStr&""" title=""尾页"" class=""last"">&raquo;</a>&nbsp;"
 		End If
 		
-		If PageCount > 0 Then
+		If PageCount > 1 Then
 			OutStr=OutStr&"&nbsp;<input type=""text"" value="""&iCurrentPage&""" onmouseover=""this.focus();this.select();"" id=""PGNumber"" style=""width: 30px;"" onKeypress=""if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"" />&nbsp;<input type=""button"" value=""GO"" onclick=""if ($('PGNumber').value>0 && $('PGNumber').value<="&PageCount&"){window.location='?page='+$('PGNumber').value+'"&Url&"'}"" />"
 		End If
 

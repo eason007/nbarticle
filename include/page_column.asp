@@ -94,15 +94,16 @@ Class page_Column
 
 		EA_Temp.CloseBlock "List.Topic", PageContent
 
-		If EA_Temp.ChkTag("ColumnPageNumNav", PageContent) Then PageContent = Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
+		If EA_Temp.ChkTag("List.PageNav", PageContent) Then EA_Temp.SetVariable "List.PageNav", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue), PageContent
 	End Sub
 
 	Private Function TagList (Keyword)
-		Dim TempArray,i
-		Dim ForTotal
 		Dim OutStr
 
 		If Len(Keyword) > 0 Then
+			Dim TempArray, i
+			Dim ForTotal
+
 			TempArray= Split(Keyword, ",")
 
 			ForTotal = UBound(TempArray)
