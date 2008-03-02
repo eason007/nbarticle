@@ -5,6 +5,7 @@
 <!--#Include File="tag_column.asp"-->
 <!--#Include File="tag_info.asp"-->
 <!--#Include File="tag_adsense.asp"-->
+<!--#Include File="tag_topic.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -250,141 +251,6 @@ Class cls_Template
 		End If
 		
 		Load_MemberTopPost=TempStr
-	End Function
-
-	Private Function Get_ArticleList(Parameter)
-		Dim TempArray
-
-		If UBound(Parameter)=12 Then
-			TempArray=EA_DBO.Get_Article_List(Parameter(2),Parameter(0),Parameter(1),Parameter(12))
-			If IsArray(TempArray) Then 
-				If Parameter(6)="0" Then 
-					Get_ArticleList=Text_List(TempArray,CInt(Parameter(4)),CInt(Parameter(5)),CInt(Parameter(3)),CInt(Parameter(7)),CInt(Parameter(8)),CInt(Parameter(9)),CInt(Parameter(10)),CInt(Parameter(11)),CInt(Parameter(2))-1)
-				Else
-					Get_ArticleList=Img_List(TempArray,CInt(Parameter(4)),CInt(Parameter(5)),CInt(Parameter(3)),CInt(Parameter(7)),CInt(Parameter(8)),CInt(Parameter(9)),CInt(Parameter(10)),CInt(Parameter(2))-1)
-				End If
-			Else
-				Get_ArticleList="&nbsp;·暂无"
-			End If
-		Else
-			Get_ArticleList="&nbsp;调用参数不足，现有 "&UBound(Parameter)+1&" 个，需 13 个"
-		End If
-	End Function
-	
-	Public Function Text_List(DataArray,IsShowSort,IsShowDate,TitleLen,RowNum,IsShowNewTag,IsNewTarget,IsShowAuthor,IsShowFileType,ListTotal)
-		Dim TempStr
-		Dim IsCrlf
-		Dim RowSize
-		
-		If IsArray(DataArray) And RowNum>0 Then 
-			If ListTotal>UBound(DataArray,2) Then ListTotal=UBound(DataArray,2)
-
-			IsCrlf = 0
-			RowSize = 100/RowNum
-
-			TempStr="<table>"
-			TempStr=TempStr&"<tr>"
-			For i=0 To ListTotal
-				If IsCrlf = 1 Then TempStr=TempStr&"<tr>":IsCrlf = 0
-
-				TempStr=TempStr&"<td style=""width: " & RowSize & "%;"">"
-				
-				If IsShowSort=1 Then TempStr=TempStr&"[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]&nbsp;"
-				
-				If IsShowFileType=1 Then TempStr=TempStr&EA_Pub.Chk_ArticleType(DataArray(6,i),DataArray(7,i))&"&nbsp;"
-				
-				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
-
-				If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
-
-				TempStr=TempStr&" title=""" & EA_Pub.Base_HTMLFilter(DataArray(3,i)) & """>"
-				DataArray(3,i)=EA_Pub.Base_HTMLFilter(DataArray(3,i))
-				DataArray(3,i)=EA_Pub.Cut_Title(DataArray(3,i),TitleLen)
-				TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),DataArray(3,i))
-				TempStr=TempStr&"</a>"
-
-				If IsShowNewTag=1 Then TempStr=TempStr&EA_Pub.Chk_ArticleTime(DataArray(5,i))
-
-				If IsShowAuthor=1 Then 
-					If Len(DataArray(9,i))>0 Then TempStr=TempStr&"&nbsp;[<span class=""link-Author"">"&DataArray(9,i)&"</span>]"
-				End If
-
-				TempStr=TempStr&"</td>"
-				If IsShowDate=1 Then 
-					TempStr=TempStr&"<td style=""TEXT-ALIGN: right;"">"
-					TempStr=TempStr&"<span class=""link-Date"">["&Month(DataArray(5,i))&"."&Day(DataArray(5,i))&"]</span>"
-					TempStr=TempStr&"</td>"
-				End If
-
-				If (i+1) Mod RowNum=0 Then TempStr=TempStr&"</tr>":IsCrlf = 1
-			Next
-			If (i-1) Mod RowNum<>0 And IsCrlf = 0 Then TempStr=TempStr&"</tr>"
-			TempStr=TempStr&"</table>"
-		ElseIf RowNum<=0 Then
-			TempStr="列数设置为0，请修改"
-		Else 
-			TempStr="·暂无"
-		End If
-	
-		Text_List=TempStr
-	End Function
-	
-	Public Function Img_List(DataArray,IsShowSort,IsShowDate,TitleLen,RowNum,IsShowNewTag,IsNewTarget,IsShowAuthor,ListTotal)
-		Dim TempStr
-		
-		If IsArray(DataArray) And RowNum>0 Then 
-			If ListTotal>UBound(DataArray,2) Then ListTotal=UBound(DataArray,2)
-
-			TempStr="<table>"
-			TempStr=TempStr&"<tr>"
-			For i=0 To ListTotal
-				TempStr=TempStr&"<td><table>"
-				TempStr=TempStr&"<tr><td>"
-				TempStr=TempStr&"<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
-				
-				If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
-
-				TempStr=TempStr&"><img src="""&DataArray(8,i)&""" alt="""&DataArray(3,i)&""" class=""midImg"" /></a></td></tr>"
-
-				If TitleLen > 1 Then
-					TempStr=TempStr&"<tr><td>"
-					
-					If IsShowSort=1 Then TempStr=TempStr&"&nbsp;[<a href="""&EA_Pub.Cov_ColumnPath(DataArray(1,i),EA_Pub.SysInfo(18))&""" class=""link-Column"">"&DataArray(2,i)&"</a>]"
-
-					TempStr=TempStr&"&nbsp;<a href="""&EA_Pub.Cov_ArticlePath(DataArray(0,i),DataArray(5,i),EA_Pub.SysInfo(18))&""""
-					
-					If IsNewTarget=1 Then TempStr=TempStr&" target=""_blank"""
-					
-					TempStr=TempStr&" title="""&EA_Pub.Base_HTMLFilter(DataArray(3,i))&""">"
-					DataArray(3,i)=EA_Pub.Base_HTMLFilter(DataArray(3,i))
-					DataArray(3,i)=EA_Pub.Cut_Title(DataArray(3,i),TitleLen)
-					TempStr=TempStr&EA_Pub.Add_ArticleColor(DataArray(4,i),DataArray(3,i))
-					TempStr=TempStr&"</a>"
-
-					If IsShowNewTag=1 Then TempStr=TempStr&EA_Pub.Chk_ArticleTime(DataArray(5,i))
-
-					If IsShowAuthor=1 Then 
-						If Len(DataArray(9,i))>0 Then TempStr=TempStr&"&nbsp;[<span class=""link-Author"">"&DataArray(9,i)&"</span>]"
-					End If
-					
-					If IsShowDate=1 Then TempStr=TempStr&"&nbsp;<span class=""link-Date"">"&Month(DataArray(5,i))&"/"&Day(DataArray(5,i))&"</span>"
-					
-					TempStr=TempStr&"</td></tr>"
-				End If
-				
-				TempStr=TempStr&"</table></td>"
-				
-				If (i+1) Mod RowNum=0 Then TempStr=TempStr&"</tr>"
-			Next
-			If i Mod RowNum<>0 Then TempStr=TempStr&"</tr>"
-			TempStr=TempStr&"</table>"
-		ElseIf RowNum<=0 Then
-			TempStr="列数设置为0，请修改"
-		Else 
-			TempStr="·暂无"
-		End If
-		
-		Img_List=TempStr
 	End Function
 
 	Public Function PageList (PageCount,iCurrentPage,FieldName,FieldValue)
