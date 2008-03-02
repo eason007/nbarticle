@@ -311,6 +311,8 @@ Const str_Content_Open_AdvancedFunction="打开增强选项"
 Const str_Content_Close_AdvancedFunction="关闭增强选项"
 Const str_Content_Preview="预览文章"
 Const str_Content_ArticleTemplate="文章模版"
+Const str_Content_SubTitle="副标题"
+Const str_Content_SubUrl="副标题连接"
 
 'admin_columnbath.asp
 Const str_Bath_Move_Help="①这里只是移动文章，而不是拷贝或者删除！ <br />②您可以将一个下属栏目的文章移动到上级栏目，也可以将上级栏目的文章移动到下级栏目<br />③当使用该功能之后，建议更新一次系统及栏目数据"

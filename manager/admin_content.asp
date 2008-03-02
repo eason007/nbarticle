@@ -12,7 +12,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-11-12
+'= 最后日期：2008-03-02
 '====================================================================
 
 Response.Clear
@@ -243,6 +243,8 @@ Sub Add
 	Call EA_M_XML.AppElements("Language_Content_ArticleTemplate",str_Content_ArticleTemplate)
 	Call EA_M_XML.AppElements("Language_Content_Title",str_Content_Title)
 	Call EA_M_XML.AppElements("Language_Content_Column",str_Content_Column)
+	Call EA_M_XML.AppElements("Language_Content_SubTitle",str_Content_SubTitle)
+	Call EA_M_XML.AppElements("Language_Content_SubUrl",str_Content_SubUrl)
 
 	TempArray=EA_DBO.Get_Article_Info(PostId,0)
 	If IsArray(TempArray) Then 
@@ -260,6 +262,8 @@ Sub Add
 		Call EA_M_XML.AppInfo("author",TempArray(8,0))
 		Call EA_M_XML.AppInfo("ispass",Abs(TempArray(20,0)))
 		Call EA_M_XML.AppInfo("Content",TempArray(5,0))
+		Call EA_M_XML.AppInfo("subtitle",TempArray(26,0))
+		Call EA_M_XML.AppInfo("suburl",TempArray(27,0))
 		
 		T_Color = TempArray(17,0)
 		Column_Id = TempArray(0,0)
@@ -337,7 +341,7 @@ Sub Add
 End Sub
 
 Sub Save
-	Dim Title,Author,Text,KeyWord,ColumnId,ColumnName,ColumnCode,Byter,TColor,IsImg,ImgPath,IsTop,IsDis,OutUrl,IsOut,AuthorId,ViewNum,AddDate,IsPass,Source,SourceUrl,Summary
+	Dim Title,Author,Text,KeyWord,ColumnId,ColumnName,ColumnCode,Byter,TColor,IsImg,ImgPath,IsTop,IsDis,OutUrl,IsOut,AuthorId,ViewNum,AddDate,IsPass,Source,SourceUrl,Summary, SubTitle, SubUrl
 	Dim PostId,TempStr,TrueTime,IsSaveAs
 	Dim Key,i
 
@@ -348,6 +352,8 @@ Sub Save
 	PostId		= EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Title		= EA_Pub.SafeRequest(2,"title",1,"",1)
 	Author		= EA_Pub.SafeRequest(2,"author",1,"",1)
+	SubTitle	= EA_Pub.SafeRequest(2,"subtitle",1,"",1)
+	SubUrl		= EA_Pub.SafeRequest(2,"suburl",1,"",1)
 
 	Text		= Request.Form("Content")
 	Text		= EA_Pub.BadWords_Filter(Text)
@@ -453,6 +459,8 @@ Sub Save
 			rs("SourceUrl")	= SourceUrl
 			rs("Summary")	= Summary
 			rs("TrueTime")	= TrueTime
+			rs("SubTitle")	= SubTitle
+			rs("SubUrl")	= SubUrl
 			rs.update
 		Rs.Close:Set Rs=Nothing
 

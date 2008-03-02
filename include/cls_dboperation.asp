@@ -401,12 +401,10 @@ Class cls_DBOperation
 	Public Function Get_Article_Info(iArticleId,iIsUpData)
 	'0=ColumnId,1=ColumnCode,2=ColumnName,3=Title,4=Summary,5=Content,6=ViewNum,7=AuthorId,8=Author,9=CommentNum,10=IsOut
 	'11=OutUrl,12=[KeyWord],13=AddDate,14=CutArticle,15=Source,16=SourceUrl,17=TColor,18=Img,19=IsTop,20=IsPass
-	'21=IsDel,22=ListPower,23=IsHide,24=Article_TempId,25=TrueTime
+	'21=IsDel,22=ListPower,23=IsHide,24=Article_TempId,25=TrueTime,26=SubTitle,27=SubUrl
 		Select Case iDataBaseType
-		Case 0
-			SQL="vi_Select_ArticleInfo "&iArticleId
-		Case 1
-			SQL="SELECT ColumnId, ColumnCode, ColumnName, a.Title, Summary, Content, a.ViewNum, AuthorId, Author, CommentNum, a.IsOut, a.OutUrl, [KeyWord], AddDate, CutArticle, Source, SourceUrl, TColor, Img, a.IsTop, IsPass, IsDel, b.ListPower, b.IsHide, b.Article_TempId,TrueTime"
+		Case 0, 1
+			SQL="SELECT ColumnId, ColumnCode, ColumnName, a.Title, Summary, Content, a.ViewNum, AuthorId, Author, CommentNum, a.IsOut, a.OutUrl, [KeyWord], AddDate, CutArticle, Source, SourceUrl, TColor, Img, a.IsTop, IsPass, IsDel, b.ListPower, b.IsHide, b.Article_TempId,TrueTime,a.SubTitle,a.SubUrl"
 			SQL=SQL&" FROM NB_Content AS a INNER JOIN NB_Column AS b ON a.ColumnId=b.Id"
 			SQL=SQL&" WHERE a.Id="&iArticleId
 		Case 2
