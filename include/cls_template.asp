@@ -253,20 +253,14 @@ Class cls_Template
 		Load_MemberTopPost=TempStr
 	End Function
 
-	Public Function PageList (PageCount,iCurrentPage,FieldName,FieldValue)
-		Dim Url
+	Public Function PageList (PageCount,iCurrentPage,Url)
 		Dim PageRoot				'页列表头
 		Dim PageFoot				'页列表尾
 		Dim OutStr
 		Dim i						'输出字符串
 		
-		Url=URLStr(FieldName,FieldValue)
-		
-		If CLng(iCurrentPage)<=0 Then 
-			iCurrentPage=1
-		ElseIf CLng(iCurrentPage)>CLng(PageCount) Then
-			iCurrentPage=PageCount
-		End if
+		If CLng(iCurrentPage)<=0 Then iCurrentPage=1
+		If CLng(iCurrentPage)>CLng(PageCount) Then iCurrentPage=PageCount
 		
 		If iCurrentPage-4<=1 Then 
 			PageRoot=1
@@ -282,11 +276,11 @@ Class cls_Template
 		OutStr="<div id=""pageNav""><span class=""total"">共 "&PageCount&" 页</span>&nbsp;"
 		
 		If iCurrentPage > 1 Then 
-			OutStr=OutStr&"<a href=""?page=1"
-			OutStr=OutStr&Url
+			OutStr=OutStr&"<a href="""
+			OutStr=OutStr&Replace(Url, "$page", "1")
 			OutStr=OutStr&""" title=""首页"" class=""first"">&laquo;</a>&nbsp;"
-			OutStr=OutStr&"<a href=""?page="&iCurrentPage-1
-			OutStr=OutStr&Url
+			OutStr=OutStr&"<a href="""
+			OutStr=OutStr&Replace(Url, "$page", iCurrentPage-1)
 			OutStr=OutStr&""" title=""上页"" class=""list"">&lt;</a>&nbsp;"
 		End If
 		
@@ -294,24 +288,24 @@ Class cls_Template
 			If i=Cint(iCurrentPage) Then
 				OutStr=OutStr&"<span class=""current"">"&i&"</span>&nbsp;"
 			Else
-				OutStr=OutStr&"<a href=""?page="&Cstr(i)
-				OutStr=OutStr&Url
+				OutStr=OutStr&"<a href="""
+				OutStr=OutStr&Replace(Url, "$page", Cstr(i))
 				OutStr=OutStr&""" class=""list"">"&i&"</a>&nbsp;"
 			End If
 			If i=PageCount Then Exit For
 		Next
 
 		If CInt(iCurrentPage) <> CInt(PageCount) Then
-			OutStr=OutStr&"<a href=""?page="&iCurrentPage+1
-			OutStr=OutStr&Url
+			OutStr=OutStr&"<a href="""
+			OutStr=OutStr&Replace(Url, "$page", iCurrentPage+1)
 			OutStr=OutStr&""" title=""下页"" class=""list"">&gt;</a>&nbsp;"
-			OutStr=OutStr&"<a href=""?page="&PageCount
-			OutStr=OutStr&Url
+			OutStr=OutStr&"<a href="""
+			OutStr=OutStr&Replace(Url, "$page", PageCount)
 			OutStr=OutStr&""" title=""尾页"" class=""last"">&raquo;</a>&nbsp;"
 		End If
 		
 		If PageCount > 1 Then
-			OutStr=OutStr&"&nbsp;<input type=""text"" value="""&iCurrentPage&""" onmouseover=""this.focus();this.select();"" id=""PGNumber"" style=""width: 30px;"" onKeypress=""if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"" />&nbsp;<input type=""button"" value=""GO"" onclick=""if ($('PGNumber').value>0 && $('PGNumber').value<="&PageCount&"){window.location='?page='+$('PGNumber').value+'"&Url&"'}"" />"
+			OutStr=OutStr&"&nbsp;<input type=""text"" value="""&iCurrentPage&""" onmouseover=""this.focus();this.select();"" id=""PGNumber"" style=""width: 30px;"" onKeypress=""if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"" />&nbsp;<input type=""button"" value=""GO"" onclick=""if ($('PGNumber').value>0 && $('PGNumber').value<="&PageCount&"){var Url = '" & Url & "';window.location=Url.replace('$page', $('PGNumber').value);}"" />"
 		End If
 
 		OutStr = OutStr & "</div>"

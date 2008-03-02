@@ -42,16 +42,13 @@ Class page_Column
 	End Function
 
 	Private Sub ListTopic (ByRef PageContent)
-		Dim FieldName(0),FieldValue(0)
+		Dim Url
 		Dim ArticleList
 		Dim PageNum, PageCount, PageSize
 		Dim Temp, ListBlock
 		Dim ForTotal
 		Dim ArticleUrlType
 		Dim i
-
-		FieldName(0)	= "classid"
-		FieldValue(0)	= ID
 
 		PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 		PageSize	= Info(17, 0)
@@ -94,7 +91,15 @@ Class page_Column
 
 		EA_Temp.CloseBlock "List.Topic", PageContent
 
-		If EA_Temp.ChkTag("List.PageNav", PageContent) Then EA_Temp.SetVariable "List.PageNav", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue), PageContent
+		If EA_Temp.ChkTag("List.PageNav", PageContent) Then 
+			If ArticleUrlType = 1 Then
+				Url = "list.asp?classid=$page"
+			Else
+				Url = Replace(EA_Pub.Cov_ColumnPath(ColumnId, EA_Pub.SysInfo(18)), "_1", "_$page")
+			End If
+
+			EA_Temp.SetVariable "List.PageNav", EA_Temp.PageList(PageCount, PageNum, Url), PageContent
+		End If
 	End Sub
 
 	Private Function TagList (Keyword)

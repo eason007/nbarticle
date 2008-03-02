@@ -502,7 +502,7 @@ Class cls_Public
 		If PathType=1 Then 
 			Cov_ColumnPath=SystemFolder&"list.asp?classid="&ColumnId
 		Else
-			Cov_ColumnPath=SystemFolder&"articlelist/article_"&ColumnId&"_adddate_desc_1.htm"
+			Cov_ColumnPath=SystemFolder&"list/list_"&ColumnId&"_1.htm"
 		End If
 	End Function 
 	
@@ -517,7 +517,7 @@ Class cls_Public
 		If PathType=1 Then 
 			Cov_ArticlePath=SystemFolder&"article.asp?articleid="&ArticleId
 		Else
-			Cov_ArticlePath=SystemFolder&"articleview/" & Year(ArticleTime) & "-" & Month(ArticleTime) & "-" & Day(ArticleTime) & "/article_view_"&ArticleId&".htm"
+			Cov_ArticlePath=SystemFolder&"view/" & Year(ArticleTime) & "-" & Month(ArticleTime) & "/" & Day(ArticleTime) & "/view_"&ArticleId&".htm"
 		End If
 	End Function
 	
