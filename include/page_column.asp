@@ -23,22 +23,16 @@ Class page_Column
 
 		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
 
-		If EA_Temp.ChkBlock("list", PageContent) Then Call MakeArticleList()
-		If EA_Temp.ChkBlock("placard", PageContent) Then Call MakePlacardList(EA_Temp, PageContent)
-
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
 		EA_Temp.Title= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
+		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
 
-		PageContent	 = Replace(PageContent, "{$ColumnId$}", ID)
-		PageContent	 = Replace(PageContent, "{$ColumnName$}", Info(0, 0))
-		PageContent	 = Replace(PageContent, "{$Info$}", Info(2, 0))
-		PageContent	 = Replace(PageContent, "{$ColumnTopicTotal$}", Info(3, 0))
-		PageContent	 = Replace(PageContent, "{$ColumnMangerTotal$}", Info(4, 0))
-
-		If EA_Temp.ChkTag("ChildColumnNav", PageContent) Then EA_Temp.Find_TemplateTagByInput "ChildColumnNav", ChildColumnNav(Info(1, 0)), PageContent
+		EA_Temp.SetVariable "List.ID", ID, PageContent
+		EA_Temp.SetVariable "List.Name", Info(0, 0), PageContent
+		EA_Temp.SetVariable "List.Description", Info(2, 0), PageContent
+		EA_Temp.SetVariable "List.TopicTotal", Info(3, 0), PageContent
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 

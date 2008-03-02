@@ -534,7 +534,7 @@ Class cls_Public
 			ForTotal = UBound(TempArray,2)
 
 			For i=0 To ForTotal
-				TempStr=TempStr&" -=> <a href="""&Cov_ColumnPath(TempArray(0,i),SysInfo(18))&"""><b>"&TempArray(1,i)&"</b></a>"
+				TempStr=TempStr&" - <a href="""&Cov_ColumnPath(TempArray(0,i),SysInfo(18))&"""><strong>"&TempArray(1,i)&"</strong></a>"
 			Next
 		End If
 		
