@@ -20,19 +20,15 @@ Dim MakeHtml
 
 MakeHtml = False
 
-If EA_Pub.SysInfo(18) = "0" Then
-	If EA_Pub.SysInfo(26) = "1" Then
-		EA_Pub.SysInfo(18) = "1"
+If EA_Pub.SysInfo(18) = "0" Or EA_Pub.SysInfo(26) = "1" Then
+	If Not EA_Pub.Chk_IsExistsHtmlFile("default.htm") Then 
+		MakeHtml = True
 	Else
-		If Not EA_Pub.Chk_IsExistsHtmlFile("default.htm") Then 
-			MakeHtml = True
-		Else
-			Call EA_Pub.Close_Obj
-			Set EA_Pub = Nothing
+		Call EA_Pub.Close_Obj
+		Set EA_Pub = Nothing
 
-			Response.Redirect "default.htm"
-			Response.End 
-		End If
+		Response.Redirect "default.htm"
+		Response.End 
 	End If
 End If
 

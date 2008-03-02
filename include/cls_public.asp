@@ -17,6 +17,7 @@ Class cls_Public
 	Public SysInfo, SysStat(5)
 	Public Mem_Info(5), Mem_GroupSetting
 	Public IsMember
+	Public sIniFilePath
 
 	Private tmpFsoObj
 	Private EA_Ini
@@ -26,7 +27,6 @@ Class cls_Public
 	'*****************************
 	Private Sub Class_Initialize()
 		Dim vTemp
-		Dim sIniFilePath
 		
 		Set EA_Ini		= New cls_Ini
 		sIniFilePath	= Server.MapPath (SystemFolder & "include/config.ini")
