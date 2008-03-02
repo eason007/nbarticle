@@ -12,7 +12,7 @@
 '= 摘    要：后台-系统设定文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-16
+'= 最后日期：2008-03-02
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -56,9 +56,6 @@ Sub Main
 	End If
 
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
-	Call EA_M_XML.AppElements("Language_Content_CutArticle_Not",str_Content_CutArticle_Not)
-	Call EA_M_XML.AppElements("Language_Content_CutArticle_Auto",str_Content_CutArticle_Auto)
-	Call EA_M_XML.AppElements("Language_Content_CutArticle_Manual",str_Content_CutArticle_Manual)
 	Call EA_M_XML.AppElements("Language_Config_Help",str_Config_Help)
 	Call EA_M_XML.AppElements("Language_Config_Base",str_Config_Base)
 	Call EA_M_XML.AppElements("Language_Config_WebSiteName",str_Config_WebSiteName)
@@ -78,7 +75,6 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Config_SystemStyle",str_Config_SystemStyle)
 	Call EA_M_XML.AppElements("Language_Config_SystemIndexMode",str_Config_SystemIndexMode)
 	Call EA_M_XML.AppElements("Language_Config_Article",str_Config_Article)
-	Call EA_M_XML.AppElements("Language_Config_ManagerEditor",str_Config_ManagerEditor)
 	Call EA_M_XML.AppElements("Language_Config_MemberEditor",str_Config_MemberEditor)
 	Call EA_M_XML.AppElements("Language_Config_AutoRemote",str_Config_AutoRemote)
 	Call EA_M_XML.AppElements("Language_Config_AutoRemote_Help",str_Config_AutoRemote_Help)
@@ -117,7 +113,6 @@ Sub Main
 	Call EA_M_XML.AppInfo("ClosedMsg",Setting(2))
 	Call EA_M_XML.AppInfo("IsClose",Setting(3))
 	Call EA_M_XML.AppInfo("SystemTimer",Setting(4))
-	Call EA_M_XML.AppInfo("cutarticle",Setting(6))
 	Call EA_M_XML.AppInfo("isreg",Setting(7))
 	Call EA_M_XML.AppInfo("isemail",Setting(8))
 	Call EA_M_XML.AppInfo("isadmin",Setting(9))
@@ -134,9 +129,7 @@ Sub Main
 	Call EA_M_XML.AppInfo("isreview_admin",Setting(20))
 	Call EA_M_XML.AppInfo("author",Setting(21))
 	Call EA_M_XML.AppInfo("autoremote",Setting(22))
-	Call EA_M_XML.AppInfo("master_editor",Setting(23))
 	Call EA_M_XML.AppInfo("member_editor",Setting(24))
-	Call EA_M_XML.AppInfo("debug",Setting(25))
 	Call EA_M_XML.AppInfo("index",Setting(26))
 	Call EA_M_XML.AppInfo("badword",BadWord)
 	Call EA_M_XML.AppInfo("source",Source)
@@ -177,8 +170,8 @@ Sub Save
 	Setting=Setting&EA_Pub.SafeRequest(2,"ClosedMsg",1,"",0)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"IsClose",0,0,0)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"SystemTimer",1,"1|23",-1)&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"cutpage",0,0,0)&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"cutarticle",0,0,0)&","
+	Setting=Setting&"0,"
+	Setting=Setting&"0,"
 	Setting=Setting&EA_Pub.SafeRequest(2,"isreg",0,1,0)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"isemail",0,1,0)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"isadmin",0,0,0)&","
@@ -195,9 +188,9 @@ Sub Save
 	Setting=Setting&EA_Pub.SafeRequest(2,"isreview_admin",0,0,1)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"author",1,"",1)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"autoremote",1,"",1)&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"master_editor",1,"",1)&","
+	Setting=Setting&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"member_editor",1,"",1)&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"debug",1,"",0)&","
+	Setting=Setting&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"index",1,"",0)&","
 	
 	SQL="UpDate [NB_System] Set Info='"&Setting&"',Source='"&Source&"',BadWord='"&BadWord&"'"
