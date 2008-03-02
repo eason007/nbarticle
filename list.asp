@@ -35,7 +35,7 @@ End If
 
 'check system state
 If EA_Pub.SysInfo(18) = "0" Then
-	PageContent = EA_Pub.Cov_ColumnPath(Request("classid"), EA_Pub.SysInfo(18))
+	PageContent = EA_Pub.Cov_ColumnPath(ColumnId, EA_Pub.SysInfo(18))
 
 	Call EA_Pub.Close_Obj
 	Set EA_Pub = Nothing
