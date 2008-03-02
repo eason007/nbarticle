@@ -6,11 +6,11 @@
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
 '=-------------------------------------------------------------------
-'= 文件名称：cls_template.asp
-'= 摘    要：模版类文件
+'= 文件名称：page_index.asp
+'= 摘    要：首页文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-01
+'= 最后日期：2008-03-02
 '====================================================================
 
 Class page_Index
@@ -19,8 +19,8 @@ Class page_Index
 
 		PageContent		= EA_Temp.Load_Template(0, 0)
 
-		EA_Temp.Title	= EA_Pub.SysInfo(0) & " - 首页"
-		EA_Temp.Nav		= "<a href=""./""><b>" & EA_Pub.SysInfo(0) & "</b></a> - 首页"
+		EA_Temp.Title	= EA_Pub.SysInfo(0) & " - " & SysMsg(10)
+		EA_Temp.Nav		= "<a href=""<!--Page.Path-->""><strong>" & EA_Pub.SysInfo(0) & "</strong></a> - " & SysMsg(10)
 
 		PageContent		= EA_Temp.Replace_PublicTag(PageContent)
 
