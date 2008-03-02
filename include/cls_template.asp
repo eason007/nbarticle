@@ -219,81 +219,6 @@ Class cls_Template
 
 		Replace_PublicTag=PageContent
 	End Function
-
-	Public Sub OutStr(ByRef sContent)
-		Response.Clear
-		Response.Write sContent
-		Set sContent = Nothing
-		Response.End
-	End Sub
-
-	Public Function Find_TemplateTags(KeyStr,ByRef PageStr)
-		Dim TempStr,PageLen
-		Dim CurrentTag,StartTag,EndTag
-		Dim ParameterArray,ReplaceStr,ReplaceLen
-
-		CurrentTag=-1
-		StartTag=1
-		PageLen=Len(PageStr)
-
-		Do While CurrentTag<>0
-			CurrentTag=InStr(StartTag,PageStr,"{$"&KeyStr&"(")
-
-			If CurrentTag<>0 Then 
-				StartTag=CurrentTag
-				EndTag=InStr(StartTag,PageStr,")$}")
-
-				If EndTag <> 0 Then
-					TempStr=Mid(PageStr,StartTag+Len(KeyStr)+3,EndTag-(StartTag+Len(KeyStr)+3))
-
-					ParameterArray=Split(TempStr,",")
-					
-					Select Case KeyStr
-					Case "GetArticleList"
-						ReplaceStr=Get_ArticleList(ParameterArray)
-					Case "Friend"
-						ReplaceStr=Load_Friend(ParameterArray)
-					Case "AdSense"
-						ReplaceStr=Load_AdSense(ParameterArray)
-					Case "SiteVote"
-						ReplaceStr=Load_Vote(ParameterArray)
-					Case "ShowColumn"
-						ReplaceStr=Load_Column(ParameterArray)
-					End Select
-
-					ReplaceLen=Len(ReplaceStr)
-
-					PageStr=Left(PageStr,StartTag-1)&ReplaceStr&Right(PageStr,PageLen-(EndTag+2))
-
-					StartTag=StartTag+ReplaceLen
-
-					PageLen=Len(PageStr)
-				End If
-			End If
-		Loop
-		
-		Find_TemplateTags=PageStr
-	End Function
-
-	Public Sub Find_TemplateTagByInput(KeyStr,ReplaceStr,ByRef PageStr)
-		Dim PageLen
-		Dim CurrentTag,StartTag,EndTag
-		Dim ReplaceLen
-
-		CurrentTag=0
-		StartTag=1
-		PageLen=Len(PageStr)
-
-		CurrentTag=InStr(StartTag,PageStr,"{$"&KeyStr&"(")
-		If CurrentTag<>0 Then 
-			StartTag=CurrentTag
-			EndTag=InStr(StartTag,PageStr,")$}")
-
-			ReplaceLen=Len(ReplaceStr)
-
-			PageStr=Left(PageStr,StartTag-1)&ReplaceStr&Right(PageStr,PageLen-(EndTag+2))
-		End If
-	End Sub
 	
 	Public Function Load_MemberTopPost()
 		Dim TempStr,TempArray
@@ -325,15 +250,6 @@ Class cls_Template
 		End If
 		
 		Load_MemberTopPost=TempStr
-	End Function
-	
-	Private Function Load_AdSense(Parameter)
-		Dim TempStr,Temp
-		
-		Temp=EA_DBO.Get_AdSense(Parameter(0))
-		If IsArray(Temp) Then TempStr=Temp(1,0)
-		
-		Load_AdSense=TempStr
 	End Function
 
 	Private Function Get_ArticleList(Parameter)

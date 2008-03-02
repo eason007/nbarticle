@@ -31,7 +31,7 @@ Sub FriendList (ByRef PageContent)
 		Parameter = EA_Temp.GetParameter("Parameter", Block)
 		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Friend.List", PageContent: Exit Do
 
-		List = EA_DBO.Get_Friend_List(Parameter(1), Parameter(0), Parameter(2))
+		List = EA_DBO.Get_Friend_List(Parameter(0), Parameter(1), Parameter(2))
 		If Not IsArray(List) Then EA_Temp.CloseBlock "Friend.List", PageContent: Exit Do
 		
 		ForTotal = UBound(List, 2)
