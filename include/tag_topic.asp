@@ -10,7 +10,7 @@
 '= 摘    要：topic模版标签文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-01
+'= 最后日期：2008-03-02
 '====================================================================
 
 Sub MakeTopic(ByRef PageContent)
@@ -42,8 +42,11 @@ Sub TopicList (ByRef PageContent)
 			List(3, i) = EA_Pub.Base_HTMLFilter(List(3, i))
 			List(3, i) = EA_Pub.Cut_Title(List(3, i), Parameter(3))
 
+			If Len(List(12, i)) > 0 Then List(11, i) = "<a href='" & List(12, i) & "'>" & List(11, i) & "</a>"
+
 			EA_Temp.SetVariable "Title", EA_Pub.Add_ArticleColor(List(4, i), List(3, i)), Temp
 			EA_Temp.SetVariable "Url", EA_Pub.Cov_ArticlePath(List(0, i), List(5, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "SubTitle", List(11, i), Temp
 			EA_Temp.SetVariable "Img", List(8, i), Temp
 			EA_Temp.SetVariable "Date", FormatDateTime(List(5, i), 2), Temp
 			EA_Temp.SetVariable "Time", FormatDateTime(List(5, i), 4), Temp

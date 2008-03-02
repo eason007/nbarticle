@@ -368,7 +368,7 @@ Class cls_DBOperation
 	End Function
 	
 	Public Function Get_Article_List(iTop,iColumnId,iArticleType,iIsIncludeChildColumn)
-		SQL="SELECT TOP "&iTop&" [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary"
+		SQL="SELECT TOP "&iTop&" [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary, SubTitle, SubUrl"
 		SQL=SQL&" FROM [NB_Content]"
 		SQL=SQL&" WHERE ISDEL=0 AND ISPASS="&TrueValue
 
