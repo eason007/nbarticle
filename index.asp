@@ -13,7 +13,7 @@
 '= 摘    要：首页文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-25
+'= 最后日期：2008-03-02
 '====================================================================
 
 Dim MakeHtml
@@ -21,7 +21,7 @@ Dim MakeHtml
 MakeHtml = False
 
 If EA_Pub.SysInfo(18) = "0" Then
-	If EA_Pub.SysInfo(26) = "0" Then
+	If EA_Pub.SysInfo(26) = "1" Then
 		EA_Pub.SysInfo(18) = "1"
 	Else
 		If Not EA_Pub.Chk_IsExistsHtmlFile("default.htm") Then 
