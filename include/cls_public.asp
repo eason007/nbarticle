@@ -10,7 +10,7 @@
 '= 摘    要：共用类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-03
 '====================================================================
 
 Class cls_Public
@@ -533,8 +533,10 @@ Class cls_Public
 		If IsArray(TempArray) Then 
 			ForTotal = UBound(TempArray,2)
 
-			For i=0 To ForTotal
-				TempStr=TempStr&" - <a href="""&Cov_ColumnPath(TempArray(0,i),SysInfo(18))&"""><strong>"&TempArray(1,i)&"</strong></a>"
+			For i = 0 To ForTotal
+				If i = ForTotal Then TempArray(1,i) = "<strong>" & TempArray(1,i) & "</strong>"
+
+				TempStr=TempStr&" - <a href="""&Cov_ColumnPath(TempArray(0,i),SysInfo(18))&""">"&TempArray(1,i)&"</a>"
 			Next
 		End If
 		

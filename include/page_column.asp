@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-29
+'= 最后日期：2008-03-03
 '====================================================================
 
 Class page_Column
@@ -34,16 +34,18 @@ Class page_Column
 		EA_Temp.SetVariable "List.Description", Info(2, 0), PageContent
 		EA_Temp.SetVariable "List.TopicTotal", Info(3, 0), PageContent
 
+		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic PageContent
+
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
 		Make = PageContent
 	End Function
 
-	Private Sub MakeArticleList ()
+	Private Sub ListTopic (ByRef PageContent)
 		Dim FieldName(0),FieldValue(0)
 		Dim ArticleList
-		Dim PageNum,PageCount,PageSize
-		Dim Temp,ListBlock
+		Dim PageNum, PageCount, PageSize
+		Dim Temp, ListBlock
 		Dim ForTotal
 		Dim ArticleUrlType
 		Dim i
@@ -54,18 +56,18 @@ Class page_Column
 		PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 		PageSize	= Info(17, 0)
 		PageCount	= EA_Pub.Stat_Page_Total(PageSize, Info(3, 0))
-		If CLng(PageNum) > PageCount And PageCount > 0 Then PageNum = PageCount
+		If CLng(PageNum) > PageCount Or PageCount > 0 Then PageNum = PageCount
 
 		'load article list
 		If Info(3, 0) > 0 Then ArticleList = EA_DBO.Get_Article_ByColumnId(ID, PageNum, PageSize)
 
 		If Info(12, 0) > 0 Or Info(13, 0) = 1 Then 
-			ArticleUrlType = 0
-		Else
 			ArticleUrlType = 1
+		Else
+			ArticleUrlType = EA_Pub.SysInfo(18)
 		End If
 
-		ListBlock = EA_Temp.GetBlock("list", PageContent)
+		ListBlock = EA_Temp.GetBlock("List.Topic", PageContent)
 
 		If IsArray(ArticleList) Then
 			ForTotal = UBound(ArticleList, 2)
@@ -75,7 +77,8 @@ Class page_Column
 		  
 				EA_Temp.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), ArticleUrlType), Temp
 				EA_Temp.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
-				EA_Temp.SetVariable "Date", ArticleList(3, i), Temp
+				EA_Temp.SetVariable "Date", FormatDateTime(ArticleList(3, i), 2), Temp
+				EA_Temp.SetVariable "Time", FormatDateTime(ArticleList(3, i), 4), Temp
 				EA_Temp.SetVariable "CommentNum", ArticleList(4, i), Temp
 				EA_Temp.SetVariable "Summary", ArticleList(5, i), Temp
 				EA_Temp.SetVariable "LastComment", ArticleList(6, i), Temp
@@ -85,11 +88,11 @@ Class page_Column
 				EA_Temp.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
 				EA_Temp.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
 
-				EA_Temp.SetBlock "list", Temp, PageContent
+				EA_Temp.SetBlock "List.Topic", Temp, PageContent
 			Next
-
-			EA_Temp.CloseBlock "list", PageContent
 		End If
+
+		EA_Temp.CloseBlock "List.Topic", PageContent
 
 		If EA_Temp.ChkTag("ColumnPageNumNav", PageContent) Then PageContent = Replace(PageContent, "{$ColumnPageNumNav$}", EA_Temp.PageList(PageCount, PageNum, FieldName, FieldValue))
 	End Sub
@@ -110,43 +113,6 @@ Class page_Column
 		End If
 
 		TagList = OutStr
-	End Function
-
-	Private Function ChildColumnNav(ColumnCode)
-		Dim ChilColumnConfig
-		Dim Temp, OutStr, Column, j
-		Dim TempArray, ForTotal, i, StepLen
-		Dim ChildColumnList
-
-		ChilColumnConfig = EA_Temp.Find_TemplateTagValues("ChildColumnNav", PageContent)
-		If Not IsArray(ChilColumnConfig) Then Exit Function
-
-		TempArray = EA_DBO.Get_Column_ChildList(ColumnCode)
-		If IsArray(TempArray) Then 
-			ForTotal = UBound(TempArray, 2)
-
-			For i = 0 To ForTotal
-				ChildColumnList = ChildColumnList & TempArray(0, i) & "," & TempArray(2, i) & "|"
-			Next
-		End If
-
-		Temp	 = Split(ChildColumnList, "|")
-		ForTotal = UBound(Temp) - 1
-
-		j = 1
-
-		For i = 0 To ForTotal
-			Column = Split(Temp(i), ",")
-
-			OutStr = OutStr & "<a href=""" & EA_Pub.Cov_ColumnPath(Column(0), EA_Pub.SysInfo(18)) & """>" & Column(1)
-			OutStr = OutStr & "</a>&nbsp;"
-
-			If j = CLng(ChilColumnConfig(1)) Then Exit For
-			j = j + 1
-			If (i + 1) Mod ChilColumnConfig(0) = 0 And (i + 1) <= (UBound(Temp) - 1) Then OutStr = OutStr & "<br>"
-		Next
-
-		ChildColumnNav = OutStr
 	End Function
 End Class
 %>

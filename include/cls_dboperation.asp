@@ -488,10 +488,7 @@ Class cls_DBOperation
 		Dim Temp
 		
 		Select Case iDataBaseType
-		'Case 0
-		'	SQL="Exec vi_Select_ArticleListById "&iColumnId
-		'	Temp=DB_CutPageQuery(SQL,iPageNum,iPageSize)
-		Case 0,1
+		Case 0, 1
 			SQL="SELECT [Id], TColor, Title, AddDate, CommentNum, Summary, LastComment, ViewNum, IsImg, Img, IsTop, Author, AuthorId, [KeyWord]"
 			SQL=SQL&" FROM NB_Content"
 			SQL=SQL&" WHERE ColumnId="&iColumnId&" And IsPass=" & TrueValue & " And IsDel=0"

@@ -311,11 +311,11 @@ function confirmMessage(sMsg){
 function change(obj,i) {
 	he=parseInt(obj.style.height);
 
-	if (he>=80&&he<=400){
+	if (he>=80&&he<=500){
 	   obj.style.height=he+i+'px';
 	}
 	else {
-	   obj.style.height='150px';
+	   obj.style.height='250px';
 	}
 }
 
