@@ -13,7 +13,7 @@
 '= 摘    要：文章显示文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-27
+'= 最后日期：2008-03-05
 '====================================================================
 
 Dim ArticleId, ArticleInfo
@@ -36,7 +36,7 @@ If EA_Pub.SysInfo(18) = "0" Then
 	Dim sHTMLFilePath
 
 	If ArticleInfo(22, 0) <= 0 And ArticleInfo(23, 0) = 0 Then
-		sHTMLFilePath = EA_Pub.Cov_ArticlePath(ArticleId,ArticleInfo(13, 0), "0")
+		sHTMLFilePath = EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), "0")
 		
 		If ArticleInfo(10, 0) Then
 			PageContent = "<meta http-equiv=""refresh"" content=""0;URL=" & ArticleInfo(11, 0) & """>"
@@ -94,7 +94,7 @@ Dim clsArticle
 
 Set clsArticle = New page_Article
 
-PageContent = clsArticle.Make(ArticleId, ArticleInfo, Page)
+PageContent = clsArticle.Make(ArticleId, ArticleInfo, Page, IsView)
 
 If MakeHtml Then
 	Call EA_Pub.Save_HtmlFile(sHTMLFilePath,PageContent)
@@ -106,8 +106,8 @@ If MakeHtml Then
 	Response.End 
 Else
 	Response.Write PageContent
-End If
 
-Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
+	Call EA_Pub.Close_Obj
+	Set EA_Pub=Nothing
+End If
 %>

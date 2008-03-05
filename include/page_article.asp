@@ -17,18 +17,20 @@ Class page_Article
 	Public PageIndex(), PageStr()
 
 
-	Public Function Make (ID, Info, Page)
+	Public Function Make (ID, ByRef Info, Page, IsView)
 		Dim FirstArticle, NextArticle
 		Dim i, TempStr
 
 		PageContent  = EA_Temp.Load_Template(ArticleInfo(24, 0), 5)
 
 		EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """><b>" & EA_Pub.SysInfo(0) & "</b></a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0)) & " -=> 正文"
+		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0)) & " - 正文"
+
+		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
+		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
 
 		If Not IsView Then 
-			TempStr = ArticleInfo(4, 0)
-			TempStr = TempStr & "<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp'>登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp'>注册</a>]。</b>"
+			TempStr = "<strong>您当前的权限不允许查看该文章，请先 [<a href='<!--Page.Path-->member/login.asp'>登陆</a>] 或 [<a href='<!--Page.Path-->member/register.asp'>注册</a>]。</strong>"
 		Else
 			Call CutContent("\[NextPage([^\]])*\]", ArticleInfo(5, 0))
 
@@ -46,48 +48,41 @@ Class page_Article
 			End If
 		End If
 
-		PageContent = Replace(PageContent, "{$ColumnId$}", ArticleInfo(0, 0))
-		PageContent = Replace(PageContent, "{$ArticleId$}", ArticleId)
-		PageContent = Replace(PageContent, "{$ArticleTitle$}", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)))
-		PageContent = Replace(PageContent, "{$ArticlePostTime$}", ArticleInfo(13, 0))
-		PageContent = Replace(PageContent, "{$ArticleText$}", TempStr)
-		PageContent = Replace(PageContent, "{$ArticleSummary$}", ArticleInfo(4, 0))
+		EA_Temp.SetVariable "Article.ColumnID", ArticleInfo(0, 0), PageContent
+		EA_Temp.SetVariable "Article.ID", ArticleId, PageContent
+		EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)), PageContent
+		EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
+		EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
+		EA_Temp.SetVariable "Article.Author", ArticleInfo(8, 0), PageContent
+		EA_Temp.SetVariable "Article.Source", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>", PageContent
+		EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
+		EA_Temp.SetVariable "Article.Content", TempStr, PageContent
+		EA_Temp.SetVariable "Article.TagList", TagList(ArticleInfo(12, 0)), PageContent
 
-		PageContent = Replace(PageContent, "{$ArticleAuthor$}", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleInfo(8, 0) & "&amp;a_id=" & ArticleInfo(7, 0) & "'>" & ArticleInfo(8, 0) & "</a>")
-		PageContent = Replace(PageContent, "{$ArticleViewTotal$}", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ArticleId & """></script>")
-		PageContent = Replace(PageContent, "{$ArticleCommentTotal$}","<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ArticleId & """></script>")
+		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ArticleId & """></script>", PageContent
+		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ArticleId & """></script>", PageContent
 
-		If Len(ArticleInfo(16, 0)) > 0 Then
-			PageContent = Replace(PageContent, "{$ArticleFrom$}", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>")
-		Else
-			PageContent = Replace(PageContent, "{$ArticleFrom$}", "本站")
-		End If
-
-		If InStr(PageContent, "{$FirstArticle$}") > 0 Then
+		If EA_Temp.ChkTag("Article.FirstList", PageContent) Then
 			FirstArticle = EA_DBO.Get_Article_FirstArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(FirstArticle) Then
-				PageContent = Replace(PageContent, "{$FirstArticle$}", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>")
+				EA_Temp.SetVariable "Article.FirstList", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>", PageContent
 			Else
-				PageContent = Replace(PageContent, "{$FirstArticle$}", "暂无")
+				EA_Temp.SetVariable "Article.FirstList", "暂无", PageContent
 			End If
 		End If
 
-		If InStr(PageContent, "{$NextArticle$}") > 0 Then
+		If EA_Temp.ChkTag("Article.NextList", PageContent) Then
 			NextArticle  =EA_DBO.Get_Article_NextArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(NextArticle) Then
-				PageContent = Replace(PageContent, "{$NextArticle$}", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>")
+				EA_Temp.SetVariable "Article.NextList", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>", PageContent
 			Else
-				PageContent = Replace(PageContent, "{$NextArticle$}", "暂无")
+				EA_Temp.SetVariable "Article.NextList", "暂无", PageContent
 			End If
 		End If
 
-		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
-		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
-
-		Call CorrList(ArticleInfo(12, 0), ArticleInfo(0, 0), PageContent)
-		Call TagList(ArticleInfo(12, 0), PageContent)
+		If EA_Temp.ChkTag("Article.RelatedList", PageContent) Then Call CorrList(ArticleInfo(12, 0), ArticleInfo(0, 0), PageContent)
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
@@ -111,7 +106,7 @@ Class page_Article
 		PageNav = OutStr
 	End Function
 
-	Private Sub TagList (Keyword, ByRef PageContent)
+	Private Function TagList (ByRef Keyword)
 		Dim TempArray, i
 		Dim ForTotal
 		Dim OutStr
@@ -126,43 +121,52 @@ Class page_Article
 			Next
 		End If
 
-		Call EA_Temp.SetVariable("TagList", OutStr, PageContent)
-	End Sub
+		TagList = OutStr
+	End Function
 
 	Private Sub CorrList(Keyword, ColumnId, ByRef PageContent)
-		Dim ConfigParameterArray
+		Dim Block, Parameter
+		Dim List
+		Dim Temp, ForTotal, i
+		Dim SearchKeyWord
 
-		ConfigParameterArray = EA_Temp.Find_TemplateTagValues("CorrList", PageContent)
+		Block = EA_Temp.GetBlock("Article.RelatedList", PageContent)
+		If Block = "" Then Exit Sub
 
-		If IsArray(ConfigParameterArray) Then 
-			If UBound(ConfigParameterArray) < 8 Then 
-				ReDim Preserve ConfigParameterArray(8)
-				ConfigParameterArray(8) = "5"
-			End If
+		Parameter = EA_Temp.GetParameter("Parameter", Block)
+		If Not IsArray(Parameter) Then EA_Temp.CloseBlock "Article.RelatedList", PageContent: Exit Sub
 
-			If Keyword <> "" Then
-				Dim TempArray, i, TempStr, SearchKeyWord
-				Dim ForTotal
-				
-				TempArray= Split(Keyword, ",")
-				ForTotal = UBound(TempArray)
+		If Keyword = "" Then EA_Temp.CloseBlock "Article.RelatedList", PageContent: Exit Sub
 
-				For i = 0 To ForTotal
-					Select Case iDataBaseType
-					Case 0
-						SearchKeyWord = SearchKeyWord & "InStr(','+keyword+',','," & TempArray(i) & ",')>0 OR "
-					Case 1
-						SearchKeyWord = SearchKeyWord & " CharIndex('," & TempArray(i) & ",',','+keyword+',')>0 OR "
-					End Select
-				Next
+		TempArray= Split(Keyword, ",")
+		ForTotal = UBound(TempArray)
 
-				TempArray = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(ConfigParameterArray(8)))
-			End If
+		For i = 0 To ForTotal
+			Select Case iDataBaseType
+			Case 0
+				SearchKeyWord = SearchKeyWord & "InStr(','+keyword+',','," & TempArray(i) & ",')>0 OR "
+			Case 1
+				SearchKeyWord = SearchKeyWord & " CharIndex('," & TempArray(i) & ",',','+keyword+',')>0 OR "
+			End Select
+		Next
 
-			TempStr	= EA_Temp.Text_List(TempArray, CInt(ConfigParameterArray(0)), CInt(ConfigParameterArray(1)), CInt(ConfigParameterArray(2)), CInt(ConfigParameterArray(3)), CInt(ConfigParameterArray(4)), CInt(ConfigParameterArray(5)), CInt(ConfigParameterArray(6)), CInt(ConfigParameterArray(7)), CInt(ConfigParameterArray(8)))
+		List = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(ConfigParameterArray(8)))
+		If Not IsArray(List) Then EA_Temp.CloseBlock "Article.RelatedList", PageContent: Exit Sub
+		
+		ForTotal = UBound(List, 2)
 
-			Call EA_Temp.Find_TemplateTagByInput("CorrList", TempStr, PageContent)
-		End If 
+		For i = 0 To ForTotal
+			Temp = Block
+	  
+			EA_Temp.SetVariable "Title", List(1, i), Temp
+			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "Info", List(4, i), Temp
+			EA_Temp.SetVariable "Total", List(2, i), Temp
+
+			EA_Temp.SetBlock "Article.RelatedList", Temp, PageContent
+		Next
+
+		EA_Temp.CloseBlock "Article.RelatedList", PageContent
 	End Sub
 
 	Private Sub CutContent(patrn, strng) 
