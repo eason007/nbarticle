@@ -219,7 +219,7 @@ Class page_Article
 			ForTotal = UBound(TempArray, 2)
 
 			For i = 0 To ForTotal
-				StrContent = Replace(StrContent, TempArray(0, i),"<a href=""" & TempArray(1, i)&""" class=""a_link"">" & TempArray(0, i) & "</a>")
+				StrContent = Replace(StrContent, TempArray(0, i),"<a href=""" & TempArray(1, i)&""">" & TempArray(0, i) & "</a>")
 			Next
 		End If
 	End Sub
