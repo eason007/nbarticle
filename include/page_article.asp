@@ -128,7 +128,7 @@ Class page_Article
 	Private Sub CorrList(Keyword, ColumnId, ByRef PageContent)
 		Dim Block, Parameter
 		Dim List
-		Dim Temp, ForTotal, i
+		Dim Temp, ForTotal, i, TempArray
 		Dim SearchKeyWord
 
 		Block = EA_Temp.GetBlock("Article.RelatedList", PageContent)
@@ -151,18 +151,24 @@ Class page_Article
 			End Select
 		Next
 
-		List = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(ConfigParameterArray(8)))
+		List = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(Parameter(0)), CInt(Parameter(2)))
 		If Not IsArray(List) Then EA_Temp.CloseBlock "Article.RelatedList", PageContent: Exit Sub
 		
 		ForTotal = UBound(List, 2)
 
 		For i = 0 To ForTotal
 			Temp = Block
-	  
-			EA_Temp.SetVariable "Title", List(1, i), Temp
-			EA_Temp.SetVariable "Url", EA_Pub.Cov_ColumnPath(List(0, i), EA_Pub.SysInfo(18)), Temp
-			EA_Temp.SetVariable "Info", List(4, i), Temp
-			EA_Temp.SetVariable "Total", List(2, i), Temp
+
+			List(3, i) = EA_Pub.Base_HTMLFilter(List(3, i))
+			List(3, i) = EA_Pub.Cut_Title(List(3, i), Parameter(1))
+			
+			EA_Temp.SetVariable "Url", EA_Pub.Cov_ArticlePath(List(0, i), List(5, i), EA_Pub.SysInfo(18)), Temp
+			EA_Temp.SetVariable "Title", EA_Pub.Add_ArticleColor(List(4, i), List(3, i)), Temp
+			EA_Temp.SetVariable "Date", FormatDateTime(List(5, i), 2), Temp
+			EA_Temp.SetVariable "Time", FormatDateTime(List(5, i), 4), Temp
+			EA_Temp.SetVariable "Icon", EA_Pub.Chk_ArticleType(List(6, i), List(7, i)), Temp
+			EA_Temp.SetVariable "Summary", List(10, i), Temp
+			EA_Temp.SetVariable "Author", List(9, i), Temp
 
 			EA_Temp.SetBlock "Article.RelatedList", Temp, PageContent
 		Next

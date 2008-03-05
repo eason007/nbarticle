@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-03
+'= 最后日期：2008-03-05
 '====================================================================
 
 Class page_Column
@@ -80,7 +80,7 @@ Class page_Column
 				EA_Temp.SetVariable "Summary", ArticleList(5, i), Temp
 				EA_Temp.SetVariable "LastComment", ArticleList(6, i), Temp
 				EA_Temp.SetVariable "ViewNum", ArticleList(7, i), Temp
-				EA_Temp.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i),ArticleList(10, i)), Temp
+				EA_Temp.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i), ArticleList(10, i)), Temp
 				EA_Temp.SetVariable "Img", ArticleList(9, i), Temp
 				EA_Temp.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
 				EA_Temp.SetVariable "Tag", TagList(ArticleList(13, i)), Temp

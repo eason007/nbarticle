@@ -416,10 +416,11 @@ Class cls_DBOperation
 		Get_Article_Info=DB_Query(SQL)
 	End Function
 
-	Public Function Get_Article_CorrList(sWSQL,iArticleId,iColumnId,iTopNum)
+	Public Function Get_Article_CorrList(sWSQL,iArticleId,iColumnId,iTopNum,IsColumn)
 		SQL="SELECT TOP " & iTopNum & " [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary"
 		SQL=SQL&" FROM [NB_CONTENT]"
-		SQL=SQL&" WHERE ISPass="&TrueValue&" And ID<>"&iArticleId&" And ("&sWSQL&"1=0) And IsDel=0 AND COLUMNID="&iColumnId
+		SQL=SQL&" WHERE ISPass="&TrueValue&" And ID<>"&iArticleId&" And ("&sWSQL&"1=0) And IsDel=0"
+		If IsColumn Then SQL=SQL&" AND COLUMNID="&iColumnId
 		SQL=SQL&" ORDER BY AddDate DESC"
 		
 		Get_Article_CorrList=DB_Query(SQL)
