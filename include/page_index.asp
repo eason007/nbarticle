@@ -10,7 +10,7 @@
 '= 摘    要：首页文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-03
+'= 最后日期：2008-03-05
 '====================================================================
 
 Class page_Index
@@ -20,7 +20,7 @@ Class page_Index
 		PageContent		= EA_Temp.Load_Template(0, 0)
 
 		EA_Temp.Title	= EA_Pub.SysInfo(0) & " - " & SysMsg(10)
-		EA_Temp.Nav		= "<a href=""<!--Page.Path-->""><strong>" & EA_Pub.SysInfo(0) & "</strong></a> - " & SysMsg(10)
+		EA_Temp.Nav		= "<a href=""" & SystemFolder & """><strong>" & EA_Pub.SysInfo(0) & "</strong></a> - " & SysMsg(10)
 
 		PageContent		= EA_Temp.Replace_PublicTag(PageContent)
 

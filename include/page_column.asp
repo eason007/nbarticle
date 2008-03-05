@@ -27,7 +27,7 @@ Class page_Column
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
 		EA_Temp.Title= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0), 1)
+		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0), 1)
 
 		EA_Temp.SetVariable "List.ID", ID, PageContent
 		EA_Temp.SetVariable "List.Name", Info(0, 0), PageContent
@@ -82,7 +82,7 @@ Class page_Column
 				EA_Temp.SetVariable "ViewNum", ArticleList(7, i), Temp
 				EA_Temp.SetVariable "Icon", EA_Pub.Chk_ArticleType(ArticleList(8, i), ArticleList(10, i)), Temp
 				EA_Temp.SetVariable "Img", ArticleList(9, i), Temp
-				EA_Temp.SetVariable "Author", "<a href='" & SystemFolder & "florilegium.asp?a_name=" & ArticleList(11, i) & "&a_id=" & ArticleList(12, i) & "'>" & ArticleList(11, i) & "</a>", Temp
+				EA_Temp.SetVariable "Author", ArticleList(11, i), Temp
 				EA_Temp.SetVariable "Tag", TagList(ArticleList(13, i)), Temp
 
 				EA_Temp.SetBlock "List.Topic", Temp, PageContent
@@ -114,7 +114,7 @@ Class page_Column
 			ForTotal = UBound(TempArray)
 
 			For i = 0 To ForTotal
-				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&field=1&keyword=" & server.urlencode(Trim(TempArray(i))) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
+				If Len(TempArray(i)) > 0 Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & server.urlencode(Trim(TempArray(i))) & "'>" & Trim(TempArray(i)) & "</a>&nbsp;"
 			Next
 		End If
 

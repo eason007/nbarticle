@@ -24,13 +24,13 @@ Class page_Article
 		PageContent  = EA_Temp.Load_Template(ArticleInfo(24, 0), 5)
 
 		EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)) & "</strong></a>"
+		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & ArticleInfo(3, 0) & "</strong></a>"
 
 		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
 		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
 
 		If Not IsView Then 
-			TempStr = "<strong>您当前的权限不允许查看该文章，请先 [<a href='<!--Page.Path-->member/login.asp'>登陆</a>] 或 [<a href='<!--Page.Path-->member/register.asp'>注册</a>]。</strong>"
+			TempStr = "<strong>" & SysMsg(11) & "</strong>"
 		Else
 			Call CutContent("\[NextPage([^\]])*\]", ArticleInfo(5, 0))
 
@@ -68,8 +68,6 @@ Class page_Article
 
 			If IsArray(FirstArticle) Then
 				EA_Temp.SetVariable "Article.FirstTopic", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>", PageContent
-			Else
-				EA_Temp.SetVariable "Article.FirstTopic", "暂无", PageContent
 			End If
 		End If
 
@@ -78,8 +76,6 @@ Class page_Article
 
 			If IsArray(NextArticle) Then
 				EA_Temp.SetVariable "Article.NextTopic", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>", PageContent
-			Else
-				EA_Temp.SetVariable "Article.NextTopic", "暂无", PageContent
 			End If
 		End If
 

@@ -48,7 +48,7 @@ Class cls_DBOperation
 
 			CloseDataBase
 
-			Response.Write "对不起，数据连接错误！如果第一次使用，请先运行setup.asp进行系统配置。"
+			Response.Write SysMsg(27)
 			Response.End
 		End If
 	End Sub

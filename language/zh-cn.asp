@@ -15,4 +15,25 @@ SysMsg(8) = "本系统限制数据提交间隔时间为 30 秒，请稍后再发
 SysMsg(9) = "加载模版 $1 时发生错误: $2"
 
 SysMsg(10) = "首页"
+
+SysMsg(11) = "您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp'>登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp'>注册</a>]。"
+
+SysMsg(12) = "共 $1 页"
+SysMsg(13) = "首页"
+SysMsg(14) = "上页"
+SysMsg(15) = "下页"
+SysMsg(16) = "尾页"
+SysMsg(17) = "GO"
+
+SysMsg(18) = "加载站点配置数据错误，系统已关闭。"
+SysMsg(19) = "您的来访ip已被屏蔽，请与管理员联系。"
+SysMsg(20) = "系统读取会员信息时发生错误，系统已关闭。"
+SysMsg(21) = "在写入文件 $1 时发生错误，可能是由于服务器没有打开写入权限，请联系你的服务器管理员。"
+SysMsg(22) = "定时关闭参数格式错误，请与管理员联系。"
+SysMsg(23) = "推荐文章"
+SysMsg(24) = "图片文章"
+SysMsg(25) = "普通文章"
+SysMsg(26) = "24小时内新文章"
+
+SysMsg(27) = "对不起，数据连接错误！如果第一次使用，请先运行setup.asp进行系统配置。"
 %>

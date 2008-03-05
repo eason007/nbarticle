@@ -82,7 +82,7 @@ Class cls_Public
 
 				FoundErr = False
 			Else
-				ErrMsg = "加载站点配置数据错误，系统已关闭。"
+				ErrMsg = SysMsg(18)
 				Call ShowErrMsg(0, 0)
 			End If
 		End If
@@ -136,7 +136,7 @@ Class cls_Public
 
 		Temp=EA_DBO.Get_Ip_LockInfo(Ip)
 		If IsArray(Temp) Then 
-			ErrMsg="您的来访ip已被屏蔽，请与管理员联系。"
+			ErrMsg=SysMsg(19)
 			Call ShowErrMsg(0,0)
 		End If
 	End Sub
@@ -209,7 +209,7 @@ Class cls_Public
 						EA_Ini.Save
 						GroupId=1
 					Else
-						ErrMsg="系统读取会员信息时发生错误，系统已关闭。"
+						ErrMsg=SysMsg(20)
 						Call ShowErrMsg(0,0)
 					End If
 				Else
@@ -312,7 +312,7 @@ Class cls_Public
 		Set S = Nothing
 
 		If Err Then
-			Response.Write "在写入文件 " & sFilePath & " 时发生错误，可能是由于服务器没有打开写入权限，请联系你的服务器管理员。"
+			Response.Write Replace(SysMsg(21), "$1", sFilePath)
 			Response.End
 		End If
 	End Sub
@@ -353,14 +353,14 @@ Class cls_Public
 		TimeArray=Split(TimeStr,"|")
 		
 		If UBound(TimeArray)<>1 Then 
-			ErrMsg="定时关闭参数格式错误，请与管理员联系。"
+			ErrMsg=SysMsg(22)
 			FoundErr=True
 		Else
 			TimeArray(0)=SafeRequest(0,TimeArray(0),0,1,0)
 			TimeArray(1)=SafeRequest(0,TimeArray(1),0,23,0)
 			
 			If TimeArray(0)>TimeArray(1) Then 
-				ErrMsg="定时关闭参数错误，请与管理员联系。"
+				ErrMsg=SysMsg(22)
 				FoundErr=True
 			End If
 
@@ -471,12 +471,12 @@ Class cls_Public
 	Public Function Chk_ArticleType(IsImg,IsTop)
 		Dim TempStr
 		If CBool(IsTop) Then 
-			TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_top.gif"" alt=""推荐文章"" />"
+			TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_top.gif"" alt=""" & SysMsg(23) & """ />"
 		Else
 			If CBool(IsImg) Then 
-				TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_img.gif"" alt=""图片文章"" />"
+				TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_img.gif"" alt=""" & SysMsg(24) & """ />"
 			Else
-				TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_normal.gif"" alt=""普通文章"" />"
+				TempStr=TempStr&"<img src="""&SystemFolder&"images/public/article_normal.gif"" alt=""" & SysMsg(25) & """ />"
 			End If
 		End If
 		
@@ -489,7 +489,7 @@ Class cls_Public
 	'	1、发表时间
 	'****************************************
 	Public Function Chk_ArticleTime(PostTime)
-		If DateDiff("h",PostTime,Now())<=24 Then Chk_ArticleTime="&nbsp;<img src="""&SystemFolder&"images/public/new.gif"" border=0 align=absmiddle alt=""24小时内新文章"">"
+		If DateDiff("h",PostTime,Now())<=24 Then Chk_ArticleTime="&nbsp;<img src="""&SystemFolder&"images/public/new.gif"" alt=""" & SysMsg(26) & """>"
 	End Function
 	
 	'************************************************

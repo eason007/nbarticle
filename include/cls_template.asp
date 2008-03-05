@@ -18,7 +18,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-03
+'= 最后日期：2008-03-05
 '====================================================================
 
 Class cls_Template
@@ -273,15 +273,15 @@ Class cls_Template
 			PageFoot=iCurrentPage+4
 		End If
 		
-		OutStr="<div id=""pageNav""><span class=""total"">共 "&PageCount&" 页</span>&nbsp;"
+		OutStr="<div id=""pageNav""><span class=""total"">" & Replace(SysMsg(12), "$1", PageCount) & "</span>&nbsp;"
 		
 		If iCurrentPage > 1 Then 
 			OutStr=OutStr&"<a href="""
 			OutStr=OutStr&Replace(Url, "$page", "1")
-			OutStr=OutStr&""" title=""首页"" class=""first"">&laquo;</a>&nbsp;"
+			OutStr=OutStr&""" title=""" & SysMsg(13) & """ class=""first"">&laquo;</a>&nbsp;"
 			OutStr=OutStr&"<a href="""
 			OutStr=OutStr&Replace(Url, "$page", iCurrentPage-1)
-			OutStr=OutStr&""" title=""上页"" class=""list"">&lt;</a>&nbsp;"
+			OutStr=OutStr&""" title=""" & SysMsg(14) & """ class=""list"">&lt;</a>&nbsp;"
 		End If
 		
 		For i=PageRoot To PageFoot
@@ -298,32 +298,19 @@ Class cls_Template
 		If CInt(iCurrentPage) <> CInt(PageCount) Then
 			OutStr=OutStr&"<a href="""
 			OutStr=OutStr&Replace(Url, "$page", iCurrentPage+1)
-			OutStr=OutStr&""" title=""下页"" class=""list"">&gt;</a>&nbsp;"
+			OutStr=OutStr&""" title=""" & SysMsg(15) & """ class=""list"">&gt;</a>&nbsp;"
 			OutStr=OutStr&"<a href="""
 			OutStr=OutStr&Replace(Url, "$page", PageCount)
-			OutStr=OutStr&""" title=""尾页"" class=""last"">&raquo;</a>&nbsp;"
+			OutStr=OutStr&""" title=""" & SysMsg(16) & """ class=""last"">&raquo;</a>&nbsp;"
 		End If
 		
 		If PageCount > 1 Then
-			OutStr=OutStr&"&nbsp;<input type=""text"" value="""&iCurrentPage&""" onmouseover=""this.focus();this.select();"" id=""PGNumber"" style=""width: 30px;"" onKeypress=""if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"" />&nbsp;<input type=""button"" value=""GO"" onclick=""if ($('PGNumber').value>0 && $('PGNumber').value<="&PageCount&"){var Url = '" & Url & "';window.location=Url.replace('$page', $('PGNumber').value);}"" />"
+			OutStr=OutStr&"&nbsp;<input type=""text"" value="""&iCurrentPage&""" onmouseover=""this.focus();this.select();"" id=""PGNumber"" style=""width: 30px;"" onKeypress=""if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"" />&nbsp;<input type=""button"" value=""" & SysMsg(17) & """ onclick=""if ($('PGNumber').value>0 && $('PGNumber').value<="&PageCount&"){var Url = '" & Url & "';window.location=Url.replace('$page', $('PGNumber').value);}"" />"
 		End If
 
 		OutStr = OutStr & "</div>"
 
 		PageList=OutStr
-	End Function
-
-	Private Function URLStr(FieldName,FieldValue)
-		If IsArray(FieldName) And IsArray(FieldValue) Then 
-			Dim i
-			Dim ForTotal
-
-			ForTotal = Ubound(FieldName)
-
-			For i = 0 To ForTotal
-				URLStr=URLStr&"&amp;"&Cstr(FieldName(i))&"="&Cstr(FieldValue(i))
-			Next
-		End If
 	End Function
 End Class
 %>
