@@ -27,7 +27,7 @@ Class page_Column
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
 
 		EA_Temp.Title= Info(0, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0))
+		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0), 1)
 
 		EA_Temp.SetVariable "List.ID", ID, PageContent
 		EA_Temp.SetVariable "List.Name", Info(0, 0), PageContent

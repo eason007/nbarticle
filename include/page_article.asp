@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-28
+'= 最后日期：2008-03-05
 '====================================================================
 
 Class page_Article
@@ -24,7 +24,7 @@ Class page_Article
 		PageContent  = EA_Temp.Load_Template(ArticleInfo(24, 0), 5)
 
 		EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0)) & " - 正文"
+		EA_Temp.Nav	 = "<a href=""<!--Page.Path-->"">" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)) & "</strong></a>"
 
 		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
 		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
@@ -50,6 +50,7 @@ Class page_Article
 
 		EA_Temp.SetVariable "Article.ColumnID", ArticleInfo(0, 0), PageContent
 		EA_Temp.SetVariable "Article.ID", ArticleId, PageContent
+		EA_Temp.SetVariable "Article.Url", EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)), PageContent
 		EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)), PageContent
 		EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
 		EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
@@ -57,28 +58,28 @@ Class page_Article
 		EA_Temp.SetVariable "Article.Source", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>", PageContent
 		EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
 		EA_Temp.SetVariable "Article.Content", TempStr, PageContent
-		EA_Temp.SetVariable "Article.TagList", TagList(ArticleInfo(12, 0)), PageContent
+		EA_Temp.SetVariable "Article.Tag", TagList(ArticleInfo(12, 0)), PageContent
 
 		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ArticleId & """></script>", PageContent
 		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ArticleId & """></script>", PageContent
 
-		If EA_Temp.ChkTag("Article.FirstList", PageContent) Then
+		If EA_Temp.ChkTag("Article.FirstTopic", PageContent) Then
 			FirstArticle = EA_DBO.Get_Article_FirstArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(FirstArticle) Then
-				EA_Temp.SetVariable "Article.FirstList", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>", PageContent
+				EA_Temp.SetVariable "Article.FirstTopic", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>", PageContent
 			Else
-				EA_Temp.SetVariable "Article.FirstList", "暂无", PageContent
+				EA_Temp.SetVariable "Article.FirstTopic", "暂无", PageContent
 			End If
 		End If
 
-		If EA_Temp.ChkTag("Article.NextList", PageContent) Then
+		If EA_Temp.ChkTag("Article.NextTopic", PageContent) Then
 			NextArticle  =EA_DBO.Get_Article_NextArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
 
 			If IsArray(NextArticle) Then
-				EA_Temp.SetVariable "Article.NextList", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>", PageContent
+				EA_Temp.SetVariable "Article.NextTopic", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>", PageContent
 			Else
-				EA_Temp.SetVariable "Article.NextList", "暂无", PageContent
+				EA_Temp.SetVariable "Article.NextTopic", "暂无", PageContent
 			End If
 		End If
 

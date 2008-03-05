@@ -521,7 +521,7 @@ Class cls_Public
 		End If
 	End Function
 	
-	Public Function Get_NavByColumnCode(sCode)
+	Public Function Get_NavByColumnCode(sCode, IsSet)
 		Dim StepNum
 		Dim TempStr,TempArray
 		Dim i
@@ -534,7 +534,7 @@ Class cls_Public
 			ForTotal = UBound(TempArray,2)
 
 			For i = 0 To ForTotal
-				If i = ForTotal Then TempArray(1,i) = "<strong>" & TempArray(1,i) & "</strong>"
+				If i = ForTotal And IsSet Then TempArray(1,i) = "<strong>" & TempArray(1,i) & "</strong>"
 
 				TempStr=TempStr&" - <a href="""&Cov_ColumnPath(TempArray(0,i),SysInfo(18))&""">"&TempArray(1,i)&"</a>"
 			Next
