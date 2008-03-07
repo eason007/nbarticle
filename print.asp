@@ -67,18 +67,17 @@ End If
 <meta http-equiv="Content-Language" content="zh-CN">
 <meta name="Keywords" content="<%=Replace(EA_Pub.SysInfo(16),"|",",")&","&ArticleInfo(12,0)%>">
 <meta name="Description" content="<%=ArticleInfo(4,0)%>">
-<meta name="Author" content="www.nbarticle.com">
 </head>
 <body> 
 <table width="778" border="0" cellspacing="0" cellpadding="0"> 
 <tr> 
-  <td> <!--PrintBegin--> 
+  <td><!--PrintBegin--> 
     <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
       <tr> 
         <td> <h3><%=EA_Pub.Add_ArticleColor(ArticleInfo(17,0),ArticleInfo(3,0))%></h3></td> 
       </tr> 
       <tr> 
-        <td>作者:<%=ArticleInfo(8,0)%>　来源:<%=ArticleInfo(16,0)%>　最后修改于：<i><%=ArticleInfo(13,0)%></i>　<a href=# onClick="window.print();">点击开始打印</a></td> 
+        <td>作者:<%=ArticleInfo(8,0)%>　来源:<%=ArticleInfo(16,0)%>　最后修改于：<i><%=ArticleInfo(13,0)%></i>　<a href="javascript:vod();" onClick="window.print();">点击开始打印</a></td> 
       </tr> 
       <tr> 
         <td> <hr size="1" noshade color="#999999"> 
