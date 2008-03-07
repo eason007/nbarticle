@@ -464,29 +464,50 @@ Sub Save
 			rs.update
 		Rs.Close:Set Rs=Nothing
 
-		If PostId=0 Then 
-			If IsPass=0 Then 
-				If iDataBaseType<>2 Then EA_DBO.Set_System_ManagerTopicTotal 1
+		ArticleID = EA_M_DBO.GetArticleID(TrueTime, ColumnId, Byter)
+		If IsArray(ArticleID) Then
+			If PostId=0 Then 
+				If IsPass=0 Then 
+					If iDataBaseType<>2 Then EA_DBO.Set_System_ManagerTopicTotal 1
 
-				EA_DBO.Set_Column_ManagerTopicTotal ColumnId,1
-			Else
-				If iDataBaseType<>2 Then EA_DBO.Set_System_TopicTotal 1
+					EA_DBO.Set_Column_ManagerTopicTotal ColumnId,1
+				Else
+					If iDataBaseType<>2 Then EA_DBO.Set_System_TopicTotal 1
 
-				EA_DBO.Set_Column_TopicTotal ColumnId,1
+					EA_DBO.Set_Column_TopicTotal ColumnId,1
+				End If
 			End If
-		End If
 
-		Application.Lock 
-		Application(sCacheName&"IsFlush")=1
-		Application.UnLock 
-		
-		Call EA_Pub.Close_Obj
-		Set EA_Pub=Nothing
+			
+			Call SetTag(KeyWord, ArticleID(0, 0), ColumnId)
+
+
+			Application.Lock 
+			Application(sCacheName&"IsFlush")=1
+			Application.UnLock 
+			
+			Call EA_Pub.Close_Obj
+			Set EA_Pub=Nothing
 	
-		Response.Write PostId
+			Response.Write "0"
+		Else
+			Response.Write "-1"
+		End If
 	End If
 
 	Response.End
+End Sub
+
+Sub SetTag (TagList, ArticleID, ColumnID) 
+	Dim TempArray, i, 
+
+	If Len(TagList) > 0 Then
+		TempArray = Split(Id, ",")
+
+		For i = 0 To ForTotal
+			EA_M_DBO.Set_Tag_Create 
+		Next
+	End If
 End Sub
 
 Sub Batch()

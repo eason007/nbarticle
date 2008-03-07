@@ -1021,6 +1021,23 @@ Class Cls_Manager_DBOperation
 		
 		DB_Execute SQL
 	End Sub
+
+	Public Function Get_ArticleID (iTrueTime, iColumnID, iByte)
+		SQL = "SELECT ID FROM NB_Content"
+		SQL = SQL & " WHERE TrueTime = " & iTrueTime
+		SQL = SQL & " AND ColumnId = " & iColumnID
+		SQL = SQL & " AND byte = " & iByte
+
+		Get_ArticleID = DB_Query(SQL)
+	End Function
+
+	Public Sub Set_Tag_Create (sTag, iArticleID, iColumnID)
+		SQL = "INSERT INTO [NB_Tags]"
+		SQL = SQL &" ([Name], ArticleID, ColumnID)"
+		SQL = SQL & " VALUES ('" & sTag & "', " & iArticleID & ", " & iColumnID & ")"
+
+		DB_Execute SQL
+	End Sub
 	
 '*******************************************************************
 	Private Sub chkDB ()
