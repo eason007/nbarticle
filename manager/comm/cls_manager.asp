@@ -10,10 +10,13 @@
 '= 摘    要：后台-管理后台类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-02-11
+'= 最后日期：2008-03-10
 '====================================================================
 
 Class cls_Manager
+	Public MasterID
+	Public MasterName
+
 	Sub Chk_IsMaster()
 		Dim Temp
 
@@ -35,6 +38,9 @@ Class cls_Manager
 				
 				Admin_Power=Temp(0,0)
 				Column_Power=Temp(1,0)
+
+				MasterID	= Session(sCacheName&"master_id")
+				MasterName	= Session(sCacheName&"master_name")
 			End If
 		End If
 	End Sub

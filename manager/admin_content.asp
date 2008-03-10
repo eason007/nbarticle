@@ -274,6 +274,7 @@ Sub Add
 		Call EA_M_XML.AppInfo("adddate",Now())
 		Call EA_M_XML.AppInfo("author",EA_Pub.SysInfo(21))
 		Call EA_M_XML.AppInfo("viewnum","0")
+		Call EA_M_XML.AppInfo("authorid","-" & EA_Manager.MasterID)
 
 		ArticleTemplate_Id=EA_Pub.SafeRequest(2,"temp_id",0,0,0)
 		If ArticleTemplate_Id > 0 Then Call EA_M_XML.AppInfo("Content",EA_M_DBO.Get_ArticleTemp_Info(ArticleTemplate_Id)(1,0))
@@ -464,36 +465,32 @@ Sub Save
 			rs.update
 		Rs.Close:Set Rs=Nothing
 
-		ArticleID = EA_M_DBO.Get_ArticleID(AddDate, ColumnId, Byter)
+		If PostId=0 Then 
+			If IsPass=0 Then 
+				If iDataBaseType<>2 Then EA_DBO.Set_System_ManagerTopicTotal 1
 
-		If IsArray(ArticleID) Then
-			If PostId=0 Then 
-				If IsPass=0 Then 
-					If iDataBaseType<>2 Then EA_DBO.Set_System_ManagerTopicTotal 1
+				EA_DBO.Set_Column_ManagerTopicTotal ColumnId,1
+			Else
+				If iDataBaseType<>2 Then EA_DBO.Set_System_TopicTotal 1
 
-					EA_DBO.Set_Column_ManagerTopicTotal ColumnId,1
-				Else
-					If iDataBaseType<>2 Then EA_DBO.Set_System_TopicTotal 1
-
-					EA_DBO.Set_Column_TopicTotal ColumnId,1
-				End If
+				EA_DBO.Set_Column_TopicTotal ColumnId,1
 			End If
-
-			
-			Call SetTag(KeyWord, ArticleID(0, 0), ColumnId)
-
-
-			Application.Lock 
-			Application(sCacheName&"IsFlush")=1
-			Application.UnLock 
-			
-			Call EA_Pub.Close_Obj
-			Set EA_Pub=Nothing
-	
-			Response.Write "0"
-		Else
-			Response.Write "-1"
 		End If
+
+		If PostId=0 Then 
+			ArticleID = EA_M_DBO.Get_ArticleID(AuthorId, ColumnId, Byter)
+
+			If IsArray(ArticleID) Then Call SetTag(KeyWord, ArticleID(0, 0), ColumnId)
+		End If
+
+		Response.Write PostId
+
+		Application.Lock 
+		Application(sCacheName&"IsFlush")=1
+		Application.UnLock 
+		
+		Call EA_Pub.Close_Obj
+		Set EA_Pub=Nothing
 	End If
 
 	Response.End

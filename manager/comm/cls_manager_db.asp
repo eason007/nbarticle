@@ -1022,9 +1022,9 @@ Class Cls_Manager_DBOperation
 		DB_Execute SQL
 	End Sub
 
-	Public Function Get_ArticleID (dAddDate, iColumnID, iByte)
+	Public Function Get_ArticleID (iAuthorID, iColumnID, iByte)
 		SQL = "SELECT ID FROM NB_Content"
-		SQL = SQL & " WHERE AddDate = '" & dAddDate & "'"
+		SQL = SQL & " WHERE authorid = " & iAuthorID
 		SQL = SQL & " AND ColumnId = " & iColumnID
 		SQL = SQL & " AND byte = " & iByte
 
