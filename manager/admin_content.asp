@@ -12,7 +12,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-10
 '====================================================================
 
 Response.Clear
@@ -341,11 +341,9 @@ Sub Add
 End Sub
 
 Sub Save
-	Dim Title,Author,Text,KeyWord,ColumnId,ColumnName,ColumnCode,Byter,TColor,IsImg,ImgPath,IsTop,IsDis,OutUrl,IsOut,AuthorId,ViewNum,AddDate,IsPass,Source,SourceUrl,Summary, SubTitle, SubUrl
+	Dim Title,Author,Text,KeyWord,ColumnId,ColumnName,ColumnCode,Byter,TColor,IsImg,ImgPath,IsTop,IsDis,OutUrl,IsOut,AuthorId,ViewNum,AddDate,IsPass,Source,SourceUrl,Summary, SubTitle, SubUrl, ArticleID
 	Dim PostId,TempStr,TrueTime,IsSaveAs
 	Dim Key,i
-
-	If Request.Form("Column")="" Or Request.Form("Column")="0" Then Response.Write "-1":Response.End
 
 	FoundErr=False
 	
@@ -379,6 +377,8 @@ Sub Save
 	Summary		= Left(Summary,140)
 	IsSaveAs	= EA_Pub.SafeRequest(2,"saveas",0,0,0)
 	Byter		= Lenb(Text)
+
+	If ColumnId = "" Or ColumnId = "0" Then FoundErr= True
 
 	If PostId<>0 Then
 		If InStr(1,","&Column_Power&",",","&ColumnId&"3,")<=0 Then 
@@ -464,7 +464,8 @@ Sub Save
 			rs.update
 		Rs.Close:Set Rs=Nothing
 
-		ArticleID = EA_M_DBO.GetArticleID(TrueTime, ColumnId, Byter)
+		ArticleID = EA_M_DBO.Get_ArticleID(AddDate, ColumnId, Byter)
+
 		If IsArray(ArticleID) Then
 			If PostId=0 Then 
 				If IsPass=0 Then 
@@ -499,13 +500,14 @@ Sub Save
 End Sub
 
 Sub SetTag (TagList, ArticleID, ColumnID) 
-	Dim TempArray, i, 
+	Dim TempArray, i
 
 	If Len(TagList) > 0 Then
-		TempArray = Split(Id, ",")
+		TempArray = Split(TagList, ",")
+		ForTotal = UBound(TempArray)
 
 		For i = 0 To ForTotal
-			EA_M_DBO.Set_Tag_Create 
+			If Len(Trim(TempArray(i))) > 0 Then EA_M_DBO.Set_Tag_Create Trim(TempArray(i)), ArticleID, ColumnID
 		Next
 	End If
 End Sub

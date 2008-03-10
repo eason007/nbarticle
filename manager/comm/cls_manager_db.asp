@@ -1022,9 +1022,9 @@ Class Cls_Manager_DBOperation
 		DB_Execute SQL
 	End Sub
 
-	Public Function Get_ArticleID (iTrueTime, iColumnID, iByte)
+	Public Function Get_ArticleID (dAddDate, iColumnID, iByte)
 		SQL = "SELECT ID FROM NB_Content"
-		SQL = SQL & " WHERE TrueTime = " & iTrueTime
+		SQL = SQL & " WHERE AddDate = '" & dAddDate & "'"
 		SQL = SQL & " AND ColumnId = " & iColumnID
 		SQL = SQL & " AND byte = " & iByte
 
@@ -1051,7 +1051,7 @@ Class Cls_Manager_DBOperation
 	Public Function DB_Execute(sSQL)
 		chkDB()
 
-		'On Error Resume Next
+		On Error Resume Next
 		Err.Clear 
 		
 		Conn.Execute(sSQL)
@@ -1076,7 +1076,7 @@ Class Cls_Manager_DBOperation
 	Public Function DB_Query(sSQL)
 		chkDB()
 
-		'On Error Resume Next
+		On Error Resume Next
 		Err.Clear 
 
 		Set Rs=Conn.Execute(sSQL)
@@ -1105,7 +1105,7 @@ Class Cls_Manager_DBOperation
 	Public Function DB_CutPageQuery(sSQL,iPageNum,iPageSize)
 		chkDB()
 
-		'On Error Resume Next
+		On Error Resume Next
 		Err.Clear 
 		If Rs.State=1 Then Rs.Close
 

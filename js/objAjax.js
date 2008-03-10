@@ -103,6 +103,11 @@ function ajaxObject() {
 					else{
 						alert("Request Fail\nMethod:"+obj.objType+"\nUrl:"+obj.URL+"\nData:"+obj.dateVal);
 						$("divLoading").style.display="NONE";
+
+						if (obj.debug && $("divDebug"))
+						{
+							$("divDebug").value = obj.dateVal;
+						}
 						
 						errCount = 0;
 						return false;

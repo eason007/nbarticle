@@ -88,6 +88,7 @@ function formObject() {
 		if(!returnStr) {
 			if(this.postUrl && this.postUrl!="") {
 				aoForm = new ajaxObject();
+				aoForm.debug = this.debug;
 				aoForm.URL = this.postUrl;
 				if(appendArg){
 					aoForm.dateVal = postStr+appendArg;
