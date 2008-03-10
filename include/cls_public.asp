@@ -909,5 +909,29 @@ Class cls_Public
 		Set BytesStream	 = Nothing
 		Set StringReturn = Nothing
 	End Function
+
+	Public Function DistinctStr (sStr)
+		Dim SplitStr
+		Dim TempArray, i, ForTotal
+		Dim Result
+
+		SplitStr = ","
+		TempArray = Split(sStr, SplitStr)
+		ForTotal = UBound(TempArray)
+		sStr = sStr & SplitStr
+		Result = SplitStr
+		
+		For i = 0 To ForTotal
+			TempArray(i) = Trim(TempArray(i))
+
+			If Len(TempArray(i)) > 0 Then
+				If InStr(Result, SplitStr & TempArray(i) & SplitStr) = 0 Then Result = Result & TempArray(i) & SplitStr
+			End If
+		Next
+
+		Result = Mid(Result, 1 + Len(SplitStr), Len(Result) - (Len(SplitStr) * 2))
+
+		DistinctStr = Result
+	End Function
 End Class
 %>

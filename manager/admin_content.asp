@@ -350,14 +350,16 @@ Sub Save
 	
 	PostId		= EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Title		= EA_Pub.SafeRequest(2,"title",1,"",1)
-	Author		= EA_Pub.SafeRequest(2,"author",1,"",1)
 	SubTitle	= EA_Pub.SafeRequest(2,"subtitle",1,"",1)
 	SubUrl		= EA_Pub.SafeRequest(2,"suburl",1,"",1)
 
 	Text		= Request.Form("Content")
 	Text		= EA_Pub.BadWords_Filter(Text)
 
-	KeyWord		= EA_Pub.SafeRequest(2,"keyword",1,"",1)
+	Summary		= EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2,"summary",1,"",2))
+	Summary		= Left(Summary,140)
+
+	KeyWord		= EA_Pub.DistinctStr(EA_Pub.SafeRequest(2,"keyword",1,"",1))
 
 	ColumnId	= EA_Pub.SafeRequest(2,"Column",0,0,0)
 	TempStr		= EA_DBO.Get_Column_Info(ColumnId)
@@ -368,14 +370,13 @@ Sub Save
 	ImgPath		= EA_Pub.SafeRequest(2,"img",1,"",1)
 	IsTop		= EA_Pub.SafeRequest(2,"istop",0,0,0)
 	OutUrl		= EA_Pub.SafeRequest(2,"outurl",1,"",1)
+	Author		= EA_Pub.SafeRequest(2,"author",1,"",1)
 	AuthorId	= EA_Pub.SafeRequest(2,"authorid",0,0,0)
 	ViewNum		= EA_Pub.SafeRequest(2,"viewnum",0,0,0)
 	AddDate		= EA_Pub.SafeRequest(2,"adddate",2,Now(),0)
 	IsPass		= EA_Pub.SafeRequest(2,"ispass",0,0,0)
 	Source		= EA_Pub.SafeRequest(2,"source",1,"",1)
 	SourceUrl	= EA_Pub.SafeRequest(2,"sourceurl",1,"",1)
-	Summary		= EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2,"summary",1,"",2))
-	Summary		= Left(Summary,140)
 	IsSaveAs	= EA_Pub.SafeRequest(2,"saveas",0,0,0)
 	Byter		= Lenb(Text)
 
