@@ -496,15 +496,22 @@ Sub Save
 	Response.End
 End Sub
 
-Sub SetTag (TagList, ArticleID, ColumnID) 
+Sub SetTag (KeyWord, ArticleID, ColumnID) 
 	Dim TempArray, i
+	Dim TagList
 
-	If Len(TagList) > 0 Then
-		TempArray = Split(TagList, ",")
+	If Len(KeyWord) > 0 Then
+		TempArray = Split(KeyWord, ",")
 		ForTotal = UBound(TempArray)
+		TagList	= ","
 
 		For i = 0 To ForTotal
-			If Len(Trim(TempArray(i))) > 0 Then EA_M_DBO.Set_Tag_Create Trim(TempArray(i)), ArticleID, ColumnID
+			TempArray(i) = Trim(TempArray(i))
+
+			If Len(TempArray(i)) > 0 And InStr(TagList, "," & TempArray(i) & ",") = 0 Then 
+				EA_M_DBO.Set_Tag_Create TempArray(i), ArticleID, ColumnID
+				TagList = TagList & TempArray(i) & ","
+			End If
 		Next
 	End If
 End Sub
