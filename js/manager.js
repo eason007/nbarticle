@@ -103,6 +103,8 @@ function ajaxChangeRightContent(pageUrl, pageType, actionMessage, isPageForceLoa
 	else{
 		aoControl.ajaxGetDate(aoControl);
 	}
+
+	$("divLoading").style.display = "none";
 }
 
 //内容插入页面中

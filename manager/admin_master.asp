@@ -196,7 +196,7 @@ Sub Add
 
 			If j Mod 4 =0 Then RN = "<br>"
 
-			EA_Temp.SetVariable "MenuName",str_LeftMenu(i,j) & RN,Temp1
+			EA_Temp.SetVariable "MenuName",Replace(str_LeftMenu(i,j), "\'", "'") & RN,Temp1
 			EA_Temp.SetVariable "Power",i&j,Temp1
 
 			If InStr(Power,i&j&",")>0 Then EA_Temp.SetVariable "Power_" & i & j,"checked",Temp1

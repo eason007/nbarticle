@@ -1,7 +1,4 @@
 <script type="text/javascript">
-//objForm.debug = true;
-objForm.postUrl = "./admin_master.asp";
-
 function initTabContent(){
 	setTabTitle(currentTab, tabTitle[151]);
 
@@ -22,6 +19,9 @@ function postForm(){
 
 	return false;
 }
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_master.asp";
 </script>
 
 <form id="form1" name="form1" method="get" onsubmit="return false;">
@@ -50,14 +50,14 @@ function postForm(){
 				<tr>
 				  <td align="right">{$Language_Master_Password$}:</td>
 				  <td>&nbsp;<input type="password" name="password"></td>
-				  <TD class=vsplit_line width=1></TD>
-				  <TD class=describe_txt width=300>&nbsp;{$Language_Master_AddMaster_PasswordInfo$}</TD>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;{$Language_Master_AddMaster_PasswordInfo$}</TD>
 				</tr>
 				<tr>
 				  <td align="right">{$Language_Master_State$}:</td>
 				  <td>&nbsp;{$Language_Comm_Enabled$}<input type="radio" name="State" value="1"{$State_1$}>{$Language_Comm_Disabled$}<input type="radio" name="State" value="0"{$State_0$}></td>
-				  <TD class=vsplit_line width=1></TD>
-				  <TD class=describe_txt width=300>&nbsp;</TD>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;</TD>
 				</tr>
 			  </table>
 		</fieldset>
