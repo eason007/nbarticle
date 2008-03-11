@@ -91,7 +91,7 @@ Sub Add
 	PostId=EA_Pub.SafeRequest(2,"ID",0,0,0)
 	Call EA_M_XML.AppInfo("ID",PostId)
 	
-	Temp=EA_M_DBO.Get_AdSense_Info(PostId)
+	Temp=EA_DBO.Get_AdSense_Info(PostId)
 	If IsArray(Temp) Then 
 		Call EA_M_XML.AppInfo("Title",Temp(0,0))
 		Call EA_M_XML.AppInfo("Content",Temp(1,0))

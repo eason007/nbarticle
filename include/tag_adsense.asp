@@ -28,7 +28,7 @@ Sub AdSenseSingle (ByRef PageContent)
 		Parameter = EA_Temp.GetParameter("AdSense.Single", PageContent)
 		If Not IsArray(Parameter) Then Exit Do
 
-		List = EA_DBO.Get_AdSense(Parameter(0))
+		List = EA_DBO.Get_AdSense_Info(Parameter(0))
 		If Not IsArray(List) Then 
 			Exit Do
 		Else

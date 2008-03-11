@@ -931,22 +931,6 @@ Class Cls_Manager_DBOperation
 		DB_Execute SQL
 	End Sub
 	
-	Public Function Get_AdSense_Info(iAdSense_Id)
-		Select Case iDataBaseType
-		Case 0
-			Sql="Exec vi_Select_Manager_AdSenseInfo "&iAdSense_Id
-		Case 1
-			SQL="SELECT Title, Content"
-			SQL=SQL&" FROM [NB_AdSense]"
-			SQL=SQL&" WHERE [Id]="&iAdSense_Id
-		Case 2
-			SQL="Exec sp_EliteArticle_AdSense_Info_Select"
-			SQL=SQL&" @AdSense_Id="&iAdSense_Id
-		End Select
-		
-		Get_AdSense_Info=DB_Query(SQL)
-	End Function
-	
 	Public Function Get_AdSense_List(iPageNum,iPageSize)
 		Dim Temp
 		
@@ -1038,6 +1022,23 @@ Class Cls_Manager_DBOperation
 
 		DB_Execute SQL
 	End Sub
+
+	Public Function Get_FlorilegiumStat(s_AName,i_AId)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Exec vi_Select_FlorilegiumStat "&i_AId&",'"&s_AName&"'"
+		Case 1
+			SQL="SELECT Count([Id])"
+			SQL=SQL&" FROM NB_Content"
+			SQL=SQL&" WHERE AuthorId="&i_AId&" And Author='"&s_AName&"' And IsPass=1 And IsDel=0"
+		Case 2
+			SQL="Exec sp_EliteArticle_Florilegium_Total_Select"
+			SQL=SQL&" @Florilegium_AuthorName='"&s_AName&"'"
+			SQL=SQL&",@Florilegium_AuthorId="&i_AId
+		End Select
+		
+		Get_FlorilegiumStat=DB_Query(SQL)
+	End Function
 	
 '*******************************************************************
 	Private Sub chkDB ()

@@ -158,7 +158,7 @@ Sub Add
 		Call EA_M_XML.AppInfo("State",Temp(9,0))
 	End If
 
-	ArticleCount=EA_DBO.Get_FlorilegiumStat(Temp(6,0),PostId)(0,0)
+	ArticleCount=EA_M_DBO.Get_FlorilegiumStat(Temp(6,0),PostId)(0,0)
 	Call EA_M_XML.AppElements("ArticleCount",ArticleCount)
 	
 	Temp=EA_M_DBO.Get_Group_List()
