@@ -1,6 +1,5 @@
 <!--#Include File="../conn.asp" -->
 <!--#Include File="comm/inc.asp" -->
-<!--#include file="../include/_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -73,24 +72,22 @@ Call EA_Pub.Close_Obj
 Set EA_Pub=Nothing
 
 Sub BackUpDataBase
-	Dim Template
-	Set Template=New cls_NEW_TEMPLATE
+	PageContent=EA_Temp.Load_Template_File("admin_data_backup.htm")
 
-	PageContent=Template.LoadTemplate("admin_data_backup.htm")
+	EA_Temp.SetVariable "Language_OperationNotice",str_OperationNotice,PageContent
+	EA_Temp.SetVariable "Language_Data_Backup_Help",str_Data_Backup_Help,PageContent
 
-	Template.SetVariable "Language_OperationNotice",str_OperationNotice,PageContent
-	Template.SetVariable "Language_Data_Backup_Help",str_Data_Backup_Help,PageContent
+	EA_Temp.SetVariable "Language_Data_Backup_Title",str_Data_Backup_Title,PageContent
+	EA_Temp.SetVariable "Language_Data_Backup_BackupFolder",str_Data_Backup_BackupFolder,PageContent
+	EA_Temp.SetVariable "Language_Data_Backup_BackupFileName",str_Data_Backup_BackupFileName,PageContent
 
-	Template.SetVariable "Language_Data_Backup_Title",str_Data_Backup_Title,PageContent
-	Template.SetVariable "Language_Data_Backup_BackupFolder",str_Data_Backup_BackupFolder,PageContent
-	Template.SetVariable "Language_Data_Backup_BackupFileName",str_Data_Backup_BackupFileName,PageContent
+	EA_Temp.SetVariable "Language_Comm_Save_Button",str_Comm_Save_Button,PageContent
 
-	Template.SetVariable "Language_Comm_Save_Button",str_Comm_Save_Button,PageContent
+	EA_Temp.SetVariable "Date",Date(),PageContent
 
-	Template.SetVariable "Date",Date(),PageContent
+	EA_Temp.BaseReplace PageContent
 
-	Template.BaseReplace PageContent
-	Template.OutStr PageContent
+	Response.Write PageContent
 End Sub
 
 Sub Execute
