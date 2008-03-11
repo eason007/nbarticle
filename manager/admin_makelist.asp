@@ -1,7 +1,5 @@
 <!--#Include File="../conn.asp" -->
 <!--#Include File="comm/inc.asp" -->
-<!--#Include File="../include/cls_template.asp"-->
-<!--#include file="../include/_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -100,11 +98,8 @@ Sub MarkList
 	
 	If Not rs.eof And Not rs.bof Then 
 		ColumnList=Rs.GetRows()
-		
-		Dim Template
-		Set Template=New cls_NEW_TEMPLATE
 
-		PageContent=Template.LoadTemplate("admin_makelist_view.htm")
+		PageContent=EA_Temp.LoadTemplate("admin_makelist_view.htm")
 
 		Template.SetVariable "ColumnTotal",Ubound(ColumnList,2)+1,PageContent
 		Template.SetVariable "Language_MakeList_Column",str_MakeList_Column,PageContent
