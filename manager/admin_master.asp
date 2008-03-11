@@ -1,7 +1,6 @@
 <!--#Include File="../conn.asp" -->
 <!--#Include File="comm/inc.asp" -->
 <!--#Include File="../include/md5.asp" -->
-<!--#include file="../include/_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -26,7 +25,7 @@ End If
 
 Dim Action
 Dim ForTotal
-Action=Request.Form("action")
+Action=Request("action")
 
 Select Case LCase(Action)
 Case "add"
@@ -118,42 +117,42 @@ Sub Add
 		Power=Power&","
 	End If
 
-	Dim Template
-	Set Template=New cls_NEW_TEMPLATE
+	PageContent=EA_Temp.Load_Template_File("admin_master_option.htm")
 
-	PageContent=Template.LoadTemplate("admin_master_option.htm")
+	EA_Temp.P_Prefix = "{$"
+	EA_Temp.P_Suffix = "$}"
 
-	Template.SetVariable "Language_Comm_Save_Button",str_Comm_Save_Button,PageContent
-	Template.SetVariable "Language_Comm_Return_Button",str_Comm_Return_Button,PageContent
-	Template.SetVariable "Language_Comm_Enabled",str_Comm_Enabled,PageContent
-	Template.SetVariable "Language_Comm_Disabled",str_Comm_Disabled,PageContent
-	Template.SetVariable "Language_Comm_SelectAll",str_Comm_SelectAll,PageContent
+	EA_Temp.SetVariable "Language_Comm_Save_Button",str_Comm_Save_Button,PageContent
+	EA_Temp.SetVariable "Language_Comm_Return_Button",str_Comm_Return_Button,PageContent
+	EA_Temp.SetVariable "Language_Comm_Enabled",str_Comm_Enabled,PageContent
+	EA_Temp.SetVariable "Language_Comm_Disabled",str_Comm_Disabled,PageContent
+	EA_Temp.SetVariable "Language_Comm_SelectAll",str_Comm_SelectAll,PageContent
 
-	Template.SetVariable "Language_OperationNotice",str_OperationNotice,PageContent
-	Template.SetVariable "Language_Master_Help",str_Master_Help,PageContent
+	EA_Temp.SetVariable "Language_OperationNotice",str_OperationNotice,PageContent
+	EA_Temp.SetVariable "Language_Master_Help",str_Master_Help,PageContent
 
-	Template.SetVariable "Language_Master_AccountList",str_Master_AccountList,PageContent
-	Template.SetVariable "Language_Master_AddAccount",str_Master_AddAccount,PageContent
+	EA_Temp.SetVariable "Language_Master_AccountList",str_Master_AccountList,PageContent
+	EA_Temp.SetVariable "Language_Master_AddAccount",str_Master_AddAccount,PageContent
 
-	Template.SetVariable "Language_Master_EditInfo",str_Master_EditInfo,PageContent
-	Template.SetVariable "Language_Master_Account",str_Master_Account,PageContent
-	Template.SetVariable "Language_Master_AddMaster_AccountInfo",str_Master_AddMaster_AccountInfo,PageContent
-	Template.SetVariable "Language_Master_Password",str_Master_Password,PageContent
-	Template.SetVariable "Language_Master_AddMaster_PasswordInfo",str_Master_AddMaster_PasswordInfo,PageContent
-	Template.SetVariable "Language_Master_State",str_Master_State,PageContent
-	Template.SetVariable "Language_Master_ColumnPowerOption",str_Master_ColumnPowerOption,PageContent
-	Template.SetVariable "Language_Master_MenuPowerOption",str_Master_MenuPowerOption,PageContent
+	EA_Temp.SetVariable "Language_Master_EditInfo",str_Master_EditInfo,PageContent
+	EA_Temp.SetVariable "Language_Master_Account",str_Master_Account,PageContent
+	EA_Temp.SetVariable "Language_Master_AddMaster_AccountInfo",str_Master_AddMaster_AccountInfo,PageContent
+	EA_Temp.SetVariable "Language_Master_Password",str_Master_Password,PageContent
+	EA_Temp.SetVariable "Language_Master_AddMaster_PasswordInfo",str_Master_AddMaster_PasswordInfo,PageContent
+	EA_Temp.SetVariable "Language_Master_State",str_Master_State,PageContent
+	EA_Temp.SetVariable "Language_Master_ColumnPowerOption",str_Master_ColumnPowerOption,PageContent
+	EA_Temp.SetVariable "Language_Master_MenuPowerOption",str_Master_MenuPowerOption,PageContent
 
-	Template.SetVariable "Language_Master_Column_Add",str_Master_Column_Add,PageContent
-	Template.SetVariable "Language_Master_Column_Manager",str_Master_Column_Manager,PageContent
-	Template.SetVariable "Language_Master_Column_Edit",str_Master_Column_Edit,PageContent
-	Template.SetVariable "Language_Master_Column_Del",str_Master_Column_Del,PageContent
+	EA_Temp.SetVariable "Language_Master_Column_Add",str_Master_Column_Add,PageContent
+	EA_Temp.SetVariable "Language_Master_Column_Manager",str_Master_Column_Manager,PageContent
+	EA_Temp.SetVariable "Language_Master_Column_Edit",str_Master_Column_Edit,PageContent
+	EA_Temp.SetVariable "Language_Master_Column_Del",str_Master_Column_Del,PageContent
 
-	Template.SetVariable "MasterID",PostId,PageContent
-	Template.SetVariable "MasterAccount",BackName,PageContent
-	Template.SetVariable "State_" & Abs(CInt(State))," checked",PageContent
+	EA_Temp.SetVariable "MasterID",PostId,PageContent
+	EA_Temp.SetVariable "MasterAccount",BackName,PageContent
+	EA_Temp.SetVariable "State_" & Abs(CInt(State))," checked",PageContent
 
-	ListBlock=Template.GetBlock("list",PageContent)
+	ListBlock=EA_Temp.GetBlock("list",PageContent)
 
 	ColumnList=EA_DBO.Get_Column_List()
 	If IsArray(ColumnList) Then
@@ -168,27 +167,27 @@ Sub Add
 			Level=(Len(ColumnList(2,i))/4-1)*4
 			ColumnName = ColumnName & String(Level,"-")
 
-			Template.SetVariable "ColumnID",ColumnList(0,i),Temp
-			Template.SetVariable "ColumnName",ColumnName & ColumnList(1,i),Temp
+			EA_Temp.SetVariable "ColumnID",ColumnList(0,i),Temp
+			EA_Temp.SetVariable "ColumnName",ColumnName & ColumnList(1,i),Temp
 
-			If InStr(Admin_Power,","&ColumnList(0,i)&"1,")>0 Then Template.SetVariable "Power_" & ColumnList(0,i) & "_1","checked",Temp
-			If InStr(Admin_Power,","&ColumnList(0,i)&"2,")>0 Then Template.SetVariable "Power_" & ColumnList(0,i) & "_2","checked",Temp
-			If InStr(Admin_Power,","&ColumnList(0,i)&"3,")>0 Then Template.SetVariable "Power_" & ColumnList(0,i) & "_3","checked",Temp
-			If InStr(Admin_Power,","&ColumnList(0,i)&"4,")>0 Then Template.SetVariable "Power_" & ColumnList(0,i) & "_4","checked",Temp
+			If InStr(Admin_Power,","&ColumnList(0,i)&"1,")>0 Then EA_Temp.SetVariable "Power_" & ColumnList(0,i) & "_1","checked",Temp
+			If InStr(Admin_Power,","&ColumnList(0,i)&"2,")>0 Then EA_Temp.SetVariable "Power_" & ColumnList(0,i) & "_2","checked",Temp
+			If InStr(Admin_Power,","&ColumnList(0,i)&"3,")>0 Then EA_Temp.SetVariable "Power_" & ColumnList(0,i) & "_3","checked",Temp
+			If InStr(Admin_Power,","&ColumnList(0,i)&"4,")>0 Then EA_Temp.SetVariable "Power_" & ColumnList(0,i) & "_4","checked",Temp
 
-			Template.SetBlock "list",Temp,PageContent
+			EA_Temp.SetBlock "list",Temp,PageContent
 		Next
     End If
-	Template.CloseBlock "list",PageContent
+	EA_Temp.CloseBlock "list",PageContent
 
 
-	ListBlock=Template.GetBlock("list1",PageContent)
+	ListBlock=EA_Temp.GetBlock("list1",PageContent)
 	ForTotal = Ubound(str_LeftMenu)-1
 
 	For i=0 To ForTotal
 		Temp=ListBlock
 
-		ListBlock1=Template.GetBlock("list2",Temp)
+		ListBlock1=EA_Temp.GetBlock("list2",Temp)
 		For j=1 To Ubound(str_LeftMenu,2)
 			If IsEmpty(str_LeftMenu(i,j)) Then Exit For
 			Temp1=ListBlock1
@@ -197,24 +196,25 @@ Sub Add
 
 			If j Mod 4 =0 Then RN = "<br>"
 
-			Template.SetVariable "MenuName",str_LeftMenu(i,j) & RN,Temp1
-			Template.SetVariable "Power",i&j,Temp1
+			EA_Temp.SetVariable "MenuName",str_LeftMenu(i,j) & RN,Temp1
+			EA_Temp.SetVariable "Power",i&j,Temp1
 
-			If InStr(Power,i&j&",")>0 Then Template.SetVariable "Power_" & i & j,"checked",Temp1
+			If InStr(Power,i&j&",")>0 Then EA_Temp.SetVariable "Power_" & i & j,"checked",Temp1
 			
-			Template.SetBlock "list2",Temp1,Temp
+			EA_Temp.SetBlock "list2",Temp1,Temp
 		Next
-		Template.CloseBlock "list2",Temp
+		EA_Temp.CloseBlock "list2",Temp
 
-		Template.SetVariable "MenuName",str_LeftMenu(i,0),Temp
+		EA_Temp.SetVariable "MenuName",str_LeftMenu(i,0),Temp
 
-		Template.SetBlock "list1",Temp,PageContent
+		EA_Temp.SetBlock "list1",Temp,PageContent
 	Next
-	Template.CloseBlock "list1",PageContent
+	EA_Temp.CloseBlock "list1",PageContent
 	
 
-	Template.BaseReplace PageContent
-	Template.OutStr PageContent
+	EA_Temp.Replace_PublicTag PageContent
+
+	Response.Write PageContent
 End Sub
 
 Sub Save

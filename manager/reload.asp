@@ -1,6 +1,5 @@
 <!--#Include File="../conn.asp" -->
 <!--#Include File="comm/inc.asp" -->
-<!--#include file="../include/_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System

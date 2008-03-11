@@ -69,12 +69,12 @@ function postForm(){
 		<fieldset>
 			<legend>{$Language_Master_ColumnPowerOption$}</legend>
 			<table width="100%" class="edittable">
-				<!-- list Begin -->
+				{$list Begin$}
 				<tr valign="middle" bgcolor="ffffff" onmouseover=this.style.backgroundColor='E4E8EF' onmouseout=this.style.backgroundColor=''>
 				  <td align="left" width="55%">&nbsp;{$ColumnName$}</td>
 				  <td align="right">{$Language_Master_Column_Add$}<input type="checkbox" name="power" value="{$ColumnID$}1"{$Power_{$ColumnID$}_1$}>&nbsp;{$Language_Master_Column_Manager$}<input type="checkbox" name="power" value="{$ColumnID$}2"{$Power_{$ColumnID$}_2$}>&nbsp;{$Language_Master_Column_Edit$}<input type="checkbox" name="power" value="{$ColumnID$}3"{$Power_{$ColumnID$}_3$}>&nbsp;{$Language_Master_Column_Del$}<input type="checkbox" name="power" value="{$ColumnID$}4"{$Power_{$ColumnID$}_4$}>&nbsp;&nbsp;</td>
 				</tr>
-				<!-- list End -->
+				{$list End$}
 			  </table>
 		</fieldset>
 	</div>
@@ -85,14 +85,14 @@ function postForm(){
 		<fieldset>
 			<legend>{$Language_Master_MenuPowerOption$}</legend>
 			<table width="100%" class="edittable">
-				<!-- list1 Begin -->
+				{$list1 Begin$}
 				<tr>
 				  <td>&nbsp;<strong>{$MenuName$}</strong></td>
 				</tr>
 				<tr>
-				  <td align="left"><!-- list2 Begin -->&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="admin_power" value="{$Power$}"{$Power_{$Power$}$}>{$Power$}.{$MenuName$}<!-- list2 End --></td>
+				  <td align="left">{$list2 Begin$}&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="admin_power" value="{$Power$}"{$Power_{$Power$}$}>{$Power$}.{$MenuName$}{$list2 End$}</td>
 				</tr>
-				<!-- list1 End -->
+				{$list1 End$}
 			  </table>
 		</fieldset>
 	</div>

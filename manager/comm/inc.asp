@@ -1,6 +1,7 @@
 <!--#Include File="../../include/cls_public.asp"-->
 <!--#Include File="../../include/cls_ini.asp"-->
 <!--#Include File="../../include/cls_dboperation.asp"-->
+<!--#Include File="../../include/cls_template.asp"-->
 <!--#include file="cls_manager.asp"-->
 <!--#include file="cls_manager_db.asp"-->
 <!--#include file="cls_xml.asp"-->
@@ -35,4 +36,5 @@ Set EA_Pub=New cls_Public
 Set EA_Manager=New cls_Manager
 Set EA_M_DBO=New Cls_Manager_DBOperation
 Set EA_M_XML=New Cls_XML
+Set EA_Temp = New cls_Template
 %>

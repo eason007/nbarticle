@@ -144,8 +144,8 @@ Class cls_Template
 		StartTag	= 1
 		PageLen		= Len(PageStr)
 
-		ParameterPrefix = "<!--" & ParameterName & "("
-		ParameterSuffix = ")-->"
+		ParameterPrefix = P_Prefix & ParameterName & "("
+		ParameterSuffix = ")" & P_Suffix
 
 		CurrentTag	= InStr(StartTag, PageStr, ParameterPrefix)
 
