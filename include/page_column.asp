@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-05
+'= 最后日期：2008-03-12
 '====================================================================
 
 Class page_Column
@@ -53,7 +53,7 @@ Class page_Column
 		PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 		PageSize	= Info(17, 0)
 		PageCount	= EA_Pub.Stat_Page_Total(PageSize, Info(3, 0))
-		If CLng(PageNum) > PageCount Or PageCount > 0 Then PageNum = PageCount
+		If CLng(PageNum) > PageCount And PageCount > 0 Then PageNum = PageCount
 
 		'load article list
 		If Info(3, 0) > 0 Then ArticleList = EA_DBO.Get_Article_ByColumnId(ID, PageNum, PageSize)
@@ -93,7 +93,7 @@ Class page_Column
 
 		If EA_Temp.ChkTag("List.PageNav", PageContent) Then 
 			If ArticleUrlType = 1 Then
-				Url = "list.asp?classid=$page"
+				Url = "list.asp?classid=" & ID & "&page=$page"
 			Else
 				Url = Replace(EA_Pub.Cov_ColumnPath(ColumnId, EA_Pub.SysInfo(18)), "_1", "_$page")
 			End If
