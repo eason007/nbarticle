@@ -14,10 +14,11 @@
 '= 最后日期：2008-03-12
 '====================================================================
 
-Dim ArticleId,ArticleInfo
+Dim ArticleId, ArticleInfo
 Dim FirstArticle,NextArticle
 Dim i,TempStr,TempArray
 Dim IsView
+Dim PageContent
 
 ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,0)
 
@@ -52,38 +53,26 @@ If Not IsView Then
 	ArticleInfo(5,0)="<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='member/login.asp' target='_blank'>登陆</a>] 或 [<a href='member/register.asp' target='_blank'>注册</a>]。</b>"
 End If
 
-%>
-<html>
-<head>
-<title><%=ArticleInfo(3,0)%> - <%=EA_Pub.SysInfo(0)%></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="zh-CN">
-<meta name="Keywords" content="<%=Replace(EA_Pub.SysInfo(16),"|",",")&","&ArticleInfo(12,0)%>">
-<meta name="Description" content="<%=ArticleInfo(4,0)%>">
-</head>
-<body> 
-<table width="778" border="0" cellspacing="0" cellpadding="0"> 
-<tr> 
-  <td><!--PrintBegin--> 
-    <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
-      <tr> 
-        <td> <h3><%=EA_Pub.Add_ArticleColor(ArticleInfo(17,0),ArticleInfo(3,0))%></h3></td> 
-      </tr> 
-      <tr> 
-        <td>作者:<%=ArticleInfo(8,0)%>　来源:<%=ArticleInfo(16,0)%>　最后修改于：<i><%=ArticleInfo(13,0)%></i>　<a href="javascript:vod();" onClick="window.print();">点击开始打印</a></td> 
-      </tr> 
-      <tr> 
-        <td> <hr size="1" noshade color="#999999"> 
-          页面地址是:<a href="<%=EA_Pub.Cov_ArticlePath(ArticleId,ArticleInfo(13,0),EA_Pub.SysInfo(18))%>">http://<%=Request.ServerVariables ("SERVER_NAME")%><%=EA_Pub.Cov_ArticlePath(ArticleId,ArticleInfo(13,0),EA_Pub.SysInfo(18))%></a> 
-          <hr size="1" noshade color="#999999"> </td> 
-      </tr> 
-      <tr> 
-        <td> <%=ArticleInfo(5,0)%> </td> 
-      </tr> 
-    </table> 
-</body>
-</html>
-<%
+PageContent		= EA_Temp.Load_Template(0, 7)
+
+EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
+EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & ArticleInfo(3, 0) & "</strong></a>"
+
+EA_Temp.SetVariable "Article.ColumnID", ArticleInfo(0, 0), PageContent
+EA_Temp.SetVariable "Article.ID", ArticleId, PageContent
+EA_Temp.SetVariable "Article.Url", EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)), PageContent
+EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)), PageContent
+EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
+EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
+EA_Temp.SetVariable "Article.Author", ArticleInfo(8, 0), PageContent
+EA_Temp.SetVariable "Article.Source", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>", PageContent
+EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
+EA_Temp.SetVariable "Article.Content", ArticleInfo(5,0), PageContent
+
+PageContent	= EA_Temp.Replace_PublicTag(PageContent)
+
+Response.Write PageContent
+
 Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
+Set EA_Pub = Nothing
 %>

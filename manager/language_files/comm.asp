@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-12
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -484,6 +484,7 @@ Const str_Theme_Default="默认风格"
 Const str_Theme_Add="添加风格"
 Const str_Theme_Edit="编辑风格"
 
+'admin_module.asp
 Const str_Theme_ModuleInfo="①在这里，您可以添加和编辑模块，操作时请按照相关页面提示完整填写表单信息。<BR>②<a href=""http://help.nbarticle.com/template_tags.html"" target=_blank><font color=red><u>风格标签说明</u></font></a>"
 Const str_Theme_ModuleName="模块名称"
 Const str_Theme_ModuleDesc="模块简介"
@@ -495,6 +496,9 @@ Const str_Theme_ModuleHead="头部模块"
 Const str_Theme_ModuleFoot="底部模块"
 Const str_Theme_ModulePage="模块"
 Const str_Theme_ModuleContent="内页模块"
+Const str_Theme_ModuleSearch="搜索模块"
+Const str_Theme_ModulePrint="打印模块"
+Const str_Theme_ModuleComment="评论模块"
 Const str_Theme_ModuleAdd="添加模块"
 Const str_Theme_ModuleEdit="编辑模块"
 
