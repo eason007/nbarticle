@@ -8,6 +8,6 @@ Disallow: /db/
 Disallow: /include/
 Disallow: /language/
 Disallow: /manager/
-Disallow: /plugins/
 Disallow: /member/
+Disallow: /plugins/
 Disallow: /themes/
