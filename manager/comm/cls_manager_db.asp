@@ -1039,6 +1039,14 @@ Class Cls_Manager_DBOperation
 		
 		Get_FlorilegiumStat=DB_Query(SQL)
 	End Function
+
+	Public Function Get_ModuleID (iThemeID, sTitle)
+		SQL = "SELECT ID"
+		SQL = SQL & " FROM NB_Module"
+		SQL = SQL & " WHERE ThemesID = " & iThemeID & " AND Title = '" & sTitle & "'"
+
+		Get_ModuleID = DB_Query(SQL)
+	End Function
 	
 '*******************************************************************
 	Private Sub chkDB ()

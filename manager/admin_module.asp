@@ -1,4 +1,4 @@
-<!--#Include File="../conn.asp" -->
+
 <!--#Include File="comm/inc.asp" -->
 <%
 '====================================================================
@@ -172,6 +172,13 @@ Sub Save
 	Rs.Close:Set Rs=Nothing
 
 	If Typer = 1 Then
+		Dim Tmp
+
+		If ModuleID = 0 Then
+			Tmp = EA_M_DBO.Get_ModuleID(ThemesID, Title)
+			If IsArray(Tmp) Then ModuleID = Tmp(0, 0)
+		End If
+
 		Dim re
 		Set re=new RegExp
 		re.IgnoreCase =true
@@ -183,7 +190,7 @@ Sub Save
 		Code=Replace(Code,"</style>","")
 		Code=Replace(Code,"{$SystemPath$}",SystemFolder)
 
-		Call EA_Pub.Save_HtmlFile("../themes/css/style_" & ThemesID & ".css",Code)
+		Call EA_Pub.Save_HtmlFile("../themes/css/style_" & ThemesID & "-" & ModuleID & ".css",Code)
 	End If
 	
 	Call EA_Pub.Close_Obj

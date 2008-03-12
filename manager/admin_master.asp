@@ -1,4 +1,4 @@
-<!--#Include File="../conn.asp" -->
+
 <!--#Include File="comm/inc.asp" -->
 <!--#Include File="../include/md5.asp" -->
 <%

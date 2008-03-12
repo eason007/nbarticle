@@ -1,4 +1,3 @@
-<!--#Include File="../conn.asp" -->
 <!--#Include File="comm/inc.asp" -->
 <!--#Include File="comm/cls_makejs.asp" -->
 <%
