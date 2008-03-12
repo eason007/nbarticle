@@ -1,4 +1,4 @@
-<!--#Include File="conn.asp" -->
+<!--#Include File="init.asp" -->
 <!--#Include File="include/inc.asp"-->
 <!--#Include File="include/vml_cake.asp"-->
 <%

@@ -26,7 +26,7 @@ Dim Admin_Power,Column_Power
 Dim Login_Key
 Dim EA_Pub,EA_Manager,EA_Temp,EA_DBO,EA_M_DBO,EA_M_XML
 Dim PageContent
-Dim SQL,Rs, Conn
+Dim SQL, Rs, Conn
 Dim Page, ErrMsg
 
 Set Rs=Server.CreateObject("adodb.recordSet")
