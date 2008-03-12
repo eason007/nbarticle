@@ -1,4 +1,3 @@
-<!--#Include File="init.asp" -->
 <!--#Include File="include/inc.asp"-->
 <%
 '====================================================================
@@ -12,7 +11,7 @@
 '= 摘    要：文章打印版本文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2005-11-30
+'= 最后日期：2008-03-12
 '====================================================================
 
 Dim ArticleId,ArticleInfo
@@ -23,36 +22,30 @@ Dim IsView
 ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,0)
 
 'load article info
-ArticleInfo=EA_DBO.Get_Article_Info(ArticleId,0)
-If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(9,1)
+ArticleInfo = EA_DBO.Get_Article_Info(ArticleId, 1)
+If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(9, 1)
+If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then Call EA_Pub.ShowErrMsg(9, 1)
 
-If Not ArticleInfo(20,0) Or ArticleInfo(21,0) Then Call EA_Pub.ShowErrMsg(9,1)
-
-If ArticleInfo(10,0) Then
-	Response.Redirect ArticleInfo(11,0)
-	Response.End 
-End If
-
-IsView=True
-
-If ArticleInfo(22,0)>0 Or ArticleInfo(23,0)=-1 Then 
+If ArticleInfo(22, 0) > 0 Or ArticleInfo(23, 0) <> 0 Then 
 	If Not EA_Pub.IsMember Then 
-		IsView=False
+		IsView = False
 	Else
-		If CLng(EA_Pub.Mem_GroupSetting(2))>=CLng(ArticleInfo(22,0)) Then 
-			If ArticleInfo(23,0) Then 
-				If EA_Pub.Mem_GroupSetting(3)="1" Then 
-					IsView=True
+		If CDbl(EA_Pub.Mem_GroupSetting(2)) >= CDbl(ArticleInfo(22, 0)) Then 
+			If ArticleInfo(23, 0) Then 
+				If EA_Pub.Mem_GroupSetting(3) = "1" Then 
+					IsView = True
 				Else
-					IsView=False
+					IsView = False
 				End If
 			Else
-				IsView=True
+				IsView = True
 			End If
 		Else
-			IsView=False
+			IsView = False
 		End If
 	End If
+Else
+	IsView = True
 End If
 
 If Not IsView Then 
@@ -62,7 +55,7 @@ End If
 %>
 <html>
 <head>
-<title><%=ArticleInfo(3,0)%>-<%=ArticleInfo(2,0)%>|<%=EA_Pub.SysInfo(0)%></title>
+<title><%=ArticleInfo(3,0)%> - <%=EA_Pub.SysInfo(0)%></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Language" content="zh-CN">
 <meta name="Keywords" content="<%=Replace(EA_Pub.SysInfo(16),"|",",")&","&ArticleInfo(12,0)%>">
