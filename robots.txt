@@ -1,17 +1,13 @@
 #
-# robots.txt for NBArticle
-# Version 3.0
+# robots.txt for EliteCMS Ver 3.01 Beta1
 #
 
 User-agent: *
 
-Disallow: /depot/
-Disallow: /editor/
-Disallow: /images/
+Disallow: /db/
 Disallow: /include/
-Disallow: /js/
-Disallow: /jsfiles/
-Disallow: /language_files/
+Disallow: /language/
 Disallow: /manager/
-Disallow: /userfiles/
-Disallow: /xml_rpc/
+Disallow: /plugins/
+Disallow: /member/
+Disallow: /themes/
