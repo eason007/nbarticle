@@ -41,11 +41,11 @@ function initTabContent(){
 					  <span id="Language_Config_WebSiteState_Close"></span>
 					  <input type="radio" name="SiteState" value="0" /></TD>
 					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_ClosedMsg"></span>:&nbsp;</TD>
-					<TD><textarea name="ClosedMsg" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="ClosedMsg" cols="50" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;</TD>
 				  </TR>
@@ -78,25 +78,25 @@ function initTabContent(){
 				<TBODY>
 				  <TR>
 					<TD align=right width="140"><span id="Language_Config_WebSiteName"></span>:&nbsp;</TD>
-					<TD><input type="text" name="SiteName" size="30" /></TD>
+					<TD><input type="text" name="SiteName" size="50" /></TD>
 					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_WebSiteURL"></span>:&nbsp;</TD>
-					<TD><input type="text" name="SiteURL" size="30" /></TD>
+					<TD><input type="text" name="SiteURL" size="50" /></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_PageKeyWord"></span>:&nbsp;</TD>
-					<TD><textarea name="keyword" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="keyword" cols="50" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageKeyWord_Help"></span></TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_PageDescription"></span>:&nbsp;</TD>
-					<TD><textarea name="description" cols="40" rows="5" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="description" cols="50" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt>&nbsp;<span id="Language_Config_PageDescription_Help"></span></TD>
 				  </TR>
@@ -125,27 +125,10 @@ function initTabContent(){
 			<TABLE id="edittable" width="100%">
 				<TBODY>
 				  <TR>
-					<TD align=right width="140"><span id="Language_Config_MemberEditor"></span>:&nbsp;</TD>
-					<TD><select name="member_editor">
-<option value='0'>eWeb Editor</option>
-<option value='1'>FCK Editor</option>
-<option value='2'>Innova Editor</option>
-<option value='3'>TinyMCE Editor</option>
-</select></TD>
-					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
-				  </TR>
-				  <TR>
-					<TD align=right><span id="Language_Config_AutoRemote"></span>:&nbsp;</TD>
-					<TD><span id="Language_Comm_Yes5"></span><input type="radio" name="autoremote" value="1"> <span id="Language_Comm_No5"></span><input type="radio" name="autoremote" value="0"></TD>
-					<TD class=vsplit_line></TD>
-					<TD class=describe_txt>&nbsp;<span id="Language_Config_AutoRemote_Help"></span></TD>
-				  </TR>
-				  <TR>
-					<TD align=right><span id="Language_Config_DefaultPoster"></span>:&nbsp;</TD>
+					<TD align=right width="140"><span id="Language_Config_DefaultPoster"></span>:&nbsp;</TD>
 					<TD><input type="text" name="author" size="16"></TD>
-					<TD class=vsplit_line></TD>
-					<TD class=describe_txt>&nbsp;</TD>
+					<TD class=vsplit_line width=1></TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				</TBODY>
 			  </TABLE>
@@ -163,7 +146,7 @@ function initTabContent(){
 					<TD align=right width="140"><span id="Language_Config_UserRegEnable"></span>:&nbsp;</TD>
 					<TD><span id="Language_Comm_Yes6"></span><input type="radio" name="isreg" value="1">&nbsp;<span id="Language_Comm_No6"></span><input type="radio" name="isreg" value="0"></TD>
 					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_EmailById"></span>:&nbsp;</TD>
@@ -193,7 +176,7 @@ function initTabContent(){
 					<TD align=right width="140"><span id="Language_Config_EMailAddress"></span>:&nbsp;</TD>
 					<TD><input type="text" name="mail"></TD>
 					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_SMTPServerAddress"></span>:&nbsp;</TD>
@@ -229,7 +212,7 @@ function initTabContent(){
 					<TD align=right width="140"><span id="Language_Config_GhostPostReview"></span>:&nbsp;</TD>
 					<TD><span id="Language_Comm_Yes9"></span><input type="radio" name="isreview" value="1"> <span id="Language_Comm_No9"></span><input type="radio" name="isreview" value="0"></TD>
 					<TD class=vsplit_line width=1></TD>
-					<TD class=describe_txt width=300>&nbsp;</TD>
+					<TD class=describe_txt width=400>&nbsp;</TD>
 				  </TR>
 				  <TR>
 					<TD align=right><span id="Language_Config_ReviewWaitAdmin"></span>:&nbsp;</TD>
@@ -245,13 +228,13 @@ function initTabContent(){
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_BadWord"></span>:&nbsp;</TD>
-					<TD><textarea name="badword" cols="40" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="badword" cols="50" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt><span id="Language_Config_BadWord_Help"></span></TD>
 				  </TR>
 				  <TR>
 					<TD align=right valign="top"><span id="Language_Config_ArticleFrom"></span>:&nbsp;</TD>
-					<TD><textarea name="source" cols="40" rows="7" wrap="VIRTUAL"></textarea></TD>
+					<TD><textarea name="source" cols="50" rows="5" wrap="VIRTUAL"></textarea></TD>
 					<TD class=vsplit_line></TD>
 					<TD class=describe_txt><span id="Language_Config_ArticleFrom_Help"></span></TD>
 				  </TR>

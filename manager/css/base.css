@@ -25,11 +25,10 @@ select, textarea {
 	FONT-SIZE: 12px;
 }
 input {
-	BORDER-RIGHT: #7f9db9 1px solid;
-	BORDER-TOP: #7f9db9 1px solid;
-	BORDER-LEFT: #7f9db9 1px solid;
-	BORDER-BOTTOM: #7f9db9 1px solid;
-	FONT-SIZE: 12px;
+	font-size: 12px;
+}
+input {
+       border: expression((this.type=="button") ?"#7f9db9 1px solid;":"style");
 }
 img {
 	BORDER: 0;
@@ -44,10 +43,7 @@ a:hover {
 	border-bottom: 0 dotted;
 }
 FIELDSET {
-	BORDER-RIGHT: #c8d9e4 1px solid; 
-	BORDER-TOP: #c8d9e4 1px solid; 
-	BORDER-LEFT: #c8d9e4 1px solid; 
-	BORDER-BOTTOM: #c8d9e4 1px solid;
+	BORDER: #c8d9e4 1px solid; 
 }
 LEGEND {
 	FONT-WEIGHT: bold; 
