@@ -1,9 +1,8 @@
-
 <!--#Include File="comm/inc.asp" -->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
-'= Copyright (c) 2005 - 2007 Eason Chan All Rights Reserved.
+'= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
@@ -12,7 +11,7 @@
 '= 摘    要：后台-系统设定文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-13
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -75,9 +74,6 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Config_SystemStyle",str_Config_SystemStyle)
 	Call EA_M_XML.AppElements("Language_Config_SystemIndexMode",str_Config_SystemIndexMode)
 	Call EA_M_XML.AppElements("Language_Config_Article",str_Config_Article)
-	Call EA_M_XML.AppElements("Language_Config_MemberEditor",str_Config_MemberEditor)
-	Call EA_M_XML.AppElements("Language_Config_AutoRemote",str_Config_AutoRemote)
-	Call EA_M_XML.AppElements("Language_Config_AutoRemote_Help",str_Config_AutoRemote_Help)
 	Call EA_M_XML.AppElements("Language_Config_DefaultPoster",str_Config_DefaultPoster)
 	Call EA_M_XML.AppElements("Language_Config_Reg",str_Config_Reg)
 	Call EA_M_XML.AppElements("Language_Config_UserRegEnable",str_Config_UserRegEnable)
@@ -128,8 +124,6 @@ Sub Main
 	Call EA_M_XML.AppInfo("isreview",Setting(19))
 	Call EA_M_XML.AppInfo("isreview_admin",Setting(20))
 	Call EA_M_XML.AppInfo("author",Setting(21))
-	Call EA_M_XML.AppInfo("autoremote",Setting(22))
-	Call EA_M_XML.AppInfo("member_editor",Setting(24))
 	Call EA_M_XML.AppInfo("index",Setting(26))
 	Call EA_M_XML.AppInfo("badword",BadWord)
 	Call EA_M_XML.AppInfo("source",Source)
@@ -187,9 +181,9 @@ Sub Save
 	Setting=Setting&EA_Pub.SafeRequest(2,"isreview",0,1,1)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"isreview_admin",0,0,1)&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"author",1,"",1)&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"autoremote",1,"",1)&","
 	Setting=Setting&","
-	Setting=Setting&EA_Pub.SafeRequest(2,"member_editor",1,"",1)&","
+	Setting=Setting&","
+	Setting=Setting&","
 	Setting=Setting&","
 	Setting=Setting&EA_Pub.SafeRequest(2,"index",1,"",0)&","
 	
