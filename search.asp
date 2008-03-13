@@ -11,7 +11,7 @@
 '= 摘    要：搜索文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-03-13
 '====================================================================
 
 Dim Action
@@ -48,7 +48,7 @@ Sub Request_Query()
 	Dim QueryArray,QueryList
 	Dim PageContent
 	Dim SQL
-	Dim Temp,ListBlock
+	Dim Temp,ListBlock, Url
 	
 	If iDataBaseType=0 Then
 		WSQL="Where IsPass="&EA_DBO.TrueValue&" And IsDel=0 And AddDate Between #"&StartDate&"# And #"&EndTime&"# "
@@ -112,6 +112,12 @@ Sub Request_Query()
 		End If
 	End If
 	EA_Temp.CloseBlock "Search.Topic", PageContent
+
+	If EA_Temp.ChkTag("Search.PageNav", PageContent) Then 
+		Url = "?keyword=" & KeyWord & "&column=" & Join(Column,"|") & "&field=" & Types & "&stime=" & StartDate & "&etime=" & EndTime & "&isinclude=" & IsInclude & "&action=query&page=$page"
+
+		EA_Temp.SetVariable "Search.PageNav", EA_Temp.PageList(PageCount, PageNum, Url), PageContent
+	End If
 
 	EA_Temp.Title= SysMsg(28) & " - " & EA_Pub.SysInfo(0)
 	EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a> - " & SysMsg(28)
