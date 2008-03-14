@@ -2,7 +2,7 @@
 <%
 '====================================================================
 '= Team Elite - Elite Article System
-'= Copyright (c) 2005 - 2007 Eason Chan All Rights Reserved.
+'= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)

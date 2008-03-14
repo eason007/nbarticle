@@ -3,6 +3,7 @@
 <!--#Include File="../../include/cls_ini.asp"-->
 <!--#Include File="../../include/cls_dboperation.asp"-->
 <!--#Include File="../../include/cls_template.asp"-->
+<!--#Include File="../../language/zh-cn.asp"-->
 <!--#include file="cls_manager.asp"-->
 <!--#include file="cls_manager_db.asp"-->
 <!--#include file="cls_xml.asp"-->

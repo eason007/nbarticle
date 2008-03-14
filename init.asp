@@ -2,7 +2,7 @@
 <%
 '====================================================================
 '= Team Elite - Elite Article System
-'= Copyright (c) 2005 - 2007 Eason Chan All Rights Reserved.
+'= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 文件名称：Coon.asp
 '= 摘    要：数据库连接文件
