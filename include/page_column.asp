@@ -21,7 +21,7 @@ Class page_Column
 		Info = aInfo
 		ID = iID
 
-		PageContent  = EA_Temp.Load_Template(Info(9, 0), 4)
+		PageContent = EA_Temp.Load_Template(Info(9, 0), 4)
 
 		EA_Pub.SysInfo(16) = Info(0, 0) & "," & EA_Pub.SysInfo(16)
 		If Len(Info(2,0)) Then EA_Pub.SysInfo(17) = Info(2, 0)
@@ -37,6 +37,8 @@ Class page_Column
 		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic PageContent, iPageNum
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
+		response.write PageContent
+		response.end
 
 		Make = PageContent
 	End Function
@@ -94,7 +96,7 @@ Class page_Column
 			If ArticleUrlType = 1 Then
 				Url = "list.asp?classid=" & ID & "&page=$page"
 			Else
-				Url = Replace(EA_Pub.Cov_ColumnPath(ColumnId, EA_Pub.SysInfo(18)), "_1", "_$page")
+				Url = Replace(EA_Pub.Cov_ColumnPath(ID, EA_Pub.SysInfo(18)), "_1", "_$page")
 			End If
 
 			EA_Temp.SetVariable "List.PageNav", EA_Temp.PageList(PageCount, PageNum, Url), PageContent

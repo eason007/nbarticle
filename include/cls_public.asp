@@ -502,7 +502,7 @@ Class cls_Public
 		If PathType=1 Then 
 			Cov_ColumnPath=SystemFolder&"list.asp?classid="&ColumnId
 		Else
-			Cov_ColumnPath=SystemFolder&"list/list_"&ColumnId&"_1.htm"
+			Cov_ColumnPath=SystemFolder&"list/"&ColumnId&"/p_1.htm"
 		End If
 	End Function 
 	
