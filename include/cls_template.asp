@@ -18,7 +18,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-05
+'= 最后日期：2008-03-14
 '====================================================================
 
 Class cls_Template
@@ -214,7 +214,7 @@ Class cls_Template
 		If ChkTag_Prefix("Friend", PageContent) Then Call MakeFriend(PageContent)
 		If ChkTag_Prefix("AdSense", PageContent) Then Call MakeAdSense(PageContent)
 		If ChkTag_Prefix("Topic", PageContent) Then Call MakeTopic(PageContent)
-		'If ChkTag_Prefix("Column", PageContent) Then Call MakeColumn(PageContent)
+		If ChkTag_Prefix("Column", PageContent) Then Call MakeColumn(PageContent)
 		If ChkTag_Prefix("Comment", PageContent) Then Call MakeComment(PageContent)
 
 
@@ -260,7 +260,8 @@ Class cls_Template
 		Dim i						'输出字符串
 		
 		If CLng(iCurrentPage)<=0 Then iCurrentPage=1
-		If CLng(iCurrentPage)>CLng(PageCount) Then iCurrentPage=PageCount
+		If CLng(iCurrentPage)>CLng(PageCount) And PageCount > 0 Then iCurrentPage=PageCount
+		If PageCount = 0 Then PageCount = 1
 		
 		If iCurrentPage-4<=1 Then 
 			PageRoot=1

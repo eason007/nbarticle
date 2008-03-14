@@ -106,16 +106,15 @@ Sub MarkList
 	Response.Write PageContent
 
 	For i = 0 To Total - 1
-		Response.Write "<script>page_total.innerHTML=""1"";</script>" & VbCrLf
 		Response.Write "<script>page_complete.innerHTML=""1"";</script>" & VbCrLf
 		Response.Write "<script>img3.width=1;</script>" & VbCrLf
 		
-		Call MakeColumn(ColumnList(i))
+		Call ForColumn(ColumnList(i))
 		
-		If i = Total Then
+		If i = Total - 1 Then
 			Response.Write "<script>img1.width=400;" & VbCrLf
 		Else
-			Response.Write "<script>img1.width=" & Fix((Total/(i + 1)) * 400) & ";" & VbCrLf
+			Response.Write "<script>img1.width=" & Fix(((i + 1)/Total) * 400) & ";" & VbCrLf
 		End If
 		Response.Write "column_complete.innerHTML=""<font color=blue>"&i+1&"</font>"";</script>" & VbCrLf
 		Response.Flush
@@ -124,7 +123,7 @@ Sub MarkList
 	Response.Write "<script>make_msg.innerHTML="""&str_MakeList_AllComplate&""";</script>" & VbCrLf
 End Sub
 
-Function MakeColumn(ColumnId)
+Sub ForColumn(ColumnId)
 	Dim PageContent
 	Dim PageCount, PageSize
 	Dim Tmp, i, TempStr
@@ -172,20 +171,21 @@ Function MakeColumn(ColumnId)
 		PageSize	= ColumnInfo(17, 0)
 		PageCount	= EA_Pub.Stat_Page_Total(PageSize, ColumnInfo(3, 0))
 		If PageCount = 0 Then PageCount = 1
-
+		Response.Write "<script>page_total.innerHTML=""" & PageCount & """;</script>" & VbCrLf
+		
 		EA_Pub.SysInfo(18) = 0
 
 		For i = 1 To PageCount
-			Response.Write "<script>img3.width=" & Fix((i/PageCount) * 400) & ";" & VbCrLf
-			Response.Write "page_complete.innerHTML=""<b>" & i & "</b>"";</script>" & VbCrLf
-			Response.Flush
-
 			Call clsColumn.Make(ColumnId, ColumnInfo, i)
 
 			Call EA_Pub.Save_HtmlFile(Replace(FileName, "_1", "_" & i), clsColumn.PageContent)
+
+			Response.Write "<script>img3.width=" & Fix((i/PageCount) * 100) & ";" & VbCrLf
+			Response.Write "page_complete.innerHTML=""<b>" & i & "</b>"";</script>" & VbCrLf
+			Response.Flush
 		Next
 	End If
 
 	Response.Write "<script>img3.width=400;</script>" & VbCrLf
-End Function
+End Sub
 %>
