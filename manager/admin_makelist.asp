@@ -25,16 +25,12 @@ If Not EA_Manager.Chk_Power(Admin_Power,"42") Then
 End If
 
 Dim Atcion
-Dim SysKeyword, SysDesc
 Dim ForTotal
 
 Atcion=Request.Form ("action")
 
 Select Case LCase(Atcion)
 Case "mark"
-	SysKeyword	= EA_Pub.SysInfo(16)
-	SysDesc		= EA_Pub.SysInfo(17)
-
 	Call MarkList
 Case Else
 	Call Main
@@ -114,7 +110,7 @@ Sub MarkList
 		Response.Write "<script>page_complete.innerHTML=""1"";</script>" & VbCrLf
 		Response.Write "<script>img3.width=1;</script>" & VbCrLf
 		
-		MakeColumn ColumnList(i)
+		Call MakeColumn(ColumnList(i))
 		
 		If i = Total Then
 			Response.Write "<script>img1.width=400;" & VbCrLf
@@ -129,15 +125,12 @@ Sub MarkList
 End Sub
 
 Function MakeColumn(ColumnId)
-	Dim TopicNav,PageNumNav
 	Dim PageContent
-	Dim PageCount,PageSize
-	Dim Tmp,i,j,TempStr
-	Dim ArticleList,ColumnInfo,ArticleOutStr
-	Dim FileName,Folder,FileNameExample
+	Dim PageCount, PageSize
+	Dim Tmp, i, TempStr
+	Dim ColumnInfo
+	Dim FileName, Folder
 	Dim re
-	Dim Temp,ListBlock
-	Dim Template
 	Dim clsColumn
 
 	Set re = New RegExp
@@ -149,14 +142,16 @@ Function MakeColumn(ColumnId)
 	FileName = EA_Pub.Cov_ColumnPath(ColumnId, "0")
 	Folder	 = re.Replace(FileName, "/$1/")
 
+	Set re = Nothing
+
 	If Not(EA_Pub.CheckDir(".." & Folder)) Then 
-		Tmp = Split(Folder, "/")
-		TempStr = ""
-		ForTotal = UBound(Tmp)-1
+		Tmp		 = Split(Folder, "/")
+		TempStr  = ""
+		ForTotal = UBound(Tmp) - 1
 
-		For j = 1 To ForTotal
-			TempStr = TempStr & "/" & Tmp(j)
-
+		For i = 1 To ForTotal
+			TempStr = TempStr & "/" & Tmp(i)
+			
 			If Not(EA_Pub.CheckDir(".." & TempStr)) Then EA_Pub.MakeNewsDir Server.MapPath(".." & TempStr)
 		Next
 	End If
@@ -174,19 +169,20 @@ Function MakeColumn(ColumnId)
 		EA_Temp.P_Prefix = "<!--"
 		EA_Temp.P_Suffix = "-->"
 
-		PageSize	= ColumnInfo(17,0)
-		PageCount	= EA_Pub.Stat_Page_Total(PageSize, ColumnInfo(3,0))
+		PageSize	= ColumnInfo(17, 0)
+		PageCount	= EA_Pub.Stat_Page_Total(PageSize, ColumnInfo(3, 0))
+		If PageCount = 0 Then PageCount = 1
 
 		EA_Pub.SysInfo(18) = 0
 
 		For i = 1 To PageCount
 			Response.Write "<script>img3.width=" & Fix((i/PageCount) * 400) & ";" & VbCrLf
-			Response.Write "page_complete.innerHTML=""<b>"&i&"</b>"";</script>" & VbCrLf
+			Response.Write "page_complete.innerHTML=""<b>" & i & "</b>"";</script>" & VbCrLf
 			Response.Flush
 
-			PageContent = clsColumn.Make(ColumnId, ColumnInfo, i)
+			Call clsColumn.Make(ColumnId, ColumnInfo, i)
 
-			Call EA_Pub.Save_HtmlFile(Replace(FileName, "_1", "_" & i), PageContent)
+			Call EA_Pub.Save_HtmlFile(Replace(FileName, "_1", "_" & i), clsColumn.PageContent)
 		Next
 	End If
 

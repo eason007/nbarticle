@@ -17,7 +17,7 @@ Class page_Column
 	Public PageContent
 	Private Info, ID
 
-	Public Function Make (iID, ByRef aInfo, iPageNum)
+	Public Sub Make (iID, aInfo, iPageNum)
 		Info = aInfo
 		ID = iID
 
@@ -34,16 +34,12 @@ Class page_Column
 		EA_Temp.SetVariable "List.Description", Info(2, 0), PageContent
 		EA_Temp.SetVariable "List.TopicTotal", Info(3, 0), PageContent
 
-		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic PageContent, iPageNum
+		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic iPageNum
 
-		PageContent = EA_Temp.Replace_PublicTag(PageContent)
-		response.write PageContent
-		response.end
+		EA_Temp.Replace_PublicTag PageContent
+	End Sub
 
-		Make = PageContent
-	End Function
-
-	Private Sub ListTopic (ByRef PageContent, PageNum)
+	Private Sub ListTopic (PageNum)
 		Dim Url
 		Dim ArticleList
 		Dim PageCount, PageSize

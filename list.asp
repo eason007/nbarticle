@@ -47,9 +47,9 @@ End If
 Dim clsColumn
 Set clsColumn = New page_Column
 
-PageContent = clsColumn.Make(ColumnId, ColumnInfo, PageNum)
+Call clsColumn.Make(ColumnId, ColumnInfo, PageNum)
 
-Response.Write PageContent
+Response.Write clsColumn.PageContent
 
 Call EA_Pub.Close_Obj
 Set EA_Pub = Nothing
