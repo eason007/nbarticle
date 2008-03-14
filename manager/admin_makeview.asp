@@ -1,7 +1,4 @@
-
 <!--#Include File="comm/inc.asp" -->
-<!--#Include File="../include/cls_template.asp"-->
-<!--#include file="../include/_cls_teamplate.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
