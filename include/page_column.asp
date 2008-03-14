@@ -10,14 +10,14 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-03-14
 '====================================================================
 
 Class page_Column
 	Public PageContent
 	Private Info, ID
 
-	Public Function Make (iID, ByRef aInfo)
+	Public Function Make (iID, ByRef aInfo, iPageNum)
 		Info = aInfo
 		ID = iID
 
@@ -34,23 +34,22 @@ Class page_Column
 		EA_Temp.SetVariable "List.Description", Info(2, 0), PageContent
 		EA_Temp.SetVariable "List.TopicTotal", Info(3, 0), PageContent
 
-		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic PageContent
+		If EA_Temp.ChkTag("List.Topic", PageContent) Then ListTopic PageContent, iPageNum
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
 		Make = PageContent
 	End Function
 
-	Private Sub ListTopic (ByRef PageContent)
+	Private Sub ListTopic (ByRef PageContent, PageNum)
 		Dim Url
 		Dim ArticleList
-		Dim PageNum, PageCount, PageSize
+		Dim PageCount, PageSize
 		Dim Temp, ListBlock
 		Dim ForTotal
 		Dim ArticleUrlType
 		Dim i
 
-		PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 		PageSize	= Info(17, 0)
 		PageCount	= EA_Pub.Stat_Page_Total(PageSize, Info(3, 0))
 		If CLng(PageNum) > PageCount And PageCount > 0 Then PageNum = PageCount

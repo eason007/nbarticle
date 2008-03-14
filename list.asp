@@ -12,15 +12,16 @@
 '= 摘    要：列表页文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-03-14
 '====================================================================
 
 Dim PageContent
-Dim ColumnId, ColumnInfo
+Dim ColumnId, ColumnInfo, PageNum
 
 'get column info
 ColumnId	= EA_Pub.SafeRequest(3, "classid", 0, 0, 0)
 ColumnInfo	= EA_DBO.Get_Column_Info(ColumnId)
+PageNum		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 If Not IsArray(ColumnInfo) Then Call EA_Pub.ShowErrMsg(9, 1)
 
 'redirect the url
@@ -46,7 +47,7 @@ End If
 Dim clsColumn
 Set clsColumn = New page_Column
 
-PageContent = clsColumn.Make(ColumnId, ColumnInfo)
+PageContent = clsColumn.Make(ColumnId, ColumnInfo, PageNum)
 
 Response.Write PageContent
 
