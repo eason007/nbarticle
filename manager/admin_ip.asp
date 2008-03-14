@@ -22,7 +22,7 @@ If Not EA_Manager.Chk_Power(Admin_Power,"32") Then
 End If
 
 Dim Action
-Action=Request("action")
+Action=Request.Form("action")
 
 Select Case LCase(Action)
 Case "save"

@@ -24,7 +24,7 @@ End If
 
 Dim Action
 Dim ForTotal
-Action=Request("action")
+Action=Request.Form("action")
 
 Select Case LCase(Action)
 Case "add"

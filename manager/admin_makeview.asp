@@ -27,7 +27,7 @@ Dim Atcion
 Dim ForTotal
 Dim PageIndex(),PageStr()
 
-Atcion=Request("action")
+Atcion=Request.Form("action")
 
 Select Case LCase(Atcion)
 Case "mark"
