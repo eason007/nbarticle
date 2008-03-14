@@ -27,47 +27,15 @@ function initTabContent(){
 			<legend id="Language_MakeList_Title"></legend>
 			<table width="100%" class="edittable">
 				<tr>
-				  <td width="13%">&nbsp;<span id="Language_Comm_Select"></span>:</td>
-				  <td><select name="ColumnList"></td>
+				  <td width="100" align="right" valign="top">&nbsp;<span id="Language_Comm_Select"></span>:</td>
+				  <td><select name="ColumnList" size="10" multiple></select></td>
 				</tr>
 				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="1" checked></td>
-				  <td><span id="Language_MakeList_Option_1"></span></td>
+				  <td align="right"></td>
+				  <td><input type="checkbox" name="checkbox" value="on" onclick="CheckAll(document.form1,this);" /><span id="Language_Comm_SelectAll"></span></td>
 				</tr>
 				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="2"></td>
-				  <td><span id="Language_MakeList_Option_2"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="3"></td>
-				  <td><span id="Language_MakeList_Option_3"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="4"></td>
-				  <td><span id="Language_MakeList_Option_4"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="5"></td>
-				  <td><span id="Language_MakeList_Option_5"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="6"></td>
-				  <td><span id="Language_MakeList_Option_6"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="7"></td>
-				  <td><span id="Language_MakeList_Option_7"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input name="selType" type="checkbox" value="8"></td>
-				  <td><span id="Language_MakeList_Option_8"></span></td>
-				</tr>
-				<tr>
-				  <td align="right"><input type="checkbox" name="checkbox" value="on" onclick="CheckAll(document.form1,this);"></td>
-				  <td><span id="Language_Comm_SelectAll"></span></td>
-				</tr>
-				<tr>
-				  <td colspan="2" bgcolor="efefef">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="this.form.submit();"></td>
+				  <td colspan="2" bgcolor="efefef">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="this.form.submit();" /></td>
 				</tr>
 			</table>
 		</fieldset>

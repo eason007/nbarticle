@@ -48,7 +48,7 @@ Sub Main
 	Dim ColumnList
 
 	Temp=EA_DBO.Get_Column_List()
-	ColumnList = "(build-select),0 " & str_Comm_AllColumn & ",0"
+	ColumnList = str_Comm_AllColumn & ",0"
 	If IsArray(Temp) Then
 		ForTotal = UBound(Temp,2)
 
@@ -69,15 +69,6 @@ Sub Main
 	Call EA_M_XML.AppElements("Language_Comm_Select",str_Comm_Select)
 
 	Call EA_M_XML.AppElements("Language_MakeList_Title",str_MakeList_Title)
-
-	Call EA_M_XML.AppElements("Language_MakeList_Option_1",str_MakeList_Option_1)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_2",str_MakeList_Option_2)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_3",str_MakeList_Option_3)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_4",str_MakeList_Option_4)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_5",str_MakeList_Option_5)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_6",str_MakeList_Option_6)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_7",str_MakeList_Option_7)
-	Call EA_M_XML.AppElements("Language_MakeList_Option_8",str_MakeList_Option_8)
 
 	Call EA_M_XML.AppElements("btnSubmit",str_MakeIndex_StartNow)
 

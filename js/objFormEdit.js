@@ -194,22 +194,23 @@ function formEditObject() {
     				    }
         				break;
     				case "select-multiple" :
-    				    valueArray = value.split(",");
-    					for (var j = 0; j < element.options.length; j++) {
-                            var opt = element.options[j];
-                            opt.selected = false; 
-                            var optValue = opt.value;
+    				    valueArray = value.split(" ");
 
-                            if (!optValue && !('value' in opt))  {
-                                optValue = opt.text;
-                            }
+						var tmp = element.length;
+						for (var ii=0;ii<=tmp ;ii++ )
+						{
+							element.remove(0);
+						}
 
-                            for(var ijs=0; ijs<valueArray.length; ijs++) {
-								if(optValue == valueArray[ijs]) {
-									opt.selected = true;
-								}
-							} 
-    					}
+    					for(var ii=0;ii<valueArray.length;ii++){
+							var a=valueArray[ii].split(",");
+							if(a[0]!=null && a[0]!='' && a[1]!=null && a[1]!=''){
+								var newOpt=new Option(a[0],a[1]);
+								element.options[element.options.length]=newOpt;
+								element.options[element.options.length-1].selected=(a[1]==current)?true:false;
+								if(a[1]==current) c++;
+							}
+						}
     					break;
     				case "textarea" :
 						if (element.id.substr(0, 4) == "FCK_") {
