@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-03-16
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -457,7 +457,7 @@ Const str_MakeList_Now="现第"
 Const str_MakeList_AllComplate="所有任务已完成"
 
 'admin_makeview.asp
-Const str_MakeView_Help="①文章ID，可以填写您想从哪一个ID号开始进行生成静态网页。具体ID号可以在<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_content_list.htm\');"">文章管理</a>中查看。<br />②无论是选择""按ID生成""还是按""按日期生成""，相互之间的间隔最好不要选择过大。"
+Const str_MakeView_Help="①文章ID，可以填写您想从哪一个ID号开始进行生成静态网页。具体ID号可以在文章管理中查看。<br />②无论是选择""按ID生成""还是按""按日期生成""，相互之间的间隔最好不要选择过大。"
 Const str_MakeView_Title="批量生成静态内容页"
 Const str_MakeView_MakeById="按ID生成"
 Const str_MakeView_MakeByDate="按日期生成"

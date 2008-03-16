@@ -43,7 +43,7 @@ Sub Main
 	Dim ColumnList
 
 	Temp=EA_DBO.Get_Column_List()
-	ColumnList = "(build-select),0 " & str_Comm_AllColumn & ",0"
+	ColumnList = str_Comm_AllColumn & ",0"
 	If IsArray(Temp) Then
 		ForTotal = UBound(Temp,2)
 

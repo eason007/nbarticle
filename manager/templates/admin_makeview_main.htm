@@ -10,7 +10,6 @@ function initTabContent(){
 
 	FormEdit.start();
 }
-
 </script>
 
 <div class="mainWindows">
@@ -24,7 +23,7 @@ function initTabContent(){
 	<input type="hidden" name="tag">
 	<input type="hidden" name="action" value="mark">
 
-	<div style="margin-top: 5px;">
+	<div style="width: 20%; margin: 3px 25px 0 0;" class="left">
 		<fieldset>
 			<legend id="Language_MakeView_MakeById"></legend>
 			<table width="100%" class="edittable">
@@ -41,7 +40,7 @@ function initTabContent(){
 		</fieldset>
 	</div>
 
-	<div style="margin-top: 5px;">
+	<div style="width: 20%; margin-top: 5px" class="left">
 		<fieldset>
 			<legend id="Language_MakeView_MakeByDate"></legend>
 			<table width="100%" class="edittable">
@@ -58,12 +57,12 @@ function initTabContent(){
 		</fieldset>
 	</div>
 
-	<div style="margin-top: 5px;">
+	<div style="width: 55%; margin-top: 5px;" class="right">
 		<fieldset>
 			<legend id="Language_MakeView_MakeByColumn"></legend>
 			<table width="100%" class="edittable">
 				<tr>
-				  <td>&nbsp;&nbsp;<select name="ColumnList"></select></td>
+				  <td>&nbsp;&nbsp;<select name="ColumnList" size="10" multiple></select></td>
 				</tr>
 				<tr>
 				  <td bgcolor="efefef" height="25">&nbsp;&nbsp;<input type="button" name="btnSubmit3" id="btnSubmit3" onclick="javascript:this.form.tag.value='3';this.form.submit();"></td>
