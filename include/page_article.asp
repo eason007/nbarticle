@@ -10,7 +10,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-05
+'= 最后日期：2008-03-16
 '====================================================================
 
 Class page_Article
@@ -122,6 +122,8 @@ Class page_Article
 	End Function
 
 	Private Sub CorrList(Keyword, ColumnId, ByRef PageContent)
+		If Len(Keyword) = 0 Or IsNull(Keyword) Then Exit Sub
+
 		Dim Block, Parameter
 		Dim List
 		Dim Temp, ForTotal, i, TempArray

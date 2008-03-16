@@ -11,7 +11,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-10
+'= 最后日期：2008-03-16
 '====================================================================
 
 Response.Clear
@@ -361,9 +361,11 @@ Sub Save
 	KeyWord		= EA_Pub.DistinctStr(EA_Pub.SafeRequest(2,"keyword",1,"",1))
 
 	ColumnId	= EA_Pub.SafeRequest(2,"Column",0,0,0)
-	TempStr		= EA_DBO.Get_Column_Info(ColumnId)
-	ColumnName	= EA_Pub.SafeRequest(0,Trim(TempStr(0,0)),1,"",1)
-	ColumnCode	= EA_Pub.SafeRequest(0,Trim(TempStr(1,0)),1,"",0)
+	If ColumnId > 0 Then
+		TempStr		= EA_DBO.Get_Column_Info(ColumnId)
+		ColumnName	= EA_Pub.SafeRequest(0,Trim(TempStr(0,0)),1,"",1)
+		ColumnCode	= EA_Pub.SafeRequest(0,Trim(TempStr(1,0)),1,"",0)
+	End If
 
 	TColor		= EA_Pub.SafeRequest(2,"color",0,0,0)
 	ImgPath		= EA_Pub.SafeRequest(2,"img",1,"",1)

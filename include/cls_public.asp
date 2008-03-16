@@ -10,7 +10,7 @@
 '= 摘    要：共用类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-10
+'= 最后日期：2008-03-16
 '====================================================================
 
 Class cls_Public
@@ -911,6 +911,8 @@ Class cls_Public
 	End Function
 
 	Public Function DistinctStr (sStr)
+		If Len(sStr) = 0 Then Exit Function
+
 		Dim SplitStr
 		Dim TempArray, i, ForTotal
 		Dim Result
