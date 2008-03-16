@@ -12,8 +12,8 @@ function WC(d,tobj){
 	var ccd=new Date();//当日日期
 	if(d==""||typeof(d)=="undefined")d=new Date();
 	//日历表头
-	var ss="<table cellpadding=1 bgColor='#021853'><tr><td bgcolor='#ECF2FC'>";
-	ss+="<table border=0 cellspacing=0 cellpadding=0 width='' bgColor='#ECF2FC'>";
+	var ss="<table bgColor='#021853' border='1'><tr><td bgcolor='#ECF2FC'>";
+	ss+="<table bgColor='#ECF2FC'>";
 	ss+="<tr height=22 bgColor='#0A246A'>";
 	ss+="<td colspan=2>"
 	//item1
@@ -94,7 +94,7 @@ function SD(sobj,tobj){
 	if(ds==""){d=new Date()}else{var da=ds.split("-");var d=new Date(da[0],da[1]-1,da[2])}
 
 	if(document.getElementById('calendar')==null){
-		document.body.innerHTML += "<div id='calendar' style='position:absolute;width:280px;height:160px;display:none;z-index:99'></div>";
+		document.body.innerHTML += "<div id='calendar' style='position:absolute;display:none;z-index:99'></div>";
 	}else{
 		document.getElementById('calendar').style.display="none";
 	}
