@@ -29,10 +29,10 @@ function initTabContent(){
 			<table width="100%" class="edittable">
 				<tr>
 				  <td width="100" align="right" valign="top">&nbsp;<span id="Language_Comm_Select"></span>:</td>
-				  <td><select name="ColumnList" size="10" multiple></select></td>
+				  <td><select name="ColumnList" size="10" multiple dataType="Require"></select></td>
 				</tr>
 				<tr>
-				  <td colspan="2" bgcolor="efefef">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="this.form.submit();" /></td>
+				  <td colspan="2" bgcolor="efefef">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="if (!Validator.Validate(this.form, 3)) {return false;}else{this.form.submit();}" /></td>
 				</tr>
 			</table>
 		</fieldset>
