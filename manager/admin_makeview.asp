@@ -157,6 +157,7 @@ Sub MarkView
 		NewFolderList = ","
 		PageKeyword   = EA_Pub.SysInfo(16)
 		ForTotal	  = UBound(TopicList, 2)
+		EA_Pub.SysInfo(18) = 0
 
 		For i = 0 To ForTotal
 			PageContent  = ""
