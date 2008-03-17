@@ -15,56 +15,61 @@
 
 Class page_Article
 	Public PageIndex(), PageStr()
+	Public ID, Info
+	
 
+	Public Function Make (iID, ByRef aInfo, Page, IsView)
+		ID	 = iID
+		Info = aInfo
 
-	Public Function Make (ID, ByRef Info, Page, IsView)
 		Dim FirstArticle, NextArticle
 		Dim i, TempStr
+		Dim PageContent
 
-		PageContent  = EA_Temp.Load_Template(ArticleInfo(24, 0), 5)
+		PageContent  = EA_Temp.Load_Template(Info(24, 0), 5)
 
-		EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
-		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & ArticleInfo(3, 0) & "</strong></a>"
+		EA_Temp.Title= Info(3, 0) & " - " & Info(2, 0) & " - " & EA_Pub.SysInfo(0)
+		EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(Info(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ID, Info(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & Info(3, 0) & "</strong></a>"
 
-		EA_Pub.SysInfo(16) = ArticleInfo(12, 0) & "," & EA_Pub.SysInfo(16)
-		EA_Pub.SysInfo(17) = ArticleInfo(4, 0)
+		EA_Pub.SysInfo(16) = Info(12, 0) & "," & EA_Pub.SysInfo(16)
+		EA_Pub.SysInfo(17) = Info(4, 0)
 
 		If Not IsView Then 
 			TempStr = "<strong>" & SysMsg(11) & "</strong>"
 		Else
-			Call CutContent("\[NextPage([^\]])*\]", ArticleInfo(5, 0))
+			Call CutContent("\[NextPage([^\]])*\]", Info(5, 0))
 
 			If UBound(PageIndex) = 1 Then
-				Call Cov_InsideLink(ArticleInfo(5, 0), ArticleInfo(0, 0))
+				Call Cov_InsideLink(Info(5, 0), Info(0, 0))
 
-				TempStr = "<div id=""article"">" & ArticleInfo(5, 0) & "</div>"
+				TempStr = "<div id=""article"">" & Info(5, 0) & "</div>"
 			Else
-				TempStr = Mid(ArticleInfo(5, 0), PageIndex(Page - 1) + Len(PageStr(Page - 1)) + 1, PageIndex(Page) - PageIndex(Page - 1) - Len(PageStr(Page - 1)))
+				TempStr = Mid(Info(5, 0), PageIndex(Page - 1) + Len(PageStr(Page - 1)) + 1, PageIndex(Page) - PageIndex(Page - 1) - Len(PageStr(Page - 1)))
 
-				Call Cov_InsideLink(TempStr, ArticleInfo(0, 0))
+				Call Cov_InsideLink(TempStr, Info(0, 0))
 
 				TempStr = "<div id=""article"">" & TempStr & "</div>"
 				TempStr = TempStr & "<div style='TEXT-ALIGN: center;margin-bottom: 5px;'>" & PageNav(UBound(PageIndex), Page) & "</div>"
 			End If
 		End If
 
-		EA_Temp.SetVariable "Article.ColumnID", ArticleInfo(0, 0), PageContent
-		EA_Temp.SetVariable "Article.ID", ArticleId, PageContent
-		EA_Temp.SetVariable "Article.Url", EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)), PageContent
-		EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)), PageContent
-		EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
-		EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
-		EA_Temp.SetVariable "Article.Author", ArticleInfo(8, 0), PageContent
-		EA_Temp.SetVariable "Article.Source", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>", PageContent
-		EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
+		EA_Temp.SetVariable "Article.ColumnID", Info(0, 0), PageContent
+		EA_Temp.SetVariable "Article.ID", ID, PageContent
+		EA_Temp.SetVariable "Article.Url", EA_Pub.Cov_ArticlePath(ID, Info(13, 0), EA_Pub.SysInfo(18)), PageContent
+		EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(Info(17, 0),Info(3, 0)), PageContent
+		EA_Temp.SetVariable "Article.Date", FormatDateTime(Info(13, 0), 2), PageContent
+		EA_Temp.SetVariable "Article.Time", FormatDateTime(Info(13, 0), 4), PageContent
+		EA_Temp.SetVariable "Article.Author", Info(8, 0), PageContent
+		EA_Temp.SetVariable "Article.Source", "<a href='" & Info(16,0) & "'>" & Info(15,0) & "</a>", PageContent
+		EA_Temp.SetVariable "Article.Summary", Info(4, 0), PageContent
 		EA_Temp.SetVariable "Article.Content", TempStr, PageContent
-		EA_Temp.SetVariable "Article.Tag", TagList(ArticleInfo(12, 0)), PageContent
+		EA_Temp.SetVariable "Article.Tag", TagList(Info(12, 0)), PageContent
 
-		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ArticleId & """></script>", PageContent
-		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ArticleId & """></script>", PageContent
+		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ID & """></script>", PageContent
+		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ID & """></script>", PageContent
 
 		If EA_Temp.ChkTag("Article.FirstTopic", PageContent) Then
-			FirstArticle = EA_DBO.Get_Article_FirstArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
+			FirstArticle = EA_DBO.Get_Article_FirstArticle(Info(0, 0), Info(25, 0), ID)
 
 			If IsArray(FirstArticle) Then
 				EA_Temp.SetVariable "Article.FirstTopic", "<a href='" & EA_Pub.Cov_ArticlePath(FirstArticle(0, 0), FirstArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(FirstArticle(2, 0),FirstArticle(1, 0)) & "</a>", PageContent
@@ -72,14 +77,14 @@ Class page_Article
 		End If
 
 		If EA_Temp.ChkTag("Article.NextTopic", PageContent) Then
-			NextArticle  =EA_DBO.Get_Article_NextArticle(ArticleInfo(0, 0), ArticleInfo(25, 0), ArticleId)
+			NextArticle  =EA_DBO.Get_Article_NextArticle(Info(0, 0), Info(25, 0), ID)
 
 			If IsArray(NextArticle) Then
 				EA_Temp.SetVariable "Article.NextTopic", "<a href='" & EA_Pub.Cov_ArticlePath(NextArticle(0, 0), NextArticle(3, 0), EA_Pub.SysInfo(18)) & "'>" & EA_Pub.Add_ArticleColor(NextArticle(2, 0), NextArticle(1, 0)) & "</a>", PageContent
 			End If
 		End If
 
-		If EA_Temp.ChkTag("Article.RelatedList", PageContent) Then Call CorrList(ArticleInfo(12, 0), ArticleInfo(0, 0), PageContent)
+		If EA_Temp.ChkTag("Article.RelatedList", PageContent) Then Call CorrList(Info(12, 0), Info(0, 0), PageContent)
 
 		PageContent = EA_Temp.Replace_PublicTag(PageContent)
 
@@ -94,9 +99,9 @@ Class page_Article
 			If i = iCurrentPage Then 
 				OutStr = OutStr & "<span style='color: red;'>[" & i & "]</span>&nbsp;"
 			ElseIf i = 1 Then
-				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "'>[" & i & "]</a>&nbsp;"
+				OutStr = OutStr & "<a href='?articleid=" & ID & "'>[" & i & "]</a>&nbsp;"
 			Else
-				OutStr = OutStr & "<a href='?articleid=" & ArticleId & "&amp;page=" & i & "'>[" & i & "]</a>&nbsp;"
+				OutStr = OutStr & "<a href='?articleid=" & ID & "&amp;page=" & i & "'>[" & i & "]</a>&nbsp;"
 			End If
 		Next
 
@@ -149,7 +154,7 @@ Class page_Article
 			End Select
 		Next
 
-		List = EA_DBO.Get_Article_CorrList(SearchKeyWord, ArticleId, ColumnId, CInt(Parameter(0)), CInt(Parameter(2)))
+		List = EA_DBO.Get_Article_CorrList(SearchKeyWord, ID, ColumnId, CInt(Parameter(0)), CInt(Parameter(2)))
 		If Not IsArray(List) Then EA_Temp.CloseBlock "Article.RelatedList", PageContent: Exit Sub
 		
 		ForTotal = UBound(List, 2)
@@ -174,7 +179,7 @@ Class page_Article
 		EA_Temp.CloseBlock "Article.RelatedList", PageContent
 	End Sub
 
-	Private Sub CutContent(patrn, strng) 
+	Public Sub CutContent(patrn, strng) 
 		Dim regEx, Match, Matches			' 建立变量。 
 		Dim i
 

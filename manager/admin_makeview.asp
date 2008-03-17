@@ -1,4 +1,5 @@
 <!--#Include File="comm/inc.asp" -->
+<!--#Include File="../include/page_article.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -11,7 +12,7 @@
 '= 摘    要：后台-HTML栏目页生成文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-01-20
+'= 最后日期：2008-03-17
 '====================================================================
 
 Server.ScriptTimeout=9999999
@@ -25,14 +26,11 @@ End If
 
 Dim Atcion
 Dim ForTotal
-Dim PageIndex(),PageStr()
 
 Atcion=Request.Form("action")
 
 Select Case LCase(Atcion)
 Case "mark"
-	Set EA_Temp=New cls_Template
-			
 	Call MarkView
 Case Else
 	Call Main
@@ -112,10 +110,9 @@ Sub MarkView
 	End Select
 		
 	'0=ColumnId,1=ColumnCode,2=ColumnName,3=Title,4=Summary,5=Content,6=ViewNum,7=AuthorId,8=Author,9=CommentNum,10=IsOut
-	'11=OutUrl,12=[KeyWord],13=AddDate,14=CutArticle,15=Source,16=SourceUrl,17=TColor,18=Img,19=IsTop,20=ListPower
-	'21=IsHide,22=Article_TempId,23=[Id],24=TrueTime
-	SQL="Select ColumnId,ColumnCode,ColumnName,a.Title,Summary,Content,a.ViewNum,AuthorId,Author,CommentNum,a.IsOut"
-	SQL=SQL&",a.OutUrl,[KeyWord],AddDate,CutArticle,Source,SourceUrl,TColor,Img,a.IsTop,b.ListPower,b.IsHide,b.Article_TempId,a.[Id],TrueTime"
+	'11=OutUrl,12=[KeyWord],13=AddDate,14=CutArticle,15=Source,16=SourceUrl,17=TColor,18=Img,19=IsTop,20=IsPass
+	'21=IsDel,22=ListPower,23=IsHide,24=Article_TempId,25=TrueTime,26=SubTitle,27=SubUrl,28=Id
+	SQL="Select ColumnId, ColumnCode, ColumnName, a.Title, Summary, Content, a.ViewNum, AuthorId, Author, CommentNum, a.IsOut, a.OutUrl, [KeyWord], AddDate, CutArticle, Source, SourceUrl, TColor, Img, a.IsTop, IsPass, IsDel, b.ListPower, b.IsHide, b.Article_TempId,TrueTime,a.SubTitle,a.SubUrl,a.Id"
 	SQL=SQL&" FROM NB_Content AS a INNER JOIN NB_Column AS b ON a.ColumnId=b.Id Where IsPass="&EA_M_DBO.TrueValue&" And IsDel=0 "&WSQL&" Order By ColumnId Asc,a.[Id] Asc"
 	'response.write sql
 	'response.end
@@ -123,20 +120,16 @@ Sub MarkView
 	If Not rs.eof And Not rs.bof Then 
 		TopicList=Rs.GetRows()
 		Rs.Close
-		
-		Dim Template
-		Set Template=New cls_NEW_TEMPLATE
 
-		PageContent=Template.LoadTemplate("admin_makeview_view.htm")
+		PageContent=EA_Temp.Load_Template_File("admin_makeview_view.htm")
+		EA_Temp.P_Prefix = "{$"
+		EA_Temp.P_Suffix = "$}"
 
-		Template.SetVariable "PageTotal",Ubound(TopicList,2)+1,PageContent
-		Template.SetVariable "Language_MakeList_Now",str_MakeList_Now,PageContent
-		Template.SetVariable "Language_MakeList_Page",str_MakeList_Page,PageContent
+		EA_Temp.SetVariable "PageTotal",Ubound(TopicList,2)+1,PageContent
+		EA_Temp.SetVariable "Language_MakeList_Now",str_MakeList_Now,PageContent
+		EA_Temp.SetVariable "Language_MakeList_Page",str_MakeList_Page,PageContent
 
-		Template.BaseReplace PageContent
 		Response.Write PageContent
-
-		Set Template = Nothing
 
 		PageContent = ""
 
@@ -149,23 +142,28 @@ Sub MarkView
 		Dim NewFolderList
 		Dim re
 		Dim Tmp
+		Dim clsArticle
 
-		Set re=New RegExp
-		re.IgnoreCase =true
-		re.Global=True
+		Set re = New RegExp
+		Set clsArticle = New page_Article
+
+		EA_Temp.P_Prefix = "<!--"
+		EA_Temp.P_Suffix = "-->"
+
+		re.IgnoreCase	= True
+		re.Global		= True
+		re.Pattern		= Replace(SystemFolder, "/", "\/") & "(.*)\/(\w+)_(\d+).(\w+)"
 
 		NewFolderList = ","
+		PageKeyword   = EA_Pub.SysInfo(16)
+		ForTotal	  = UBound(TopicList, 2)
 
-		PageKeyword = EA_Pub.SysInfo(16)
-		ForTotal = UBound(TopicList,2)
-		k=0
-
-		For i=0 To ForTotal
-			IsReplace=True
-			sHTMLFilePath=EA_Pub.Cov_ArticlePath(TopicList(23,i), TopicList(13,i), "0")
+		For i = 0 To ForTotal
+			PageContent  = ""
+			IsReplace	 = True
+			sHTMLFilePath= EA_Pub.Cov_ArticlePath(TopicList(28, i), TopicList(13, i), "0")
 			
 			'check folder isexists
-			re.Pattern=Replace(SystemFolder, "/", "\/") & "(.*)\/(\w+).(\w+)"
 			Folder = re.Replace(sHTMLFilePath,"/$1/")
 
 			If InStr(NewFolderList, "," & Folder & ",") = 0 Then
@@ -185,125 +183,48 @@ Sub MarkView
 			End If
 			
 			'check is member
-			If TopicList(20,i)>0 Or TopicList(21,i)<>0 Then
-				IsReplace=False
-				TempStr="<meta http-equiv=""refresh"" content=""0;URL="&SystemFolder&"article.asp?articleid="&TopicList(23,i)&""">"
+			If TopicList(22,i) > 0 Or TopicList(23,i) <> 0 Then
+				IsReplace	= False
+				TempStr		= "<meta http-equiv=""refresh"" content=""0;URL="&SystemFolder&"article.asp?articleid="&TopicList(28,i)&""">"
 			End If
 			
 			'check is out
 			If TopicList(10,i) And IsReplace Then
-				IsReplace=False
-				TempStr="<meta http-equiv=""refresh"" content=""0;URL="&TopicList(11,i)&""">"
-			End If
-			
-			'load template
-			If CurrentTemplateId<>TopicList(22,i) And IsReplace Then
-				CurrentTemplateId=TopicList(22,i)
-				PageContent=EA_Temp.Load_Template(CurrentTemplateId,"view")
-			End If
-
-			If Len(PageContent)<=0 And IsReplace Then
-				Response.Write "栏目[ "&TopicList(2,i)&" ]尚未设定文章页模版，导致文章："&TopicList(3,i)&" 未能生成HTML。<br>"
-				IsReplace = False
-			End If
-
-			If CurrentColumnId<>TopicList(0,i) Then
-				EA_Temp.Nav="<a href="""&SystemFolder&"""><b>"&EA_Pub.SysInfo(0)&"</b></a>"&EA_Pub.Get_NavByColumnCode(TopicList(1,i))&" -=> 正文"
-				CurrentColumnId=TopicList(0,i)
+				IsReplace	= False
+				TempStr		= "<meta http-equiv=""refresh"" content=""0;URL="&TopicList(11,i)&""">"
 			End If
 			
 			If Not IsReplace Then
 			'not replace template tag
 				Call EA_Pub.Save_HtmlFile(sHTMLFilePath,TempStr)
 			Else
-				TempStr=PageContent
-				
-				EA_Temp.Title=TopicList(3,i)&" - "&TopicList(2,i)&" - "&EA_Pub.SysInfo(0)
+				Call clsArticle.CutContent("\[NextPage([^\]])*\]", TopicList(5, i))
 
-				EA_Temp.ReplaceTag "ColumnId",TopicList(0,i),TempStr
-				EA_Temp.ReplaceTag "ArticleId",TopicList(23,i),TempStr
-				EA_Temp.ReplaceTag "ArticleTitle",EA_Pub.Add_ArticleColor(TopicList(17,i),TopicList(3,i)),TempStr
-				EA_Temp.ReplaceTag "ArticlePostTime",TopicList(13,i),TempStr
-				EA_Temp.ReplaceTag "ArticleSummary",TopicList(4,i),TempStr
-				
-				EA_Temp.ReplaceTag "ArticleAuthor","<a href='"&SystemFolder&"florilegium.asp?a_name="&TopicList(8,i)&"&amp;a_id="&TopicList(7,i)&"' rel=""external"">"&TopicList(8,i)&"</a>",TempStr
-				
-				If Len(TopicList(16,i))>0 Then
-					EA_Temp.ReplaceTag "ArticleFrom","<a href='"&TopicList(16,i)&"' rel=""external"">"&TopicList(15,i)&"</a>",TempStr
+				If UBound(clsArticle.PageIndex) = 1 Then
+					PageContent = clsArticle.Make(TopicList(28, i), GetOneArray(TopicList, i), 1, True)
+
+					Call EA_Pub.Save_HtmlFile(sHTMLFilePath, PageContent)
 				Else
-					EA_Temp.ReplaceTag "ArticleFrom","本站",TempStr
-				End If
-				
-				EA_Temp.ReplaceTag "ArticleViewTotal","<script type=""text/javascript"" src="""&SystemFolder&"articleinfo.asp?action=viewtotal&amp;articleid="&TopicList(23,i)&"""></script>",TempStr
-				EA_Temp.ReplaceTag "ArticleCommentTotal","<script type=""text/javascript"" src="""&SystemFolder&"articleinfo.asp?action=commenttotal&amp;articleid="&TopicList(23,i)&"""></script>",TempStr
-
-				If InStr(TempStr, "{$FirstArticle$}") > 0 Then
-					FirstArticle=EA_DBO.Get_Article_FirstArticle(TopicList(0,i),TopicList(24,i),TopicList(23,i))
-
-					If IsArray(FirstArticle) Then
-						TempStr=Replace(TempStr,"{$FirstArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(FirstArticle(0,0),FirstArticle(3,0),EA_Pub.SysInfo(18))&"' rel=""external"">"&EA_Pub.Add_ArticleColor(FirstArticle(2,0),FirstArticle(1,0))&"</a>")
-					Else
-						TempStr=Replace(TempStr,"{$FirstArticle$}","<span style=""color: #800000;"">已到尽头</span>")
-					End If
-				End If
-
-				If InStr(TempStr, "{$NextArticle$}") > 0 Then
-					NextArticle=EA_DBO.Get_Article_NextArticle(TopicList(0,i),TopicList(24,i),TopicList(23,i))
-
-					If IsArray(NextArticle) Then
-						TempStr=Replace(TempStr,"{$NextArticle$}","<a href='"&EA_Pub.Cov_ArticlePath(NextArticle(0,0),NextArticle(3,0),EA_Pub.SysInfo(18))&"' rel=""external"">"&EA_Pub.Add_ArticleColor(NextArticle(2,0),NextArticle(1,0))&"</a>")
-					Else
-						TempStr=Replace(TempStr,"{$NextArticle$}","<span style=""color: #800000;"">已到尽头</span>")
-					End If
-				End If
-				
-				EA_Pub.SysInfo(16)=TopicList(12,i) & "," & PageKeyword 
-				EA_Pub.SysInfo(17)=TopicList(4,i)
-
-				Call CorrList(TopicList(12,i)&"",TopicList(0,i),TopicList(23,i),TempStr)
-				Call TagList(TopicList(12,i),TempStr)
-
-				TempStr=EA_Temp.Replace_PublicTag(TempStr)
-
-				TopicList(5,i)=EA_Pub.Cov_InsideLink(TopicList(5,i),TopicList(0,i))
-				
-				Call RegExpTest("\[NextPage([^\]])*\]", TopicList(5,i), re)
-
-				If UBound(PageIndex) = 1 Then
-					EA_Temp.ReplaceTag "ArticleText","<div id=""article"">"&TopicList(5,i)&"</div>",TempStr
-
-					Call EA_Pub.Save_HtmlFile(sHTMLFilePath,TempStr)
-				Else
-					For j = 1 To UBound(PageIndex)
-						Tmp = TempStr
-
-						ArticleContent = Mid(TopicList(5,i), PageIndex(j - 1) + Len(PageStr(j - 1)) + 1, PageIndex(j) - PageIndex(j - 1) - Len(PageStr(j - 1)))
-						ArticleContent = "<div id=""article"">" & ArticleContent & "</div>"
-						ArticleContent = ArticleContent & "<div style='TEXT-ALIGN: center;margin-bottom: 5px;'>" & PageNav(UBound(PageIndex), j, sHTMLFilePath, re) & "</div>"
-
-						EA_Temp.ReplaceTag "ArticleText",ArticleContent,Tmp
-
-						re.Pattern = "(.*)\/(\w+)_(\d+).(\w+)"
+					For j = 1 To UBound(clsArticle.PageIndex)
+						PageContent = clsArticle.Make(TopicList(28, i), GetOneArray(TopicList, i), j, True)
 						
 						If j = 1 Then
-							Call EA_Pub.Save_HtmlFile(sHTMLFilePath,Tmp)
+							Call EA_Pub.Save_HtmlFile(sHTMLFilePath, PageContent)
 						Else
-							Call EA_Pub.Save_HtmlFile(re.Replace(sHTMLFilePath,"$1/$2_$3_" & j & ".$4"),Tmp)
+							Call EA_Pub.Save_HtmlFile(re.Replace(sHTMLFilePath, "/$1/$2_$3_" & j & ".$4"), PageContent)
 						End If
 					Next
 				End If
 			End If
 			
-			k = k+1
-			
-			If ForTotal=0 Then 
+			If ForTotal = 0 Then 
 				Response.Write "<script>img1.width=400;" & VbCrLf
 			Else
-				Response.Write "<script>img1.width=" & Fix((k/ForTotal) * 400) & ";" & VbCrLf
+				Response.Write "<script>img1.width=" & Fix(((i + 1) / ForTotal) * 400) & ";" & VbCrLf
 			End If
-			Response.Write "column_complete.innerHTML=""<font color=green>"&i+1&"</font>"";</script>" & VbCrLf
+
+			Response.Write "column_complete.innerHTML=""<font color=green>" & i + 1 & "</font>"";</script>" & VbCrLf
 			Response.Flush
-			'response.end
 		Next
 		
 		Response.Write "<script>img1.width=400;"& VbCrLf
@@ -311,108 +232,17 @@ Sub MarkView
 	End If
 End Sub
 
-Sub TagList (Keyword, ByRef PageContent)
-	Dim OutStr
-	Dim TempArray,i
-	Dim ForTotal
+Function GetOneArray(ExArray, RowNum)
+	Dim TmpArray()
+	Dim i, k
 
-	If Len(Trim(Keyword)) > 0 And Not IsNull(Keyword) Then
-		TempArray= Split(Keyword,",")
+	k = UBound(ExArray)
+	ReDim TmpArray(k + 1, 1)
 
-		ForTotal = UBound(TempArray)
-
-		For i=0 To ForTotal
-			If Len(Trim(TempArray(i))) > 0 And Not IsNull(TempArray(i)) Then OutStr = OutStr & "<a href='" & SystemFolder & "search.asp?action=query&amp;field=1&amp;keyword=" & server.urlencode(Trim(TempArray(i))) & "' rel='external'>" & Trim(TempArray(i)) & "</a>&nbsp;"
-		Next
-	End If
-
-	Call EA_Temp.ReplaceTag("TagList",OutStr,PageContent)
-End Sub
-
-Sub CorrList(Keyword,ColumnId,ArticleId,ByRef PageContent)
-	Dim ConfigParameterArray
-	Dim TempStr
-
-	If Keyword = "" Or Len(Keyword) = 0 Then 
-		TempStr = EA_Temp.Text_List(ConfigParameterArray,0,0,0,1,0,0,0,0,0)
-	Else
-		ConfigParameterArray=EA_Temp.Find_TemplateTagValues("CorrList",PageContent)
-
-		If IsArray(ConfigParameterArray) Then 
-			If UBound(ConfigParameterArray) < 8 Then 
-				ReDim Preserve ConfigParameterArray(8)
-				ConfigParameterArray(8) = "5"
-			End If
-
-			Dim TempArray,i,SearchKeyWord
-			Dim ForTotal
-
-			TempArray= Split(Keyword,",")
-			ForTotal = UBound(TempArray)
-
-			For i=0 To ForTotal
-				Select Case iDataBaseType
-				Case 0
-					SearchKeyWord=SearchKeyWord&" InStr(','+keyword+',',',"&TempArray(i)&",')>0 or "
-				Case 1
-					SearchKeyWord=SearchKeyWord&" CharIndex(',"&TempArray(i)&",',','+keyword+',')>0 or "
-				End Select
-			Next
-		
-			TempArray=EA_DBO.Get_Article_CorrList(SearchKeyWord,ArticleId,ColumnId,CInt(ConfigParameterArray(8)))
-
-			TempStr=EA_Temp.Text_List(TempArray,CInt(ConfigParameterArray(0)),CInt(ConfigParameterArray(1)),CInt(ConfigParameterArray(2)),CInt(ConfigParameterArray(3)),CInt(ConfigParameterArray(4)),CInt(ConfigParameterArray(5)),CInt(ConfigParameterArray(6)),CInt(ConfigParameterArray(7)),CInt(ConfigParameterArray(8)))
-		End If
-	End If
-
-	Call EA_Temp.Find_TemplateTagByInput("CorrList",TempStr,PageContent)
-End Sub
-
-Sub RegExpTest(patrn, strng, ByRef regEx) 
-	Dim Match, Matches			' 建立变量。 
-	Dim i
-
-	regEx.Pattern = patrn				' 设置模式。 
-	Set Matches = regEx.Execute(strng)	' 执行搜索。 
-
-	ReDim PageIndex(Matches.Count + 1)
-	ReDim PageStr(Matches.Count + 1)
-
-	i = 1
-	
-	PageIndex(0) = 0
-
-	For Each Match in Matches			' 遍历匹配集合。 
-		PageIndex(i) = Match.FirstIndex
-		PageStr(i)	 = Match.Value
-
-		i = i + 1
+	For i = 0 To k
+		TmpArray(i, 0) = ExArray(i, RowNum)
 	Next
 
-	PageIndex(i) = Len(strng)
-End Sub
-
-Function PageNav (iCount, iCurrentPage, sFilePath, ByRef re)
-	Dim i
-	Dim OutStr
-	Dim iArticleID,sFileName,sFileExt
-
-	re.Pattern = "(.*)\/(\w+)_(\d+).(\w+)"
-
-	iArticleID = re.Replace(sFilePath,"$3")
-	sFileName  = re.Replace(sFilePath,"$2_$3")
-	sFileExt   = re.Replace(sFilePath,".$4")
-
-	For i = 1 To iCount
-		If i = iCurrentPage Then 
-			OutStr = OutStr & "<span style='color: red;'>[" & i & "]</span>&nbsp;"
-		ElseIf i = 1 Then
-			OutStr = OutStr & "<a href='" & sFilePath & "'>[" & i & "]</a>&nbsp;"
-		Else
-			OutStr = OutStr & "<a href='" & sFileName & "_" & i & sFileExt & "'>[" & i & "]</a>&nbsp;"
-		End If
-	Next
-
-	PageNav = OutStr
+	GetOneArray = TmpArray
 End Function
 %>
