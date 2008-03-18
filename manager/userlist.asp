@@ -11,7 +11,7 @@
 '= 摘    要：后台-组内会员列表文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-27
+'= 最后日期：2008-03-18
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -63,7 +63,7 @@ function CheckAll(form)
       <th width="6%"><%=str_Member_State%></th>
     </tr>
     <%
-    Dim i,TopicList
+    Dim i
     Dim Count,OutStr
 	Dim FieldName(0),FieldValue(0)
 	Dim ForTotal
