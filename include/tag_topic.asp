@@ -10,16 +10,16 @@
 '= 摘    要：topic模版标签文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-18
 '====================================================================
 
 Sub MakeTopic(ByRef PageContent)
 	If EA_Temp.ChkBlock("Topic.List", PageContent) Then
-		TopicList PageContent
+		Topic PageContent
 	End If
 End Sub
 
-Sub TopicList (ByRef PageContent)
+Sub Topic (ByRef PageContent)
 	Dim Block, Parameter
 	Dim List
 	Dim Temp, ForTotal, i
@@ -38,7 +38,7 @@ Sub TopicList (ByRef PageContent)
 
 		For i = 0 To ForTotal
 			Temp = Block
-	  
+
 			List(3, i) = EA_Pub.Base_HTMLFilter(List(3, i))
 			List(3, i) = EA_Pub.Cut_Title(List(3, i), Parameter(3))
 
