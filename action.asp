@@ -11,7 +11,7 @@
 '= 摘    要：申请友情连接文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-03-18
 '====================================================================
 
 Dim Action
@@ -43,10 +43,6 @@ Sub SaveVote()
 		IsVoted = False
 	End If
 
-	If Not IsVoted Then
-		ErrMsg = SysMsg(31)
-		Call EA_Pub.ShowErrMsg(0, 0)
-	End If
 	If EA_Pub.SysInfo(10) = "0" Then
 		ErrMsg = SysMsg(31)
 		Call EA_Pub.ShowErrMsg(0, 0)
@@ -80,7 +76,7 @@ Sub SaveVote()
 			Response.Cookies(sCacheName & "Vote" & VoteId).Expires = Date() + 24
 		End If
 
-		response.write "1"
+		Response.Redirect "./vote.asp?" & Request.QueryString
 	Else
 		ErrMsg = SysMsg(33)
 		Call EA_Pub.ShowErrMsg(0, 0)

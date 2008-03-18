@@ -15,6 +15,45 @@
 '= 最后日期：2008-03-18
 '====================================================================
 
+Dim VoteId,VoteChoose,VoteType,VoteText,VoteNum
+Dim i,VoteInfo
+Dim IsVoted
+Dim ForTotal
+
+VoteId		= EA_Pub.SafeRequest(3, "voteid", 0, 0, 3)
+VoteChoose	= EA_Pub.SafeRequest(3, "vote", 1, "", 3)
+VoteChoose	= Split(VoteChoose, ",")
+VoteType	= EA_Pub.SafeRequest(3, "votetype", 0, 0, 3)
+
+If Request.Cookies(sCacheName & "Vote" & VoteId) = "" Then 
+	IsVoted = True
+Else
+	IsVoted = False
+End If
+
+VoteInfo = EA_DBO.Get_Vote_Info(VoteId)
+If IsArray(VoteInfo) Then
+	If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then 
+		ErrMsg = SysMsg(29)
+		Call EA_Pub.ShowErrMsg(0, 0)
+	End If
+
+	If VoteInfo(5, 0) <> 0 Then 
+		ErrMsg = SysMsg(32)
+		Call EA_Pub.ShowErrMsg(0, 0)
+	End If
+
+	VoteText = VoteInfo(2, 0)
+	VoteText = Split(VoteText, "|")
+	VoteNum	 = VoteInfo(3, 0)
+	VoteNum	 = Split(VoteNum, "|")
+
+	Call ShowResult(VoteText,VoteNum,VoteInfo(0,0),IsVoted)
+Else
+	ErrMsg = SysMsg(33)
+	Call EA_Pub.ShowErrMsg(0, 0)
+End If
+
 Sub ShowResult(VoteText,VoteNum,VoteTitle,IsVote)
 	Dim i,LoopNum,VoteCount,rate,j
 	Dim CakeArray
@@ -96,7 +135,7 @@ td {
       </table></td>
   </tr>
   <tr bgcolor="#E8F7FF"> 
-    <td height="22">&nbsp; <%If IsVote Then Response.Write "你已经投过票！" Else Response.Write "<font color=800000>这是你第一次投票！</font>"%></td>
+    <td height="22">&nbsp; <%If Not IsVote Then Response.Write "你已经投过票！" Else Response.Write "<font color=800000>这是你第一次投票！</font>"%></td>
   </tr>
 </table>
 </body>
