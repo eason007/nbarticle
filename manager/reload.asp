@@ -157,27 +157,24 @@ Sub Make_Sitemaps()
 	Dim SitemapsFront
 	Dim i, j, k, TempArray
 	Dim PageCount, FileName
-	Dim Template
-
-	Set Template=New cls_NEW_TEMPLATE
 
 	FileIndex = 1
 	FileTotal = 0
 
-	IndexContent = Template.LoadTemplate("sitemap-index.xml")
-	Content		 = Template.LoadTemplate("sitemaps.xml")
+	IndexContent = EA_Temp.Load_Template_File("sitemap-index.xml")
+	Content		 = EA_Temp.Load_Template_File("sitemaps.xml")
 
-	IndexListBlock		= Template.GetBlock("list",IndexContent)
-	ContentListBlock	= Template.GetBlock("list",Content)
+	IndexListBlock		= EA_Temp.GetBlock("list",IndexContent)
+	ContentListBlock	= EA_Temp.GetBlock("list",Content)
 
 	SitemapsFront = EA_Pub.SysInfo(11)
 
 	Block = ContentListBlock
-	Template.SetVariable "SitemapsFile", EA_Pub.SysInfo(11), Block
-	Template.SetVariable "priority", "1.0", Block
-	Template.SetVariable "changefreq", "weekly", Block
+	EA_Temp.SetVariable "SitemapsFile", EA_Pub.SysInfo(11), Block
+	EA_Temp.SetVariable "priority", "1.0", Block
+	EA_Temp.SetVariable "changefreq", "weekly", Block
 
-	Template.SetBlock "list", Block, Content
+	EA_Temp.SetBlock "list", Block, Content
 
 	'Sort List
 	SQL = "SELECT [ID],CountNum,IsOut,PageSize,ListPower,IsHide FROM [NB_Column]"
@@ -190,11 +187,11 @@ Sub Make_Sitemaps()
 			Block = ContentListBlock
 
 			If (TempArray(2,i) = "1") Or (CDbl(TempArray(4,i)) > 0) Or (TempArray(5,i) = "1") Then
-				Template.SetVariable "SitemapsFile", SitemapsFront & "list.asp?classid=" & TempArray(0,i), Block
-				Template.SetVariable "priority", "0.5", Block
-				Template.SetVariable "changefreq", "weekly", Block
+				EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "list.asp?classid=" & TempArray(0,i), Block
+				EA_Temp.SetVariable "priority", "0.5", Block
+				EA_Temp.SetVariable "changefreq", "weekly", Block
 
-				Template.SetBlock "list", Block, Content
+				EA_Temp.SetBlock "list", Block, Content
 
 				FileTotal = FileTotal + 1
 
@@ -204,11 +201,11 @@ Sub Make_Sitemaps()
 
 				For j = 1 To PageCount
 					If EA_Pub.SysInfo(18) = "1" Then
-						Template.SetVariable "SitemapsFile", SitemapsFront & "list.asp?classid=" & TempArray(0,i) & "&amp;page=" & j, Block
-						Template.SetVariable "priority", "0.5", Block
-						Template.SetVariable "changefreq", "weekly", Block
+						EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "list.asp?classid=" & TempArray(0,i) & "&amp;page=" & j, Block
+						EA_Temp.SetVariable "priority", "0.5", Block
+						EA_Temp.SetVariable "changefreq", "weekly", Block
 
-						Template.SetBlock "list", Block, Content
+						EA_Temp.SetBlock "list", Block, Content
 
 						Block = ContentListBlock
 
@@ -216,11 +213,11 @@ Sub Make_Sitemaps()
 
 						If FileTotal = 50000 Then Call Save_Sitemaps(FileIndex, FileTotal, Content, IndexListBlock, IndexContent, SitemapsFront, Template)
 					Else
-						Template.SetVariable "SitemapsFile", SitemapsFront & "articlelist/article_" & TempArray(0,i) & "_adddate_desc_" & j & ".htm", Block
-						Template.SetVariable "priority", "0.5", Block
-						Template.SetVariable "changefreq", "weekly", Block
+						EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "articlelist/article_" & TempArray(0,i) & "_adddate_desc_" & j & ".htm", Block
+						EA_Temp.SetVariable "priority", "0.5", Block
+						EA_Temp.SetVariable "changefreq", "weekly", Block
 
-						Template.SetBlock "list", Block, Content
+						EA_Temp.SetBlock "list", Block, Content
 
 						Block = ContentListBlock
 
@@ -246,16 +243,16 @@ Sub Make_Sitemaps()
 			Block = ContentListBlock
 
 			If (TempArray(2,i) = "1") Or (CDbl(TempArray(3,i)) > 0) Or (TempArray(4,i) = "1") Then
-				Template.SetVariable "SitemapsFile", SitemapsFront & "article.asp?articleid=" & TempArray(0,i), Block
-				Template.SetVariable "priority", "0.8", Block
-				Template.SetVariable "changefreq", "daily", Block
+				EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "article.asp?articleid=" & TempArray(0,i), Block
+				EA_Temp.SetVariable "priority", "0.8", Block
+				EA_Temp.SetVariable "changefreq", "daily", Block
 			Else
-				Template.SetVariable "SitemapsFile", SitemapsFront & "articleview/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "-" & Day(TempArray(1,i)) & "/article_view_" & TempArray(0,i) & ".htm", Block
-				Template.SetVariable "priority", "0.8", Block
-				Template.SetVariable "changefreq", "daily", Block
+				EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "articleview/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "-" & Day(TempArray(1,i)) & "/article_view_" & TempArray(0,i) & ".htm", Block
+				EA_Temp.SetVariable "priority", "0.8", Block
+				EA_Temp.SetVariable "changefreq", "daily", Block
 			End If
 
-			Template.SetBlock "list", Block, Content
+			EA_Temp.SetBlock "list", Block, Content
 
 			FileTotal = FileTotal + 1
 
@@ -263,32 +260,32 @@ Sub Make_Sitemaps()
 		Next
 	End If
 
-	Call Save_Sitemaps(FileIndex, FileTotal, Content, IndexListBlock, IndexContent, SitemapsFront, Template)
+	Call Save_Sitemaps(FileIndex, FileTotal, Content, IndexListBlock, IndexContent, SitemapsFront)
 
-	Template.CloseBlock "list",IndexContent
+	EA_Temp.CloseBlock "list",IndexContent
 
 	FileName = "../sitemap-index.xml"
 
-	Template.SetVariable "LastModTime",Year(Date()) & "-" & Right("00"&Month(Date()),2) & "-" & Right("00"&Day(Date()),2),IndexContent
+	EA_Temp.SetVariable "LastModTime",Year(Date()) & "-" & Right("00"&Month(Date()),2) & "-" & Right("00"&Day(Date()),2),IndexContent
 
 	Call EA_Pub.Save_HtmlFile(FileName, IndexContent)
 
 	Response.Write str_BatchOperationMessageForSucess
 End Sub
 
-Sub Save_Sitemaps(ByRef iFileIndex, ByRef iFileTotal, sFileContent, sIndexListBlock, ByRef sIndexContent, sSitemapsFront,ByRef Template)
+Sub Save_Sitemaps(ByRef iFileIndex, ByRef iFileTotal, sFileContent, sIndexListBlock, ByRef sIndexContent, sSitemapsFront)
 	Dim FileName
 
 	FileName = "../sitemaps-" & Date() & "-" & iFileIndex & ".xml"
 
-	Template.CloseBlock "list",sFileContent
+	EA_Temp.CloseBlock "list",sFileContent
 
-	Template.SetVariable "LastModTime",Year(Date()) & "-" & Right("00"&Month(Date()),2) & "-" & Right("00"&Day(Date()),2),sFileContent
+	EA_Temp.SetVariable "LastModTime",Year(Date()) & "-" & Right("00"&Month(Date()),2) & "-" & Right("00"&Day(Date()),2),sFileContent
 
 	Call EA_Pub.Save_HtmlFile(FileName, sFileContent)
 
-	Template.SetVariable "SitemapsFile", sSitemapsFront & "sitemaps-" & Date() & "-" & iFileIndex & ".xml", sIndexListBlock
-	Template.SetBlock "list", sIndexListBlock, sIndexContent
+	EA_Temp.SetVariable "SitemapsFile", sSitemapsFront & "sitemaps-" & Date() & "-" & iFileIndex & ".xml", sIndexListBlock
+	EA_Temp.SetBlock "list", sIndexListBlock, sIndexContent
 
 	iFileIndex = iFileIndex + 1
 	iFileTotal = 0
@@ -301,19 +298,16 @@ Sub Make_BaiduNewsop ()
 	Dim SitemapsFront
 	Dim i,TempArray
 	Dim FileName
-	Dim Template
 
-	Set Template=New cls_NEW_TEMPLATE
-
-	Content				= Template.LoadTemplate("baidu-newsop.xml")
-	ContentListBlock	= Template.GetBlock("list",Content)
+	Content				= EA_Temp.Load_Template_File("baidu-newsop.xml")
+	ContentListBlock	= EA_Temp.GetBlock("list",Content)
 
 	SitemapsFront = EA_Pub.SysInfo(11)
 
-	Template.SetVariable "webSite", EA_Pub.SysInfo(11), Content
-	Template.SetVariable "webMaster", EA_Pub.SysInfo(12), Content
+	EA_Temp.SetVariable "webSite", EA_Pub.SysInfo(11), Content
+	EA_Temp.SetVariable "webMaster", EA_Pub.SysInfo(12), Content
 
-	Template.SetBlock "list", Block, Content
+	EA_Temp.SetBlock "list", Block, Content
 
 	'Article List
 	SQL = "SELECT TOP 100 a.[ID],a.AddDate,a.IsOut,b.ListPower,b.IsHide,a.Title,a.Summary,a.Content,a.KeyWord,b.Title,a.Author,a.Source,a.Img"
@@ -329,26 +323,26 @@ Sub Make_BaiduNewsop ()
 			Block = ContentListBlock
 
 			If (TempArray(2,i) = "1") Or (CDbl(TempArray(3,i)) > 0) Or (TempArray(4,i) = "1") Then
-				Template.SetVariable "link", SitemapsFront & "article.asp?articleid=" & TempArray(0,i), Block
+				EA_Temp.SetVariable "link", SitemapsFront & "article.asp?articleid=" & TempArray(0,i), Block
 			Else
-				Template.SetVariable "link", SitemapsFront & "articleview/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "-" & Day(TempArray(1,i)) & "/article_view_" & TempArray(0,i) & ".htm", Block
+				EA_Temp.SetVariable "link", SitemapsFront & "articleview/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "-" & Day(TempArray(1,i)) & "/article_view_" & TempArray(0,i) & ".htm", Block
 			End If
 
-			Template.SetVariable "title", TempArray(5,i), Block
-			Template.SetVariable "description", EA_Pub.SafeRequest(0, TempArray(6,i), 1, "", 3), Block
-			Template.SetVariable "text", EA_Pub.SafeRequest(0, TempArray(7,i), 1, "", 3), Block
-			Template.SetVariable "headlineImg", TempArray(12,i), Block
-			Template.SetVariable "keywords", Replace(TempArray(8,i), ",", " "), Block
-			Template.SetVariable "category", TempArray(9,i), Block
-			Template.SetVariable "author", TempArray(10,i), Block
-			Template.SetVariable "source", TempArray(11,i), Block
-			Template.SetVariable "pubDate", TempArray(1,i), Block
+			EA_Temp.SetVariable "title", TempArray(5,i), Block
+			EA_Temp.SetVariable "description", EA_Pub.SafeRequest(0, TempArray(6,i), 1, "", 3), Block
+			EA_Temp.SetVariable "text", EA_Pub.SafeRequest(0, TempArray(7,i), 1, "", 3), Block
+			EA_Temp.SetVariable "headlineImg", TempArray(12,i), Block
+			EA_Temp.SetVariable "keywords", Replace(TempArray(8,i)&"", ",", " "), Block
+			EA_Temp.SetVariable "category", TempArray(9,i), Block
+			EA_Temp.SetVariable "author", TempArray(10,i), Block
+			EA_Temp.SetVariable "source", TempArray(11,i), Block
+			EA_Temp.SetVariable "pubDate", TempArray(1,i), Block
 
-			Template.SetBlock "list", Block, Content
+			EA_Temp.SetBlock "list", Block, Content
 		Next
 	End If
 
-	Template.CloseBlock "list",Content
+	EA_Temp.CloseBlock "list",Content
 
 	Call EA_Pub.Save_HtmlFile("../baidu-newsop.xml", Content)
 	Response.Write str_BatchOperationMessageForSucess
