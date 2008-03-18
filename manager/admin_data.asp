@@ -11,13 +11,13 @@
 '= 摘    要：后台-数据库管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-11-12
+'= 最后日期：2008-03-18
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
 
 Dim Action
-Action=Request.Form("action")
+Action=Request("action")
 
 Select Case LCase(Action)
 Case "backupdata"
@@ -72,6 +72,8 @@ Set EA_Pub=Nothing
 
 Sub BackUpDataBase
 	PageContent=EA_Temp.Load_Template_File("admin_data_backup.htm")
+	EA_Temp.P_Prefix = "{$"
+	EA_Temp.P_Suffix = "$}"
 
 	EA_Temp.SetVariable "Language_OperationNotice",str_OperationNotice,PageContent
 	EA_Temp.SetVariable "Language_Data_Backup_Help",str_Data_Backup_Help,PageContent
@@ -83,8 +85,6 @@ Sub BackUpDataBase
 	EA_Temp.SetVariable "Language_Comm_Save_Button",str_Comm_Save_Button,PageContent
 
 	EA_Temp.SetVariable "Date",Date(),PageContent
-
-	EA_Temp.BaseReplace PageContent
 
 	Response.Write PageContent
 End Sub
