@@ -132,16 +132,17 @@ Sub GetArticleInfo()
 	Dim ArticleInfo
 
 	ArticleId	= EA_Pub.SafeRequest(3, "articleid", 0, 0, 3)
-	ArticleInfo	= EA_DBO.Get_Article_Info(ArticleId,0)
+	ArticleInfo	= EA_DBO.Get_Article_Info_Single(ArticleId)
 
 	If IsArray(ArticleInfo) Then
 		Select Case LCase(Action)
 		Case "viewtotal"
-			Response.Write "document.write (""" & ArticleInfo(6, 0) & """);"
+			Response.Write "document.write (""" & ArticleInfo(6, 0) + 1 & """);"
+			Response.Flush
 			Call EA_DBO.Set_Article_ViewNum_UpDate(ArticleId)
 		Case "commenttotal"
 			Response.Write "document.write (""" & ArticleInfo(9, 0) & """);"
-			Call EA_DBO.Set_Article_CommentNum_UpDate(ArticleId)
+			Response.Flush
 		End Select
 	End If
 

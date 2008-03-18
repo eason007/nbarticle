@@ -65,8 +65,8 @@ Class page_Article
 		EA_Temp.SetVariable "Article.Content", TempStr, PageContent
 		EA_Temp.SetVariable "Article.Tag", TagList(Info(12, 0)), PageContent
 
-		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=viewtotal&amp;articleid=" & ID & """></script>", PageContent
-		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "articleinfo.asp?action=commenttotal&amp;articleid=" & ID & """></script>", PageContent
+		EA_Temp.SetVariable "Article.ViewTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "action.asp?action=viewtotal&amp;articleid=" & ID & """></script>", PageContent
+		EA_Temp.SetVariable "Article.CommentTotal", "<script type=""text/javascript"" src=""" & SystemFolder & "action.asp?action=commenttotal&amp;articleid=" & ID & """></script>", PageContent
 
 		If EA_Temp.ChkTag("Article.FirstTopic", PageContent) Then
 			FirstArticle = EA_DBO.Get_Article_FirstArticle(Info(0, 0), Info(25, 0), ID)

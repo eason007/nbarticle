@@ -11,7 +11,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-16
+'= 最后日期：2008-03-18
 '====================================================================
 
 Response.Clear
@@ -541,7 +541,7 @@ Sub Batch()
 		ForTotal = UBound(TempArray)
 
 		For i=0 To ForTotal
-			Temp=EA_DBO.Get_Article_Info(TempArray(i),0)
+			Temp=EA_DBO.Get_Article_Info_Single(TempArray(i))
 			If IsArray(Temp) Then 
 				If InStr(1,","&Column_Power&",",","&Temp(0,0)&"2,")>0 Then 
 					EA_M_DBO.Set_Article_PassState 1,TempArray(i)
@@ -554,7 +554,7 @@ Sub Batch()
 		ForTotal = UBound(TempArray)
 
 		For i=0 To ForTotal
-			Temp=EA_DBO.Get_Article_Info(TempArray(i),0)
+			Temp=EA_DBO.Get_Article_Info_Single(TempArray(i))
 			If IsArray(Temp) Then 
 				If InStr(1,","&Column_Power&",",","&Temp(0,0)&"2,")>0 Then 
 					EA_M_DBO.Set_Article_PassState 0,TempArray(i)
@@ -612,7 +612,7 @@ Sub Del
 	For i = 0 To ForTotal
 		Tmp = EA_Pub.SafeRequest(5,IDs(i),0,0,0)
 
-		Temp=EA_DBO.Get_Article_Info(Tmp,0)
+		Temp=EA_DBO.Get_Article_Info_Single(Tmp)
 		If IsArray(Temp) Then
 			ColumnId=Temp(0,0)
 			AuthroId=Temp(7,0)
