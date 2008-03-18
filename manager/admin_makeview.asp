@@ -12,7 +12,7 @@
 '= 摘    要：后台-HTML栏目页生成文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-17
+'= 最后日期：2008-03-18
 '====================================================================
 
 Server.ScriptTimeout=9999999
@@ -100,9 +100,15 @@ Sub MarkView
 			WSQL=" And AddDate between '"&StartBorder&"' and '"&DateAdd("d",1,EndBorder)&"'"
 		End If
 	Case 3
-		StartBorder=EA_Pub.SafeRequest(2,"ColumnList",0,0,0)
-		
-		If StartBorder<>0 Then WSQL=" And ColumnId="&StartBorder
+		StartBorder = EA_Pub.SafeRequest(2, "ColumnList", 1, "", 1)
+		EndBorder = Split(StartBorder, ", ")
+		If UBound(EndBorder) = -1 Then Exit Sub
+
+		If UBound(EndBorder) >= 1 Then
+			WSQL=" And ColumnId IN (" & StartBorder & ")"
+		Else
+			If StartBorder <> "0" Then WSQL=" And ColumnId="&StartBorder
+		End If
 	Case 4
 		StartBorder=EA_Pub.SafeRequest(2,"sid",1,"",0)
 
@@ -220,7 +226,7 @@ Sub MarkView
 			If ForTotal = 0 Then 
 				Response.Write "<script>img1.width=400;" & VbCrLf
 			Else
-				Response.Write "<script>img1.width=" & Fix(((i + 1) / ForTotal) * 400) & ";" & VbCrLf
+				Response.Write "<script>img1.width=" & Fix(((i + 1) / ForTotal) * 100) & ";" & VbCrLf
 			End If
 
 			Response.Write "column_complete.innerHTML=""<font color=green>" & i + 1 & "</font>"";</script>" & VbCrLf
