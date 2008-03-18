@@ -94,14 +94,29 @@ Class page_Article
 	Private Function PageNav (iCount, iCurrentPage)
 		Dim i
 		Dim OutStr
+		Dim Url
+		Dim re
+
+		If EA_Pub.SysInfo(18) <> "0" Then
+			Url = EA_Pub.Cov_ArticlePath(ID, Info(13, 0), EA_Pub.SysInfo(18)) & "&page=#1"
+		Else
+			Set re = New RegExp
+
+			re.IgnoreCase	= True
+			re.Global		= True
+			re.Pattern		= "\/(\w+)_(\d+).(\w+)"
+
+			Url = EA_Pub.Cov_ArticlePath(ID, Info(13, 0), EA_Pub.SysInfo(18))
+			Url = re.Replace(Url, "/$1_$2_#1.$3")
+		End If
 
 		For i = 1 To iCount
 			If i = iCurrentPage Then 
 				OutStr = OutStr & "<span style='color: red;'>[" & i & "]</span>&nbsp;"
 			ElseIf i = 1 Then
-				OutStr = OutStr & "<a href='?articleid=" & ID & "'>[" & i & "]</a>&nbsp;"
+				OutStr = OutStr & "<a href='" & Replace(Url, "_#1", "") & "'>[" & i & "]</a>&nbsp;"
 			Else
-				OutStr = OutStr & "<a href='?articleid=" & ID & "&amp;page=" & i & "'>[" & i & "]</a>&nbsp;"
+				OutStr = OutStr & "<a href='" & Replace(Url, "#1", i) & "'>[" & i & "]</a>&nbsp;"
 			End If
 		Next
 

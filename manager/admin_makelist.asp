@@ -173,7 +173,7 @@ Sub ForColumn(ColumnId)
 		If PageCount = 0 Then PageCount = 1
 		Response.Write "<script>page_total.innerHTML=""" & PageCount & """;</script>" & VbCrLf
 		
-		EA_Pub.SysInfo(18) = 0
+		EA_Pub.SysInfo(18) = "0"
 
 		For i = 1 To PageCount
 			Call clsColumn.Make(ColumnId, ColumnInfo, i)

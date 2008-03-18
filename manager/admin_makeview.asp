@@ -77,7 +77,7 @@ Sub Main
 End Sub
 
 Sub MarkView
-	Dim TopicList,i,j,k
+	Dim TopicList,i,j
 	Dim Tag
 	Dim StartBorder,EndBorder
 	Dim WSQL
@@ -133,12 +133,10 @@ Sub MarkView
 
 		PageContent = ""
 
-		Dim CurrentTemplateId,CurrentColumnId
 		Dim IsReplace
-		Dim PageContent,ArticleContent,PageKeyword
+		Dim PageContent, PageKeyword
 		Dim TempStr,TempArray
 		Dim Folder,sHTMLFilePath
-		Dim FirstArticle,NextArticle
 		Dim NewFolderList
 		Dim re
 		Dim Tmp
@@ -157,11 +155,12 @@ Sub MarkView
 		NewFolderList = ","
 		PageKeyword   = EA_Pub.SysInfo(16)
 		ForTotal	  = UBound(TopicList, 2)
-		EA_Pub.SysInfo(18) = 0
+		EA_Pub.SysInfo(18) = "0"
 
 		For i = 0 To ForTotal
 			PageContent  = ""
 			IsReplace	 = True
+			EA_Pub.SysInfo(16) = PageKeyword
 			sHTMLFilePath= EA_Pub.Cov_ArticlePath(TopicList(28, i), TopicList(13, i), "0")
 			
 			'check folder isexists
