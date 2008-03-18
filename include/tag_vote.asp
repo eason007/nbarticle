@@ -41,9 +41,8 @@ Sub VoteSingle (ByRef PageContent)
 				
 				Content	= Split(VoteText, "|")
 
-				Temp	 = ""
-				
-				Temp	= Temp & "<form action=""" & SystemFolder & "action.asp"" method=""post"" id=""vote_" & Id & """><table><tr><td>" & Title & "</td></tr>"
+				Temp = ""
+				Temp = Temp & "<form action="""" id=""vote_" & Id & """><table><tr><td>" & Title & "</td></tr>"
 		
 				If Mtype = False Then
 					SType = "radio"
