@@ -1,4 +1,3 @@
-<!--#Include File="init.asp" -->
 <!--#Include File="include/inc.asp"-->
 <!--#Include File="include/vml_cake.asp"-->
 <%
@@ -13,7 +12,7 @@
 '= 摘    要：投票文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-27
+'= 最后日期：2008-03-18
 '====================================================================
 
 Dim VoteId,VoteChoose,VoteType,VoteText,VoteNum,VoteUBound

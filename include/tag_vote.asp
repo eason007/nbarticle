@@ -23,6 +23,7 @@ Sub VoteSingle (ByRef PageContent)
 	Dim Parameter
 	Dim List
 	Dim Temp, ForTotal, i
+	Dim Id, Title, VoteText, Mtype, SType, Content
 
 	Do 
 		Parameter = EA_Temp.GetParameter("Vote.Single", PageContent)
@@ -39,25 +40,27 @@ Sub VoteSingle (ByRef PageContent)
 				Mtype	= List(4, 0)
 				
 				Content	= Split(VoteText, "|")
+
+				Temp	 = ""
 				
 				Temp	= Temp & "<form action=""" & SystemFolder & "action.asp"" method=""post"" id=""vote_" & Id & """><table><tr><td>" & Title & "</td></tr>"
 		
 				If Mtype = False Then
-					Mtype = "redio"
-				Else If Mtype = True Then
-					Mtype = "checkbox"
+					SType = "radio"
+				ElseIf Mtype = True Then
+					SType = "checkbox"
 				End If
 				
 				ForTotal = Ubound(Content)
 
 				For i = 0 To ForTotal
 					Temp = Temp & "<tr><td>"
-					Temp = Temp & "<input type=""" & Mtype & """ name=""vote"" value=""" & i & """ />&nbsp;&nbsp;&nbsp;" & Content(i)
+					Temp = Temp & "<input type=""" & SType & """ name=""vote"" value=""" & i & """ />&nbsp;&nbsp;&nbsp;" & Content(i)
 					Temp = Temp & "</td></tr>"
 				Next
 		
 				Temp = Temp&"<tr><td><input name=""votetype"" type=""hidden"" value=""" & CInt(Mtype) & """ />"
-				Temp = Temp&"<input name=""voteid"" type=""hidden"" value=""" & Id & """ />'
+				Temp = Temp&"<input name=""voteid"" type=""hidden"" value=""" & Id & """ />"
 				Temp = Temp&"<input type=""button"" name=""submit"" value=""投票"" onclick=""window.open(submit_vote(" & Id & "),'_blank','scrollbars=yes,width=645,height=380')"" />"
 				Temp = Temp&"&nbsp;<input type=""button"" name=""view"" value=""查看"" onclick=""window.open('vote.asp?VoteId=" & Id & "','_blank','scrollbars=yes,width=645,height=380')"" /></td></tr>"
 				Temp = Temp & "</table></form>"
