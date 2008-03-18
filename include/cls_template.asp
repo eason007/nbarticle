@@ -18,7 +18,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-14
+'= 最后日期：2008-03-18
 '====================================================================
 
 Class cls_Template
@@ -98,7 +98,7 @@ Class cls_Template
 		sBlockBeginStr	= P_Prefix & sBlockName & " Begin" & P_Suffix
 		sBlockEndStr	= P_Prefix & sBlockName & " End" & P_Suffix
 
-		If InStr(1, sContent, sBlockBeginStr) And InStr(1, sContent, sBlockEndStr) Then
+		If InStr(1, sContent, sBlockBeginStr) > 0 And InStr(1, sContent, sBlockEndStr) > 0 Then
 			ChkBlock = True
 		Else
 			ChkBlock = False
