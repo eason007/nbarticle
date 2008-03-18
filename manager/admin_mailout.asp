@@ -11,7 +11,7 @@
 '= 摘    要：后台-导出邮件文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-09
+'= 最后日期：2008-03-18
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -22,7 +22,7 @@ If Not EA_Manager.Chk_Power(Admin_Power,"54") Then
 End If
 
 Dim Atcion
-Atcion=Request ("way")
+Atcion=Request.Form("way")
 
 Select Case LCase(Atcion)
 Case "todatabase"
@@ -52,7 +52,7 @@ Sub Main
 End Sub
 
 Sub OutToDataBase
-	'On Error Resume Next
+	On Error Resume Next
 	
 	Dim TConn,TempCount,TStr
 	Dim ExportTotal
