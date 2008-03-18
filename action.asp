@@ -18,11 +18,77 @@ Dim Action
 Action = Request.QueryString ("action")
 
 Select Case LCase(Action)
-Case "save_link"
+Case "vote"
+	Call SaveVote
+Case "link"
 	Call SetLink
 Case "viewtotal", "commenttotal"
 	Call GetArticleInfo()
 End Select
+
+Sub SaveVote()
+	Dim VoteId,VoteChoose,VoteType,VoteText,VoteNum,VoteUBound
+	Dim i,VoteInfo
+	Dim IsVoted
+	Dim ForTotal
+
+	VoteId		= EA_Pub.SafeRequest(3, "voteid", 0, 0, 3)
+	VoteChoose	= EA_Pub.SafeRequest(3, "vote", 1, "", 3)
+	VoteChoose	= Split(VoteChoose, ",")
+	VoteType	= EA_Pub.SafeRequest(3, "votetype", 0, 0, 3)
+
+	If Request.Cookies(sCacheName & "Vote" & VoteId) = "" Then 
+		IsVoted = True
+	Else
+		IsVoted = False
+	End If
+
+	If Not IsVoted Then
+		ErrMsg = SysMsg(31)
+		Call EA_Pub.ShowErrMsg(0, 0)
+	End If
+	If EA_Pub.SysInfo(10) = "0" Then
+		ErrMsg = SysMsg(31)
+		Call EA_Pub.ShowErrMsg(0, 0)
+	End If
+
+	VoteInfo = EA_DBO.Get_Vote_Info(VoteId)
+	If IsArray(VoteInfo) Then
+		If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then 
+			ErrMsg = SysMsg(29)
+			Call EA_Pub.ShowErrMsg(0, 0)
+		End If
+
+		If VoteInfo(5, 0) <> 0 Then 
+			ErrMsg = SysMsg(32)
+			Call EA_Pub.ShowErrMsg(0, 0)
+		End If
+
+		VoteNum	 = VoteInfo(3, 0)
+		VoteNum	 = Split(VoteNum, "|")
+
+		If IsVoted Then
+			ForTotal = UBound(VoteChoose)
+			For i = 0 To ForTotal
+				VoteNum(CLng(VoteChoose(i))) = VoteNum(CLng(VoteChoose(i))) + 1
+			Next
+			VoteNum = Join(VoteNum, "|")
+		
+			Call EA_DBO.Set_Vote_SaveVoted(VoteId, VoteNum)
+
+			Response.Cookies(sCacheName & "Vote" & VoteId) = 1
+			Response.Cookies(sCacheName & "Vote" & VoteId).Expires = Date() + 24
+		End If
+
+		response.write "1"
+	Else
+		ErrMsg = SysMsg(33)
+		Call EA_Pub.ShowErrMsg(0, 0)
+	End If
+
+	Call EA_Pub.Close_Obj
+	Set EA_Pub=Nothing
+End Sub
 
 Sub SetLink()
 	Call EA_Pub.Chk_Post

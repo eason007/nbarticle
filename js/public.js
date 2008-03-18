@@ -142,7 +142,7 @@ function submit_vote(vote_id){
 //投票处理函数
 	var vote_form=$('vote_'+vote_id);
 
-	var target_url='vote.asp?votetype='+vote_form.votetype.value;
+	var target_url='&votetype='+vote_form.votetype.value;
 	target_url+='&voteid='+vote_form.voteid.value;
 	target_url+='&vote=';
 
