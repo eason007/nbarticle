@@ -10,7 +10,7 @@
 '= 摘    要：adsense模版标签文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-02
+'= 最后日期：2008-03-18
 '====================================================================
 
 Sub MakeAdSense(ByRef PageContent)
@@ -22,7 +22,6 @@ End Sub
 Sub AdSenseSingle (ByRef PageContent)
 	Dim Parameter
 	Dim List
-	Dim Temp, ForTotal, i
 
 	Do 
 		Parameter = EA_Temp.GetParameter("AdSense.Single", PageContent)
