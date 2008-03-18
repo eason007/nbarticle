@@ -18,13 +18,6 @@ function makeFile(returnResult){
 	alert(returnResult + operateComplate);
 }
 
-function makeSysJs(){
-	objForm.postUrl = './reload.asp';
-	objForm.dateVal = "action=markjs";
-	objForm.doResponseMethod = getmakeSysJsResult;
-	objForm.ajaxPost();
-}
-
 function getmakeSysJsResult(returnResult){
 	alert(returnResult + operateComplate);
 }
@@ -49,7 +42,7 @@ function getmakeSysJsResult(returnResult){
 		  </tr>
 		</table>
 		<div style="BACKGROUND: #efefef;height:25px;">
-			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_makejs_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_makejs.asp');">&nbsp;<input type="button" id="Language_Js_UpDate" onclick="javascript:postChooseForm('./admin_makejs.asp','make',makeFile);">&nbsp;<input type="button" id="Language_Js_UpDateSystemJs" onclick="javascript:makeSysJs();"></div>
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_makejs_option.htm','pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_makejs.asp');">&nbsp;<input type="button" id="Language_Js_UpDate" onclick="javascript:postChooseForm('./admin_makejs.asp','make',makeFile);"></div>
 		</div>
 	</div>
 </div>
