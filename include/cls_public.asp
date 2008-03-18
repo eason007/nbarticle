@@ -270,7 +270,7 @@ Class cls_Public
 		Server_V1=Cstr(Request.ServerVariables("HTTP_REFERER"))
 		Server_V2=Cstr(Request.ServerVariables("SERVER_NAME"))
 		
-		If Mid(Server_V1,8,Len(Server_V2))<>Server_V2 Then Call ShowErrMsg(9,1)
+		If Mid(Server_V1,8,Len(Server_V2))<>Server_V2 Then ErrMsg = SysMsg(36):Call ShowErrMsg(0, 2)
 	End Sub
 	
 	'****************************************************
