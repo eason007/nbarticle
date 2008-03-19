@@ -14,24 +14,9 @@
 '= 最后日期：2008-03-19
 '====================================================================
 
-Dim Action
-Action=Request.QueryString ("action")
+Dim ArticleId
+ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,3)
 
-Select Case LCase(Action)
-Case "review_min"
-	Call Min_ReviewList
-Case "save"
-	Call Save_Review
-Case Else
-	Call Main
-End Select
-Call EA_Pub.Close_Obj
-Set EA_Pub=Nothing
-
-Sub Main
-	Dim ArticleId
-	ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,3)
-	
-	EA_Temp.Title=EA_Pub.SysInfo(0)&" - 评论系统"
-	EA_Temp.Nav="<a href=""./""><b>"&EA_Pub.SysInfo(0)&"</b></a> - <a href=""article.asp?articleid="&ArticleId&""" target=""_blank"">文章正文</a> - 评论列表"
+EA_Temp.Title=EA_Pub.SysInfo(0)&" - 评论系统"
+EA_Temp.Nav="<a href=""./""><b>"&EA_Pub.SysInfo(0)&"</b></a> - <a href=""article.asp?articleid="&ArticleId&""" target=""_blank"">文章正文</a> - 评论列表"
 %>
