@@ -1,7 +1,7 @@
 <%@ LANGUAGE = VBScript CodePage = 65001%>
 <%
 '====================================================================
-'= Team Elite - Elite Article System
+'= Team Elite - EliteCMS
 '= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 文件名称：Coon.asp

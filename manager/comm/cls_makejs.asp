@@ -1,6 +1,6 @@
 <%
 '====================================================================
-'= Team Elite - Elite Article System
+'= Team Elite - EliteCMS
 '= Copyright (c) 2005 - 2007 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 版权协议：

@@ -1,7 +1,7 @@
 <!--#Include File="md5.asp"-->
 <%
 '====================================================================
-'= Team Elite - Elite Article System
+'= Team Elite - EliteCMS
 '= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
 '= 版权协议：
