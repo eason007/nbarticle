@@ -15,11 +15,10 @@
 
 Dim SysMsg(100)
 
+'action.asp
 SysMsg(0) = "本系统限制数据提交间隔时间为 30 秒，请稍后再发！"
 SysMsg(1) = "申请已记录，请等待站长开通。谢谢您的支持。"
 SysMsg(2) = "提交错误的信息。"
-
-'action.asp
 SysMsg(3) = "您当前的会员权限不被允许发表评论，请联系管理员。"
 SysMsg(4) = "您必须在注册 $1 分钟后才能发表评论。"
 SysMsg(5) = "管理员已设置游客不允许发表评论，请稍后重试。"
@@ -28,18 +27,18 @@ SysMsg(7) = "您发表的评论内客超过了250个字符，请修改后再发�
 SysMsg(8) = "管理员已设置游客不允许投票，请稍后重试。"
 SysMsg(32) = "投票已关闭。"
 
+'cls_template.asp
 SysMsg(9) = "加载模版 $1 时发生错误: $2"
-
-SysMsg(10) = "首页"
-
-SysMsg(11) = "您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp'>登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp'>注册</a>]。"
-
 SysMsg(12) = "共 $1 页"
 SysMsg(13) = "首页"
 SysMsg(14) = "上页"
 SysMsg(15) = "下页"
 SysMsg(16) = "尾页"
 SysMsg(17) = "GO"
+
+SysMsg(10) = "首页"
+
+SysMsg(11) = "您当前的权限不允许查看该文章，请先 [<a href='" & SystemFolder & "member/login.asp'>登陆</a>] 或 [<a href='" & SystemFolder & "member/register.asp'>注册</a>]。"
 
 'cls_public.asp
 SysMsg(18) = "加载站点配置数据错误，系统已关闭。"
@@ -52,10 +51,12 @@ SysMsg(24) = "图片文章"
 SysMsg(25) = "普通文章"
 SysMsg(26) = "24小时内新文章"
 
+'cls_dboperation.asp
 SysMsg(27) = "对不起，数据连接错误！如果第一次使用，请先运行/install/install.asp进行系统配置。"
 
 SysMsg(28) = "站点搜索"
 
+'cls_public.asp
 SysMsg(36) = "请勿外部提交。"
 
 'inc.asp
