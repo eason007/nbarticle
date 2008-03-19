@@ -119,3 +119,7 @@ function postComment (iArticleID) {
 
 	return html;
 }
+
+function siupIn () {
+	
+}

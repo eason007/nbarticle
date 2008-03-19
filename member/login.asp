@@ -1,4 +1,3 @@
-<!--#Include File="../conn.asp" -->
 <!--#Include File="../include/inc.asp"-->
 <!--#Include File="../include/md5.asp"-->
 <%
@@ -24,8 +23,6 @@ Case "login"
 	Call Chk_Login
 Case "logout"
 	Call Get_Logout
-Case Else
-	Call Main
 End Select
 EA_Pub.Close_Obj
 Set EA_Pub=Nothing
@@ -83,13 +80,5 @@ Sub Get_Logout()
 	Response.Cookies("UserData")=Empty
 	
 	Response.Redirect SystemFolder
-End Sub
-
-Sub Main()
-	Dim PageContent
-
-	PageContent=EA_Temp.Load_Template(0,"Login")
-	PageContent=EA_Temp.Replace_PublicTag(PageContent)
-	Response.Write PageContent
 End Sub
 %> 
