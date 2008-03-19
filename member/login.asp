@@ -30,14 +30,14 @@ Set EA_Pub=Nothing
 Sub Chk_Login
 	Call EA_Pub.Chk_Post
 	
-	Dim Login_Accout,Login_Password,SaveTime
+	Dim Login_Accout, Login_Password, SaveTime
 	Dim Mem_Info(4)
-	Dim TempArray,i,Key,Temp
+	Dim TempArray, i, Key, Temp
 	
-	Login_Accout=EA_Pub.SafeRequest(2,"username",1,"",1)
-	Login_Password=EA_Pub.SafeRequest(2,"password",1,"",-1)
-	Login_Password=MD5(Login_Password)
-	SaveTime=EA_Pub.SafeRequest(2,"savetimes",0,0,0)
+	Login_Accout	= EA_Pub.SafeRequest(2, "username", 1,"", 1)
+	Login_Password	= EA_Pub.SafeRequest(2, "password", 1,"", -1)
+	Login_Password	= MD5(Login_Password)
+	SaveTime		= EA_Pub.SafeRequest(2, "savetimes", 0, 0, 0)
 	
 	Temp=EA_DBO.Get_MemberLogin(Login_Accout)
 	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(18,1)

@@ -120,6 +120,25 @@ function postComment (iArticleID) {
 	return html;
 }
 
-function siupIn () {
-	
+function siupIn (siteUrl) {
+	var html = "";
+
+	html = "<table>";
+	html += "<form name=\"form1\" method=\"post\" action=\"" + siteUrl + "member/login.asp?action=login\">"
+	html += "<tr>"
+	html += "<td align=\"right\">用户名：</td><td align=\"left\"><input type=\"text\" name=\"UserName\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">密码：</td><td align=\"left\"><input type=\"text\" name=\"Password\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">自动登陆：</td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
+	html += "</tr>"
+	html += "</form>";
+	html += "</table>";
+
+	return html;
 }
