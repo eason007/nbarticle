@@ -69,3 +69,32 @@ function submit_vote(vote_id){
 
 	return target_url;
 }
+
+function postFriend () {
+	var html = "";
+
+	html = "<table>";
+	html += "<form name=\"form1\" method=\"post\" action=\"action.asp?action=link\">"
+	html += "<tr>"
+	html += "<td align=\"right\">站点名称：</td><td align=\"left\"><input type=\"text\" name=\"name\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">站点Logo：</td><td align=\"left\"><input type=\"text\" name=\"logo\" value=\"http://\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">站点URL：</td><td align=\"left\"><input type=\"text\" name=\"url\" value=\"http://\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">站点简介：</td><td align=\"left\"><textarea name=\"info\" wrap=\"VIRTUAL\" cols=\"50\" rows=\"5\"></textarea></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">显示风格：</td><td align=\"left\"><input type=\"radio\" value=\"0\" name=\"style\">文本<input type=\"radio\" value=\"1\" name=\"style\">图片</td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\"></td>";
+	html += "</tr>"
+	html += "</form>";
+	html += "</table>";
+
+	return html;
+}
