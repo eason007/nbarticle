@@ -24,6 +24,8 @@ Case "link"
 	Call SetLink
 Case "viewtotal", "commenttotal"
 	Call GetArticleInfo()
+Case "comment"
+	Call SaveComment()
 End Select
 
 Sub SaveVote()
@@ -151,14 +153,14 @@ Sub GetArticleInfo()
 End Sub
 
 
-Sub Save_Review
+Sub SaveComment()
 	Call EA_Pub.Chk_Post
 	
 	Dim RUserId, RUserName, RContent, RState, R_IsGhost
 	Dim IP
 	Dim ArticleId
 	
-	ArticleId	= EA_Pub.SafeRequest(3, "articleid", 0, 0, 3)
+	ArticleId	= EA_Pub.SafeRequest(2, "articleid", 0, 0, 3)
 	RContent	= EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2, "review", 1, "", 2))
 	IP			= EA_Pub.Get_UserIp
 	

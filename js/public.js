@@ -98,3 +98,24 @@ function postFriend () {
 
 	return html;
 }
+
+function postComment (iArticleID) {
+	var html = "";
+
+	html = "<table>";
+	html += "<form name=\"form1\" method=\"post\" action=\"action.asp?action=comment\">"
+	html += "<input type=\"hidden\" name=\"articleid\" value=\"" + iArticleID + "\">"
+	html += "<tr>"
+	html += "<td align=\"right\">笔名：</td><td align=\"left\"><input type=\"text\" name=\"name\"></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">评论：</td><td align=\"left\"><textarea name=\"review\" wrap=\"VIRTUAL\" cols=\"50\" rows=\"5\"></textarea></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\"></td>";
+	html += "</tr>"
+	html += "</form>";
+	html += "</table>";
+
+	return html;
+}
