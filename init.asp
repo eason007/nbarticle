@@ -20,7 +20,7 @@ Response.Buffer	= True
 
 Const iDataBaseType	= 0						'定义数据库类别，0为Access，1为SQL数据库，2=SQL Pro
 Const BowelVersion	= "ECMS-301-F-080226"
-Const SysVersion	= "EliteCMS Ver 3.01 Beta1"
+Const SysVersion	= "EliteCMS Ver3.01 Beta1"
 
 Dim StarTime, EndTime
 Dim FoundErr
