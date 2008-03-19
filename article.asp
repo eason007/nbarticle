@@ -23,8 +23,8 @@ Page		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 
 'get article
 ArticleInfo = EA_DBO.Get_Article_Info(ArticleId, 1)
-If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(34, 0)
-If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then Call EA_Pub.ShowErrMsg(34, 0)
+If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(2, 0)
+If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then Call EA_Pub.ShowErrMsg(2, 0)
 
 Dim PageContent
 Dim MakeHtml

@@ -45,11 +45,11 @@ Sub SaveVote()
 		IsVoted = False
 	End If
 
-	If EA_Pub.SysInfo(10) = "0" Then Call EA_Pub.ShowErrMsg(30, 2)
+	If EA_Pub.SysInfo(10) = "0" Then Call EA_Pub.ShowErrMsg(8, 2)
 
 	VoteInfo = EA_DBO.Get_Vote_Info(VoteId)
 	If IsArray(VoteInfo) Then
-		If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then Call EA_Pub.ShowErrMsg(29, 2)
+		If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then Call EA_Pub.ShowErrMsg(2, 2)
 		If VoteInfo(5, 0) <> 0 Then Call EA_Pub.ShowErrMsg(32, 2)
 
 		VoteNum	 = VoteInfo(3, 0)
@@ -70,7 +70,7 @@ Sub SaveVote()
 
 		Response.Redirect "./vote.asp?" & Request.QueryString
 	Else
-		Call EA_Pub.ShowErrMsg(33, 2)
+		Call EA_Pub.ShowErrMsg(2, 2)
 	End If
 
 	Call EA_Pub.Close_Obj
@@ -80,7 +80,7 @@ End Sub
 Sub SetLink()
 	Call EA_Pub.Chk_Post
 
-	If EA_Pub.Chk_PostTime(30, "s", Session("lastpost")) Then Call EA_Pub.ShowErrMsg(38, 2)
+	If EA_Pub.Chk_PostTime(30, "s", Session("lastpost")) Then Call EA_Pub.ShowErrMsg(0, 2)
 		
 	Dim LinkName, LinkImg, LinkUrl, LinkInfo, ColumnId, Style
 
