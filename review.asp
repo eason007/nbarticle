@@ -24,4 +24,5 @@ If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then ErrMsg = SysMsg(34):Call EA
 EA_Temp.Title	= EA_Pub.SysInfo(0) & " - 评论列表"
 EA_Temp.Nav		= "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """>" & ArticleInfo(3, 0) & "</a> - <strong>评论列表</strong>"
 
+
 %>
