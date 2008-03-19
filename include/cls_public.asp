@@ -10,7 +10,7 @@
 '= 摘    要：共用类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-16
+'= 最后日期：2008-03-19
 '====================================================================
 
 Class cls_Public
@@ -82,8 +82,7 @@ Class cls_Public
 
 				FoundErr = False
 			Else
-				ErrMsg = SysMsg(18)
-				Call ShowErrMsg(0, 0)
+				Call ShowErrMsg(18, 0)
 			End If
 		End If
 
@@ -135,10 +134,7 @@ Class cls_Public
 		Ip=FormatIp(Ip)
 
 		Temp=EA_DBO.Get_Ip_LockInfo(Ip)
-		If IsArray(Temp) Then 
-			ErrMsg=SysMsg(19)
-			Call ShowErrMsg(0,0)
-		End If
+		If IsArray(Temp) Then Call ShowErrMsg(19,0)
 	End Sub
 	
 	'************************
@@ -209,8 +205,7 @@ Class cls_Public
 						EA_Ini.Save
 						GroupId=1
 					Else
-						ErrMsg=SysMsg(20)
-						Call ShowErrMsg(0,0)
+						Call ShowErrMsg(20,0)
 					End If
 				Else
 					GroupId=1
@@ -237,15 +232,16 @@ Class cls_Public
 		Response.Clear
 		Select Case CInt(Types)
 		Case 0
-			Response.Write "<font style='font-family:Verdana;font-size:11px'>"&ErrMsg&"</font>"
+			Response.Write "<font style='font-family:Verdana;font-size:11px'>" & SysMsg(ErrNum) & "</font>"
 		Case 1
-			Response.Redirect SystemFolder&"error.asp?errnum="&ErrNum
+			Response.Write "<font style='font-family:Verdana;font-size:11px'>" & ErrNum & "</font>"
 		Case 2
 			Response.Write "<script language=""JavaScript"">"&vbcrlf
-			Response.Write "alert("""&ErrMsg&""");"&vbcrlf
+			Response.Write "alert(""" & SysMsg(ErrNum) & """);"&vbcrlf
 			Response.Write "history.go(-1);"&vbcrlf
 			Response.Write "</script>"&vbcrlf
 		End Select
+		Response.Flush
 		Response.End
 	End Sub
 	
@@ -270,7 +266,7 @@ Class cls_Public
 		Server_V1=Cstr(Request.ServerVariables("HTTP_REFERER"))
 		Server_V2=Cstr(Request.ServerVariables("SERVER_NAME"))
 		
-		If Mid(Server_V1,8,Len(Server_V2))<>Server_V2 Then ErrMsg = SysMsg(36):Call ShowErrMsg(0, 2)
+		If Mid(Server_V1,8,Len(Server_V2))<>Server_V2 Then Call ShowErrMsg(36, 0)
 	End Sub
 	
 	'****************************************************

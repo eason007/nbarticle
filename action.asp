@@ -45,22 +45,12 @@ Sub SaveVote()
 		IsVoted = False
 	End If
 
-	If EA_Pub.SysInfo(10) = "0" Then
-		ErrMsg = SysMsg(31)
-		Call EA_Pub.ShowErrMsg(0, 0)
-	End If
+	If EA_Pub.SysInfo(10) = "0" Then Call EA_Pub.ShowErrMsg(30, 2)
 
 	VoteInfo = EA_DBO.Get_Vote_Info(VoteId)
 	If IsArray(VoteInfo) Then
-		If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then 
-			ErrMsg = SysMsg(29)
-			Call EA_Pub.ShowErrMsg(0, 0)
-		End If
-
-		If VoteInfo(5, 0) <> 0 Then 
-			ErrMsg = SysMsg(32)
-			Call EA_Pub.ShowErrMsg(0, 0)
-		End If
+		If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then Call EA_Pub.ShowErrMsg(29, 2)
+		If VoteInfo(5, 0) <> 0 Then Call EA_Pub.ShowErrMsg(32, 2)
 
 		VoteNum	 = VoteInfo(3, 0)
 		VoteNum	 = Split(VoteNum, "|")
@@ -80,8 +70,7 @@ Sub SaveVote()
 
 		Response.Redirect "./vote.asp?" & Request.QueryString
 	Else
-		ErrMsg = SysMsg(33)
-		Call EA_Pub.ShowErrMsg(0, 0)
+		Call EA_Pub.ShowErrMsg(33, 2)
 	End If
 
 	Call EA_Pub.Close_Obj
@@ -91,10 +80,7 @@ End Sub
 Sub SetLink()
 	Call EA_Pub.Chk_Post
 
-	If EA_Pub.Chk_PostTime(30, "s", Session("lastpost")) Then
-		ErrMsg = SysMsg(0)
-		Call EA_Pub.ShowErrMsg(0, 2)
-	End If
+	If EA_Pub.Chk_PostTime(30, "s", Session("lastpost")) Then Call EA_Pub.ShowErrMsg(38, 2)
 		
 	Dim LinkName, LinkImg, LinkUrl, LinkInfo, ColumnId, Style
 
@@ -113,13 +99,13 @@ Sub SetLink()
 	If Not FoundErr Then
 		Call EA_DBO.Set_FriendList_Insert(LinkName, LinkImg, LinkUrl, LinkInfo, ColumnId, Style, 0, 0)
 		
-		ErrMsg = SysMsg(1)
+		ErrMsg = 1
 		Session("lastpost") = Now()
 	Else
-		ErrMsg = SysMsg(2)
+		ErrMsg = 2
 	End If
 
-	Call EA_Pub.ShowErrMsg(0, 2)
+	Call EA_Pub.ShowErrMsg(ErrMsg, 2)
 End Sub
 
 Sub GetArticleInfo()
@@ -167,7 +153,7 @@ Sub SaveComment()
 	
 	If EA_Pub.IsMember Then 
 		If EA_Pub.Mem_GroupSetting(8) = "0" Then 
-			ErrMsg	= SysMsg(3)
+			ErrMsg	= 3
 			FoundErr= True
 		End If
 		If EA_Pub.Mem_GroupSetting(7) > "0" Then 
@@ -186,7 +172,7 @@ Sub SaveComment()
 		RUserName= EA_Pub.Mem_Info(1)
 	Else
 		If EA_Pub.SysInfo(19) = "0" Then 
-			ErrMsg	= SysMsg(5)
+			ErrMsg	= 5
 			FoundErr= True
 		Else
 			If EA_Pub.SysInfo(20) = "0" Then 
@@ -200,15 +186,15 @@ Sub SaveComment()
 	End If
 	
 	If Len(RContent)<5 Then
-		ErrMsg = SysMsg(6)
+		ErrMsg = 6
 		FoundErr=True
 	End If
 	If Len(RContent)>250 Then
-		ErrMsg = SysMsg(7)
+		ErrMsg = 7
 		FoundErr=True
 	End If
 	If EA_Pub.Chk_PostTime(30,"s",Session("lastpost")) Then
-		ErrMsg = SysMsg(8)
+		ErrMsg = 8
 		FoundErr=True
 	End If
 
@@ -218,6 +204,6 @@ Sub SaveComment()
 	Application(sCacheName&"IsFlush")=1
 	Application.UnLock 
 	
-	Call EA_Pub.ShowErrMsg(0,2)
+	Call EA_Pub.ShowErrMsg(ErrMsg, 2)
 End Sub
 %>

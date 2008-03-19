@@ -33,15 +33,8 @@ End If
 
 VoteInfo = EA_DBO.Get_Vote_Info(VoteId)
 If IsArray(VoteInfo) Then
-	If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then 
-		ErrMsg = SysMsg(29)
-		Call EA_Pub.ShowErrMsg(0, 0)
-	End If
-
-	If VoteInfo(5, 0) <> 0 Then 
-		ErrMsg = SysMsg(32)
-		Call EA_Pub.ShowErrMsg(0, 0)
-	End If
+	If UBound(VoteChoose) > 0 And VoteInfo(4, 0) = 0 Then Call EA_Pub.ShowErrMsg(29, 0)
+	If VoteInfo(5, 0) <> 0 Then Call EA_Pub.ShowErrMsg(32, 0)
 
 	VoteText = VoteInfo(2, 0)
 	VoteText = Split(VoteText, "|")
@@ -50,8 +43,7 @@ If IsArray(VoteInfo) Then
 
 	Call ShowResult(VoteText,VoteNum,VoteInfo(0,0),IsVoted)
 Else
-	ErrMsg = SysMsg(33)
-	Call EA_Pub.ShowErrMsg(0, 0)
+	Call EA_Pub.ShowErrMsg(33, 0)
 End If
 
 Sub ShowResult(VoteText,VoteNum,VoteTitle,IsVote)

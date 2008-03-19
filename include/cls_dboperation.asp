@@ -1003,7 +1003,7 @@ Class cls_DBOperation
 			Else
 				ErrMsg="查询数据的时候发现错误。系统已关闭"
 			End If
-			Call EA_Pub.ShowErrMsg(0,0)
+			Call EA_Pub.ShowErrMsg(ErrMsg, 1)
 		Else
 			DB_Execute=0
 		End If
@@ -1035,7 +1035,7 @@ Class cls_DBOperation
 			Else
 				ErrMsg="查询数据的时候发现错误。系统已关闭"
 			End If
-			Call EA_Pub.ShowErrMsg(0,0)
+			Call EA_Pub.ShowErrMsg(ErrMsg, 1)
 		End If
 	End Function
 	
@@ -1067,7 +1067,7 @@ Class cls_DBOperation
 			Else
 				ErrMsg="查询数据的时候发现错误。系统已关闭"
 			End If
-			Call EA_Pub.ShowErrMsg(0,0)
+			Call EA_Pub.ShowErrMsg(ErrMsg, 1)
 		End If
 	End Function
 '-------------------------------------------------------------------

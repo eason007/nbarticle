@@ -65,7 +65,7 @@ Class cls_Template
 		Else
 			ErrMsg = Replace(SysMsg(9), "$1", "")
 			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
-			Call EA_Pub.ShowErrMsg(0, 0)
+			Call EA_Pub.ShowErrMsg(ErrMsg, 1)
 		End If
 	End Function
 
@@ -87,7 +87,7 @@ Class cls_Template
 		If Err Then 
 			ErrMsg = Replace(SysMsg(9), "$1", sFileName)
 			ErrMsg = Replace(ErrMsg, "$2", Err.Description)
-			Call EA_Pub.ShowErrMsg(0, 0)
+			Call EA_Pub.ShowErrMsg(ErrMsg, 1)
 		End If
 	End Function
 

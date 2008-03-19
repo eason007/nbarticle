@@ -39,10 +39,10 @@ Sub Chk_Login
 	Login_Password	= MD5(Login_Password)
 	SaveTime		= EA_Pub.SafeRequest(2, "savetimes", 0, 0, 0)
 	
-	Temp=EA_DBO.Get_MemberLogin(Login_Accout)
-	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(18,1)
-	If Temp(1,0)<>Login_Password Then Call EA_Pub.ShowErrMsg(36,1)
-	If Temp(2,0)<>1 Then Call EA_Pub.ShowErrMsg(3,1)
+	Temp = EA_DBO.Get_MemberLogin(Login_Accout)
+	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(18, 1)
+	If Temp(1,0) <> Login_Password Then Call EA_Pub.ShowErrMsg(36, 1)
+	If Temp(2,0) <> 1 Then Call EA_Pub.ShowErrMsg(3, 1)
 	
 	EA_Pub.Mem_Info(0)=Temp(0,0)
 	EA_Pub.Mem_Info(1)=Login_Accout

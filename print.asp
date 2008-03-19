@@ -24,8 +24,8 @@ ArticleId=EA_Pub.SafeRequest(3,"articleid",0,0,0)
 
 'load article info
 ArticleInfo = EA_DBO.Get_Article_Info(ArticleId, 1)
-If Not IsArray(ArticleInfo) Then ErrMsg = SysMsg(34):Call EA_Pub.ShowErrMsg(0, 0)
-If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then ErrMsg = SysMsg(34):Call EA_Pub.ShowErrMsg(0, 0)
+If Not IsArray(ArticleInfo) Then Call EA_Pub.ShowErrMsg(34, 0)
+If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then Call EA_Pub.ShowErrMsg(34, 0)
 
 If ArticleInfo(22, 0) > 0 Or ArticleInfo(23, 0) <> 0 Then 
 	If Not EA_Pub.IsMember Then 
