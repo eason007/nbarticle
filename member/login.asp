@@ -12,7 +12,7 @@
 '= 摘    要：会员-登陆文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-10-27
+'= 最后日期：2008-03-20
 '====================================================================
 
 Dim Action
@@ -40,22 +40,19 @@ Sub Chk_Login
 	SaveTime		= EA_Pub.SafeRequest(2, "savetimes", 0, 0, 0)
 	
 	Temp = EA_DBO.Get_MemberLogin(Login_Accout)
-	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(18, 1)
-	If Temp(1,0) <> Login_Password Then Call EA_Pub.ShowErrMsg(36, 1)
-	If Temp(2,0) <> 1 Then Call EA_Pub.ShowErrMsg(3, 1)
+	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(2, 2)
+	If Temp(1,0) <> Login_Password Then Call EA_Pub.ShowErrMsg(29, 2)
+	If Temp(2,0) <> 1 Then Call EA_Pub.ShowErrMsg(30, 2)
 	
-	EA_Pub.Mem_Info(0)=Temp(0,0)
-	EA_Pub.Mem_Info(1)=Login_Accout
-	EA_Pub.Mem_Info(2)=Temp(3,0)
-	EA_Pub.Mem_Info(3)=Temp(4,0)
+	EA_Pub.Mem_Info(0) = Temp(0, 0)
+	EA_Pub.Mem_Info(1) = Login_Accout
+	EA_Pub.Mem_Info(2) = Temp(3, 0)
+	EA_Pub.Mem_Info(3) = Temp(4, 0)
 	
 	Call EA_Pub.Get_Member_GroupSetting(EA_Pub.Mem_Info(3))
 	
-	If EA_Pub.Mem_GroupSetting(1)="0" Then Call EA_Pub.ShowErrMsg(37,1)
-
-	If EA_Pub.Mem_GroupSetting(5)="1" Then 
-		If EA_Pub.Chk_SystemTimer(EA_Pub.Mem_GroupSetting(4)) Then Call EA_Pub.ShowErrMsg(38,1)
-	End If
+	If EA_Pub.Mem_GroupSetting(1)="0" Then Call EA_Pub.ShowErrMsg(31, 2)
+	If EA_Pub.Mem_GroupSetting(5)="1" And EA_Pub.Chk_SystemTimer(EA_Pub.Mem_GroupSetting(4)) Then Call EA_Pub.ShowErrMsg(33, 1)
 	
 	Randomize
 	Key=CStr(Int((999999-1+100000)*Rnd+1))

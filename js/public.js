@@ -135,7 +135,7 @@ function siupIn (siteUrl) {
 	html += "<td align=\"right\">自动登陆：</td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\"></td>";
 	html += "</tr>"
 	html += "<tr>"
-	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
+	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/register.asp','','width=790,height=400')\">注册</a>] - [<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
 	html += "</tr>"
 	html += "</form>";
 	html += "</table>";

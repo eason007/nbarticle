@@ -1,4 +1,3 @@
-<!--#Include File="../conn.asp" -->
 <!--#Include File="../include/inc.asp"-->
 <!--#Include File="../include/cls_xml_rpc.asp"-->
 <%
@@ -16,10 +15,7 @@
 '= 最后日期：2006-08-20
 '====================================================================
 
-If EA_Pub.SysInfo(7)="0" Then
-	ErrMsg="系统已暂停新会员注册"
-	Call EA_Pub.ShowErrMsg(33,1)
-End If
+If EA_Pub.SysInfo(7)="0" Then Call EA_Pub.ShowErrMsg(34, 0)
 
 If LCase(Request.Querystring("action"))="savedata" Then
 	'0=account,1=password,2=email,3=question,4=answer
@@ -194,7 +190,7 @@ function viewnone(e){
               </table> 
               <table width="760" align=center border="0" cellspacing="3" cellpadding="3"> 
                 <tr> 
-                  <td bgcolor="#FFFFFF"><!--#include file="../language_files/registration.asp" --></td> 
+                  <td bgcolor="#FFFFFF"><!--#include file="../language/zh-cn_reg.asp" --></td> 
                 </tr> 
               </table> 
             </div> 
