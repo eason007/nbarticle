@@ -52,8 +52,7 @@ If LCase(Request.Querystring("action"))="savedata" Then
 
 	Select Case Feedback
 	Case -1
-		ErrMsg="您填写的E-Mail地址已被注册，请重新选择其他E-Mail地址！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(38, 2)
 	Case 0
 		MemberInfo(1) = Password
 		MemberInfo(4) = Answer
@@ -87,8 +86,7 @@ If LCase(Request.Querystring("action"))="savedata" Then
 		Application.UnLock 
 		Call EA_Pub.ShowSusMsg(9,0)
 	Case 2
-		ErrMsg="您填写的用户名已被注册，请重新选择其他用户名！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(35, 2)
 	End Select	
 End if
 %>
