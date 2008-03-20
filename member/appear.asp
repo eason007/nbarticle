@@ -18,11 +18,9 @@
 Dim EA_Mem_DBO
 Set EA_Mem_DBO = New cls_Member_DBOperation
 
-If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(10,1)
-
-If EA_Pub.Mem_GroupSetting(10)="0" Then Call EA_Pub.ShowErrMsg(14,1)
-
-If CLng(EA_Mem_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0,0))>=CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(41,1)
+If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
+If EA_Pub.Mem_GroupSetting(10)="0" Then Call EA_Pub.ShowErrMsg(42, 2)
+If CLng(EA_Mem_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0,0))>=CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(43, 2)
 
 If LCase(Request.QueryString ("action"))="save" Then Call Save_MemberAppear()
 
@@ -49,13 +47,100 @@ If IsArray(ArticleInfo) Then
 End If
 	
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
-<title>我要投稿</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="zh-CN">
+<title>我要投稿 - <%=EA_Pub.SysInfo(0)%></title>
+<meta name="generator" content="NB文章系统(NBArticle) EliteCMS Ver3.01 Beta1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<SCRIPT language=JavaScript>
+<script type="text/javascript" src="../js/public.js"></script>
+<script type="text/javascript" src="../plugins/fck_editor/fckeditor.js"></script>
+</head>
+<body bgcolor="#FFFFFF" text="#000000"> 
+<table width="762" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC"> 
+  <tr> 
+    <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="1" cellspacing="2" align="center"> 
+        <form name=a1 method="post" action="?action=save&postid=<%=PostId%>" onsubmit="return checkData()"> 
+          <tr valign="middle"> 
+            <td bgcolor="#dddddd" height="30" colspan="4">&nbsp;<b>会员投稿</b></td>
+          </tr> 
+          <tr valign="middle" height="25"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">所属栏目</td> 
+            <td align="left" colspan="3" >&nbsp;<select name="Column" class="LoginInput"> 
+                <option value="0">请选择...</option> 
+                <%
+					ColumnOption=EA_Mem_DBO.Get_MemberAppearColumnList()
+					
+					If IsArray(ColumnOption) Then 
+						For i=0 To UBound(ColumnOption,2)
+							Level=(Len(ColumnOption(2,i))/4-1)*3
+							Response.Write "<option value="""&ColumnOption(0,i)&"|||"&ColumnOption(1,i)&"|||"&ColumnOption(2,i)&""""
+							If ColumnOption(0,i)=ColumnId Then Response.Write " selected"
+							Response.Write ">"
+							If Len(ColumnOption(2,i))>4 Then Response.Write "├"
+							Response.Write String(Level,"-")
+							Response.Write ColumnOption(1,i)&"</option>"
+						Next
+					End If
+				%> 
+              </select></td>
+          </tr>
+          <tr valign="middle" height="25"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">标题</td> 
+            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<input name="title" type="text" size=50 class="LoginInput" value="<%=Title%>"></td> 
+          </tr>
+          <tr valign="middle" height="25"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">关键字</td> 
+            <td align="left" bgcolor="ffffff" width="50%">&nbsp;<input name="keyword" size=40 type="text" class="LoginInput" value="<%=Keyword%>">&nbsp;以,号分隔</td>
+            <td width="20%" align="center" bgcolor="#e6f0ff">作者</td> 
+            <td align="left" bgcolor="#FFFFFF">&nbsp;<font color=800000><%=EA_Pub.Mem_Info(1)%></font></td> 
+          </tr>
+          <tr valign="middle" height="25"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">标题图片</td> 
+            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<select name="d_picture" class="LoginInput"> 
+                <option value=''>暂无图片</option> 
+              </select>&nbsp;<input name="img" type="text" size=30 class="LoginInput" value="<%=ImgPath%>">&nbsp;<a href="#" onclick="review_img();">[预览]</a></td> 
+          </tr>
+          <tr valign="middle" height="25"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">文章来源</td> 
+            <td align="left" bgcolor="ffffff" colspan="3">&nbsp;<select name="choosesource" class="LoginInput" onchange="inputsource(this.options[this.selectedIndex].value)">
+			<option value="==">快捷选择</option>
+			<%
+			Temp=EA_DBO.Get_System_Info()
+			If IsArray(Temp) Then
+				If Not IsNull(Temp(6,0)) Then 
+					TempArray=Split(Temp(6,0),";")
+		
+					For i=0 To UBound(TempArray)
+						TStr=""
+						TStr=Split(TempArray(i),"==")
+						
+						Response.Write "<option value='"&TempArray(i)&"'>"&TStr(0)&"</option>"
+					Next
+				End If
+			End If
+			%>
+      </select>&nbsp;=->&nbsp;<input name="source" type="text" value="<%=Source%>" class="LoginInput">&nbsp;<input name="sourceurl" class="LoginInput" type="text" value="<%=SourceUrl%>" size=30></td> 
+          </tr>
+          <tr valign="middle"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">正文</td> 
+            <td colspan="3" align="left" bgcolor="ffffff" id="myFCKeditor">&nbsp;</td> 
+          </tr>
+          <tr valign="middle"> 
+            <td width="15%" align="center" bgcolor="#e6f0ff">摘要</td> 
+            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<textarea name="summary" cols="70" rows="5" wrap="VIRTUAL"><%=EA_Pub.Un_Full_HTMLFilter(Summary)%></textarea></td> 
+          </tr> 
+          <tr> 
+            <td colspan="4" align="center" valign="middle" height="25" bgcolor="#efefef"><input type="hidden" name="author" value="<%=EA_Pub.Mem_Info(0)%>"> 
+              <input type="submit" name="Submit1" value=" 提交我的文章 ">&nbsp;<input type="reset" name="Submit2" value="重置"></td> 
+          </tr> 
+        </form> 
+      </table></td> 
+  </tr> 
+</table>
+<script type="text/javascript">
 function checkData() {
 	var f1 = document.a1;
 	var wm = "\n";
@@ -154,90 +239,12 @@ function review_img(){
 		}
 	}
 }
-</SCRIPT>
-</head>
-<body bgcolor="#FFFFFF" text="#000000"> 
-<table width="762" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC"> 
-  <tr> 
-    <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="1" cellspacing="2" align="center"> 
-        <form name=a1 method="post" action="?action=save&postid=<%=PostId%>" onsubmit="return checkData()"> 
-          <tr valign="middle"> 
-            <td bgcolor="#dddddd" height="30" colspan="4">&nbsp;<b>会员投稿</b></td>
-          </tr> 
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">所属栏目</td> 
-            <td align="left" colspan="3" >&nbsp;<select name="Column" class="LoginInput"> 
-                <option value="0">请选择...</option> 
-                <%
-					ColumnOption=EA_Mem_DBO.Get_MemberAppearColumnList()
-					
-					If IsArray(ColumnOption) Then 
-						For i=0 To UBound(ColumnOption,2)
-							Level=(Len(ColumnOption(2,i))/4-1)*3
-							Response.Write "<option value="""&ColumnOption(0,i)&"|||"&ColumnOption(1,i)&"|||"&ColumnOption(2,i)&""""
-							If ColumnOption(0,i)=ColumnId Then Response.Write " selected"
-							Response.Write ">"
-							If Len(ColumnOption(2,i))>4 Then Response.Write "├"
-							Response.Write String(Level,"-")
-							Response.Write ColumnOption(1,i)&ColumnOption(3,i)&"</option>"
-						Next
-					End If
-				%> 
-              </select></td>
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">标题</td> 
-            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<input name="title" type="text" size=50 class="LoginInput" value="<%=Title%>"></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">关键字</td> 
-            <td align="left" bgcolor="ffffff" width="50%">&nbsp;<input name="keyword" size=40 type="text" class="LoginInput" value="<%=Keyword%>">&nbsp;以,号分隔</td>
-            <td width="20%" align="center" bgcolor="#e6f0ff">作者</td> 
-            <td align="left" bgcolor="#FFFFFF">&nbsp;<font color=800000><%=EA_Pub.Mem_Info(1)%></font></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">标题图片</td> 
-            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<select name="d_picture" class="LoginInput"> 
-                <option value=''>暂无图片</option> 
-              </select>&nbsp;<input name="img" type="text" size=30 class="LoginInput" value="<%=ImgPath%>">&nbsp;<a href="#" onclick="review_img();">[预览]</a></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">文章来源</td> 
-            <td align="left" bgcolor="ffffff" colspan="3">&nbsp;<select name="choosesource" class="LoginInput" onchange="inputsource(this.options[this.selectedIndex].value)">
-			<option value="==">快捷选择</option>
-			<%
-			Temp=EA_DBO.Get_System_Info()
-			If IsArray(Temp) Then
-				If Not IsNull(Temp(6,0)) Then 
-					TempArray=Split(Temp(6,0),";")
-		
-					For i=0 To UBound(TempArray)
-						TStr=""
-						TStr=Split(TempArray(i),"==")
-						
-						Response.Write "<option value='"&TempArray(i)&"'>"&TStr(0)&"</option>"
-					Next
-				End If
-			End If
-			%>
-      </select>&nbsp;=->&nbsp;<input name="source" type="text" value="<%=Source%>" class="LoginInput">&nbsp;<input name="sourceurl" class="LoginInput" type="text" value="<%=SourceUrl%>" size=30></td> 
-          </tr>
-          <tr valign="middle"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">正文</td> 
-            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;</td> 
-          </tr>
-          <tr valign="middle"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">摘要</td> 
-            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<textarea name="summary" cols="70" rows="5" wrap="VIRTUAL"><%=EA_Pub.Un_Full_HTMLFilter(Summary)%></textarea></td> 
-          </tr> 
-          <tr> 
-            <td colspan="4" align="center" valign="middle" height="25" bgcolor="#efefef"><input type="hidden" name="author" value="<%=EA_Pub.Mem_Info(0)%>"> 
-              <input type="submit" name="Submit1" value=" 提交我的文章 ">&nbsp;<input type="reset" name="Submit2" value="重置"></td> 
-          </tr> 
-        </form> 
-      </table></td> 
-  </tr> 
-</table> 
+
+var div = $("myFCKeditor");
+var fck = new FCKeditor("Content", 650, 520);
+fck.BasePath	= "../plugins/fck_editor/";
+div.innerHTML = fck.CreateHtml();
+</script>
 <%
 
 Sub Save_MemberAppear()

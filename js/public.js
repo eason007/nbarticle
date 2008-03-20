@@ -129,7 +129,7 @@ function siupIn (siteUrl) {
 	html += "<td align=\"right\">用户名：</td><td align=\"left\"><input type=\"text\" name=\"UserName\"></td>";
 	html += "</tr>"
 	html += "<tr>"
-	html += "<td align=\"right\">密码：</td><td align=\"left\"><input type=\"text\" name=\"Password\"></td>";
+	html += "<td align=\"right\">密码：</td><td align=\"left\"><input type=\"password\" name=\"Password\"></td>";
 	html += "</tr>"
 	html += "<tr>"
 	html += "<td align=\"right\">自动登陆：</td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\"></td>";
@@ -180,5 +180,3 @@ EliteCMS = {
 }
 
 EliteCMS.init();
-
-alert(EliteCMS.isMember);

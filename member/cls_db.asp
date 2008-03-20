@@ -263,7 +263,7 @@ Class cls_Member_DBOperation
 		Case 0, 1
 			SQL="SELECT [Id], Title, Code"
 			SQL=SQL&" FROM NB_Column"
-			SQL=SQL&" WHERE IsPost=1"
+			SQL=SQL&" WHERE IsPost=" & TrueValue
 			SQL=SQL&" ORDER BY Code"
 		Case 2
 			SQL="Exec sp_EliteArticle_Column_MemberAppearList_Select"
