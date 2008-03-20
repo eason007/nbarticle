@@ -64,8 +64,8 @@ Sub Chk_Login
 	EA_Pub.Mem_Info(4)=Key
 	EA_Pub.Mem_Info(5)=EA_Pub.Mem_GroupSetting(0)
 
-	Session("UserData")=Join(EA_Pub.Mem_Info,",")
-	Response.Cookies("UserData")=Session("UserData")
+	Session("UserData") = Join(EA_Pub.Mem_Info,"|")
+	Response.Cookies("UserData") = Session("UserData")
 
 	If SaveTime=10 Then Response.Cookies("UserData").Expires=Date()+720
 

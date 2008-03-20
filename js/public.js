@@ -142,3 +142,41 @@ function siupIn (siteUrl) {
 
 	return html;
 }
+
+function getCookie(cName){
+	var cValue="";
+	var cName=cName+"=";
+
+	if(document.cookie.length>0){ 
+		offset=document.cookie.indexOf(cName);
+		if(offset!=-1){ 
+			offset+=cName.length;
+			end=document.cookie.indexOf(";",offset);
+			if(end==-1) {
+				end=document.cookie.length;
+			}
+			cValue=decodeURI(document.cookie.substring(offset,end))
+		}
+	}
+
+	return cValue;
+}
+
+
+EliteCMS = {
+	isMember : false,
+	memberData : "",
+
+	init : function () {
+		this.memberData = getCookie('UserData');
+
+		if (this.memberData.length > 0) {
+			this.isMember = true;
+		}
+		else {
+			this.isMember = false;
+		}
+	}
+}
+
+EliteCMS.init();

@@ -155,7 +155,7 @@ Class cls_Public
 		End If
 		
 		If IsMember Then 
-			vTemp=Split(Session("UserData"),",")
+			vTemp=Split(Session("UserData"),"|")
 			Mem_Info(0)=vTemp(0)
 			Mem_Info(1)=vTemp(1)
 			Mem_Info(2)=vTemp(2)
