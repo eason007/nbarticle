@@ -1,5 +1,6 @@
 <!--#Include File="../include/inc.asp"-->
 <!--#Include File="../include/md5.asp"-->
+<!--#Include File="cls_db.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -33,6 +34,9 @@ Sub Chk_Login
 	Dim Login_Accout, Login_Password, SaveTime
 	Dim Mem_Info(4)
 	Dim TempArray, i, Key, Temp
+	Dim EA_Mem_DBO
+
+	Set EA_Mem_DBO = New cls_Member_DBOperation
 	
 	Login_Accout	= EA_Pub.SafeRequest(2, "username", 1,"", 1)
 	Login_Password	= EA_Pub.SafeRequest(2, "password", 1,"", -1)
@@ -65,7 +69,7 @@ Sub Chk_Login
 
 	If SaveTime=10 Then Response.Cookies("UserData").Expires=Date()+720
 
-	Call EA_DBO.Set_MemberLoginKey(EA_Pub.Get_UserIp,Key,EA_Pub.Mem_Info(0))
+	Call EA_Mem_DBO.Set_MemberLoginKey(EA_Pub.Get_UserIp,Key,EA_Pub.Mem_Info(0))
 
 	Call EA_Pub.ShowErrMsg(39, 2)
 End Sub
