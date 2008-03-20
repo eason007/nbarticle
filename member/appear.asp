@@ -1,6 +1,5 @@
-<!--#Include File="../conn.asp" -->
 <!--#Include File="../include/inc.asp"-->
-<!--#Include File="../include/cls_editor.asp" -->
+<!--#Include File="cls_db.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System
@@ -13,26 +12,27 @@
 '= 摘    要：会员-会员发布文章文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-09-12
+'= 最后日期：2008-03-20
 '====================================================================
+
+Dim EA_Mem_DBO
+Set EA_Mem_DBO = New cls_Member_DBOperation
 
 If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(10,1)
 
 If EA_Pub.Mem_GroupSetting(10)="0" Then Call EA_Pub.ShowErrMsg(14,1)
 
-If CLng(EA_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0,0))>=CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(41,1)
+If CLng(EA_Mem_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0,0))>=CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(41,1)
 
 If LCase(Request.QueryString ("action"))="save" Then Call Save_MemberAppear()
 
-Dim ColumnList,ArticleInfo
+Dim ColumnOption,ArticleInfo
 Dim Title,Text,KeyWord,ColumnId,ImgPath,Source,SourceUrl,Summary
 Dim i,Level,TempArray,TStr,Temp
 Dim EA_Editor
 Dim PostId
 
 PostId=EA_Pub.SafeRequest(3,"postid",0,0,0)
-
-Set EA_Editor=New cls_Editor
 
 ArticleInfo=EA_DBO.Get_Article_Info(PostId,0)
 If IsArray(ArticleInfo) Then 
@@ -48,8 +48,6 @@ If IsArray(ArticleInfo) Then
 	Summary=ArticleInfo(4,0)
 End If
 	
-EA_Editor.EditorType=EA_Pub.SysInfo(24)
-EA_Editor.Value=Text
 %>
 <html>
 <head>
@@ -171,17 +169,17 @@ function review_img(){
             <td align="left" colspan="3" >&nbsp;<select name="Column" class="LoginInput"> 
                 <option value="0">请选择...</option> 
                 <%
-					ColumnList=EA_DBO.Get_MemberAppearColumnList()
+					ColumnOption=EA_Mem_DBO.Get_MemberAppearColumnList()
 					
-					If IsArray(ColumnList) Then 
-						For i=0 To UBound(ColumnList,2)
-							Level=(Len(ColumnList(2,i))/4-1)*3
-							Response.Write "<option value="""&ColumnList(0,i)&"|||"&ColumnList(1,i)&"|||"&ColumnList(2,i)&""""
-							If ColumnList(0,i)=ColumnId Then Response.Write " selected"
+					If IsArray(ColumnOption) Then 
+						For i=0 To UBound(ColumnOption,2)
+							Level=(Len(ColumnOption(2,i))/4-1)*3
+							Response.Write "<option value="""&ColumnOption(0,i)&"|||"&ColumnOption(1,i)&"|||"&ColumnOption(2,i)&""""
+							If ColumnOption(0,i)=ColumnId Then Response.Write " selected"
 							Response.Write ">"
-							If Len(ColumnList(2,i))>4 Then Response.Write "├"
+							If Len(ColumnOption(2,i))>4 Then Response.Write "├"
 							Response.Write String(Level,"-")
-							Response.Write ColumnList(1,i)&ColumnList(3,i)&"</option>"
+							Response.Write ColumnOption(1,i)&ColumnOption(3,i)&"</option>"
 						Next
 					End If
 				%> 
@@ -226,11 +224,11 @@ function review_img(){
           </tr>
           <tr valign="middle"> 
             <td width="15%" align="center" bgcolor="#e6f0ff">正文</td> 
-            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<%=EA_Editor.Create%></td> 
+            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;</td> 
           </tr>
           <tr valign="middle"> 
             <td width="15%" align="center" bgcolor="#e6f0ff">摘要</td> 
-            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<textarea name="summary" cols="70" rows="5" wrap="VIRTUAL"><%=EA_Pub.Un_Full_HTMLFilter(Summary)%></textarea><br>&nbsp;<a href="javascript:change(document.all.summary,-20)"><img src="../images/public/minus.gif" border=0 title="缩小"></a>&nbsp;&nbsp;<a href="javascript:change(document.all.summary,20)"><img src="../images/public/plus.gif" border=0 title="放大"></a></td> 
+            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<textarea name="summary" cols="70" rows="5" wrap="VIRTUAL"><%=EA_Pub.Un_Full_HTMLFilter(Summary)%></textarea></td> 
           </tr> 
           <tr> 
             <td colspan="4" align="center" valign="middle" height="25" bgcolor="#efefef"><input type="hidden" name="author" value="<%=EA_Pub.Mem_Info(0)%>"> 

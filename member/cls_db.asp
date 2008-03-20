@@ -261,7 +261,7 @@ Class cls_Member_DBOperation
 	Public Function Get_MemberAppearColumnList()
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT [Id], Title, Code, Case When IsTop = 0 Then '' Else '[导航]' End"
+			SQL="SELECT [Id], Title, Code"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE IsPost=1"
 			SQL=SQL&" ORDER BY Code"

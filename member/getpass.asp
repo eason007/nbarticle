@@ -1,6 +1,6 @@
-<!--#Include File="../conn.asp" -->
 <!--#Include File="../include/inc.asp"-->
 <!--#Include File="../include/md5.asp"-->
+<!--#Include File="cls_db.asp"-->
 <%
 '====================================================================
 '= Team Elite - Elite Article System

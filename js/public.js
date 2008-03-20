@@ -180,3 +180,5 @@ EliteCMS = {
 }
 
 EliteCMS.init();
+
+alert(EliteCMS.isMember);
