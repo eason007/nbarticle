@@ -245,18 +245,6 @@ Class cls_Public
 		Response.End
 	End Sub
 	
-	'****************************
-	'显示成功信息提示过程
-	'输入参数：
-	'	1、成功号
-	'	2、显示类型
-	'****************************
-	Public Sub ShowSusMsg(SusNum,Note)
-		Response.Clear
-		Response.Redirect SystemFolder&"success.asp?susnum="&SusNum&"&note="&Note
-		Response.End
-	End Sub
-	
 	'********************
 	'检测是否外部提交数据过程
 	'********************

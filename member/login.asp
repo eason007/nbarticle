@@ -67,7 +67,7 @@ Sub Chk_Login
 
 	Call EA_DBO.Set_MemberLoginKey(EA_Pub.Get_UserIp,Key,EA_Pub.Mem_Info(0))
 
-	Call EA_Pub.ShowSusMsg(4,1)
+	Call EA_Pub.ShowErrMsg(39, 2)
 End Sub
 
 Sub Get_Logout()
