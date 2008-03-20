@@ -20,12 +20,12 @@ Set EA_Mem_DBO = New cls_Member_DBOperation
 
 If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
 If EA_Pub.Mem_GroupSetting(10)="0" Then Call EA_Pub.ShowErrMsg(42, 2)
-If CLng(EA_Mem_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0,0))>=CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(43, 2)
+If CLng(EA_Mem_DBO.Get_MemberDayPostTotal(EA_Pub.Mem_Info(0))(0, 0)) >= CLng(EA_Pub.Mem_GroupSetting(13)) Then Call EA_Pub.ShowErrMsg(43, 2)
 
 If LCase(Request.QueryString ("action"))="save" Then Call Save_MemberAppear()
 
-Dim ColumnOption,ArticleInfo
-Dim Title,Text,KeyWord,ColumnId,ImgPath,Source,SourceUrl,Summary
+Dim ColumnOption, ArticleInfo
+Dim Title, Text, KeyWord,ColumnId,ImgPath,Source,SourceUrl,Summary
 Dim i,Level,TempArray,TStr,Temp
 Dim EA_Editor
 Dim PostId
@@ -51,25 +51,23 @@ End If
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
 <title>我要投稿 - <%=EA_Pub.SysInfo(0)%></title>
-<meta name="generator" content="NB文章系统(NBArticle) EliteCMS Ver3.01 Beta1" />
+<meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/public.js"></script>
 <script type="text/javascript" src="../plugins/fck_editor/fckeditor.js"></script>
 </head>
-<body bgcolor="#FFFFFF" text="#000000"> 
-<table width="762" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC"> 
-  <tr> 
-    <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="1" cellspacing="2" align="center"> 
-        <form name=a1 method="post" action="?action=save&postid=<%=PostId%>" onsubmit="return checkData()"> 
-          <tr valign="middle"> 
-            <td bgcolor="#dddddd" height="30" colspan="4">&nbsp;<b>会员投稿</b></td>
-          </tr> 
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">所属栏目</td> 
-            <td align="left" colspan="3" >&nbsp;<select name="Column" class="LoginInput"> 
-                <option value="0">请选择...</option> 
+<body id="center">
+
+<form name="a1" method="post" action="?action=save&postid=<%=PostId%>" onsubmit="return checkData()">
+
+<div style="line-height: 25px; background: #F7FAFD; border: #DBE1E9 1px solid;">&nbsp;<strong>会员投稿</strong></div>
+<div class="left" style="border: #DBE1E9 1px solid;">
+	<table>
+		<tr>
+			<td><select name="column"> 
+                <option value="0">请选择栏目...</option> 
                 <%
 					ColumnOption=EA_Mem_DBO.Get_MemberAppearColumnList()
 					
@@ -85,27 +83,33 @@ End If
 						Next
 					End If
 				%> 
-              </select></td>
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">标题</td> 
-            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<input name="title" type="text" size=50 class="LoginInput" value="<%=Title%>"></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">关键字</td> 
-            <td align="left" bgcolor="ffffff" width="50%">&nbsp;<input name="keyword" size=40 type="text" class="LoginInput" value="<%=Keyword%>">&nbsp;以,号分隔</td>
-            <td width="20%" align="center" bgcolor="#e6f0ff">作者</td> 
-            <td align="left" bgcolor="#FFFFFF">&nbsp;<font color=800000><%=EA_Pub.Mem_Info(1)%></font></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">标题图片</td> 
-            <td colspan="3" align="left" bgcolor="#FFFFFF">&nbsp;<select name="d_picture" class="LoginInput"> 
-                <option value=''>暂无图片</option> 
-              </select>&nbsp;<input name="img" type="text" size=30 class="LoginInput" value="<%=ImgPath%>">&nbsp;<a href="#" onclick="review_img();">[预览]</a></td> 
-          </tr>
-          <tr valign="middle" height="25"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">文章来源</td> 
-            <td align="left" bgcolor="ffffff" colspan="3">&nbsp;<select name="choosesource" class="LoginInput" onchange="inputsource(this.options[this.selectedIndex].value)">
+              </select>&nbsp;<input type="text" name="title" size="50" value="<%=Title%>" /></td>
+		</tr>
+		<tr>
+			<td id="myFCKeditor"></td>
+		</tr>
+	</table>
+</div>
+
+<div style="border: #DBE1E9 1px solid;">
+	<table>
+		<tr>
+			<td valign="top">关键字：</td><td><textarea name="keyword" cols="28" rows="4" title="以,号分隔"></textarea></td>
+		</tr>
+		<tr>
+			<td valign="top">摘要：</td><td><textarea name="summary" id="summary" cols="28" rows="8" wrap="VIRTUAL"></textarea></td>
+		</tr>
+		<tr>
+			<td>副标题：</td><td><input type="text" name="subtitle" size="33"></td>
+		</tr>
+		<tr>
+			<td>副标题连接：</td><td><input type="text" name="suburl" size="33"></td>
+		</tr>
+		<tr>
+			<td>标题图片：</td><td><input type="text" name="img" value="<%=ImgPath%>">&nbsp;<a href="javascript: vod();" onclick="review_img();">[预览]</a></td>
+		</tr>
+		<tr>
+			<td valign="top">文章来源：</td><td><select name="choosesource" onchange="inputsource(this.options[this.selectedIndex].value)">
 			<option value="==">快捷选择</option>
 			<%
 			Temp=EA_DBO.Get_System_Info()
@@ -122,24 +126,15 @@ End If
 				End If
 			End If
 			%>
-      </select>&nbsp;=->&nbsp;<input name="source" type="text" value="<%=Source%>" class="LoginInput">&nbsp;<input name="sourceurl" class="LoginInput" type="text" value="<%=SourceUrl%>" size=30></td> 
-          </tr>
-          <tr valign="middle"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">正文</td> 
-            <td colspan="3" align="left" bgcolor="ffffff" id="myFCKeditor">&nbsp;</td> 
-          </tr>
-          <tr valign="middle"> 
-            <td width="15%" align="center" bgcolor="#e6f0ff">摘要</td> 
-            <td colspan="3" align="left" bgcolor="ffffff">&nbsp;<textarea name="summary" cols="70" rows="5" wrap="VIRTUAL"><%=EA_Pub.Un_Full_HTMLFilter(Summary)%></textarea></td> 
-          </tr> 
-          <tr> 
-            <td colspan="4" align="center" valign="middle" height="25" bgcolor="#efefef"><input type="hidden" name="author" value="<%=EA_Pub.Mem_Info(0)%>"> 
-              <input type="submit" name="Submit1" value=" 提交我的文章 ">&nbsp;<input type="reset" name="Submit2" value="重置"></td> 
-          </tr> 
-        </form> 
-      </table></td> 
-  </tr> 
-</table>
+      </select><br /><input name="source" type="text" value="<%=Source%>"><br /><input name="sourceurl" type="text" value="<%=SourceUrl%>" size=30></td>
+		</tr>
+	</table>
+
+	<input type="hidden" name="author" value="<%=EA_Pub.Mem_Info(0)%>"> 
+	<input type="submit" name="Submit1" value=" 提交我的文章 ">&nbsp;<input type="reset" name="Submit2" value="重置">
+</div>
+
+</form>
 <script type="text/javascript">
 function checkData() {
 	var f1 = document.a1;
@@ -232,19 +227,15 @@ function review_img(){
 	if (document.all.img.value!=''){
 		window.open(''+document.all.img.value+'','','');
 	}
-	else{
-		//alert(document.all.d_picture.value);
-		if (document.all.d_picture.selectedIndex>0){
-			window.open(''+document.all.d_picture.value+'','','');
-		}
-	}
 }
 
 var div = $("myFCKeditor");
 var fck = new FCKeditor("Content", 650, 520);
 fck.BasePath	= "../plugins/fck_editor/";
-div.innerHTML = fck.CreateHtml();
+div.innerHTML	= fck.CreateHtml();
 </script>
+</body>
+</html>
 <%
 
 Sub Save_MemberAppear()
