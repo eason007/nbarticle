@@ -11,7 +11,7 @@
 '= 摘    要：XML-RPC接口类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-18
+'= 最后日期：2008-03-20
 '====================================================================
 
 Class cls_XML_RPC
@@ -45,9 +45,6 @@ Class cls_XML_RPC
 		Dim Mission
 		Dim i
 		Dim ForTotal
-
-		Response.ContentType = "text/xml"
-		Response.Clear
 
 		Mission = EA_DBO.Get_InterfaceList(OutInterfaceType)
 		If IsArray(Mission) Then
@@ -217,6 +214,7 @@ Class cls_XML_RPC
 		sStructFileContent = Replace(sStructFileContent, "$2", sErrMsg)
 
 		Response.Clear
+		Response.ContentType = "text/xml"
 		Response.Write sStructFileContent
 		Response.End
 	End Sub
@@ -228,6 +226,7 @@ Class cls_XML_RPC
 		sStructFileContent = Replace(sStructFileContent, "$1", iCode)
 
 		Response.Clear
+		Response.ContentType = "text/xml"
 		Response.Write sStructFileContent
 		Response.End
 	End Sub

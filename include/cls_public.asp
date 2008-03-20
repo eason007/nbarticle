@@ -236,7 +236,7 @@ Class cls_Public
 		Case 1
 			Response.Write "<font style='font-family:Verdana;font-size:11px'>" & ErrNum & "</font>"
 		Case 2
-			Response.Write "<script language=""JavaScript"">"&vbcrlf
+			Response.Write "<script type=""text/javascript"" charset=""utf-8"">"&vbcrlf
 			Response.Write "alert(""" & SysMsg(ErrNum) & """);"&vbcrlf
 			Response.Write "history.go(-1);"&vbcrlf
 			Response.Write "</script>"&vbcrlf

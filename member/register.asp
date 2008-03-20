@@ -12,7 +12,7 @@
 '= 摘    要：会员-注册文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-08-20
+'= 最后日期：2008-03-20
 '====================================================================
 
 If EA_Pub.SysInfo(7)="0" Then Call EA_Pub.ShowErrMsg(34, 0)
@@ -53,7 +53,7 @@ If LCase(Request.Querystring("action"))="savedata" Then
 	Select Case Feedback
 	Case -1
 		Call EA_Pub.ShowErrMsg(38, 2)
-	Case 0
+	Case 0, 1
 		MemberInfo(1) = Password
 		MemberInfo(4) = Answer
 
@@ -68,23 +68,7 @@ If LCase(Request.Querystring("action"))="savedata" Then
 		Application.Lock 
 		Application(sCacheName&"IsFlush")=1
 		Application.UnLock 
-		Call EA_Pub.ShowSusMsg(1,0)
-	Case 1
-		MemberInfo(1) = Password
-		MemberInfo(4) = Answer
-
-		Set XML_RPC = New cls_XML_RPC
-
-		XML_RPC.OutInterfaceType = 1
-		XML_RPC.StructData = MemberInfo
-		XML_RPC.Start_OutInterface
-
-		XML_RPC.Close_Obj
-
-		Application.Lock 
-		Application(sCacheName&"IsFlush")=1
-		Application.UnLock 
-		Call EA_Pub.ShowSusMsg(9,0)
+		Call EA_Pub.ShowErrMsg(40, 2)
 	Case 2
 		Call EA_Pub.ShowErrMsg(35, 2)
 	End Select	
