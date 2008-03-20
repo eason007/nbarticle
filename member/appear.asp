@@ -247,8 +247,7 @@ Sub Save_MemberAppear()
 	ReDim ArticleInfo(18)
 	
 	If Request.Form("column")="" Or Request.Form("column")="0" Then 
-		ErrMsg="传递错误的栏目数据！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(2, 2)
 	Else
 		TempStr=Split(Request.Form ("Column"),"|||")
 	End If
@@ -269,26 +268,23 @@ Sub Save_MemberAppear()
 	ArticleInfo(11)=Lenb(Text)
 
 	If Len(ArticleInfo(0))>150 Or Len(ArticleInfo(0))=0 Then 
-		ErrMsg="标题内容长度不符。"
-		ErrMsg=ErrMsg&"\n大于150或者等于0个字符"
+		ErrMsg = 44
 		FoundErr=True
 	End If
 	If Len(ArticleInfo(2))>20 Then 
-		ErrMsg="关键字长度不符。"
-		ErrMsg=ErrMsg&"\n大于20个字符"
+		ErrMsg = 45
 		FoundErr=True
 	End If
 	If Len(ArticleInfo(10))>250 Then 
-		ErrMsg="文章简介长度不符。"
-		ErrMsg=ErrMsg&"\n大于250个字符"
+		ErrMsg = 46
 		FoundErr=True
 	End If
 	If Not EA_DBO.Get_Column_Info(ArticleInfo(3))(15,0) Then 
-		ErrMsg="该栏目不允许投稿"
+		ErrMsg = 47
 		FoundErr=True
 	End If
 	
-	If FoundErr Then Call EA_Pub.ShowErrMsg(0,2)
+	If FoundErr Then Call EA_Pub.ShowErrMsg(ErrMsg, 2)
 
 	If ArticleInfo(6)="" Then ArticleInfo(6)=EA_Pub.SafeRequest(2,"d_picture",1,"",1)
 	If ArticleInfo(6)="" Then 
@@ -319,27 +315,23 @@ Sub Save_MemberAppear()
 	key="000000"&CStr(Int((999999-1+100000)*Rnd+1))
 	ArticleInfo(18)=ArticleInfo(18)&Right(Key,6)
 	
-	Feedback=EA_DBO.Set_Article_Insert(PostId,ArticleInfo)
+	Feedback=EA_Mem_DBO.Set_Article_Insert(PostId,ArticleInfo)
 	
 	Select Case Feedback
 	Case -1
-		ErrMsg="在更新数据库过程中发生错误，操作已取消。"
-
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(48, 2)
 	Case 1
-		ErrMsg="文章已发布，正等待管理员审核。"
 		Application.Lock 
 		Application(sCacheName&"IsFlush")=1
 		Application.UnLock 
 
-		Call EA_Pub.ShowSusMsg(6,"")
+		Call EA_Pub.ShowErrMsg(49, 2)
 	Case 0
-		ErrMsg="文章已发布，现可马上查看。"
 		Application.Lock 
 		Application(sCacheName&"IsFlush")=1
 		Application.UnLock 
 
-		Call EA_Pub.ShowSusMsg(7,"")
+		Call EA_Pub.ShowErrMsg(50, 2)
 	End Select
 End Sub
 %> 

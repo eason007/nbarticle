@@ -48,7 +48,7 @@ Class cls_Member_DBOperation
 	End Sub
 
 	Public Function Set_Article_Insert(iArticleId,vArticleInfo)
-		On Error Resume Next
+		'On Error Resume Next
 		Dim Flag
 		Flag=0
 
@@ -85,13 +85,13 @@ Class cls_Member_DBOperation
 			
 			If iArticleId=0 Then 
 				If vArticleInfo(12)=0 Then 
-					Set_System_ManagerTopicTotal 1
+					EA_DBO.Set_System_ManagerTopicTotal 1
 					
-					Set_Column_ManagerTopicTotal vArticleInfo(3),1
+					EA_DBO.Set_Column_ManagerTopicTotal vArticleInfo(3),1
 				Else
-					Set_System_TopicTotal 1
+					EA_DBO.Set_System_TopicTotal 1
 					
-					Set_Column_TopicTotal vArticleInfo(3),1
+					EA_DBO.Set_Column_TopicTotal vArticleInfo(3),1
 				End If
 			End If
 
