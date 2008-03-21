@@ -74,14 +74,14 @@ If LCase(Request.Querystring("action"))="savedata" Then
 	End Select	
 End if
 %>
-<html>
-<head>
-<title>注册会员</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<title>注册会员 - <%=EA_Pub.SysInfo(0)%></title>
+<meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-<body bgcolor="#FFFFFF" text="#000000"> 
+<script src="../js/jsdate.js"></script>
 <script type="text/javascript">
 var Step = 1;
 var goreg = true;
@@ -158,11 +158,12 @@ function viewnone(e){
 	e.style.display=(e.style.display=="none")?"":"none";
 }
 
-</script> 
-<script src="../js/jsdate.js"></script> 
-<table width="762" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#dddddd"> 
+</script>
+</head>
+<body id="center">
+<table width="762" align="center" bgcolor="#dddddd"> 
   <tr> 
-    <td bgcolor="#FFFFFF"><table width="760" border="0" align="center" cellpadding="0" cellspacing="0"> 
+    <td><table width="760" border="0" align="center" cellpadding="0" cellspacing="0"> 
         <tr> 
           <td align="center" valign="top"><div id="xieyi"> 
               <table border=0 cellpadding=3 cellspacing=2 width="760" align=center> 
