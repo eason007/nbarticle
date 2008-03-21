@@ -70,11 +70,11 @@ function submit_vote(vote_id){
 	return target_url;
 }
 
-function friend (siteUrl) {
+function friend () {
 	var html = "";
 
 	html = "<table>";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + siteUrl + "action.asp?action=link\">"
+	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=link\">"
 	html += "<tr>"
 	html += "<td align=\"right\">站点名称：</td><td align=\"left\"><input type=\"text\" name=\"name\" /></td>";
 	html += "</tr>"
@@ -99,11 +99,11 @@ function friend (siteUrl) {
 	return html;
 }
 
-function comment (iArticleID, siteUrl) {
+function comment (iArticleID) {
 	var html = "";
 
 	html = "<table>";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + siteUrl + "action.asp?action=comment\">"
+	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=comment\">"
 	html += "<input type=\"hidden\" name=\"articleid\" value=\"" + iArticleID + "\" />"
 	html += "<tr>"
 	html += "<td align=\"right\">笔名：</td><td align=\"left\"><input type=\"text\" name=\"name\" /></td>";
@@ -120,11 +120,11 @@ function comment (iArticleID, siteUrl) {
 	return html;
 }
 
-function siupIn (siteUrl) {
+function siupIn () {
 	var html = "";
 
 	html = "<table>";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + siteUrl + "member/login.asp?action=login\">"
+	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "member/login.asp?action=login\">"
 	html += "<tr>"
 	html += "<td align=\"right\">用户名：</td><td align=\"left\"><input type=\"text\" name=\"UserName\" style=\"width: 130px;\" /></td>";
 	html += "</tr>"
@@ -135,7 +135,7 @@ function siupIn (siteUrl) {
 	html += "<td align=\"right\"><input type=\"submit\" name=\"Submit\" value=\"提交\" /></td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\" />自动登陆</td>";
 	html += "</tr>"
 	html += "<tr>"
-	html += "<td align=\"left\" colspan=\"2\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/register.asp','','width=790,height=400')\">注册</a>] - [<a href=\"javascript: vod();\" onclick=\"window.open('" + siteUrl + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
+	html += "<td align=\"left\" colspan=\"2\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/register.asp','','width=790,height=450')\">注册</a>] - [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
 	html += "</tr>"
 	html += "</form>";
 	html += "</table>";
@@ -164,6 +164,7 @@ function getCookie(cName){
 
 
 EliteCMS = {
+	basePath : "",
 	isMember : false,
 	memberData : "",
 	memberInfo : Array(),
@@ -184,7 +185,7 @@ EliteCMS = {
 	showMember : function () {
 		if (this.isMember)
 		{
-			document.write (this.memberInfo[1] + "，你好 - <a href=\"\">退出");
+			document.write (this.memberInfo[1] + "，你好 - <a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>");
 		}
 		else{
 			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | 注册");
