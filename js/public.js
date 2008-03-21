@@ -41,6 +41,25 @@ function $() {
 	return elements;
 }
 
+function getCookie(cName){
+	var cValue="";
+	var cName=cName+"=";
+
+	if(document.cookie.length>0){ 
+		offset=document.cookie.indexOf(cName);
+		if(offset!=-1){ 
+			offset+=cName.length;
+			end=document.cookie.indexOf(";",offset);
+			if(end==-1) {
+				end=document.cookie.length;
+			}
+			cValue=decodeURI(document.cookie.substring(offset,end))
+		}
+	}
+
+	return cValue;
+}
+
 function submit_vote(vote_id){
 //投票处理函数
 	var vote_form=$('vote_'+vote_id);
@@ -135,7 +154,7 @@ function siupIn () {
 	html += "<td align=\"right\"><input type=\"submit\" name=\"Submit\" value=\"提交\" /></td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\" />自动登陆</td>";
 	html += "</tr>"
 	html += "<tr>"
-	html += "<td align=\"left\" colspan=\"2\">[<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/register.asp','','width=790,height=450')\">注册</a>] - [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/getpass.asp','','scrollbars=no,width=650,height=150')\">忘记密码</a>]</td>";
+	html += "<td align=\"left\" colspan=\"2\">[<a href=\"" + EliteCMS.basePath + "member/register.asp\">注册</a>] - [<a href=\"" + EliteCMS.basePath + "member/getpass.asp\">忘记密码</a>]</td>";
 	html += "</tr>"
 	html += "</form>";
 	html += "</table>";
@@ -143,45 +162,12 @@ function siupIn () {
 	return html;
 }
 
-function getCookie(cName){
-	var cValue="";
-	var cName=cName+"=";
-
-	if(document.cookie.length>0){ 
-		offset=document.cookie.indexOf(cName);
-		if(offset!=-1){ 
-			offset+=cName.length;
-			end=document.cookie.indexOf(";",offset);
-			if(end==-1) {
-				end=document.cookie.length;
-			}
-			cValue=decodeURI(document.cookie.substring(offset,end))
-		}
-	}
-
-	return cValue;
-}
-
-function LoadJS(id, fileUrl)
-{
-    var scriptTag = $(id);
-    var oHead = document.getElementsByTagName('HEAD').item(0);
-    var oScript= document.createElement("script");
-
-    if (scriptTag)oHead.removeChild(scriptTag);
-
-    oScript.id = id;
-    oScript.type = "text/javascript";
-    oScript.src=fileUrl ;
-    oHead.appendChild(oScript);
-}
-
 EliteCMS = {
 	basePath : "",
 	isMember : false,
 	memberData : "",
 	memberInfo : Array(),
-	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; border: #DBE1E9 1px solid; background: #fff; padding: 10px 30px;\"></div>",
+	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; top: 200px; left: 350px; border: #DBE1E9 1px solid; background: #fff; padding: 10px 30px;\"></div>",
 
 	init : function () {
 		this.memberData = getCookie('UserData');
@@ -218,8 +204,6 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = "<a href=\"javascript: vod();\" onclick=\"$('EliteWindow').style.display = 'none';\" class=\"left\">[X]</a>" + op;
 		$("EliteWindow").style.display = "";
-
-		resizeModal();
 	}
 }
 
