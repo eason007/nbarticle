@@ -164,7 +164,7 @@ function getCookie(cName){
 
 function LoadJS(id, fileUrl)
 {
-    var scriptTag = document.getElementById(id);
+    var scriptTag = $(id);
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
 
@@ -174,14 +174,14 @@ function LoadJS(id, fileUrl)
     oScript.type = "text/javascript";
     oScript.src=fileUrl ;
     oHead.appendChild(oScript);
-} 
+}
 
 EliteCMS = {
 	basePath : "",
 	isMember : false,
 	memberData : "",
 	memberInfo : Array(),
-	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; top: 200px; left: 400px; border: #DBE1E9 1px solid; background: #fff; padding: 10px 30px;\"></div>",
+	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; border: #DBE1E9 1px solid; background: #fff; padding: 10px 30px;\"></div>",
 
 	init : function () {
 		this.memberData = getCookie('UserData');
@@ -194,7 +194,7 @@ EliteCMS = {
 			this.isMember = false;
 		}
 
-		LoadJS(this.basePath + "js/objAjax.js");
+		LoadJS("objAjax", this.basePath + "js/objAjax.js");
 	},
 
 	showMember : function () {
@@ -203,7 +203,7 @@ EliteCMS = {
 			document.write (this.memberInfo[1] + "，你好 - <a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>");
 		}
 		else{
-			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/getpass.asp')\">注册</a>");
+			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"" + EliteCMS.basePath + "member/register.asp\">注册</a>");
 		}
 	},
 
@@ -218,19 +218,8 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = "<a href=\"javascript: vod();\" onclick=\"$('EliteWindow').style.display = 'none';\" class=\"left\">[X]</a>" + op;
 		$("EliteWindow").style.display = "";
-	},
 
-	showWindow2File : function (sURL) {
-		if (!$("EliteWindow"))
-		{
-			document.body.innerHTML += this.windows;
-		}
-		else{
-			$("EliteWindow").innerHTML = "";
-			$("EliteWindow").style.display = "";
-		}
-
-		ajaxGetDateToPage(sURL, "EliteWindow");
+		resizeModal();
 	}
 }
 

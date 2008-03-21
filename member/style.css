@@ -20,16 +20,6 @@ a:hover
 	color: #999999;
 	text-decoration: underline;
 }
-TD 
-{
-	SCROLLBAR-ARROW-COLOR: #666666; 
-	SCROLLBAR-BASE-COLOR: #f0faff;
-	SCROLLBAR-DARKSHADOW-COLOR: #EEEEEE
-}
-TR 
-{
-	SCROLLBAR-ARROW-COLOR: #666666; 
-}
 form {
 	margin: 0;
 	padding: 0;

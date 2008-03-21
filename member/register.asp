@@ -82,7 +82,7 @@ End if
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body bgcolor="#FFFFFF" text="#000000"> 
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 var Step = 1;
 var goreg = true;
 
