@@ -162,6 +162,19 @@ function getCookie(cName){
 	return cValue;
 }
 
+function LoadJS(id, fileUrl)
+{
+    var scriptTag = document.getElementById(id);
+    var oHead = document.getElementsByTagName('HEAD').item(0);
+    var oScript= document.createElement("script");
+
+    if (scriptTag)oHead.removeChild(scriptTag);
+
+    oScript.id = id;
+    oScript.type = "text/javascript";
+    oScript.src=fileUrl ;
+    oHead.appendChild(oScript);
+} 
 
 EliteCMS = {
 	basePath : "",
@@ -180,6 +193,8 @@ EliteCMS = {
 		else {
 			this.isMember = false;
 		}
+
+		LoadJS(this.basePath + "js/objAjax.js");
 	},
 
 	showMember : function () {
@@ -188,7 +203,7 @@ EliteCMS = {
 			document.write (this.memberInfo[1] + "，你好 - <a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>");
 		}
 		else{
-			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/register.asp','','width=790,height=450')\">注册</a>");
+			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/getpass.asp')\">注册</a>");
 		}
 	},
 
@@ -203,6 +218,19 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = "<a href=\"javascript: vod();\" onclick=\"$('EliteWindow').style.display = 'none';\" class=\"left\">[X]</a>" + op;
 		$("EliteWindow").style.display = "";
+	},
+
+	showWindow2File : function (sURL) {
+		if (!$("EliteWindow"))
+		{
+			document.body.innerHTML += this.windows;
+		}
+		else{
+			$("EliteWindow").innerHTML = "";
+			$("EliteWindow").style.display = "";
+		}
+
+		ajaxGetDateToPage(sURL, "EliteWindow");
 	}
 }
 
