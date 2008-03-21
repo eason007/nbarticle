@@ -188,7 +188,7 @@ EliteCMS = {
 			document.write (this.memberInfo[1] + "，你好 - <a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>");
 		}
 		else{
-			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | 注册");
+			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/register.asp','','width=790,height=450')\">注册</a>");
 		}
 	},
 
