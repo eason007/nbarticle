@@ -232,6 +232,7 @@ function review_img(){
 var div = $("myFCKeditor");
 var fck = new FCKeditor("Content", 650, 480);
 fck.BasePath	= "../plugins/fck_editor/";
+fck.Value		= "<%=Text%>";
 div.innerHTML	= fck.CreateHtml();
 </script>
 </body>
