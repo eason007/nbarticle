@@ -186,7 +186,7 @@ EliteCMS = {
 	showMember : function () {
 		if (this.isMember)
 		{
-			document.write (this.memberInfo[1] + "，你好 - <a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>");
+			document.write (this.memberInfo[1] + "，你好 - [投稿] [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/favlist.asp','_blank','scrollbars=yes,width=645,height=380');\">收藏夹</a>] [修改密码] [修改资料] [<a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>]");
 		}
 		else{
 			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"" + EliteCMS.basePath + "member/register.asp\">注册</a>");

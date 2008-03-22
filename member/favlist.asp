@@ -12,10 +12,13 @@
 '= 摘    要：会员-收藏夹列表文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2007-03-11
+'= 最后日期：2008-03-22
 '====================================================================
 
-If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(10,1)
+If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
+
+Dim EA_Mem_DBO
+Set EA_Mem_DBO = New cls_Member_DBOperation
 
 Dim Action
 Dim Member_Id
@@ -39,12 +42,12 @@ Sub Main
 	Dim ReCount
 	Dim FavArray,FavList
 	Dim i
-	Dim FieldName(0),FieldValue(0)
+	Dim Url
 	
 	PageNum=EA_Pub.SafeRequest(1,"page",0,1,3)
 	PageSize=15
 	
-	ReCount=EA_DBO.Get_MemberFavTotalByAccountId(Member_Id)(0,0)
+	ReCount=EA_Mem_DBO.Get_MemberFavTotalByAccountId(Member_Id)(0,0)
 	PageCount=EA_Pub.Stat_Page_Total(PageSize,ReCount)
 	If PageNum>PageCount And PageCount>0 Then PageNum=PageCount
 	
@@ -64,36 +67,40 @@ Sub Main
 		FavList=FavList&"<td colspan='4'><font color=""#FF6600"" face=""Webdings"">4</font>&nbsp;该页为空</td>"
 		FavList=FavList&"</tr>"
 	End If
+
+	Url = "?&page=$page"
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
-<title>我的收藏夹</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="zh-CN">
+<title>我的收藏夹 - <%=EA_Pub.SysInfo(0)%></title>
+<meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#FFFFFF" text="#000000">
-<table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-  <tr>
-    <td bgcolor="#FFFFFF">
-      <table border=0 cellpadding=3 cellspacing=2 width="100%" align=center>
-        <tr> 
-          <td bgcolor="#dddddd" height="30">&nbsp;<b>我的收藏夹</b></td>
-        </tr>
-      </table>
-      <table width="100%" align=center cellpadding="1" cellspacing="2" bgcolor="#FFFFFF">
-          <tr height="25" bgcolor="#e6f0ff" align=center> 
-            <td>文章标题</td>
-            <td width="10%">文章作者</td>
-            <td width="20%">收藏日期</td>
-            <td width="10%">操 作</td>
-          </tr>
-          <%=FavList%>
-          <tr height="25" bgcolor="#efefef" align=right> 
-            <td colspan="4"><%=EA_Temp.PageList(PageCount,PageNum,FieldName,FieldValue)%>&nbsp;</td>
-          </tr>
-      </table></td>
-  </tr>
+<body id="center">
+
+<table width="750" style="border: #A9D5F4 1px solid;" align="center">
+	<tr>
+		<td height="25" colspan="3" bgcolor="#DBF2FF">&nbsp;<strong>我的收藏夹</strong></td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%">
+				<tr height="22" bgcolor="#e6f0ff" align="center"> 
+					<td>文章标题</td>
+					<td width="10%">文章作者</td>
+					<td width="20%">收藏日期</td>
+					<td width="10%">操 作</td>
+				</tr>
+				<%=FavList%>
+				<tr align="right"> 
+					<td colspan="4"><%=EA_Temp.PageList(PageCount,PageNum,Url)%>&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
 </table>
 <%
 End Sub
