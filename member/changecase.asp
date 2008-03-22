@@ -16,7 +16,7 @@
 '= 最后日期：2008-03-22
 '====================================================================
 
-If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(10,1)
+If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
 
 Dim MemberInfo
 
