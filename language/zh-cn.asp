@@ -90,4 +90,7 @@ SysMsg(50) = "文章已发布，现可马上查看。"
 
 'changecase.asp
 SysMsg(51) = "修改成功"
+
+'changepwd.asp
+SysMsg(52) = "二次输入的新密码不相符！"
 %>

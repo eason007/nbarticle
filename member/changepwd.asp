@@ -16,7 +16,10 @@
 '= 最后日期：2005-10-19
 '====================================================================
 
-If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(10,1)
+If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
+
+Dim EA_Mem_DBO
+Set EA_Mem_DBO = New cls_Member_DBOperation
 
 Dim Member_Id
 Member_Id=EA_Pub.Mem_Info(0)
@@ -37,7 +40,7 @@ If LCase(Request.QueryString("action"))="savepwd" Then
 		
 	If MemberInfo(1)<>ReNewPassword Then
 		ErrMsg="二次输入的新密码不相符！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(52, 2)
 	End If
 	
 	MemberInfo(0) = MD5(Password)
@@ -48,11 +51,10 @@ If LCase(Request.QueryString("action"))="savepwd" Then
 
 	Select Case Feedback
 	Case -1
-		ErrMsg="用户不存在！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(2, 2)
 	Case 1
 		ErrMsg="密码错误！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(29, 2)
 	Case 0
 		MemberInfo(0) = Password
 		MemberInfo(1) = ReNewPassword
@@ -67,68 +69,64 @@ If LCase(Request.QueryString("action"))="savepwd" Then
 
 		XML_RPC.Close_Obj
 
-		Call EA_Pub.ShowSusMsg(3,0)
+		Call EA_Pub.ShowErrMsg(51, 2)
 	End Select
 Else
 	Dim Temp,Question
 	Member_Id=EA_Pub.Mem_Info(0)
 	
-	Temp=EA_DBO.Get_MemberQuestionByAccountId(Member_Id)
+	Temp=EA_Mem_DBO.Get_MemberQuestionByAccountId(Member_Id)
 	If IsArray(Temp) Then 
 		Question=Temp(1,0)
 	Else
-		ErrMsg="用户不存在！"
-		Call EA_Pub.ShowErrMsg(0,2)
+		Call EA_Pub.ShowErrMsg(2, 2)
 	End If
 End if
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
-<title>修改密码</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="zh-CN">
+<title>修改密码 - <%=EA_Pub.SysInfo(0)%></title>
+<meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script src="../js/jsdate.js"></script>
 </head>
-<body bgcolor="#FFFFFF" text="#000000"> 
-<table width="762" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC"> 
-  <form action="?action=SavePwd" method="post" name="reg" target="_self"> 
-    <tr> 
-      <td align="center" valign="top" bgcolor="#FFFFFF"><table border=0 cellpadding=3 cellspacing=2 width="100%" align=center> 
-          <tr> 
-            <td bgcolor="#dddddd" height="30">&nbsp;<b>修改密码</b></td> 
-          </tr> 
-        </table> 
-        <table width="100%" cellspacing="1" cellpadding="2"> 
-          <tr> 
-            <td width="30%" height="30" bgcolor="#e6f0ff" align="right"><font color="#FF6600" face="Webdings">4</font>请输入您现在的密码&nbsp;</td> 
-            <td bgcolor="#FFFFFF">&nbsp;<input name="OldPassword" type="password" id="OldPassword2" class="LoginInput" size="15" maxlength="20"> 
-              <font color="#FF0000">*</font>[<font color="#999999">为了系统安全要求必须验证您的身份合法性</font>] </td> 
-          </tr> 
-          <tr> 
-            <td height="30" bgcolor="#e6f0ff" align="right"><font color="#FF6600" face="Webdings">4</font>请输入新的密码&nbsp;</td> 
-            <td>&nbsp;<input name="Password" type="password" class="LoginInput" id="Password" size="15" maxlength="20"> 
-              <font color="#FF0000">*</font>[<font color="#999999">大于6小于14个字符.</font><font color="#999999">不能使用特殊字符</font>]</td> 
-          </tr> 
-          <tr> 
-            <td height="30" bgcolor="#e6f0ff" align="right"><font color="#FF6600" face="Webdings">4</font>请再输入一遍新的密码&nbsp;</td> 
-            <td bgcolor="#FFFFFF">&nbsp;<input name="RePassword" type="password" class="LoginInput" id="RePassword" size="15" maxlength="20"> 
-              <font color="#FF0000">*</font>[<font color="#999999">确认一遍您输入的密码</font>]</td> 
-          </tr> 
-          <tr> 
-            <td height="30" bgcolor="#e6f0ff" align="right"><font color="#FF6600" face="Webdings">4</font>您的密码提示问题&nbsp;</td> 
-            <td>&nbsp;<input name="Question" type="text" class="LoginInput" id="Question" size="20" maxlength="40" value="<%=Question%>"></td> 
-          </tr> 
-          <tr> 
-            <td height="30" bgcolor="#e6f0ff" align="right"><font color="#FF6600" face="Webdings">4</font>请输入答案&nbsp;</td> 
-            <td>&nbsp;<input name="Answer" type="text" class="LoginInput" id="Answer" size="20" maxlength="40"></td> 
-          </tr> 
-          <tr> 
-            <td align="center" bgcolor="#efefef" height="30" colspan="2"><input type="submit" value="提交修改" name="acc2" id="acc3" class="LoginInput"> 
-&nbsp; 
-              <input type="reset" value="清除重来" name="noacc2" id="noacc3" class="LoginInput"></td> 
-          </tr> 
-        </table></td> 
-    </tr> 
-  </form> 
-</table> 
+<body id="center">
+
+<table width="750" style="border: #A9D5F4 1px solid;" align="center">
+	<form action="?action=SavePwd" method="post" name="reg">
+	<tr>
+		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改个人资料</strong></td>
+	</tr>
+	<tr>
+		<td align="right">请输入您现在的密码&nbsp;</td>
+		<td>&nbsp;<input name="OldPassword" type="password" id="OldPassword2" class="LoginInput" style="width: 150px;" /></td> 
+		<td><font color="#FF0000">*</font>[<font color="#999999">为了系统安全要求必须验证您的身份合法性</font>]</td>
+	</tr>
+	<tr>
+		<td align="right">请输入新的密码&nbsp;</td>
+		<td>&nbsp;<input name="Password" type="password" class="LoginInput" id="Password" style="width: 150px;" /></td> 
+		<td><font color="#FF0000">*</font>[<font color="#999999">大于6小于14个字符.</font><font color="#999999">不能使用特殊字符</font>]</td>
+	</tr>
+	<tr>
+		<td align="right">请再输入一遍新的密码&nbsp;</td>
+		<td>&nbsp;<input name="RePassword" type="password" class="LoginInput" id="RePassword" style="width: 150px;" /></td> 
+		<td><font color="#FF0000">*</font>[<font color="#999999">确认一遍您输入的密码</font>]</td>
+	</tr>
+	<tr>
+		<td align="right">您的密码提示问题&nbsp;</td>
+		<td>&nbsp;<input name="Question" type="text" class="LoginInput" id="Question" value="<%=Question%>" style="width: 150px;" /></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td align="right">请输入答案&nbsp;</td>
+		<td>&nbsp;<input name="Answer" type="text" class="LoginInput" id="Answer" style="width: 150px;" /></td>
+		<td></td>
+	</tr>
+	<tr>
+	<td align="center" height="30" colspan="3"><input type="submit" value="提交修改" name="acc2" id="acc3" class="LoginInput">&nbsp;<input type="reset" value="清除重来" name="noacc2" id="noacc3" class="LoginInput"></td>
+	</tr>
+	</form>
+</table>
