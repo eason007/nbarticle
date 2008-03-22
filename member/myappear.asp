@@ -19,6 +19,9 @@ If Not EA_Pub.IsMember Then Call EA_Pub.ShowErrMsg(41, 2)
 
 Dim Action
 Dim Member_Id
+Dim EA_Mem_DBO
+Set EA_Mem_DBO = New cls_Member_DBOperation
+
 Action=Request.QueryString ("action")
 Member_Id=EA_Pub.Mem_Info(0)
 
@@ -26,9 +29,6 @@ Select Case LCase(Action)
 Case "del"
 	Call Del_Fav
 Case Else
-	Dim EA_Mem_DBO
-	Set EA_Mem_DBO = New cls_Member_DBOperation
-
 	Call Main
 End Select
 Call EA_Pub.Close_Obj
@@ -123,7 +123,7 @@ Sub Del_Fav
 	Column_Id=EA_Pub.SafeRequest(3,"columnid",0,0,3)
 	IsPass=EA_Pub.SafeRequest(3,"ispass",0,0,3)
 	
-	Call EA_DBO.Del_MemberAppear(Appear_Id,Member_Id,Column_Id,IsPass)
+	Call EA_Mem_DBO.Del_MemberAppear(Appear_Id,Member_Id,Column_Id,IsPass)
 
 	Application.Lock 
 	Application(sCacheName&"IsFlush")=1
