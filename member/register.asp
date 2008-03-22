@@ -80,8 +80,9 @@ End if
 <meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="zh-cn" />
+<meta name="robots" content="nofollow" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script src="../js/jsdate.js"></script>
+<script type="text/javascript" src="../js/jsdate.js"></script>
 <script type="text/javascript">
 var Step = 1;
 var goreg = true;
@@ -157,128 +158,106 @@ function checkerr(errmsg,obj,maxlen,minlen){
 function viewnone(e){
 	e.style.display=(e.style.display=="none")?"":"none";
 }
-
 </script>
 </head>
 <body id="center">
-<table width="762" align="center" bgcolor="#dddddd"> 
-  <tr> 
-    <td><table width="760" border="0" align="center" cellpadding="0" cellspacing="0"> 
-        <tr> 
-          <td align="center" valign="top"><div id="xieyi"> 
-              <table border=0 cellpadding=3 cellspacing=2 width="760" align=center> 
-                <tr style="color:#000000"> 
-                  <td bgcolor="#e6f0ff" height="30">&nbsp;<b>用户协议</b></td>
-                </tr> 
-              </table> 
-              <table width="760" align=center border="0" cellspacing="3" cellpadding="3"> 
-                <tr> 
-                  <td bgcolor="#FFFFFF"><!--#include file="../language/zh-cn_reg.asp" --></td> 
-                </tr> 
-              </table> 
-            </div> 
-            <form action="?action=SaveData" method="post" name="reg" id="reg"> 
-              <div id="mustinfo" style="display:none"> 
-                <table border=0 cellpadding=3 cellspacing=2 width="760" align=center> 
-                  <tr style="color:#000000"> 
-                    <td bgcolor="#e6f0ff" height="30">&nbsp;<b>基本资料</b></td>
-                  </tr> 
-                </table> 
-                <table width="760" align=center cellpadding="3" cellspacing="3" bgcolor="#FFFFFF"> 
-                  <tbody> 
-                    <tr> 
-                      <td width="250" height="25" align="right" bgcolor="#efefef">请输入您想要申请的昵称&nbsp;</td> 
-                      <td align="left"><input name="UserName" type="text" id="UserName" class="LoginInput" maxlength="20"> </td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">最大10个字符.不能使用特殊字符</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">请为新帐户设定一个密码&nbsp;</td> 
-                      <td align="left"><input name="Password" type="password" id="Password" class="LoginInput" maxlength="20"></td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">大于6小于14个字符.</font><font color="#999999">不能使用特殊字符</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">请再输入一遍设定的密码&nbsp;</td> 
-                      <td align="left"><input name="RePassWord" type="password" id="RePassWord" class="LoginInput" maxlength="20"></td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">确认一遍您输入的密码</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">请输入您常用的电子信箱&nbsp;</td> 
-                      <td align="left"><input name="Email" type="text" id="Email" class="LoginInput" maxlength="30"> </td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">必须是有效的电子信箱,当你忘记密码时要用到它</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">请输入你的密码找回问题&nbsp;</td> 
-                      <td align="left"><input name="Question" type="text" id="Question" class="LoginInput" maxlength="20"></td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">不能使用空格等特殊字符</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">请输入你的密码找回答案&nbsp;</td> 
-                      <td align="left"><input name="Ans" type="text" id="Ans" class="LoginInput" maxlength="20"></td> 
-                      <td><font color="#FF0000">*</font>[<font color="#999999">不能使用空格等特殊字符</font>]</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" name=up bgcolor="#efefef">您的性别&nbsp;</td> 
-                      <td align="left">男
-                        <input name="sex" type="radio" value="1" checked> 
-                        女
-                        <input name="sex" type="radio" value="0"></td> 
-                      <td>&nbsp;</td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">开启高级选项&nbsp;</td> 
-                      <td align="left"><input name="otherselect" type="checkbox" value="1" onclick="viewnone(others)"> </td> 
-                      <td>&nbsp;</td> 
-                    </tr> 
-                  </tbody> 
-                </table>
-              </div> 
-              <div id="others" style="display:none"> 
-                <table border=0 cellpadding=3 cellspacing=2 width="760" align=center> 
-                  <tr style="color:#000000"> 
-                    <td bgcolor="#e6f0ff" height="30">&nbsp;<b>详细资料</b></td>
-                  </tr> 
-                </table> 
-                <table width="760" align=center border="0" cellpadding="3" cellspacing="3" bgcolor="#FFFFFF"> 
-                  <tbody> 
-                    <tr> 
-                      <td width="250" height="24" align="right" bgcolor="#efefef">个人网站地址&nbsp;</td> 
-                      <td colspan="2"><input name="HomePage" type="text" id="HomePage" class="LoginInput" size="35" maxlength="50"></td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">腾讯QQ号码&nbsp;</td> 
-                      <td colspan="2"><input name="QQ" type="text" id="QQ" class="LoginInput" size="15" maxlength="20"></td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">ICQ号码&nbsp;</td> 
-                      <td colspan="2"><input name="ICQ" type="text" id="ICQ" class="LoginInput" size="15" maxlength="20"></td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">MSN帐户&nbsp;</td> 
-                      <td colspan="2"><input name="MSN" type="text" id="MSN" class="LoginInput" size="20" maxlength="40"></td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">真实姓名&nbsp;</td> 
-                      <td colspan="2"><input name="ReName" type="text" id="ReName" class="LoginInput" size="15" maxlength="20"> </td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">出生日期&nbsp;</td> 
-                      <td colspan="2"><input type="text" name="date" id="date" size="10" readonly class="LoginInput">&nbsp;<a href="javascript:vod()" onclick="SD(this,'date');"><img border="0" src="../images/public/date_picker.gif" width="30" height="19"></a></td> 
-                    </tr> 
-                    <tr> 
-                      <td height="25" align="right" bgcolor="#efefef">来自&nbsp;</td> 
-                      <td colspan="2"><input name="UForm" type="text" id="UForm" class="LoginInput" size="50" maxlength="30"></td> 
-                    </tr> 
-                  </tbody> 
-                </table> 
-              </div> 
-            </form>
-            <div bgcolor="efefef">
-            <input type="button" value="同意协议" name="acc" id="acc" onClick="accaction()">&nbsp;
-            <input type="button" value="我不同意" name="noacc" id="noacc" onClick="noaccaction()">
-            <p></p>
-            </div>
-            </td> 
-        </tr> 
-      </table></td> 
-  </tr> 
-</table> 
+
+<div id="xieyi">
+	<div style="text-align: center; background: #DBF2FF; border: #A9D5F4 1px solid; line-height: 25px;"><strong>用户协议</strong></div>
+	<div style="border-left: #A9D5F4 1px solid; border-right: #A9D5F4 1px solid; border-bottom: #A9D5F4 1px solid;"><!--#include file="../language/zh-cn_reg.asp" --></div>
+</div>
+
+<div id="mustinfo" style="display:none">
+	<form action="?action=SaveData" method="post" name="reg" id="reg">
+	<table width="100%" style="border: #A9D5F4 1px solid;">
+		<tr>
+			<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>基本资料</strong></td>
+		</tr>
+		<tr>
+			<td height="25" align="right">请输入您想要申请的昵称&nbsp;</td>
+			<td align="left"><input name="UserName" type="text" id="UserName" class="LoginInput" style="width: 150px;"></td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">最大10个字符.不能使用特殊字符</font>]</td>
+		</tr> 
+		<tr>
+			<td height="25" align="right">请为新帐户设定一个密码&nbsp;</td>
+			<td align="left"><input name="Password" type="password" id="Password" class="LoginInput" style="width: 150px;"></td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">大于6小于14个字符.</font><font color="#999999">不能使用特殊字符</font>]</td>
+		</tr>
+		<tr>
+			<td height="25" align="right">请再输入一遍设定的密码&nbsp;</td>
+			<td align="left"><input name="RePassWord" type="password" id="RePassWord" class="LoginInput" style="width: 150px;"></td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">确认一遍您输入的密码</font>]</td>
+		</tr>
+		<tr>
+			<td height="25" align="right">请输入您常用的电子信箱&nbsp;</td>
+			<td align="left"><input name="Email" type="text" id="Email" class="LoginInput" style="width: 150px;"> </td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">必须是有效的电子信箱,当你忘记密码时要用到它</font>]</td>
+		</tr>
+		<tr>
+			<td height="25" align="right">请输入你的密码找回问题&nbsp;</td>
+			<td align="left"><input name="Question" type="text" id="Question" class="LoginInput" style="width: 150px;"></td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">不能使用空格等特殊字符</font>]</td>
+		</tr>
+		<tr>
+			<td height="25" align="right">请输入你的密码找回答案&nbsp;</td>
+			<td align="left"><input name="Ans" type="text" id="Ans" class="LoginInput" style="width: 150px;"></td>
+			<td><font color="#FF0000">*</font>[<font color="#999999">不能使用空格等特殊字符</font>]</td>
+		</tr>
+		<tr>
+			<td height="25" align="right" name=up>您的性别&nbsp;</td>
+			<td align="left">男<input name="sex" type="radio" value="1">女<input name="sex" type="radio" value="0"></td>
+			<td>&nbsp;</td>
+		</tr>
+	<tr> 
+	<td height="25" align="right">开启高级选项&nbsp;</td> 
+	<td align="left"><input name="otherselect" type="checkbox" value="1" onclick="viewnone(others)"> </td> 
+	<td>&nbsp;</td> 
+	</tr> 
+	</tbody> 
+	</table>
+	</div> 
+	<div id="others" style="display:none"> 
+	<table border=0 cellpadding=3 cellspacing=2 width="760" align=center> 
+	<tr style="color:#000000"> 
+	<td bgcolor="#e6f0ff" height="30">&nbsp;<b>详细资料</b></td>
+	</tr> 
+	</table> 
+	<table width="760" align=center border="0" cellpadding="3" cellspacing="3" bgcolor="#FFFFFF"> 
+	<tbody> 
+	<tr> 
+	<td width="250" height="24" align="right">个人网站地址&nbsp;</td> 
+	<td colspan="2"><input name="HomePage" type="text" id="HomePage" class="LoginInput" size="35" maxlength="50"></td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">腾讯QQ号码&nbsp;</td> 
+	<td colspan="2"><input name="QQ" type="text" id="QQ" class="LoginInput" size="15" maxlength="20"></td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">ICQ号码&nbsp;</td> 
+	<td colspan="2"><input name="ICQ" type="text" id="ICQ" class="LoginInput" size="15" maxlength="20"></td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">MSN帐户&nbsp;</td> 
+	<td colspan="2"><input name="MSN" type="text" id="MSN" class="LoginInput" size="20" maxlength="40"></td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">真实姓名&nbsp;</td> 
+	<td colspan="2"><input name="ReName" type="text" id="ReName" class="LoginInput" size="15" maxlength="20"> </td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">出生日期&nbsp;</td> 
+	<td colspan="2"><input type="text" name="date" id="date" size="10" readonly class="LoginInput">&nbsp;<a href="javascript:vod()" onclick="SD(this,'date');"><img border="0" src="../images/public/date_picker.gif" width="30" height="19"></a></td> 
+	</tr> 
+	<tr> 
+	<td height="25" align="right">来自&nbsp;</td> 
+	<td colspan="2"><input name="UForm" type="text" id="UForm" class="LoginInput" size="50" maxlength="30"></td> 
+	</tr> 
+	</tbody> 
+	</table>
+	</form>
+</div> 
+ 
+
+<div style="text-align: center; border-left: #A9D5F4 1px solid; border-bottom: #A9D5F4 1px solid; border-right: #A9D5F4 1px solid;">
+	<input type="button" value="同意协议" name="acc" id="acc" onClick="accaction()" />&nbsp;<input type="button" value="我不同意" name="noacc" id="noacc" onClick="noaccaction()" />
+</div>

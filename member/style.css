@@ -7,7 +7,7 @@ body
 
 }
 #center {
-	width: 980px;
+	width: 750px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -37,9 +37,11 @@ select, textarea {
 }
 input {
 	font-size: 12px;
+	background: #FFF;
+	border: 1px;
 }
 input {
-       border: expression((this.type=="button") ?"#7f9db9 1px solid;":"style");
+       border: expression((this.type=="button") ?"#efefef 1px solid;":"style");
 }
 .LoginInput 
 {
