@@ -12,7 +12,7 @@
 '= 摘    要：会员-会员发布文章文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-20
+'= 最后日期：2008-03-22
 '====================================================================
 
 Dim EA_Mem_DBO
@@ -62,8 +62,8 @@ End If
 
 <form name="a1" method="post" action="?action=save&postid=<%=PostId%>" onsubmit="return checkData()">
 
-<div style="line-height: 25px; background: #F7FAFD; border: #DBE1E9 1px solid;">&nbsp;<strong>会员投稿</strong></div>
-<div class="left" style="border: #DBE1E9 1px solid;">
+<div style="background: #DBF2FF; border: #A9D5F4 1px solid; line-height: 25px;">&nbsp;<strong>会员投稿</strong></div>
+<div class="left" style="border: #DBE1E9 1px solid;padding: 5px;">
 	<table>
 		<tr>
 			<td><select name="column"> 
@@ -91,7 +91,7 @@ End If
 	</table>
 </div>
 
-<div style="border: #DBE1E9 1px solid;">
+<div style="border: #DBE1E9 1px solid;padding:5px">
 	<table>
 		<tr>
 			<td valign="top">关键字：</td><td><textarea name="keyword" cols="28" rows="4" title="以,号分隔"></textarea></td>
@@ -230,7 +230,7 @@ function review_img(){
 }
 
 var div = $("myFCKeditor");
-var fck = new FCKeditor("Content", 650, 520);
+var fck = new FCKeditor("Content", 650, 480);
 fck.BasePath	= "../plugins/fck_editor/";
 div.innerHTML	= fck.CreateHtml();
 </script>

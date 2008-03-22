@@ -12,7 +12,7 @@
 '= 摘    要：会员-注册文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-20
+'= 最后日期：2008-03-22
 '====================================================================
 
 If EA_Pub.SysInfo(7)="0" Then Call EA_Pub.ShowErrMsg(34, 0)
@@ -253,7 +253,6 @@ function viewnone(e){
 	</form>
 	<p />
 </div> 
- 
 
 <div style="text-align: center;">
 	<input type="button" value="同意协议" name="acc" id="acc" onClick="accaction()" />&nbsp;<input type="button" value="我不同意" name="noacc" id="noacc" onClick="noaccaction()" />
