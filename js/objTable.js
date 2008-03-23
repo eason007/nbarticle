@@ -60,7 +60,6 @@ function tableObject() {
 		var tableXmldoc = mtObj.returnMessage;
 		var obj = mtObj.targetArea;
 		var	table = $(obj.tableID);
-		var elementType = "innerText";
 
 		if (mtObj.returnMessageText == "505")
 		{
@@ -70,18 +69,6 @@ function tableObject() {
 		}
 
 		$("divLoading").style.display = "";
-
-		/*删除旧表格*/
-		for(ti=0;ti<100;ti++) {
-			if($(obj.tableID+"row"+ti)) {
-				var row = $(obj.tableID+"row"+ti);
-				var tbl = row.parentNode;
-				tbl.removeChild(row);
-			}
-			else {
-				break;
-			} 
-		}
 
 		if(tableXmldoc.getElementsByTagName("list").length>0) {
 			var listContents = tableXmldoc.getElementsByTagName("list")[0];
