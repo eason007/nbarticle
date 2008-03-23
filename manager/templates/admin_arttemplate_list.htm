@@ -25,14 +25,14 @@ function initTabContent(){
 	<div style="margin-top: 5px;">
 		<table width="100%" id="listTable">
 		  <tr>
-			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);"></th>
+			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);" /></th>
 			<th>ID</th>
 			<th><span id="Language_ArticleTemplate_TemplateName"></th>
 			<th><span id="Language_Comm_Bar_Operation"></span></th>
 		  </tr>
 		</table>
 		<div style="BACKGROUND: #efefef;height:25px;">
-			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_arttemplate_option.htm', 'pageAdd');">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_arttemplate.asp');"></div>
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Add_Operation" onclick="javascript:ajaxChangeRightContent('./templates/admin_arttemplate_option.htm', 'pageAdd');" />&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_arttemplate.asp');" /></div>
 			<div id="pageListDiv" style="float: right;"></div>
 		</div>
 	</div>

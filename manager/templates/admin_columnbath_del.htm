@@ -20,8 +20,8 @@ function getPostResult(returnResult){
 </script>
 <form id="form1" name="form1" method="get" onsubmit="return false;">
 
-<input type="hidden" name="">
-<input type="hidden" name="action" value="bathdel">
+<input type="hidden" name="" />
+<input type="hidden" name="action" value="bathdel" />
 
 <div class="mainWindows">
 	<div>
@@ -40,14 +40,14 @@ function getPostResult(returnResult){
 			</tr>
 			<tr>
 			  <td align="right" valign="top">&nbsp;&nbsp;<span id="Language_Bath_Condition"></span>: </td>
-			  <td><input type="radio" name="where" value="0" checked>&nbsp;<span id="Language_Bath_All"></span><br><input type="radio" name="where" value="1">&nbsp;<span id="Language_Bath_ByDate"></span>:<input type="text" name="date" id="date" size="10" readonly>&nbsp;<a href="javascript:vod();" onclick="SD(this,'date')"><img border="0" src="images/date_picker.gif" width="30" height="19" align=absmiddle></a><br><input type="radio" name="where" value="2">&nbsp;<span id="Language_Bath_ByKeyword"></span>:<input type="text" name="keyword">&nbsp;<span id="Language_Bath_In"></span>:<select name="Field"></select></td>
+			  <td><input type="radio" name="where" value="0" checked />&nbsp;<span id="Language_Bath_All"></span><br><input type="radio" name="where" value="1" />&nbsp;<span id="Language_Bath_ByDate"></span>:<input type="text" name="date" id="date" size="10" onclick="SD(this,'date')" /><br><input type="radio" name="where" value="2" />&nbsp;<span id="Language_Bath_ByKeyword"></span>:<input type="text" name="keyword" />&nbsp;<span id="Language_Bath_In"></span>:<select name="Field"></select></td>
 			</tr>
 			<tr>
 			  <td align="right" valign="top">&nbsp;&nbsp;<span id="Language_Bath_Option"></span>:</td>
-			  <td><input type="radio" name="back" value="0" checked>&nbsp;<span id="Language_Bath_RecycleBin"></span><br><input type="radio" name="back" value="1">&nbsp;<span id="Language_Bath_NoRecycleBin"></span></td>
+			  <td><input type="radio" name="back" value="0" checked />&nbsp;<span id="Language_Bath_RecycleBin"></span><br><input type="radio" name="back" value="1" />&nbsp;<span id="Language_Bath_NoRecycleBin"></span></td>
 			</tr>
 			<tr bgcolor="efefef">
-			  <td colspan="2">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();"></td>
+			  <td colspan="2">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();" /></td>
 			</tr>
 		</table>
 	</div>

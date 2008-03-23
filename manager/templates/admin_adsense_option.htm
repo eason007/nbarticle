@@ -28,9 +28,9 @@ function initTabContent(){
 </script>
 <form id="form1" name="form1" method="get" onsubmit="return false;">
 
-<input type="hidden" name="">
-<input type="hidden" name="ID">
-<input type="hidden" name="action" value="save">
+<input type="hidden" name="" />
+<input type="hidden" name="ID" />
+<input type="hidden" name="action" value="save" />
 
 <div class="mainWindows">
 	<div>
@@ -45,7 +45,7 @@ function initTabContent(){
 			<table width="100%" class="edittable">
 				<tr>
 				  <td width="13%" align="right"><span id="Language_AdSense_Title"></span></td>
-				  <td align="left">&nbsp;<input type="text" name="Title" size="43" dataType="Require" style="width: 300px;"></td>
+				  <td align="left">&nbsp;<input type="text" name="Title" dataType="Require" style="width: 300px;" /></td>
 				</tr>
 				<tr>
 				  <td align="right" valign="top"><span id="Language_AdSense_Content"></span></td>
@@ -53,7 +53,7 @@ function initTabContent(){
 					<br>&nbsp;<a href="javascript:vod();" onclick="javascript:change($('Content'),-20)"><img src="images/minus.gif" alt="" /></a>&nbsp;&nbsp;<a href="javascript:vod();" onclick="javascript:change($('Content'),20)"><img src="images/plus.gif" alt="" /></a></td>
 				</tr>
 				<tr bgcolor="#efefef">
-				  <td align="left" valign="middle" colspan="2" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_adsense_list.htm','pageContent');"></td>
+				  <td align="left" valign="middle" colspan="2" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();" />&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_adsense_list.htm','pageContent');" /></td>
 				</tr>
 			</table>
 		</fieldset>
