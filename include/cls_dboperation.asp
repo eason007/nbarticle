@@ -46,7 +46,7 @@ Class cls_DBOperation
 			Response.Clear
 			Err.Clear
 
-			CloseDataBase
+			Close()
 
 			Response.Write SysMsg(27)
 			Response.End

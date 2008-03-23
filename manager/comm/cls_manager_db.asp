@@ -42,7 +42,7 @@ Class Cls_Manager_DBOperation
 			Response.Clear
 			Err.Clear
 
-			CloseDataBase
+			Close_DB
 
 			Response.Write "对不起，数据连接错误！如果第一次使用，请先运行setup.asp进行系统配置。"
 			Response.End
@@ -50,7 +50,11 @@ Class Cls_Manager_DBOperation
 	End Sub
 
 	Public Sub Close_DB()
+		If Rs.State = 1 Then Rs.Close
 		Set Rs=Nothing
+
+		If Conn.State=1 Then Conn.Close
+		Set Conn = Nothing
 	End Sub
 
 	Public Sub Set_Master_LoginLog(sLogin_Key,sCome_Ip,iLogin_Id)

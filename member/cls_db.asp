@@ -32,7 +32,7 @@ Class cls_Member_DBOperation
 			Response.Clear
 			Err.Clear
 
-			CloseDataBase
+			Close()
 
 			Response.Write SysMsg(27)
 			Response.End
