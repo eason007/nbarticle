@@ -60,6 +60,20 @@ function getCookie(cName){
 	return cValue;
 }
 
+function LoadJS(id, fileUrl)
+{
+	var scriptTag = document.getElementById(id);
+	var oHead = document.getElementsByTagName('HEAD').item(0);
+	var oScript= document.createElement("script");
+
+	if (scriptTag)oHead.removeChild(scriptTag);
+
+	oScript.id = id;
+	oScript.type = "text/javascript";
+	oScript.src=fileUrl ;
+	oHead.appendChild(oScript);
+}
+
 function submit_vote(vote_id){
 //投票处理函数
 	var vote_form=$('vote_'+vote_id);
@@ -167,7 +181,7 @@ EliteCMS = {
 	isMember : false,
 	memberData : "",
 	memberInfo : Array(),
-	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; top: 200px; left: 350px; border: #DBE1E9 1px solid; background: #fff; padding: 10px 30px;\"></div>",
+	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; top: 50px; left: 50px; border: #DBE1E9 1px solid; background: #fff; padding: 10px 20px;\"></div>",
 
 	init : function () {
 		this.memberData = getCookie('UserData');
@@ -186,10 +200,10 @@ EliteCMS = {
 	showMember : function () {
 		if (this.isMember)
 		{
-			document.write (this.memberInfo[1] + "，你好 - [投稿] [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/favlist.asp','_blank','scrollbars=yes,width=645,height=380');\">收藏夹</a>] [修改密码] [修改资料] [<a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>]");
+			document.write (this.memberInfo[1] + "，你好 - [投稿] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/register.asp')\">收藏夹</a>] [修改密码] [修改资料] [<a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>]");
 		}
 		else{
-			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"" + EliteCMS.basePath + "member/register.asp\">注册</a>");
+			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/register.asp')\">注册</a>");
 		}
 	},
 
@@ -204,6 +218,19 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = "<a href=\"javascript: vod();\" onclick=\"$('EliteWindow').style.display = 'none';\" class=\"left\">[X]</a>" + op;
 		$("EliteWindow").style.display = "";
+	},
+
+	showWindow2File : function (sURL) {
+		if (!$("EliteWindow"))
+		{
+			document.body.innerHTML += this.windows;
+		}
+		else{
+			$("EliteWindow").innerHTML = "";
+			$("EliteWindow").style.display = "";
+		}
+
+		ajaxGetDateToPage(sURL, "EliteWindow");
 	}
 }
 

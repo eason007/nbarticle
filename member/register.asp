@@ -168,8 +168,8 @@ function viewnone(e){
 </div>
 
 <div id="mustinfo" style="display:none">
-	<form action="?action=SaveData" method="post" name="reg" id="reg">
-	<table width="100%" style="border: #A9D5F4 1px solid;">
+	<form action="<%=SystemFolder%>member/register.asp?action=SaveData" method="post" name="reg" id="reg">
+	<table width="90%" style="border: #A9D5F4 1px solid;">
 		<tr>
 			<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>基本资料</strong></td>
 		</tr>
@@ -217,7 +217,7 @@ function viewnone(e){
 </div>
 <p />
 <div id="others" style="display:none">
-	<table width="100%" style="border: #A9D5F4 1px solid;">
+	<table width="90%" style="border: #A9D5F4 1px solid;">
 		<tr style="color:#000000">
 			<td height="25" colspan="2" bgcolor="#DBF2FF" align="center"><strong>详细资料</strong></td>
 		</tr>
