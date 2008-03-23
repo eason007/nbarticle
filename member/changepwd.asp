@@ -91,7 +91,7 @@ End if
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script src="../js/jsdate.js"></script>
+<script src="<%=SystemFolder%>js/jsdate.js"></script>
 </head>
 <body id="center">
 

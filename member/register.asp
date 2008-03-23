@@ -82,7 +82,7 @@ End if
 <meta http-equiv="Content-Language" content="zh-cn" />
 <meta name="robots" content="nofollow" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/jsdate.js"></script>
+<script type="text/javascript" src="<%=SystemFolder%>js/jsdate.js"></script>
 <script type="text/javascript">
 var Step = 1;
 var goreg = true;
@@ -96,7 +96,7 @@ function accaction(){
 		Step = 2
 	}
 	else{
-		checkerr("\n请输入用户名\n\n10个字符以下",document.reg.UserName,10,1);
+		checkerr("\n请输入帐号\n\n10个字符以下",document.reg.UserName,10,1);
 		if(goreg==true){checkerr("\n请输入密码\n\n6-14个字符内",document.reg.Password,14,6);}
 		if(goreg==true){checkerr("\n请再输入一次密码\n\n6-14个字符内",document.reg.RePassWord,14,6);}
 		if(goreg==true){
@@ -174,7 +174,7 @@ function viewnone(e){
 			<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>基本资料</strong></td>
 		</tr>
 		<tr>
-			<td height="25" align="right">请输入您想要申请的昵称&nbsp;</td>
+			<td height="25" align="right">请输入您想要申请的帐号&nbsp;</td>
 			<td align="left"><input name="UserName" type="text" id="UserName" class="LoginInput" style="width: 150px;" /></td>
 			<td><font color="#FF0000">*</font>[<font color="#999999">最大10个字符.不能使用特殊字符</font>]</td>
 		</tr> 

@@ -62,7 +62,7 @@ function getCookie(cName){
 
 function LoadJS(id, fileUrl)
 {
-	var scriptTag = document.getElementById(id);
+	var scriptTag = $(id);
 	var oHead = document.getElementsByTagName('HEAD').item(0);
 	var oScript= document.createElement("script");
 
@@ -156,19 +156,19 @@ function comment (iArticleID) {
 function siupIn () {
 	var html = "";
 
-	html = "<table>";
+	html = "<table style=\"border: #A9D5F4 1px solid; width: 250px\">";
 	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "member/login.asp?action=login\">"
 	html += "<tr>"
-	html += "<td align=\"right\">用户名：</td><td align=\"left\"><input type=\"text\" name=\"UserName\" style=\"width: 130px;\" /></td>";
+	html += "<td height=\"25\" colspan=\"2\" bgcolor=\"#DBF2FF\" align=\"center\"><strong>会员登陆</strong></td>";
+	html += "</tr>"
+	html += "<tr>"
+	html += "<td align=\"right\">帐号：</td><td align=\"left\"><input type=\"text\" name=\"UserName\" style=\"width: 130px;\" /></td>";
 	html += "</tr>"
 	html += "<tr>"
 	html += "<td align=\"right\">密码：</td><td align=\"left\"><input type=\"password\" name=\"Password\" style=\"width: 130px;\" /></td>";
 	html += "</tr>"
 	html += "<tr>"
-	html += "<td align=\"right\"><input type=\"submit\" name=\"Submit\" value=\"提交\" /></td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\" />自动登陆</td>";
-	html += "</tr>"
-	html += "<tr>"
-	html += "<td align=\"left\" colspan=\"2\">[<a href=\"" + EliteCMS.basePath + "member/register.asp\">注册</a>] - [<a href=\"" + EliteCMS.basePath + "member/getpass.asp\">忘记密码</a>]</td>";
+	html += "<td align=\"right\"><input type=\"submit\" name=\"Submit\" value=\"登陆\" /></td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\" />自动登陆</td>";
 	html += "</tr>"
 	html += "</form>";
 	html += "</table>";
@@ -181,7 +181,7 @@ EliteCMS = {
 	isMember : false,
 	memberData : "",
 	memberInfo : Array(),
-	windows: "<div id=\"EliteWindow\" style=\"z-index: 99; position: absolute; top: 50px; left: 50px; border: #DBE1E9 1px solid; background: #fff; padding: 10px 20px;\"></div>",
+	windows: "<div id=\"EliteBox\" style=\"z-index: 99; position: absolute; top: 50px; left: 100px; border: #DBE1E9 1px solid; background: #fff; padding: 15px 20px;\"><a href=\"javascript: vod();\" onclick=\"$('EliteBox').style.display = 'none';\" title=\"关闭\">[X]</a><div id=\"EliteWindow\"></div></div>",
 
 	init : function () {
 		this.memberData = getCookie('UserData');
@@ -208,7 +208,7 @@ EliteCMS = {
 	},
 
 	showWindow : function (op) {
-		if (!$("EliteWindow"))
+		if (!$("EliteBox"))
 		{
 			document.body.innerHTML += this.windows;
 		}
@@ -216,18 +216,18 @@ EliteCMS = {
 			$("EliteWindow").innerHTML = "";
 		}
 
-		$("EliteWindow").innerHTML = "<a href=\"javascript: vod();\" onclick=\"$('EliteWindow').style.display = 'none';\" class=\"left\">[X]</a>" + op;
-		$("EliteWindow").style.display = "";
+		$("EliteWindow").innerHTML = op;
+		$("EliteBox").style.display = "";
 	},
 
 	showWindow2File : function (sURL) {
-		if (!$("EliteWindow"))
+		if (!$("EliteBox"))
 		{
 			document.body.innerHTML += this.windows;
 		}
 		else{
 			$("EliteWindow").innerHTML = "";
-			$("EliteWindow").style.display = "";
+			$("EliteBox").style.display = "";
 		}
 
 		ajaxGetDateToPage(sURL, "EliteWindow");

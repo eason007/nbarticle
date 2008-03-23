@@ -55,8 +55,7 @@ End If
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/public.js"></script>
-<script type="text/javascript" src="../plugins/fck_editor/fckeditor.js"></script>
+<script type="text/javascript" src="<%=SystemFolder%>plugins/fck_editor/fckeditor.js"></script>
 </head>
 <body id="center">
 
