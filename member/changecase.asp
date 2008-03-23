@@ -82,7 +82,7 @@ End If
 <body id="center">
 
 <table width="750" style="border: #A9D5F4 1px solid;" align="center">
-	<form action="?action=savedata" method="post" name="reg" id="reg">
+	<form action="<%=SystemFolder%>member/changecase.asp?action=savedata" method="post" name="reg" id="reg">
 	<tr>
 		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改个人资料</strong></td>
 	</tr>

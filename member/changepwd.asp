@@ -96,7 +96,7 @@ End if
 <body id="center">
 
 <table width="750" style="border: #A9D5F4 1px solid;" align="center">
-	<form action="?action=SavePwd" method="post" name="reg">
+	<form action="<%=SystemFolder%>member/changepwd.asp?action=SavePwd" method="post" name="reg">
 	<tr>
 		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改个人资料</strong></td>
 	</tr>
