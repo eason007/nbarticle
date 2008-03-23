@@ -347,6 +347,7 @@ Const str_ArticleTemplate_Help="文章模版用于在添加文章时，可快速
 Const str_ArticleTemplate_TemplateList="模版列表"
 Const str_ArticleTemplate_AddTemplate="添加模版"
 Const str_ArticleTemplate_TemplateName="模版名称"
+Const str_ArticleTemplate_TemplateContent="模版内容"
 Const str_ArticleTemplate_Input_Template="输入模版内容"
 
 'admin_usergroup.asp

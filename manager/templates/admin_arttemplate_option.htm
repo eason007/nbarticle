@@ -21,7 +21,7 @@ FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
 	FCKeditorAPI = null;
-	var oFCKeditor = new FCKeditor('Content', 730, 450) ;
+	var oFCKeditor = new FCKeditor('Content', 650, 350) ;
 	oFCKeditor.BasePath	= "../plugins/fck_editor/";
 	oFCKeditor.ReplaceTextarea() ;
 	__FCKeditorNS = null;
@@ -67,10 +67,11 @@ function getFekeditorText(editor_name)
 			<table width="100%" class="edittable">
 				<tr>
 				  <td width="13%" align="center"><span id="Language_ArticleTemplate_TemplateName"></span></td>
-				  <td align="left">&nbsp;<input type="text" name="title" size="30" dataType="Require"></td>
+				  <td align="left"><input type="text" name="title" size="30" dataType="Require"></td>
 				</tr>
 				<tr>
-				  <td align="center" colspan="2"><textarea name="Content" id="Content" dataType="Require"></textarea></td>
+				  <td width="13%" align="center" valign="top"><span id="Language_ArticleTemplate_TemplateContent"></span></td>
+				  <td align="left"><textarea name="Content" id="Content" dataType="Require"></textarea></td>
 				</tr>
 				<tr bgcolor="#efefef">
 				  <td align="left" colspan="2">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_arttemplate_list.htm','pageContent');"></td>

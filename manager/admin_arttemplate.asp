@@ -102,6 +102,7 @@ Sub Add
 	Call EA_M_XML.AppElements("Language_ArticleTemplate_Help",str_ArticleTemplate_Help)
 	Call EA_M_XML.AppElements("Language_ArticleTemplate_Input_Template",str_ArticleTemplate_Input_Template)
 	Call EA_M_XML.AppElements("Language_ArticleTemplate_TemplateName",str_ArticleTemplate_TemplateName)
+	Call EA_M_XML.AppElements("Language_ArticleTemplate_TemplateContent",str_ArticleTemplate_TemplateContent)
 
 	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
 	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)
