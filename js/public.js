@@ -200,7 +200,7 @@ EliteCMS = {
 	showMember : function () {
 		if (this.isMember)
 		{
-			document.write (this.memberInfo[1] + "，你好 - [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/appear.asp','_blank','scrollbars=yes,width=1030,height=580');\">投稿</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/favlist.asp')\">收藏夹</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/changepwd.asp')\">修改密码</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/changecase.asp')\">修改资料</a>] [<a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>]");
+			document.write (this.memberInfo[1] + "，你好 - [<a href=\"javascript: vod();\" onclick=\"window.open('" + EliteCMS.basePath + "member/appear.asp','_blank','scrollbars=yes,width=1030,height=580');\">投稿</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/myappear.asp')\">投稿箱</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/favlist.asp')\">收藏夹</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/changepwd.asp')\">修改密码</a>] [<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/changecase.asp')\">修改资料</a>] [<a href=\"" + this.basePath + "member/login.asp?action=logout\">退出</a>]");
 		}
 		else{
 			document.write ("<a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow(siupIn())\">登陆</a> | <a href=\"javascript: vod();\" onclick=\"EliteCMS.showWindow2File('" + EliteCMS.basePath + "member/register.asp')\">注册</a>");

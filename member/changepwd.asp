@@ -98,7 +98,7 @@ End if
 <table width="750" style="border: #A9D5F4 1px solid;" align="center">
 	<form action="<%=SystemFolder%>member/changepwd.asp?action=SavePwd" method="post" name="reg">
 	<tr>
-		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改个人资料</strong></td>
+		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改密码</strong></td>
 	</tr>
 	<tr>
 		<td align="right">请输入您现在的密码&nbsp;</td>

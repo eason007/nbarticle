@@ -243,7 +243,7 @@ function viewnone(e){
 		</tr>
 		<tr>
 			<td height="25" align="right">出生日期&nbsp;</td>
-			<td><input type="text" name="date" id="date" size="10" readonly class="LoginInput" onclick="SD(this,'date');"></td>
+			<td><input type="text" name="date" id="date" size="10" class="LoginInput" onclick="SD(this,'date');"></td>
 		</tr>
 		<tr>
 			<td height="25" align="right">来自&nbsp;</td>

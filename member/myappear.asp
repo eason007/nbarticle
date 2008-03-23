@@ -66,7 +66,7 @@ Sub Main
 				AppearList=AppearList&"<font color=red>N</font>"
 			End If
 			AppearList=AppearList&"</td>"
-			AppearList=AppearList&"<td align=center><a href=""appear.asp?postid="&AppearArray(0,i)&""" target=""_blank"">修改</a> <a href='?action=del&postid="&AppearArray(0,i)&"&columnid="&AppearArray(8,i)&"&ispass="&CInt(AppearArray(7,i))&"' onclick=""{if(confirm('确认删除？')){return true;}return false;}"">删除</a></td>"
+			AppearList=AppearList&"<td align=center><a href="""&SystemFolder&"member/appear.asp?postid="&AppearArray(0,i)&""" target=""_blank"">修改</a> <a href='"&SystemFolder&"member/myappear.asp?action=del&postid="&AppearArray(0,i)&"&columnid="&AppearArray(8,i)&"&ispass="&CInt(AppearArray(7,i))&"' onclick=""{if(confirm('确认删除？')){return true;}return false;}"">删除</a></td>"
 			AppearList=AppearList&"</tr>"
 		Next
 	Else
@@ -80,7 +80,7 @@ Sub Main
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
 <head>
-<title>我的文集 - <%=EA_Pub.SysInfo(0)%></title>
+<title>投稿箱 - <%=EA_Pub.SysInfo(0)%></title>
 <meta name="generator" content="NB文章系统(NBArticle) - <%=SysVersion%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="zh-cn" />
@@ -90,7 +90,7 @@ Sub Main
 
 <table width="750" style="border: #A9D5F4 1px solid;" align="center">
 	<tr>
-		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>修改个人资料</strong></td>
+		<td height="25" colspan="3" bgcolor="#DBF2FF" align="center"><strong>投稿箱</strong></td>
 	</tr>
 	<tr>
 		<td>
