@@ -6,6 +6,7 @@ User-agent: *
 
 Disallow: /db/
 Disallow: /include/
+Disallow: /js/
 Disallow: /language/
 Disallow: /manager/
 Disallow: /member/
