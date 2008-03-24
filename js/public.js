@@ -106,8 +106,8 @@ function submit_vote(vote_id){
 function friend () {
 	var html = "";
 
-	html = "<table>";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=link\">"
+	html = "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=link\">"
+	html += "<table>";
 	html += "<tr>"
 	html += "<td align=\"right\">站点名称：</td><td align=\"left\"><input type=\"text\" name=\"name\" /></td>";
 	html += "</tr>"
@@ -126,8 +126,8 @@ function friend () {
 	html += "<tr>"
 	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\" /></td>";
 	html += "</tr>"
-	html += "</form>";
 	html += "</table>";
+	html += "</form>";
 
 	return html;
 }
@@ -135,8 +135,8 @@ function friend () {
 function comment (iArticleID) {
 	var html = "";
 
-	html = "<table>";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=comment\">"
+	html = "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "action.asp?action=comment\">"
+	html += "<table>";
 	html += "<input type=\"hidden\" name=\"articleid\" value=\"" + iArticleID + "\" />"
 	html += "<tr>"
 	html += "<td align=\"right\">笔名：</td><td align=\"left\"><input type=\"text\" name=\"name\" /></td>";
@@ -147,8 +147,8 @@ function comment (iArticleID) {
 	html += "<tr>"
 	html += "<td align=\"left\" colspan=\"2\"><input type=\"submit\" name=\"Submit\" value=\"提交\" /></td>";
 	html += "</tr>"
-	html += "</form>";
 	html += "</table>";
+	html += "</form>";
 
 	return html;
 }
@@ -156,8 +156,8 @@ function comment (iArticleID) {
 function siupIn () {
 	var html = "";
 
-	html = "<table style=\"border: #A9D5F4 1px solid; width: 250px\">";
-	html += "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "member/login.asp?action=login\">"
+	html = "<form name=\"form1\" method=\"post\" action=\"" + EliteCMS.basePath + "member/login.asp?action=login\">"
+	html += "<table style=\"border: #A9D5F4 1px solid; width: 250px\">";
 	html += "<tr>"
 	html += "<td height=\"25\" colspan=\"2\" bgcolor=\"#DBF2FF\" align=\"center\"><strong>会员登陆</strong></td>";
 	html += "</tr>"
@@ -170,8 +170,8 @@ function siupIn () {
 	html += "<tr>"
 	html += "<td align=\"right\"><input type=\"submit\" name=\"Submit\" value=\"登陆\" /></td><td align=\"left\"><input type=\"checkbox\" name=\"SaveTimes\" value=\"10\" />自动登陆</td>";
 	html += "</tr>"
-	html += "</form>";
 	html += "</table>";
+	html += "</form>";
 
 	return html;
 }
@@ -218,7 +218,6 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = op;
 		$("EliteBox").style.display = "";
-		alert($("EliteWindow").innerHTML);
 	},
 
 	showWindow2File : function (sURL) {
