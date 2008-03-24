@@ -218,6 +218,7 @@ EliteCMS = {
 
 		$("EliteWindow").innerHTML = op;
 		$("EliteBox").style.display = "";
+		alert($("EliteWindow").innerHTML);
 	},
 
 	showWindow2File : function (sURL) {
