@@ -12,7 +12,7 @@
 '= 摘    要：会员-注册文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-22
+'= 最后日期：2008-03-24
 '====================================================================
 
 If EA_Pub.SysInfo(7)="0" Then Call EA_Pub.ShowErrMsg(34, 0)
@@ -89,10 +89,10 @@ var goreg = true;
 
 function accaction(){
 	if(Step==1){
-		xieyi.style.display = "none";
-		acc.value = "确认申请";
-		noacc.value = "放弃申请";
-		mustinfo.style.display = "block";
+		$("xieyi").style.display = "none";
+		$("acc").value = "确认申请";
+		$("noacc").value = "放弃申请";
+		$("mustinfo").style.display = "block";
 		Step = 2
 	}
 	else{
@@ -101,7 +101,7 @@ function accaction(){
 		if(goreg==true){checkerr("\n请再输入一次密码\n\n6-14个字符内",document.reg.RePassWord,14,6);}
 		if(goreg==true){
 			if(document.reg.Password.value!=document.reg.RePassWord.value){
-			alert("\n您两次输入的密码不一致</b>");
+			alert("\n您两次输入的密码不一致");
 			document.reg.RePassWord.focus();
 			goreg = false;
 		}
@@ -125,19 +125,19 @@ function accaction(){
 	if(goreg==true){checkerr("\n请输入密码找回答案\n\n20个字符以下",document.reg.Ans,20,1);}
 
 	if(goreg == true){
-		acc.value = "正在提交";
-		acc.disabled = true;
-		reg.submit();}
+		$("acc").value = "正在提交";
+		$("acc").disabled = true;
+		$("reg").submit();}
 	}
 }
 
 function noaccaction(){
 	if(Step==2){
-		xieyi.style.display = "block";
-		acc.value = "同意协议";
-		noacc.value = "我不同意";
-		mustinfo.style.display = "none";
-		others.style.display = "none";
+		$("xieyi").style.display = "block";
+		$("acc").value = "同意协议";
+		$("noacc").value = "我不同意";
+		$("mustinfo").style.display = "none";
+		$("others").style.display = "none";
 		Step = 1
 	}
 	else{
@@ -156,7 +156,7 @@ function checkerr(errmsg,obj,maxlen,minlen){
 }
 
 function viewnone(e){
-	e.style.display=(e.style.display=="none")?"":"none";
+	$(e).style.display=($(e).style.display=="none")?"":"none";
 }
 </script>
 </head>
@@ -210,7 +210,7 @@ function viewnone(e){
 		</tr>
 		<tr>
 			<td height="25" align="right">开启高级选项&nbsp;</td>
-			<td align="left"><input name="otherselect" type="checkbox" value="1" onclick="viewnone(others)" /></td>
+			<td align="left"><input name="otherselect" type="checkbox" value="1" onclick="viewnone('others')" /></td>
 			<td>&nbsp;</td>
 		</tr>
 	</table>
