@@ -4,8 +4,8 @@
 '= Team Elite - EliteCMS
 '= Copyright (c) 2004 - 2008 Eason Chan All Rights Reserved.
 '=-------------------------------------------------------------------
-'= 文件名称：Coon.asp
-'= 摘    要：数据库连接文件
+'= 文件名称：init.asp
+'= 摘    要：系统环境初始化文件
 '=-------------------------------------------------------------------
 '= 版权协议：
 '=	GPL (The GNU GENERAL PUBLIC LICENSE Version 2, June 1991)
