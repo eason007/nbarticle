@@ -2,9 +2,9 @@
 Dim ConnStr
 Dim DataBaseFilePath
 
-DataBaseFilePath	= "/db/mobile.mdb"
+DataBaseFilePath	= "/db/NBArticle.mdb"
 ConnStr				= "Provider = Microsoft.Jet.OLEDB.4.0;Data Source =" & Server.MapPath(DataBaseFilePath)
 
-Const sCacheName	= "NB959392727"
+Const sCacheName	= "NB59612453"
 Const SystemFolder	= "/"
 %>

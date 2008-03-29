@@ -10,7 +10,7 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-19
+'= 最后日期：2008-03-29
 '====================================================================
 
 Class cls_DBOperation
@@ -289,14 +289,14 @@ Class cls_DBOperation
 			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"), IIF(a.UserId=0, UserName, '[会员]'+UserName), a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" RIGHT JOIN [NB_Content] b ON a.ArticleId = b.id"
-			SQL=SQL&" Where a.IsPass=" & TrueValue
+			SQL=SQL&" Where a.IsPass=" & TrueValue & " And a.IsDel=0"
 			If iArticleId > 0 Then SQL=SQL&" AND a.ArticleId=" & iArticleId
 			SQL=SQL&" Order By a.Id Desc"
 		Case 1, 2
 			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"),Case a.UserId When 0 Then UserName Else '[会员]'+UserName End As [UserName], a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" RIGHT JOIN [NB_Content] b ON a.ArticleId = b.id"
-			SQL=SQL&" Where a.IsPass=" & TrueValue
+			SQL=SQL&" Where a.IsPass=" & TrueValue & " And a.IsDel=0"
 			If iArticleId > 0 Then SQL=SQL&" AND a.ArticleId=" & iArticleId
 			SQL=SQL&" Order By a.Id Desc"
 		End Select
@@ -309,7 +309,7 @@ Class cls_DBOperation
 	Public Function Get_Article_List(iTop,iColumnId,iArticleType,iIsIncludeChildColumn)
 		SQL="SELECT TOP "&iTop&" [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary, SubTitle, SubUrl"
 		SQL=SQL&" FROM [NB_Content]"
-		SQL=SQL&" WHERE ISDEL=0 AND ISPASS="&TrueValue
+		SQL=SQL&" WHERE ISPASS="&TrueValue & " And IsDel=0"
 
 		If iColumnId<>"0" Then 
 			If iIsIncludeChildColumn="1" Then
@@ -338,7 +338,7 @@ Class cls_DBOperation
 	End Function
 
 	Public Function Get_Article_Info_Single (iArticleID)
-		SQL = "SELECT ColumnId, ColumnCode, ColumnName, Title, Summary, Content, ViewNum, AuthorId, Author, CommentNum, IsOut, OutUrl, [KeyWord], AddDate, CutArticle, Source, SourceUrl, TColor, Img, IsTop, IsPass, IsDel, TrueTime, SubTitle, SubUrl"
+		SQL = "SELECT ColumnId, ColumnCode, ColumnName, Title, Summary, Content, ViewNum, AuthorId, Author, CommentNum, IsOut, OutUrl, [KeyWord], AddDate, '', Source, SourceUrl, TColor, Img, IsTop, IsPass, IsDel, TrueTime, SubTitle, SubUrl"
 		SQL = SQL & " FROM [NB_CONTENT]"
 		SQL = SQL & " WHERE ID = " & iArticleID
 
@@ -351,7 +351,7 @@ Class cls_DBOperation
 	'21=IsDel,22=ListPower,23=IsHide,24=Article_TempId,25=TrueTime,26=SubTitle,27=SubUrl
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT ColumnId, ColumnCode, ColumnName, a.Title, Summary, Content, a.ViewNum, AuthorId, Author, CommentNum, a.IsOut, a.OutUrl, [KeyWord], AddDate, CutArticle, Source, SourceUrl, TColor, Img, a.IsTop, IsPass, IsDel, b.ListPower, b.IsHide, b.Article_TempId, TrueTime, a.SubTitle, a.SubUrl"
+			SQL="SELECT ColumnId, ColumnCode, ColumnName, a.Title, Summary, Content, a.ViewNum, AuthorId, Author, CommentNum, a.IsOut, a.OutUrl, [KeyWord], AddDate, '', Source, SourceUrl, TColor, Img, a.IsTop, IsPass, IsDel, b.ListPower, b.IsHide, b.Article_TempId, TrueTime, a.SubTitle, a.SubUrl"
 			SQL=SQL&" FROM NB_Content AS a INNER JOIN NB_Column AS b ON a.ColumnId=b.Id"
 			SQL=SQL&" WHERE a.Id="&iArticleId
 		Case 2
@@ -366,9 +366,9 @@ Class cls_DBOperation
 	Public Function Get_Article_CorrList(sWSQL,iArticleId,iColumnId,iTopNum,IsColumn)
 		SQL="SELECT TOP " & iTopNum & " [ID],COLUMNID,COLUMNNAME,TITLE,TCOLOR,AddDate,IsImg,IsTop,Img,Author,Summary"
 		SQL=SQL&" FROM [NB_CONTENT]"
-		SQL=SQL&" WHERE ISPass="&TrueValue&" And ID<>"&iArticleId&" And ("&sWSQL&"1=0) And IsDel=0"
+		SQL=SQL&" WHERE ISPass="&TrueValue&" And IsDel= 0 And ID<>"&iArticleId&" And ("&sWSQL&"1=0)"
 		If IsColumn Then SQL=SQL&" AND COLUMNID="&iColumnId
-		SQL=SQL&" ORDER BY AddDate DESC"
+		SQL=SQL&" ORDER BY TrueTime DESC"
 		
 		Get_Article_CorrList=DB_Query(SQL)
 	End Function
@@ -488,11 +488,11 @@ Class cls_DBOperation
 
 '*******************************************************************
 	Public Function Get_Column_Info(iColumnId)
-	'0=title,1=code,2=info,3=coumnnum,4=managernum,5=viewnum,6=isout,7=outurl,8=styleid,9=list_tempid,10=article_tempid
+	'0=title,1=code,2=info,3=coumnnum,4=managernum,5=viewnum,6=isout,7=outurl,8=,9=list_tempid,10=article_tempid
 	'11=0,12=listpower,13=ishide,14=isreview,15=ispost,16=istop,17=pagesize
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT Title, Code, Info, CountNum, MangerNum, ViewNum, IsOut, OutUrl, StyleId, List_TempId, Article_TempId, 0, ListPower, IsHide, IsReview, IsPost, IsTop, PageSize"
+			SQL="SELECT Title, Code, Info, CountNum, MangerNum, ViewNum, IsOut, OutUrl, '', List_TempId, Article_TempId, 0, ListPower, IsHide, IsReview, IsPost, IsTop, PageSize"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE [Id]="&iColumnId
 		Case 2
