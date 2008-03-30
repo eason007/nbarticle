@@ -264,7 +264,7 @@ Class cls_DBOperation
 					If iRState=1 Then 
 						Set_System_ReviewTotal 1
 
-						SQL="Update [NB_Content] Set LastComment='"&Left(sRContent,25)&"'"
+						SQL="Update [NB_Content] Set LastComment='"&Left(sRContent,50)&"'"
 						SQL=SQL&" Where [Id]="&iArticleId
 						DB_Execute SQL
 					End If

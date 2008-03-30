@@ -11,7 +11,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2006-07-27
+'= 最后日期：2008-03-30
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -122,7 +122,7 @@ Sub Save
 	Title	= EA_Pub.SafeRequest(2,"title",1,"",0)
 	Content = Request.Form("Content")
 	
-	If Title="" Or Len(Title)>150 Then FoundErr = True
+	If Title="" Or Len(Title)>50 Then FoundErr = True
 	
 	If FoundErr Then
 		Response.Write "-1"

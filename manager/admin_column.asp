@@ -11,7 +11,7 @@
 '= 摘    要：后台-栏目管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-22
+'= 最后日期：2008-03-30
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -322,9 +322,10 @@ Sub Save
 	PageSize		= EA_Pub.SafeRequest(2,"PageSize",0,15,0)
 	
 	If ParentCode = "0" Then ParentCode = ""
-	ParentCode		= CStr(ParentCode)
+	ParentCode = CStr(ParentCode)
 	
 	If Name="" Or Len(Name)>50 Then Response.Write "-1":Response.End
+	If Len(Info) > 250 Then Response.Write "-1":Response.End
 	
 	If Len(OutUrl)>0 Then
 		IsOut=1
