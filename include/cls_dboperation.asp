@@ -289,14 +289,14 @@ Class cls_DBOperation
 			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"), IIF(a.UserId=0, UserName, '[会员]'+UserName), a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" RIGHT JOIN [NB_Content] b ON a.ArticleId = b.id"
-			SQL=SQL&" Where a.IsPass=" & TrueValue & " And a.IsDel=0"
+			SQL=SQL&" Where a.IsPass=" & TrueValue
 			If iArticleId > 0 Then SQL=SQL&" AND a.ArticleId=" & iArticleId
 			SQL=SQL&" Order By a.Id Desc"
 		Case 1, 2
 			SQL="Select Top "&iTop&" a.ArticleId, Left(a.Content,"&iContentLen&"),Case a.UserId When 0 Then UserName Else '[会员]'+UserName End As [UserName], a.AddDate, b.AddDate, b.Title"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" RIGHT JOIN [NB_Content] b ON a.ArticleId = b.id"
-			SQL=SQL&" Where a.IsPass=" & TrueValue & " And a.IsDel=0"
+			SQL=SQL&" Where a.IsPass=" & TrueValue
 			If iArticleId > 0 Then SQL=SQL&" AND a.ArticleId=" & iArticleId
 			SQL=SQL&" Order By a.Id Desc"
 		End Select
@@ -559,21 +559,6 @@ Class cls_DBOperation
 		End Select
 		
 		Get_PlacardInfo=DB_Query(SQL)
-	End Function
-'-------------------------------------------------------------------
-	Public Function Get_MemberTopPostList()
-		Select Case iDataBaseType
-		Case 0
-			SQL="Exec vi_Select_MemberTopPostList"
-		Case 1
-			SQL="SELECT TOP 10 [Id], Reg_Name, PostTotal"
-			SQL=SQL&" FROM NB_User"
-			SQL=SQL&" ORDER BY PostTotal DESC"
-		Case 2
-			SQL="Exec sp_EliteArticle_Member_PostList_Select"
-		End Select
-		
-		Get_MemberTopPostList=DB_Query(SQL)
 	End Function
 
 	Public Function Get_MemberLogin(iAccountName)

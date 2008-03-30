@@ -34,7 +34,7 @@ Class Cls_Manager_DBOperation
 	End Sub
 
 	Private Sub ConnectionDatabase
-		'On Error Resume Next
+		On Error Resume Next
 
 		Set Conn = Server.CreateObject("ADODB.Connection")
 		Conn.Open ConnStr
@@ -296,7 +296,7 @@ Class Cls_Manager_DBOperation
 		SQL="UPDATE NB_Themes SET IsDefault = 0"
 		DB_Execute SQL
 		
-		SQL="UPDATE NB_Themes SET IsDefault = 1"
+		SQL="UPDATE NB_Themes SET IsDefault = " & TrueValue
 		SQL=SQL&" WHERE Id="&iTheme_Id
 		DB_Execute SQL
 	End Sub
@@ -328,7 +328,7 @@ Class Cls_Manager_DBOperation
 	Public Function Get_DefaultModule_List()
 		SQL="SELECT Id, Title"
 		SQL=SQL&" FROM NB_Module"
-		SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 Id FROM NB_Themes WHERE IsDefault=1)"
+		SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 Id FROM NB_Themes WHERE IsDefault=" & TrueValue & ")"
 		SQL=SQL&" AND [Type] > 3"
 
 		Get_DefaultModule_List=DB_Query(SQL)
