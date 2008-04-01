@@ -11,7 +11,7 @@
 '= 摘    要：后台-文章管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-18
+'= 最后日期：2008-04-01
 '====================================================================
 
 Response.Clear
@@ -374,7 +374,7 @@ Sub Save
 	Author		= EA_Pub.SafeRequest(2,"author",1,"",1)
 	AuthorId	= EA_Pub.SafeRequest(2,"authorid",0,0,0)
 	ViewNum		= EA_Pub.SafeRequest(2,"viewnum",0,0,0)
-	AddDate		= EA_Pub.SafeRequest(2,"adddate",2,Now(),0)
+	AddDate		= Trim(EA_Pub.SafeRequest(2,"adddate",2,Now(),0))
 	IsPass		= EA_Pub.SafeRequest(2,"ispass",0,0,0)
 	Source		= EA_Pub.SafeRequest(2,"source",1,"",1)
 	SourceUrl	= EA_Pub.SafeRequest(2,"sourceurl",1,"",1)
