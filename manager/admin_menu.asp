@@ -11,7 +11,7 @@
 '= 摘    要：后台-左边控制菜单文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-02-17
+'= 最后日期：2008-04-01
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -20,8 +20,6 @@ Dim i,j
 
 Call EA_Pub.Close_Obj
 Set EA_Pub=Nothing
-
-Response.Write "var mainMenu = new Array();" & Chr(10) & Chr(13)
 
 For i=0 To Ubound(str_LeftMenu)-1
 	Response.Write "var subMenu = new Array();" & Chr(10) & Chr(13)
