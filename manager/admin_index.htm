@@ -9,6 +9,8 @@ function menuFormat (title, link) {
 	this.title	= title,
 	this.link	= link
 }
+
+var mainMenu = new Array();
 </script>
 <script type="text/javascript" src="./admin_menu.asp"></script>
 <script type="text/javascript" src="language_files/message.js"></script>
@@ -31,10 +33,11 @@ function menuFormat (title, link) {
 
 <div id="head">
 	<div class="left" id="NBArticlePlacard"></div>
+
 	<div class="left" id="menu"></div>
 </div>
 <div class="separator"></div>
-<div id="subMenu"></div>
+	<div id="subMenu"></div>
 
 <div class="separator"></div>
 
@@ -46,6 +49,11 @@ function menuFormat (title, link) {
 </div>
 
 <script type="text/javascript">
+if (mainMenu.length == 0)
+{
+	top.location.href = "./";
+}
+
 var FormEdit = new formEditObject();
 var objForm = new formObject();
 var objTable = new tableObject();
@@ -62,8 +70,6 @@ var editDateVal = "";
 objForm.formName = "form1";
 
 $("divLoading").innerHTML += "&nbsp;" + loadingMsg;
-
-ajaxGetDate("./templates/admin_main.htm", loadMain);
 
 function loadMain(obj){
 	var regexp1 = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/ig;
@@ -87,15 +93,13 @@ function showSubMenu (iMenu) {
 	}
 }
 
-
-if (typeof(mainMenu) != "undefined")
+for (var i = 0; i < mainMenu.length ; i++ )
 {
-	for (var i = 0; i < mainMenu.length ; i++ )
-	{
-		$("menu").innerHTML += "<a href='javascript: vod();' class='title' onclick='javascript: showSubMenu(" + i + ");'>" + mainMenu[i].title + "</a>";
-	}
+	$("menu").innerHTML += "<a href='javascript: vod();' class='title' onclick='javascript: showSubMenu(" + i + ");'>" + mainMenu[i].title + "</a>";
 }
+
+ajaxGetDate("./templates/admin_main.htm", loadMain);
 </script>
-<script type="text/javascript" src="http://nbarticle.com/plaCard.js"></script>
+
 </body>
 </html>
