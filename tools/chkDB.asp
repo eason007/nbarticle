@@ -195,7 +195,7 @@ Sub Step2 ()
 				Else
 					If Not ChkField(TbName, FName) Then
 						Call AddColumn(TbName, FName, FType)
-					Else
+					ElseIf LCase(FName) <> "id" Then
 						Call ModColumn(TbName, FName, FType)
 					End If
 				End If

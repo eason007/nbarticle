@@ -65,7 +65,7 @@
 	<TableIndex name="AuthorId">AuthorId</TableIndex>
 	<TableIndex name="ColumnCode">ColumnCode</TableIndex>
 	<TableIndex name="ColumnId">ColumnId</TableIndex>
-	<TableIndex name="Id">Id</TableIndex>
+	<TableIndex name="Id">Id DESC</TableIndex>
 	<TableIndex name="KeyWord">KeyWord</TableIndex>
 	<TableIndex name="List">IsPass, IsDel</TableIndex>
 	<TableIndex name="PrimaryKey">TrueTime DESC</TableIndex>
