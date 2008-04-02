@@ -31,9 +31,9 @@ Class cls_DBOperation
 
 		Select Case iDataBaseType
 		Case 0
-			TrueValue = "-1"
+			TrueValue = True
 		Case 1,2
-			TrueValue = "1"
+			TrueValue = True
 		End Select
 	End Sub
 
@@ -139,7 +139,7 @@ Class cls_DBOperation
 		If iTemplateId > 0 Then
 			SQL=SQL&" WHERE [Id]="&iTemplateId
 		Else 
-			SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 ID FROM NB_Themes WHERE IsDefault = 1) AND [Type] = "&iTemplateType
+			SQL=SQL&" WHERE ThemesID=(SELECT TOP 1 ID FROM NB_Themes WHERE IsDefault = " & TrueValue & ") AND [Type] = "&iTemplateType
 		End If
 		
 		Get_Template_Info=DB_Query(SQL)
