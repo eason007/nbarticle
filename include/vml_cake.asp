@@ -30,7 +30,9 @@ total_no=ubound(total,1)
 totalpie=0
 for i=1 to total_no
  totalpie=totalpie+total(i,1)
-next
+Next
+
+If totalpie = 0 Then Exit Function
 
 PreAngle=0
 for i=1 to total_no

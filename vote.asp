@@ -41,7 +41,7 @@ If IsArray(VoteInfo) Then
 	VoteNum	 = VoteInfo(3, 0)
 	VoteNum	 = Split(VoteNum, "|")
 
-	Call ShowResult(VoteText,VoteNum,VoteInfo(0,0),IsVoted)
+	Call ShowResult(VoteText,VoteNum,VoteInfo(1,0),IsVoted)
 Else
 	Call EA_Pub.ShowErrMsg(2, 0)
 End If
@@ -125,9 +125,6 @@ td {
             </table></td>
         </tr>
       </table></td>
-  </tr>
-  <tr bgcolor="#E8F7FF"> 
-    <td height="22">&nbsp; <%If Not IsVote Then Response.Write "你已经投过票！" Else Response.Write "<font color=800000>这是你第一次投票！</font>"%></td>
   </tr>
 </table>
 </body>
