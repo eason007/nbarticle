@@ -10,7 +10,7 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-29
+'= 最后日期：2008-04-02
 '====================================================================
 
 Class cls_DBOperation
@@ -513,6 +513,7 @@ Class cls_DBOperation
 			SQL="SELECT [ID], Title, [CountNum], [ViewNum], Info"
 			SQL=SQL&" FROM NB_Column"
 			SQL=SQL&" WHERE Left(Code,"&Temp&")='"&sMainCode&"' And Len(Code)="&Temp&"+4"
+			SQL=SQL&" ORDER BY Code ASC"
 		Case 2
 			SQL="Exec sp_EliteArticle_Column_ChildList_Select"
 			SQL=SQL&" @Main_Code='"&sMainCode&"'"

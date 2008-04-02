@@ -18,7 +18,7 @@
 '= 摘    要：模版类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-18
+'= 最后日期：2008-04-02
 '====================================================================
 
 Class cls_Template
@@ -53,6 +53,7 @@ Class cls_Template
 	Public Function Load_Template(TemplateId, TemplateType)
 		Dim Temp
 		Temp = EA_DBO.Get_Template_Info(TemplateId, TemplateType)
+		If Not IsArray(Temp) Then Temp = EA_DBO.Get_Template_Info(0, TemplateType)
 
 		If IsArray(Temp) Then 
 			TemplateId = Temp(2, 0)
