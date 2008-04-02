@@ -42,11 +42,11 @@ Sub VoteSingle (ByRef PageContent)
 				Content	= Split(VoteText, "|")
 
 				Temp = ""
-				Temp = Temp & "<form action="""" id=""vote_" & Id & """><table><tr><td>" & Title & "</td></tr>"
+				Temp = Temp & "<form action="""" id=""vote_" & Id & """><table><tr><td class=""voteTitle"">" & Title & "</td></tr>"
 		
 				If Mtype = False Then
 					SType = "radio"
-				ElseIf Mtype = True Then
+				Else
 					SType = "checkbox"
 				End If
 				
