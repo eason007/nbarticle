@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+<table name="NB_AdSense">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(50)</Title>
+	<Content>ntext</Content>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+</table>
+<table name="NB_ArticleTemplate">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(50)</Title>
+	<Content>ntext</Content>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+</table>
+<table name="NB_Column">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(50)</Title>
+	<Code>varchar(200)</Code>
+	<Info>varchar(250)</Info>
+	<ViewNum>int default 0</ViewNum>
+	<CountNum>int default 0</CountNum>
+	<MangerNum>int default 0</MangerNum>
+	<IsOut>int default 0</IsOut>
+	<OutURL>varchar(150)</OutURL>
+	<IsReview>int default -1</IsReview>
+	<IsPost>int default -1</IsPost>
+	<IsTop>int default -1</IsTop>
+	<List_TempId>int default 0</List_TempId>
+	<Article_TempId>int default 0</Article_TempId>
+	<PageSize>int default 10</PageSize>
+	<ListPower>int default 0</ListPower>
+	<IsHide>int default 0</IsHide>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="Code">Code</TableIndex>
+</table>
+<table name="NB_Content">
+	<Id>int identity(1, 1) not null</Id>
+	<ColumnId>int not null</ColumnId>
+	<ColumnCode>varchar(200)</ColumnCode>
+	<ColumnName>varchar(50) null</ColumnName>
+	<Title>varchar(150)</Title>
+	<AddDate>smalldatetime default now()</AddDate>
+	<Content>ntext</Content>
+	<KeyWord>varchar(250) null</KeyWord>
+	<ViewNum>int default 0</ViewNum>
+	<Byte>int default 0</Byte>
+	<CommentNum>int default 0</CommentNum>
+	<IsDel>int default 0</IsDel>
+	<Author>varchar(16) null</Author>
+	<AuthorId>int default 0</AuthorId>
+	<IsPass>int default -1</IsPass>
+	<TColor>int default 0</TColor>
+	<IsImg>int default 0</IsImg>
+	<Img>varchar(150) null</Img>
+	<IsTop>int default 0</IsTop>
+	<LastComment>varchar(50) null</LastComment>
+	<OutUrl>varchar(150) null</OutUrl>
+	<IsOut>int default 0</IsOut>
+	<Source>varchar(50) null</Source>
+	<SourceUrl>varchar(150) null</SourceUrl>
+	<Summary>varchar(250) null</Summary>
+	<TrueTime>FLOAT</TrueTime>
+	<SubTitle>varchar(50) null</SubTitle>
+	<SubUrl>varchar(150) null</SubUrl>
+	<TableIndex name="AuthorId">AuthorId</TableIndex>
+	<TableIndex name="ColumnCode">ColumnCode</TableIndex>
+	<TableIndex name="ColumnId">ColumnId</TableIndex>
+	<TableIndex name="Id">Id</TableIndex>
+	<TableIndex name="KeyWord">KeyWord</TableIndex>
+	<TableIndex name="List">IsPass, IsDel</TableIndex>
+	<TableIndex name="PrimaryKey">TrueTime DESC</TableIndex>
+	<TableIndex name="ViewNum">ViewNum DESC</TableIndex>
+</table>
+<table name="NB_FriendLink">
+	<Id>int identity(1, 1) not null</Id>
+	<LinkName>varchar(50)</LinkName>
+	<LinkURL>varchar(150)</LinkURL>
+	<LinkImgPath>varchar(150)</LinkImgPath>
+	<LinkInfo>varchar(250)</LinkInfo>
+	<ColumnId>int default 0</ColumnId>
+	<OrderNum>int default 0</OrderNum>
+	<State>int default 0</State>
+	<Style>int default 0</Style>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="ColumnId">ColumnId</TableIndex>
+	<TableIndex name="OrderNum">OrderNum DESC</TableIndex>
+</table>
+<table name="NB_Interface">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(50)</Title>
+	<RemoteURL>varchar(150)</RemoteURL>
+	<StructFile>varchar(50)</StructFile>
+	<Type>int default 0</Type>
+	<SKey>varchar(50)</SKey>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="Type">Type</TableIndex>
+</table>
+<table name="NB_Ip">
+	<Id>int identity(1, 1) not null</Id>
+	<Head_Ip>char(12)</Head_Ip>
+	<Foot_Ip>char(12)</Foot_Ip>
+	<OverTime>smalldatetime default now()</OverTime>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="List">Head_Ip, Foot_Ip DESC, OverTime</TableIndex>
+</table>
+<table name="NB_JsFile">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(50)</Title>
+	<FileName>varchar(150)</FileName>
+	<Info>varchar(250)</Info>
+	<Setting>ntext</Setting>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+</table>
+<table name="NB_Link">
+	<Id>int identity(1, 1) not null</Id>
+	<Word>varchar(100)</Word>
+	<Link>varchar(150)</Link>
+	<ColumnId>int default 0</ColumnId>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="ColumnId">ColumnId</TableIndex>
+</table>
+<table name="NB_Master">
+	<Master_Id>int identity(1, 1) not null</Master_Id>
+	<Master_Name>varchar(20)</Master_Name>
+	<Master_Password>char(16)</Master_Password>
+	<Column_Setting>ntext</Column_Setting>
+	<Setting>ntext</Setting>
+	<LasTime>smalldatetime</LasTime>
+	<LastIP>char(15)</LastIP>
+	<Cookiess>int default 0</Cookiess>
+	<State>int default 0</State>
+	<TableIndex name="PrimaryKey">Master_Id</TableIndex>
+</table>
+<table name="NB_Module">
+	<ID>int identity(1, 1) not null</ID>
+	<Title>varchar(50)</Title>
+	<Desc>varchar(50)</Desc>
+	<ThemesID>int not null default 0</ThemesID>
+	<Code>ntext</Code>
+	<Type>int default 0</Type>
+	<TableIndex name="PrimaryKey">ID</TableIndex>
+	<TableIndex name="ThemesID">ThemesID</TableIndex>
+</table>
+<table name="NB_MyFavorites">
+	<Id>int identity(1, 1) not null</Id>
+	<ArticleId>int not null default 0</ArticleId>
+	<UserId>int not null default 0</UserId>
+	<AddDate>smalldatetime default now()</AddDate>
+	<Title>varchar(150)</Title>
+	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
+	<TableIndex name="ArticleId">ArticleId</TableIndex>
+	<TableIndex name="UserId">UserId</TableIndex>
+</table>
+<table name="NB_Placard">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(150)</Title>
+	<Content>varchar(250)</Content>
+	<AddDate>smalldatetime default now()</AddDate>
+	<OverTime>smalldatetime</OverTime>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="OverTime">OverTime DESC</TableIndex>
+</table>
+<table name="NB_Review">
+	<Id>int identity(1, 1) not null</Id>
+	<UserId>int default 0</UserId>
+	<AddDate>smalldatetime default now()</AddDate>
+	<IP>char(15)</IP>
+	<UserName>varchar(50)</UserName>
+	<IsPass>int default -1</IsPass>
+	<ArticleId>int not null</ArticleId>
+	<Content>varchar(250)</Content>
+	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
+	<TableIndex name="IsPass">IsPass</TableIndex>
+	<TableIndex name="ArticleId">ArticleId</TableIndex>
+</table>
+<table name="NB_System">
+	<Id>int identity(1, 1) not null</Id>
+	<RegUser>int default 0</RegUser>
+	<TopicNum>int default 0</TopicNum>
+	<ColumnNum>int default 0</ColumnNum>
+	<Info>ntext</Info>
+	<MangerTopicNum>int default 0</MangerTopicNum>
+	<ReviewNum>int default 0</ReviewNum>
+	<Source>ntext</Source>
+	<BadWord>ntext</BadWord>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+</table>
+<table name="NB_Tags">
+	<ID>int identity(1, 1) not null</ID>
+	<Name>varchar(50)</Name>
+	<ArticleID>int not null</ArticleID>
+	<ColumnID>int not null</ColumnID>
+	<TableIndex name="PrimaryKey">ID</TableIndex>
+	<TableIndex name="ColumnID">ColumnID</TableIndex>
+	<TableIndex name="ArticleID">ArticleID</TableIndex>
+</table>
+<table name="NB_Themes">
+	<ID>int identity(1, 1) not null</ID>
+	<Title>varchar(50)</Title>
+	<IsDefault>int default 0</IsDefault>
+	<TableIndex name="PrimaryKey">ID</TableIndex>
+	<TableIndex name="IsDefault">IsDefault DESC</TableIndex>
+</table>
+<table name="NB_User">
+	<Id>int identity(1, 1) not null</Id>
+	<Reg_Name>varchar(50)</Reg_Name>
+	<Reg_Pass>char(32)</Reg_Pass>
+	<Question>varchar(30)</Question>
+	<Answer>varchar(20)</Answer>
+	<Sex>int default 0</Sex>
+	<Email>varchar(50)</Email>
+	<User_Group>int default 0</User_Group>
+	<State>int default 0</State>
+	<Setting>varchar(250)</Setting>
+	<Cookies>int default 0</Cookies>
+	<Login>int default 0</Login>
+	<RegTime>smalldatetime default now()</RegTime>
+	<RegIp>char(15)</RegIp>
+	<LasTime>smalldatetime</LasTime>
+	<LastIp>char(15)</LastIp>
+	<HomePage>varchar(100)</HomePage>
+	<UserName>varchar(50)</UserName>
+	<QQ>int default 0</QQ>
+	<ICQ>int default 0</ICQ>
+	<MSN>varchar(50)</MSN>
+	<BirtDay>smalldatetime</BirtDay>
+	<ComeFrom>varchar(150)</ComeFrom>
+	<PostTotal>int default 0</PostTotal>
+	<MangerPostTotal>int default 0</MangerPostTotal>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+	<TableIndex name="Reg_Name">Reg_Name</TableIndex>
+</table>
+<table name="NB_UserGroup">
+	<Id>int identity(1, 1) not null</Id>
+	<GroupName>varchar(50)</GroupName>
+	<Setting>varchar(250)</Setting>
+	<IsLogin>int default 0</IsLogin>
+	<UserTotal>int default 0</UserTotal>
+	<TableIndex name="PrimaryKey">Id</TableIndex>
+</table>
+<table name="NB_Vote">
+	<Id>int identity(1, 1) not null</Id>
+	<Title>varchar(100)</Title>
+	<VoteText>ntext</VoteText>
+	<VoteNum>varchar(50)</VoteNum>
+	<VoteTotal>int default 0</VoteTotal>
+	<Type>int default 0</Type>
+	<Lock>int default 0</Lock>
+	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
+</table>
+</root>
