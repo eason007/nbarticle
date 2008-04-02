@@ -459,7 +459,7 @@ Class cls_DBOperation
 		SQL=SQL&" FROM [NB_FriendLink]"
 		SQL=SQL&" Where Style="&iStyle&" And State="&TrueValue
 		If iColumnId >= 0 Then SQL = SQL & " AND ColumnId=" & iColumnId
-		SQL=SQL&" Order By ColumnId ASC, OrderNum Desc,Id ASC"
+		SQL=SQL&" Order By ColumnId ASC, OrderNum ASC,Id ASC"
 		
 		Get_Friend_List=DB_Query(SQL)
 	End Function
