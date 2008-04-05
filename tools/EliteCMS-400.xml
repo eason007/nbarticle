@@ -166,7 +166,7 @@
 	<AddDate>smalldatetime default now()</AddDate>
 	<IP>char(15)</IP>
 	<UserName>varchar(50)</UserName>
-	<bit>int default -1</IsPass>
+	<IsPass>bit default -1</IsPass>
 	<ArticleId>int not null</ArticleId>
 	<Content>varchar(250)</Content>
 	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
