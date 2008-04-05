@@ -20,16 +20,16 @@
 	<ViewNum>int default 0</ViewNum>
 	<CountNum>int default 0</CountNum>
 	<MangerNum>int default 0</MangerNum>
-	<IsOut>int default 0</IsOut>
+	<IsOut>bit default 0</IsOut>
 	<OutURL>varchar(150)</OutURL>
-	<IsReview>int default -1</IsReview>
-	<IsPost>int default -1</IsPost>
-	<IsTop>int default -1</IsTop>
+	<IsReview>bit default -1</IsReview>
+	<IsPost>bit default -1</IsPost>
+	<IsTop>bit default -1</IsTop>
 	<List_TempId>int default 0</List_TempId>
 	<Article_TempId>int default 0</Article_TempId>
 	<PageSize>int default 10</PageSize>
 	<ListPower>int default 0</ListPower>
-	<IsHide>int default 0</IsHide>
+	<IsHide>bit default 0</IsHide>
 	<TableIndex name="PrimaryKey">Id</TableIndex>
 	<TableIndex name="Code">Code</TableIndex>
 </table>
@@ -45,17 +45,17 @@
 	<ViewNum>int default 0</ViewNum>
 	<Byte>int default 0</Byte>
 	<CommentNum>int default 0</CommentNum>
-	<IsDel>int default 0</IsDel>
+	<IsDel>bit default 0</IsDel>
 	<Author>varchar(16) null</Author>
 	<AuthorId>int default 0</AuthorId>
-	<IsPass>int default -1</IsPass>
+	<IsPass>bit default -1</IsPass>
 	<TColor>int default 0</TColor>
-	<IsImg>int default 0</IsImg>
+	<IsImg>bit default 0</IsImg>
 	<Img>varchar(150) null</Img>
-	<IsTop>int default 0</IsTop>
+	<IsTop>bit default 0</IsTop>
 	<LastComment>varchar(50) null</LastComment>
 	<OutUrl>varchar(150) null</OutUrl>
-	<IsOut>int default 0</IsOut>
+	<IsOut>bit default 0</IsOut>
 	<Source>varchar(50) null</Source>
 	<SourceUrl>varchar(150) null</SourceUrl>
 	<Summary>varchar(250) null</Summary>
@@ -79,7 +79,7 @@
 	<LinkInfo>varchar(250)</LinkInfo>
 	<ColumnId>int default 0</ColumnId>
 	<OrderNum>int default 0</OrderNum>
-	<State>int default 0</State>
+	<State>bit default 0</State>
 	<Style>int default 0</Style>
 	<TableIndex name="PrimaryKey">Id</TableIndex>
 	<TableIndex name="ColumnId">ColumnId</TableIndex>
@@ -128,7 +128,7 @@
 	<LasTime>smalldatetime</LasTime>
 	<LastIP>char(15)</LastIP>
 	<Cookiess>int default 0</Cookiess>
-	<State>int default 0</State>
+	<State>bit default 0</State>
 	<TableIndex name="PrimaryKey">Master_Id</TableIndex>
 </table>
 <table name="NB_Module">
@@ -166,7 +166,7 @@
 	<AddDate>smalldatetime default now()</AddDate>
 	<IP>char(15)</IP>
 	<UserName>varchar(50)</UserName>
-	<IsPass>int default -1</IsPass>
+	<bit>int default -1</IsPass>
 	<ArticleId>int not null</ArticleId>
 	<Content>varchar(250)</Content>
 	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
@@ -207,7 +207,7 @@
 	<Reg_Pass>char(32)</Reg_Pass>
 	<Question>varchar(30)</Question>
 	<Answer>varchar(20)</Answer>
-	<Sex>int default 0</Sex>
+	<Sex>bit default 0</Sex>
 	<Email>varchar(50)</Email>
 	<User_Group>int default 0</User_Group>
 	<State>int default 0</State>
@@ -234,7 +234,7 @@
 	<Id>int identity(1, 1) not null</Id>
 	<GroupName>varchar(50)</GroupName>
 	<Setting>varchar(250)</Setting>
-	<IsLogin>int default 0</IsLogin>
+	<IsLogin>bit default 0</IsLogin>
 	<UserTotal>int default 0</UserTotal>
 	<TableIndex name="PrimaryKey">Id</TableIndex>
 </table>
@@ -244,8 +244,8 @@
 	<VoteText>ntext</VoteText>
 	<VoteNum>varchar(50)</VoteNum>
 	<VoteTotal>int default 0</VoteTotal>
-	<Type>int default 0</Type>
-	<Lock>int default 0</Lock>
+	<Type>bit default 0</Type>
+	<Lock>bit default 0</Lock>
 	<TableIndex name="PrimaryKey">Id DESC</TableIndex>
 </table>
 </root>
