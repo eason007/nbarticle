@@ -27,9 +27,9 @@ Class Cls_Manager_DBOperation
 
 		Select Case iDataBaseType
 		Case 0
-			TrueValue="-1"
+			TrueValue= True
 		Case 1,2
-			TrueValue="1"
+			TrueValue=True
 		End Select
 	End Sub
 
