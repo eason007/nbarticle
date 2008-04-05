@@ -217,7 +217,7 @@ Sub MarkView
 						If j = 1 Then
 							Call EA_Pub.Save_HtmlFile(sHTMLFilePath, PageContent)
 						Else
-							Call EA_Pub.Save_HtmlFile(re.Replace(sHTMLFilePath, "/$1/$2_$3_" & j & ".$4"), PageContent)
+							Call EA_Pub.Save_HtmlFile(re.Replace(sHTMLFilePath, SystemFolder & "$1/$2_$3_" & j & ".$4"), PageContent)
 						End If
 					Next
 				End If
