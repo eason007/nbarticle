@@ -355,8 +355,14 @@ Sub Save
 	Text		= Request.Form("Content")
 	Text		= EA_Pub.BadWords_Filter(Text)
 
-	Summary		= EA_Pub.BadWords_Filter(EA_Pub.SafeRequest(2,"summary",1,"",2))
-	Summary		= Left(Summary,140)
+	Summary		= EA_Pub.SafeRequest(2,"summary",1,"",2)
+	If Len(Summary) = 0 Then 
+		Summary = Text
+		Summary = Left(EA_Pub.Clean_HTMLFilter(Summary), 140)
+	Else
+		Summary	= EA_Pub.BadWords_Filter(Summary)
+		Summary	= Left(Summary,140)
+	End If
 
 	KeyWord		= EA_Pub.DistinctStr(EA_Pub.SafeRequest(2,"keyword",1,"",1))
 
