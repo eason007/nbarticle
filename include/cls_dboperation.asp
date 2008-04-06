@@ -328,11 +328,18 @@ Class cls_DBOperation
 			SQL=SQL&" And IsImg="&TrueValue
 		End Select
 
-		If iArticleType="4" Then 
+		Select Case iArticleType
+		Case "4"
 			SQL=SQL&" Order By ViewNum Desc,TrueTime Desc"
-		Else
+		Case "5"
+			If iDataBaseType = 0 Then
+				SQL=SQL&" Order By RND()"
+			Else
+				SQL=SQL&" Order By RAND()"
+			End If
+		Case Else
 			SQL=SQL&" Order By TrueTime Desc"
-		End If
+		End Select
 		
 		Get_Article_List=DB_Query(SQL)
 	End Function
@@ -433,11 +440,13 @@ Class cls_DBOperation
 	End Sub
 
 	Public Function Get_Article_ByColumnId(iColumnId,iPageNum,iPageSize)
+	'0=[Id], 1=TColor, 2=Title, 3=AddDate, 4=CommentNum, 5=Summary, 6=LastComment, 7=ViewNum, 8=IsImg, 9=Img
+	'10=IsTop, 11=Author, 12=AuthorId, 13=[KeyWord], 14=SubTitle, 15=SubUrl
 		Dim Temp
 		
 		Select Case iDataBaseType
 		Case 0, 1
-			SQL="SELECT [Id], TColor, Title, AddDate, CommentNum, Summary, LastComment, ViewNum, IsImg, Img, IsTop, Author, AuthorId, [KeyWord]"
+			SQL="SELECT [Id], TColor, Title, AddDate, CommentNum, Summary, LastComment, ViewNum, IsImg, Img, IsTop, Author, AuthorId, [KeyWord], SubTitle, SubUrl"
 			SQL=SQL&" FROM NB_Content"
 			SQL=SQL&" WHERE ColumnId="&iColumnId&" And IsPass=" & TrueValue & " And IsDel=0"
 			SQL=SQL&" ORDER BY TrueTime DESC"
