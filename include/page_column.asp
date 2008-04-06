@@ -71,8 +71,8 @@ Class page_Column
 		  
 				EA_Temp.SetVariable "Url", EA_Pub.Cov_ArticlePath(ArticleList(0, i), ArticleList(3, i), ArticleUrlType), Temp
 				EA_Temp.SetVariable "Title", EA_Pub.Add_ArticleColor(ArticleList(1, i), EA_Pub.Base_HTMLFilter(ArticleList(2, i))), Temp
-				EA_Temp.SetVariable "SubUrl", ArticleList(14, i), Temp
-				EA_Temp.SetVariable "SubTitle", ArticleList(15, i), Temp
+				EA_Temp.SetVariable "SubUrl", ArticleList(15, i), Temp
+				EA_Temp.SetVariable "SubTitle", ArticleList(14, i), Temp
 				EA_Temp.SetVariable "Date", FormatDateTime(ArticleList(3, i), 2), Temp
 				EA_Temp.SetVariable "Time", FormatDateTime(ArticleList(3, i), 4), Temp
 				EA_Temp.SetVariable "CommentNum", ArticleList(4, i), Temp
