@@ -26,7 +26,7 @@ FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
 	var div = $("myFCKeditor");
-	var fck = new FCKeditor("Content", 650, 520);
+	var fck = new FCKeditor("Content", 645, 410);
 	fck.BasePath	= "../plugins/fck_editor/";
 	div.innerHTML = fck.CreateHtml();
 
@@ -124,15 +124,15 @@ function getFekeditorText(editor_name)
 			  <table class="edittable">
 				  <tr>
 					<td align="right"><span id="Language_Content_Column"></span></td>
-					<td align="left">&nbsp;<select name="Column" dataType="Require" style="width: 210px;"></select></td>
+					<td align="left">&nbsp;<select name="Column" dataType="Require" style="width: 220px;"></select></td>
 				  </tr>
 				  <tr>
 					<td align="right" valign="top"><span id="Language_Content_Keyword"></span></td>
-					<td align="left">&nbsp;<textarea name="keyword" cols="28" rows="4"></textarea></td>
+					<td align="left">&nbsp;<textarea name="keyword" cols="28" rows="2"></textarea></td>
 				  </tr>
 				  <tr>
 					<td align="right" valign="top"><span id="Language_Content_Summary"></span></td>
-					<td align="left">&nbsp;<textarea name="summary" id="summary" cols="28" rows="8" wrap="VIRTUAL"></textarea></td>
+					<td align="left">&nbsp;<textarea name="summary" id="summary" cols="28" rows="4" wrap="VIRTUAL"></textarea></td>
 				  </tr>
 				  <tr>
 					<td align="right" valign="top"><span id="Language_Content_SubTitle"></span></td>
@@ -144,11 +144,11 @@ function getFekeditorText(editor_name)
 				  </tr>
 				  <tr>
 				    <td align="right" valign="top"><span id="Language_Content_OutURL"></span></td>
-					<td align="left">&nbsp;<textarea name="outurl" id="outurl" cols="28" rows="2" wrap="VIRTUAL"></textarea></td>
+					<td align="left">&nbsp;<input type="text" name="outurl" size="33"></td>
 				  </tr>
 				  <tr>
 					<td align="right" valign="top"><span id="Language_Content_Img"></span></td>
-					<td align="left">&nbsp;<textarea name="img" id="img" cols="28" rows="2" wrap="VIRTUAL"></textarea><br />&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
+					<td align="left">&nbsp;<input type="text" name="img" id="img" size="33"><br />&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
 				  </tr>
 				  <tr>
 				    <td align="right" valign="top"><span id="Language_Content_Source"></span></td>
@@ -156,7 +156,7 @@ function getFekeditorText(editor_name)
 				  </tr>
 				  <tr>
 					<td align="right"><span id="Language_Content_Date"></span></td>
-					<td align="left">&nbsp;<input type="text" name="adddate" size="17"></td>
+					<td align="left">&nbsp;<input type="text" name="adddate" size="18"></td>
 				  </tr>
 				  <tr>
 					<td align="right"><span id="Language_Content_ArticleTemplate"></span></td>
@@ -181,8 +181,6 @@ function getFekeditorText(editor_name)
 				  </tr>
 			  </table>
 		  </div>
-
-		  <div class="separator"></div>
 
 		  <div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_content_list.htm','pageContent');"></div>
 		</fieldset>
