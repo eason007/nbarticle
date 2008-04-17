@@ -11,7 +11,7 @@
 '= 摘    要：文章打印版本文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-18
+'= 最后日期：2008-04-17
 '====================================================================
 
 Dim ArticleId, ArticleInfo
@@ -65,7 +65,7 @@ EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),
 EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
 EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
 EA_Temp.SetVariable "Article.Author", ArticleInfo(8, 0), PageContent
-EA_Temp.SetVariable "Article.Source", "<a href='" & ArticleInfo(16,0) & "'>" & ArticleInfo(15,0) & "</a>", PageContent
+EA_Temp.SetVariable "Article.Source", ArticleInfo(15,0), PageContent
 EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
 EA_Temp.SetVariable "Article.Content", ArticleInfo(5,0), PageContent
 
