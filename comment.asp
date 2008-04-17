@@ -16,14 +16,24 @@
 '====================================================================
 
 Dim ArticleId, ArticleInfo
+Dim Page
+Dim PageContent
 
 ArticleId	= EA_Pub.SafeRequest(3, "articleid", 0, 0, 3)
 ArticleInfo	= EA_DBO.Get_Article_Info_Single(ArticleId)
+Page		= EA_Pub.SafeRequest(3, "page", 0, 1, 0)
 If Not IsArray(ArticleInfo) Then ErrMsg = SysMsg(34):Call EA_Pub.ShowErrMsg(0, 0)
 If Not ArticleInfo(20, 0) Or ArticleInfo(21, 0) Then ErrMsg = SysMsg(34):Call EA_Pub.ShowErrMsg(0, 0)
 
-EA_Temp.Title	= EA_Pub.SysInfo(0) & " - " & SysMsg(54)
-EA_Temp.Nav		= "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """>" & ArticleInfo(3, 0) & "</a> - <strong>" & SysMsg(54) & "</strong>"
 
+Dim clsComment
 
+Set clsComment = New page_Comment
+
+PageContent = clsComment.Make(ArticleId, ArticleInfo, Page)
+
+Response.Write PageContent
+
+Call EA_Pub.Close_Obj
+Set EA_Pub=Nothing
 %>

@@ -304,6 +304,29 @@ Class cls_DBOperation
 		Get_Review_List=DB_Query(SQL)
 	End Function
 
+	Public Function Get_CommentList(iArticleId, iPageNum)
+		Select Case iDataBaseType
+		Case 0
+			SQL="Select a.Content, IIF(a.UserId=0, UserName, '[会员]'+UserName), a.AddDate"
+			SQL=SQL&" From [NB_Review] a"
+			SQL=SQL&" Where a.IsPass=" & TrueValue
+			SQL=SQL&" AND a.ArticleId=" & iArticleId
+			SQL=SQL&" Order By a.Id Desc"
+
+			Temp=DB_CutPageQuery(SQL,iPageNum,15)
+		Case 1, 2
+			SQL="Select a.Content,Case a.UserId When 0 Then UserName Else '[会员]'+UserName End As [UserName], a.AddDate"
+			SQL=SQL&" From [NB_Review] a"
+			SQL=SQL&" Where a.IsPass=" & TrueValue
+			SQL=SQL&" AND a.ArticleId=" & iArticleId
+			SQL=SQL&" Order By a.Id Desc"
+
+			Temp=DB_CutPageQuery(SQL,iPageNum,15)
+		End Select
+
+		Get_CommentList=Temp
+	End Function
+
 '*******************************************************************
 'article
 	Public Function Get_Article_List(iTop,iColumnId,iArticleType,iIsIncludeChildColumn)
