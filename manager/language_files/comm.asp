@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-16
+'= 最后日期：2008-04-17
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -495,8 +495,8 @@ Const str_Theme_ModuleHome="首页模块"
 Const str_Theme_ModuleCss="Css模块"
 Const str_Theme_ModuleHead="头部模块"
 Const str_Theme_ModuleFoot="底部模块"
-Const str_Theme_ModulePage="模块"
-Const str_Theme_ModuleContent="内页模块"
+Const str_Theme_ModulePage="列表模块"
+Const str_Theme_ModuleContent="内容模块"
 Const str_Theme_ModuleSearch="搜索模块"
 Const str_Theme_ModulePrint="打印模块"
 Const str_Theme_ModuleComment="评论模块"
