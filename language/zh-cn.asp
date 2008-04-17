@@ -96,4 +96,7 @@ SysMsg(52) = "二次输入的新密码不相符！"
 
 'print
 SysMsg(53) = "打印本页"
+
+'comment
+SysMsg(54) = "评论列表"
 %>
