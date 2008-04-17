@@ -52,27 +52,24 @@ End If
 If Not IsView Then 
 	ArticleInfo(5,0)="<br><br><b>您当前的权限不允许查看该文章，请先 [<a href='member/login.asp' target='_blank'>登陆</a>] 或 [<a href='member/register.asp' target='_blank'>注册</a>]。</b>"
 End If
-
-PageContent	= EA_Temp.Load_Template(0, 7)
-
-EA_Temp.Title= ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)
-EA_Temp.Nav	 = "<a href=""" & SystemFolder & """>" & EA_Pub.SysInfo(0) & "</a>" & EA_Pub.Get_NavByColumnCode(ArticleInfo(1, 0), 0) & " - <a href=""" & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)) & """><strong>" & ArticleInfo(3, 0) & "</strong></a>"
-
-EA_Temp.SetVariable "Article.ColumnID", ArticleInfo(0, 0), PageContent
-EA_Temp.SetVariable "Article.ID", ArticleId, PageContent
-EA_Temp.SetVariable "Article.Url", EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18)), PageContent
-EA_Temp.SetVariable "Article.Title", EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0)), PageContent
-EA_Temp.SetVariable "Article.Date", FormatDateTime(ArticleInfo(13, 0), 2), PageContent
-EA_Temp.SetVariable "Article.Time", FormatDateTime(ArticleInfo(13, 0), 4), PageContent
-EA_Temp.SetVariable "Article.Author", ArticleInfo(8, 0), PageContent
-EA_Temp.SetVariable "Article.Source", ArticleInfo(15,0), PageContent
-EA_Temp.SetVariable "Article.Summary", ArticleInfo(4, 0), PageContent
-EA_Temp.SetVariable "Article.Content", ArticleInfo(5,0), PageContent
-
-PageContent	= EA_Temp.Replace_PublicTag(PageContent)
-
-Response.Write PageContent
-
-Call EA_Pub.Close_Obj
-Set EA_Pub = Nothing
 %>
+<html>
+<head>
+<title><%=ArticleInfo(3, 0) & " - " & ArticleInfo(2, 0) & " - " & EA_Pub.SysInfo(0)%></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="zh-CN">
+<style type="text/css">
+body {margin: 5px 20px;font-size: 12px;font-family: Helvetica, Arial, sans-serif;}
+</style>
+</head>
+<body>
+
+<div id="print">
+  <h1><%=EA_Pub.Add_ArticleColor(ArticleInfo(17, 0),ArticleInfo(3, 0))%></h1>
+  <div><strong>网址：</strong><a href="<%=Left(EA_Pub.SysInfo(11), Len(EA_Pub.SysInfo(11)) - 1) & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18))%>"><%=Left(EA_Pub.SysInfo(11), Len(EA_Pub.SysInfo(11)) - 1) & EA_Pub.Cov_ArticlePath(ArticleId, ArticleInfo(13, 0), EA_Pub.SysInfo(18))%></a></div>
+  <div><strong>作者：</strong><%=ArticleInfo(8, 0)%>&nbsp;&nbsp;&nbsp;<strong>来源：</strong><%=ArticleInfo(15,0)%>&nbsp;&nbsp;&nbsp;<strong>日期：</strong><%=ArticleInfo(13, 0)%>&nbsp;&nbsp;&nbsp;<a href="javascript:vod();" onClick="window.print();"><%=SysMsg(53)%></a></div>
+  <div><%=ArticleInfo(5,0)%></div>
+</div>
+
+</body>
+</html>
