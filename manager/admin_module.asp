@@ -11,7 +11,7 @@
 '= 摘    要：后台-模块管理文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-03-12
+'= 最后日期：2008-04-17
 '====================================================================
 
 Call EA_Manager.Chk_IsMaster
@@ -102,8 +102,6 @@ Sub Main
 			Case 6
 				ListValue(5,i) = str_Theme_ModuleSearch
 			Case 7
-				ListValue(5,i) = str_Theme_ModulePrint
-			Case 8
 				ListValue(5,i) = str_Theme_ModuleComment
 			End Select
 			ListValue(6,i) = "action"
@@ -132,14 +130,14 @@ Sub Edit
 		Call EA_M_XML.AppInfo("Desc",TempStr(2,0))
 		Call EA_M_XML.AppInfo("Code",TempStr(3,0))
 
-		Tmp = "(build-select)," & TempStr(4,0) & " " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5 " & str_Theme_ModuleSearch & ",6 " & str_Theme_ModulePrint & ",7 " & str_Theme_ModuleComment & ",8"
+		Tmp = "(build-select)," & TempStr(4,0) & " " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5 " & str_Theme_ModuleSearch & ",6 " & str_Theme_ModuleComment & ",7"
 		Call EA_M_XML.AppInfo("Typer",Tmp)
 
 		Call EA_M_XML.AppElements("Language_Theme_ModuleEdit",str_Theme_ModuleEdit)
 	Else
 		Call EA_M_XML.AppElements("Language_Theme_ModuleEdit",str_Theme_ModuleAdd)
 
-		Tmp = "(build-select),0 " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5 " & str_Theme_ModuleSearch & ",6 " & str_Theme_ModulePrint & ",7 " & str_Theme_ModuleComment & ",8"
+		Tmp = "(build-select),0 " & str_Theme_ModuleHome & ",0 " & str_Theme_ModuleCss & ",1 " & str_Theme_ModuleHead & ",2 " & str_Theme_ModuleFoot & ",3 " & str_Theme_ModulePage & ",4 " & str_Theme_ModuleContent & ",5 " & str_Theme_ModuleSearch & ",6 " & str_Theme_ModuleComment & ",7"
 		Call EA_M_XML.AppInfo("Typer",Tmp)
 	End If
 
