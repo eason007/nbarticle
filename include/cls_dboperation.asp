@@ -305,9 +305,11 @@ Class cls_DBOperation
 	End Function
 
 	Public Function Get_CommentList(iArticleId, iPageNum)
+		Dim Temp
+
 		Select Case iDataBaseType
 		Case 0
-			SQL="Select a.Content, IIF(a.UserId=0, UserName, '[会员]'+UserName), a.AddDate"
+			SQL="Select a.Content, IIF(a.UserId=0, IIF(UserName='','游客',UserName), '[会员]'+UserName), a.AddDate"
 			SQL=SQL&" From [NB_Review] a"
 			SQL=SQL&" Where a.IsPass=" & TrueValue
 			SQL=SQL&" AND a.ArticleId=" & iArticleId
