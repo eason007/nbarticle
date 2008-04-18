@@ -74,6 +74,7 @@ function ajaxObject() {
 					}
 					if(xmlreq.responseText == "-100") {
 						top.location = "./";
+						return false;
 					}
 					if (obj.gReturnMessage == "TEXT") {	
 						obj.returnMessage = xmlreq.responseText.toString();
@@ -178,6 +179,10 @@ function ajaxObject() {
 	/*处理element*/
 	this.replaceElement = function (mtObj) {
 		var xmldoc = mtObj.returnMessage;
+		if(xmldoc.returnMessageText == "-100") {
+			top.location = "./";
+		}
+
 		if(xmldoc.getElementsByTagName("elements").length > 0) {
 			var rowNames = xmldoc.getElementsByTagName("elements");
 			for(var ri=rowNames[0].childNodes.length-1; ri>=0; ri--) {	
