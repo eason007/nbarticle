@@ -20,13 +20,12 @@ else{
 FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
-	FCKeditorAPI = null;
-	var oFCKeditor = new FCKeditor('Content', 650, 350) ;
-	oFCKeditor.BasePath	= "../plugins/fck_editor/";
-	oFCKeditor.ReplaceTextarea() ;
-	__FCKeditorNS = null;
-
 	FormEdit.start();
+
+	tinyMCE.init({
+		mode : "textareas",
+		theme : "simple"
+	});
 }
 
 function checkData(sTargetName) {
@@ -41,8 +40,10 @@ function checkData(sTargetName) {
 
 function getFekeditorText(editor_name)
 {
-    var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
-    returnValue = oEditor.GetXHTML(true);
+    //var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
+    //returnValue = oEditor.GetXHTML(true);
+
+	returnValue = tinyMCE.get(editor_name).getContent();
 
     return returnValue;
 }
