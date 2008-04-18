@@ -24,7 +24,7 @@ var mainMenu = new Array();
 <script type="text/javascript" src="../js/objformedit.js"></script>
 <script type="text/javascript" src="../js/objvalidator.js" defer="true"></script>
 <script type="text/javascript" src="../js/jsdate.js" defer="true"></script>
-<script type="text/javascript" src="../plugins/fck_editor/fckeditor.js" defer="true"></script>
+<script type="text/javascript" src="../plugins/tinymce_editor/tiny_mce.js" defer="true"></script>
 <link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
 </head>
 <body id="center">
@@ -78,9 +78,12 @@ function loadMain(obj){
 	var returnMessage = sContent.replace(regexp1, "");
 	sContent = sContent.match(regexp1);
 
-	$("contentDiv").innerHTML = returnMessage;
-	tabCache[0] = returnMessage;
-	executeScript(sContent);
+	if (document.getElementById("contentDiv"))
+	{
+		$("contentDiv").innerHTML = returnMessage;
+		tabCache[0] = returnMessage;
+		executeScript(sContent);
+	}
 }
 
 function showSubMenu (iMenu) {
