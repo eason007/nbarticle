@@ -23,7 +23,8 @@ function initTabContent(){
 	FormEdit.start();
 
 	tinyMCE.init({
-		mode : "textareas",
+		mode : "exact",
+		elements : "Content",
 		theme : "simple"
 	});
 }
@@ -40,9 +41,6 @@ function checkData(sTargetName) {
 
 function getFekeditorText(editor_name)
 {
-    //var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
-    //returnValue = oEditor.GetXHTML(true);
-
 	returnValue = tinyMCE.get(editor_name).getContent();
 
     return returnValue;

@@ -25,12 +25,13 @@ else{
 FormEdit.doResponseMethodOther = "sw_help_topic_init()";
 
 function initTabContent(){
-	var div = $("myFCKeditor");
-	var fck = new FCKeditor("Content", 645, 410);
-	fck.BasePath	= "../plugins/fck_editor/";
-	div.innerHTML = fck.CreateHtml();
-
 	FormEdit.start();
+
+	tinyMCE.init({
+		mode : "exact",
+		elements : "Content",
+		theme : "simple"
+	});
 }
 
 function checkData(sTargetName) {
@@ -47,10 +48,6 @@ function checkData(sTargetName) {
 }
 
 function RedirectTemplate(iValue,vSelect){
-	//objForm.resetForm();
-	FCKeditorAPI = null;
-	__FCKeditorNS = null;
-
 	var dateVal = FormEdit.dateVal;
 
 	if (dateVal.indexOf("temp_id")>-1)
@@ -64,8 +61,6 @@ function RedirectTemplate(iValue,vSelect){
 	FormEdit.dateVal = dateVal;
 	FormEdit.doResponseMethodOther = "";
 	FormEdit.start();
-
-	$('Content___Frame').src = $('Content___Frame').src;
 }
 
 function inputsource(Str){
@@ -86,8 +81,8 @@ function review_img(){
 
 function getFekeditorText(editor_name)
 {
-    var oEditor = FCKeditorAPI.GetInstance(editor_name) ;
-    returnValue = oEditor.GetXHTML(true);
+    returnValue = tinyMCE.get(editor_name).getContent();
+
     return returnValue;
 }
 </script>
@@ -116,7 +111,7 @@ function getFekeditorText(editor_name)
 					<td align="left">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="77" dataType="Require"></td>
 				  </tr>
 				  <tr>
-					<td align="left" colspan="2" valign="top" id="myFCKeditor"></td>
+					<td align="left" colspan="2" valign="top"><textarea name="Content" id="Content"></textarea></td>
 				  </tr>
 			  </table>
 		  </div>
