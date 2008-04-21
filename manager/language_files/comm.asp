@@ -10,7 +10,7 @@
 '= 摘    要：后台-语言包-公用文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-04-17
+'= 最后日期：2008-04-21
 '====================================================================
 
 Dim str_LeftMenu(8,11)
@@ -44,8 +44,7 @@ str_LeftMenu(4,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChange
 str_LeftMenu(4,2)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makelist_main.htm\');"">生成列表</a>"
 str_LeftMenu(4,3)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makeview_main.htm\');"">生成内容页</a>"
 str_LeftMenu(4,4)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_theme_list.htm\');"">风格管理</a>"
-str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_main.htm\');"">导出风格</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_loadskin_input.htm\');"">导入</a>"
-str_LeftMenu(4,6)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_list.htm\');"">Js文件管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_option.htm\', \'pageAdd\');"">添加</a>"
+str_LeftMenu(4,5)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_list.htm\');"">Js文件管理</a> | <a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./templates/admin_makejs_option.htm\', \'pageAdd\');"">添加</a>"
 
 str_LeftMenu(5,0)="数据库管理"
 str_LeftMenu(5,1)="<a href=""javascript:vod();"" onclick=""javascript:ajaxChangeRightContent(\'./admin_data.asp\',\'\',\'\',false,\'action=backupdata\');"">备份数据库</a>"
