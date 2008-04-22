@@ -213,7 +213,7 @@ Sub Make_Sitemaps()
 
 						If FileTotal = 50000 Then Call Save_Sitemaps(FileIndex, FileTotal, Content, IndexListBlock, IndexContent, SitemapsFront, Template)
 					Else
-						EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "articlelist/article_" & TempArray(0,i) & "_adddate_desc_" & j & ".htm", Block
+						EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "list/" & TempArray(0,i) & "/p_" & j & ".htm", Block
 						EA_Temp.SetVariable "priority", "0.5", Block
 						EA_Temp.SetVariable "changefreq", "weekly", Block
 
@@ -247,7 +247,7 @@ Sub Make_Sitemaps()
 				EA_Temp.SetVariable "priority", "0.8", Block
 				EA_Temp.SetVariable "changefreq", "daily", Block
 			Else
-				EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "articleview/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "-" & Day(TempArray(1,i)) & "/article_view_" & TempArray(0,i) & ".htm", Block
+				EA_Temp.SetVariable "SitemapsFile", SitemapsFront & "view/" & Year(TempArray(1,i)) & "-" & Month(TempArray(1,i)) & "/" & Day(TempArray(1,i)) & "/view_" & TempArray(0,i) & ".htm", Block
 				EA_Temp.SetVariable "priority", "0.8", Block
 				EA_Temp.SetVariable "changefreq", "daily", Block
 			End If
