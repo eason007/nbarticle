@@ -10,7 +10,7 @@
 '= 摘    要：数据库操作类文件
 '=-------------------------------------------------------------------
 '= 最后更新：eason007
-'= 最后日期：2008-04-02
+'= 最后日期：2008-04-24
 '====================================================================
 
 Class cls_DBOperation
@@ -348,7 +348,7 @@ Class cls_DBOperation
 		Case "1"
 			SQL=SQL&" And IsTop="&TrueValue
 		Case "2"
-			SQL=SQL&" And IsDis="&TrueValue
+			'SQL=SQL&" And IsDis="&TrueValue
 		Case "3"
 			SQL=SQL&" And IsImg="&TrueValue
 		End Select
