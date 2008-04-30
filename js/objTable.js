@@ -107,7 +107,7 @@ function tableObject() {
 							hr.innerHTML = trim(obj.noneValue);	
 						}
 					}
-				}	
+				}
 				
 				if(listContents.getElementsByTagName("item").length > 0 && table) {
 					if(table.rows) {

@@ -14,9 +14,6 @@ function formEditObject() {
 	this.doResponseMethod = null;
 	//其他表单数据填充操作
 	this.doResponseMethodOther = '';
-
-	/*是否在在线编辑器*/
-	this.fckName = "";
 	
 	this.start = function(){
 	    if(this.dateVal != "" && this.postUrl!="") {
@@ -96,12 +93,6 @@ function formEditObject() {
 				}
 			}  
         }
-
-		if(this.fckName != "") {
-			oFCKeditor.BasePath	= "/html/FCKeditor/";
-			oFCKeditor.ReplaceTextarea() ;
-			__FCKeditorNS = null;
-	    }
 		
 	    return false;
 	}
@@ -177,21 +168,6 @@ function formEditObject() {
 								}
 							}
 						}
-						else {
-        				    for(var is=0; is<element.options.length; is++) {
-        				        opt = element.options[is];
-        				        evalue = opt.value;
-        						if (!evalue && !('value' in opt)) {
-        						    evalue = opt.text;
-        						} 
-        				        if(evalue == value) {
-        				            opt.selected=true;
-        				        }
-								else {
-        				            opt.selected=false;
-        				        }
-        				    }
-    				    }
         				break;
     				case "select-multiple" :
     				    valueArray = value.split(" ");
@@ -213,19 +189,14 @@ function formEditObject() {
 						}
     					break;
     				case "textarea" :
-						if (element.id.substr(0, 4) == "FCK_") {
-   							this.fckName = element.name;
-   						}
-						else {
-							value = value.replace(/&quot;/g, '"');
-							value = value.replace(/&#039;/g, "'");
-							value = value.replace(/&#92;/g, "\\");
-							value = value.replace(/&lt;/g, "<");
-							value = value.replace(/&gt;/g, ">");
-							value = value.replace(/&#123;/g, "{");
-							value = value.replace(/&#125;/g, "}");
-							element.value = value;
-						}
+						value = value.replace(/&quot;/g, '"');
+						value = value.replace(/&#039;/g, "'");
+						value = value.replace(/&#92;/g, "\\");
+						value = value.replace(/&lt;/g, "<");
+						value = value.replace(/&gt;/g, ">");
+						value = value.replace(/&#123;/g, "{");
+						value = value.replace(/&#125;/g, "}");
+						element.value = value;
     					break;
     				case "text" :
     					value = value.replace(/&quot;/g, '"'); 
