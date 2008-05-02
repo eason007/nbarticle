@@ -203,16 +203,15 @@ function tableObject() {
 		}	
 		
 
-		if(obj.pageTargetID) {
+		if($(obj.pageTargetID)) {
 			var total	= obj.total ? obj.total:0;
-			if($(obj.pageTargetID)) {
-				if(total > 0) {
-					$(obj.pageTargetID).innerHTML= obj.page();
-					$(obj.pageTargetID).style.display = "";
-				}
-				else {
-					$(obj.pageTargetID).innerHTML= "";
-				}
+
+			if(total > 0) {
+				$(obj.pageTargetID).innerHTML= obj.page();
+				$(obj.pageTargetID).style.display = "";
+			}
+			else {
+				$(obj.pageTargetID).innerHTML= "";
 			}
 		}
 
