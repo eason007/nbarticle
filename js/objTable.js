@@ -239,7 +239,6 @@ function tableObject() {
 		if(total > 0) {
     		var nowPage	= this.nowPage ? this.nowPage:1;
     		var prePage	= this.prePage ? this.prePage:10;
-    		var targetID = this.targetID;
     		var pageNum = (total/prePage)>parseInt(total/prePage)?(parseInt(total/prePage)+1):(parseInt(total/prePage));
     		
     		var pageContent = "";
