@@ -9,6 +9,8 @@ $("quickMenu5").innerHTML = mainMenu[4].link[1];
 $("quickMenu6").innerHTML = mainMenu[4].link[2];
 $("quickMenu7").innerHTML = mainMenu[2].link[0];
 $("quickMenu8").innerHTML = "&nbsp;" + mainMenu[2].link[1] + "&nbsp;";
+
+$("username").innerHTML = getCookie("UserName");
 </script>
 
 <div class="mainWindows">
@@ -22,7 +24,7 @@ $("quickMenu8").innerHTML = "&nbsp;" + mainMenu[2].link[1] + "&nbsp;";
 	<div class="right" style="width: 45%;">
 		<div class="title" id="Language_SystemInformation"></div>
 		<ul style="padding-left: 10px; LINE-HEIGHT: 20px;">
-			<li>，你好。[<a href="../" target="_blank">首页</a>]&nbsp;&nbsp;[<a href="login.asp?action=logout">登出</a>]</li>
+			<li><span id="username"></span>，你好。[<a href="../" target="_blank">首页</a>]&nbsp;&nbsp;[<a href="login.asp?action=logout">登出</a>]</li>
 			<li><strong><span id="Language_SystemStat"></span></strong>:<span id="ColumnTotal"></span> <span id="Language_Column"></span>,<span id="TopicTotal"></span> <span id="Language_Article"></span>,<span id="MangerTopicTotal"></span> <span id="Language_AuditArticle"></span>,<span id="UserTotal"></span> <span id="Language_RegUser"></span>,<span id="CommentTotal"></span> <span id="Language_Review"></span></li>
 			<li><strong><span id="Language_SystemVersion"></span></strong>:<span id="SystemVersion"></span>(<span id="DatabaseVersion"></span>)</li>
 			<li><strong><span id="Language_ServerWindow"></span></strong>:<span id="Request_OS"></span>(IP:<span id="Request_Local"></span>)</li>
