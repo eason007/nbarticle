@@ -1,5 +1,5 @@
 #
-# robots.txt for EliteCMS Ver 3.01 Beta1
+# robots.txt for EliteCMS Ver4.00 Beta1
 #
 
 User-agent: *
