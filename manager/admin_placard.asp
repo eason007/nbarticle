@@ -100,9 +100,9 @@ Sub Add
 	
 	Info=EA_DBO.Get_PlacardInfo(PostId)
 	If IsArray(Info) Then 
-		Call EA_M_XML.AppInfo("Title",Info(0,0))
-		Call EA_M_XML.AppInfo("Content",Info(1,0))
-		Call EA_M_XML.AppInfo("OverTime",FormatDateTime(Info(2,0),2))
+		Call EA_M_XML.AppInfo("Title",Info(1,0))
+		Call EA_M_XML.AppInfo("Content",Info(4,0))
+		Call EA_M_XML.AppInfo("OverTime",FormatDateTime(Info(3,0),2))
 	End If
 
 	Call EA_M_XML.AppElements("Language_OperationNotice",str_OperationNotice)
