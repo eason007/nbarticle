@@ -194,13 +194,6 @@ Sub Step2 ()
 						Call AddIndex(TbName, TbIndex, FType, 0)
 					End If
 
-				Case "TableIndex"
-					If Not ChkField(TbName, FName) Then
-						Call AddColumn(TbName, FName, FType)
-					ElseIf LCase(FName) <> "id" Then
-						Call ModColumn(TbName, FName, FType)
-					End If
-
 				Case "TableData"
 					Dim op
 					Dim root
@@ -223,6 +216,13 @@ Sub Step2 ()
 						Rs.update
 						Rs.Close:Set Rs=Nothing
 					End Select
+				
+				Case Else
+					If Not ChkField(TbName, FName) Then
+						Call AddColumn(TbName, FName, FType)
+					ElseIf LCase(FName) <> "id" Then
+						Call ModColumn(TbName, FName, FType)
+					End If
 				End Select
 			Next
 		Next

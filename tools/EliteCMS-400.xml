@@ -166,7 +166,7 @@ EliteCMS.basePath = "<!--Page.Path-->";
 <div id="head"><span class="right"><script type="text/javascript">EliteCMS.showMember();</script></span>演示</div>
 
 <div>
-  <div class="right ad"><!--AdSense.Single(1)--></div>
+  <div class="right ad"></div>
   <div id="logo"><img src="http://www.nbarticle.com/images/nbarticle.gif" alt="" /></div>
 </div>
 <div id="nav">
