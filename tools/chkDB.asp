@@ -184,7 +184,8 @@ Sub Step2 ()
 				FName = objAtr.ChildNodes.item(j).tagName
 				FType = objAtr.ChildNodes.item(j).Text
 
-				If FName = "TableIndex" Then
+				Select Case FName
+				Case "TableIndex"
 					TbIndex = objAtr.ChildNodes.item(j).Attributes(0).Text
 					
 					If TbIndex = "PrimaryKey" Then
@@ -192,13 +193,37 @@ Sub Step2 ()
 					Else
 						Call AddIndex(TbName, TbIndex, FType, 0)
 					End If
-				Else
+
+				Case "TableIndex"
 					If Not ChkField(TbName, FName) Then
 						Call AddColumn(TbName, FName, FType)
 					ElseIf LCase(FName) <> "id" Then
 						Call ModColumn(TbName, FName, FType)
 					End If
-				End If
+
+				Case "TableData"
+					Dim op
+					Dim root
+					Dim Rs
+					Dim ii
+
+					Set Rs = Server.CreateObject("adodb.recordSet")
+					Set root = objAtr.ChildNodes.item(j)
+					op = root.Attributes(0).Text
+
+					Select Case op
+					Case "insert"
+						Rs.Open TbName, Conn, 2, 2
+						Rs.AddNew
+
+						For ii = 0 To root.ChildNodes.Length - 1
+							Rs(root.ChildNodes.item(ii).tagName) = root.ChildNodes.item(ii).Text
+						Next
+
+						Rs.update
+						Rs.Close:Set Rs=Nothing
+					End Select
+				End Select
 			Next
 		Next
 

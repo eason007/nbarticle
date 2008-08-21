@@ -140,6 +140,460 @@
 	<Type>int default 0</Type>
 	<TableIndex name="PrimaryKey">ID</TableIndex>
 	<TableIndex name="ThemesID">ThemesID</TableIndex>
+	<TableData op="insert">
+		<title>头部模块</title>
+		<type>2</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head>
+<title><!--Page.Title--></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<meta name="keywords" content="<!--Page.Keyword-->" />
+<meta name="description" content="<!--Page.Description-->" />
+<meta name="robots" content="all" />
+<meta name="author" content="eason007" />
+<meta name="copyright" content="www.nbarticle.com,所有版权" />
+<link rel="stylesheet" rev="stylesheet" href="<!--Page.Path-->themes/css/style_19-50.css" type="text/css" media="all" />
+<script type="text/javascript" src="<!--Page.Path-->js/public.js"></script>
+<script type="text/javascript">
+EliteCMS.basePath = "<!--Page.Path-->";
+</script>
+</head>
+<body id="center">
+
+<div id="head"><span class="right"><script type="text/javascript">EliteCMS.showMember();</script></span>演示</div>
+
+<div>
+  <div class="right ad"><!--AdSense.Single(1)--></div>
+  <div id="logo"><img src="http://www.nbarticle.com/images/nbarticle.gif" alt="" /></div>
+</div>
+<div id="nav">
+  <!--Column.List Begin-->
+    <!--Parameter(0)-->
+    <a href="<!--Url-->" title="<!--Info-->">[&nbsp;<!--Title-->&nbsp;]</a>&nbsp;&nbsp;
+  <!--Column.List End-->
+</div>
+
+<div id="location">当前位置：<!--Page.Nav--></div>
+
+<!--头部代码结束-->]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>css模块</title>
+		<type>1</type>
+		<themesID>1</themesID>
+		<code><![CDATA[@charset "utf-8";
+
+body {
+	font-family: '宋体','新宋体',arial,verdana,sans-serif;
+	font-size: 12px;
+	color: #666;
+	background: #FFF;
+	margin: 0;
+	padding: 0;
+}
+#center {
+	width: 980px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.hidden {
+	display: none;
+}
+.clear {
+	clear: both;
+}
+
+a {
+	color: #0365BF; 
+	text-decoration: none;
+}
+a:hover {
+	color: #0099FF; 
+	text-decoration: underline;
+	/*text:expression(target="_blank");*/
+}
+
+img {
+	border: 0;
+}
+table {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+form {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+input {
+	font-size: 12px;
+}
+input {
+       border: expression((this.type=="button") ?"#7f9db9 1px solid;":"style");
+}
+
+#head {
+	background: #F7FAFD;
+	border-right: #DBE1E9 1px solid;
+	border-bottom: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+	line-height: 25px;
+	padding: 0 10px;
+}
+#logo {
+	margin: 5px 0;
+}
+#nav {
+	background: #DBF2FF;
+	border: #A9D5F4 1px solid;
+	line-height: 25px;
+	padding: 0 10px;
+}
+#location {
+	border-right: #DBE1E9 1px solid;
+	border-bottom: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+	line-height: 22px;
+	padding: 0 10px;
+	margin-bottom: 5px;
+}
+
+.main {
+	border: #DBE1E9 1px solid;
+	width: 500px;
+	float: left;
+}
+.main .title {
+	line-height: 30px;
+	font-size: 14px;
+	color: #1974C8;
+	font-weight: bold;
+	padding-left: 5px;
+	border-bottom: 1px #DBE1E9 solid;
+	background: #EEF6FE;
+}
+.main .info {
+	line-height: 20px;
+	padding: 0 5px;
+	border-bottom: 1px dotted #AAA;
+}
+.main li {
+	padding-left: 10px;
+	line-height: 25px;
+}
+.main .list a {
+	font-size: 14px;
+}
+.main .subTitle a {
+	font-size: 12px;
+	color: #666; 
+}
+
+.leftBox {
+	border-top: #DBE1E9 1px solid;
+	border-right: #DBE1E9 1px solid;
+	border-bottom: #DBE1E9 1px solid;
+	width: 260px;
+	float: left;
+}
+
+.rightBox {
+	border: #DBE1E9 1px solid;
+	width: 200px;
+	float: right;
+}
+
+#comment {
+	border-bottom: #DBE1E9 1px solid;
+	margin-top: 5px;
+}
+#comment .split {
+	border-bottom: #DBE1E9 1px solid;
+	line-height: 25px;
+	width: 895px;
+}
+#comment .title {
+	border-top: #DBE1E9 1px solid;
+	border-right: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+	line-height: 25px;
+	width: 80px;
+	text-align: center;
+}
+#comment ul {
+	padding-left: 10px;
+	border-right: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+}
+#comment li {
+	line-height: 25px;
+	padding-right: 10px;
+}
+
+#friend {
+	margin-top: 5px;
+	border-bottom: #DBE1E9 1px solid;
+}
+#friend .split {
+	border-bottom: #DBE1E9 1px solid;
+	line-height: 25px;
+	width: 895px;
+}
+#friend .title {
+	border-top: #DBE1E9 1px solid;
+	border-right: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+	line-height: 25px;
+	width: 80px;
+	text-align: center;
+}
+#friend ul {
+	padding-left: 10px;
+	border-right: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+}
+#friend li {
+	line-height: 35px;
+	display: inline;
+	padding-right: 10px;
+}
+
+#foot {
+	background: #F7FAFD;
+	border-top: #DBE1E9 1px solid;
+	border-right: #DBE1E9 1px solid;
+	border-left: #DBE1E9 1px solid;
+	padding: 10px 0;
+	margin-top: 5px;
+}
+#foot li {
+	line-height: 18px;
+	padding-left: 10px;
+}
+
+/*分页样式*/
+#pageNav {
+	padding: 5px;
+	line-height: 25px;
+	float: right;
+}
+#pageNav a:hover {
+	background: #D2EAF6;
+}
+#pageNav .total {
+	background: #FFF;
+	border: 1px solid #E6E6E6;
+	padding: 3px 5px;
+	color: #0066A7;
+}
+#pageNav .current {
+	background: #D2EAF6;
+	padding: 4px 5px;
+	color: #44447B;
+}
+#pageNav .list {
+	background: #FFF;
+	border: 1px solid #E6E6E6;
+	padding: 3px 5px;
+	color: #0066A7;
+	text-decoration: none;
+}
+#pageNav .first,#pageNav .last {
+	background: #FFF;
+	border: 1px solid #E6E6E6;
+	padding: 3px 5px;
+	color: #AAA;
+	text-decoration: none;
+}
+#pageNav input {
+	border: 1px solid #D2EAF6;
+	font-size: 10px;
+	background: #D2EAF6;
+}
+#pageNav #PGNumber {
+	font-size: 11px;
+	background: #FFF;
+}]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>首页模块</title>
+		<type>0</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!--Page.Head-->
+
+<div class="main">
+  <div class="title">最新文章</div>
+  <ul class="list">
+  <!--Topic.List Begin-->
+  <!--Parameter(5,0,0,20,0)-->
+    <li><a href="<!--Url-->"><!--Title--></a>&nbsp;<span class="subTitle"><!--SubTitle--></span></li>
+  <!--Topic.List End-->
+  </ul>
+</div>
+
+<div class="leftBox">asdf
+  <div><!--Vote.Single(1)--></div>
+  <div><!--Vote.Single(2)--></div>
+</div>
+
+<div class="rightBox">asdf</div>
+
+<div class="clear"></div>
+
+<div id="comment">
+  <div class="right split">&nbsp;</div><div class="title">最新评论</div>
+  <ul>
+  <!--Comment.List Begin-->
+  <!--Parameter(5,0,150)-->
+    <li><!--UserName-->&nbsp;对&nbsp;<a href="<!--ArticleUrl-->"><!--ArticleTitle--></a>&nbsp;说：<!--Content--></li>
+  <!--Comment.List End-->
+  </ul>
+</div>
+
+<div id="friend">
+  <div class="right split">&nbsp;</div><div class="title">友情链接</div>
+  <ul>
+  <!--Friend.List Begin-->
+  <!--Parameter(5,0,0)-->
+    <li><a href="<!--Url-->" title="<!--Info-->"><!--Name--></a></li>
+  <!--Friend.List End-->
+  </ul>
+</div>
+
+<!--Page.Foot-->]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>底部模块</title>
+		<type>3</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!--底部代码开始-->
+
+<div id="foot">
+  <ul>
+    <li>关于我们</li>
+    <li>Powered&nbsp;by&nbsp;<!--Info.Version--></li>
+    <li>Copyright&nbsp;&copy;2004&nbsp;-&nbsp;2008&nbsp;<a href="<!--Info.SiteUrl-->" title="<!--Info.SiteName-->"><!--Info.SiteName--></a></li>
+  </ul>
+</div>
+
+</body>
+</html>]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>列表页模块</title>
+		<type>4</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!--Page.Head-->
+
+<div class="main">
+  <div class="title"><!--List.Name--></div>
+  <div class="info"><!--List.Description--></div>
+  <ul class="list">
+  <!--List.Topic Begin-->
+    <li><a href="<!--Url-->"><!--Title--></a>&nbsp;<!--Date--></li>
+  <!--List.Topic End-->
+  </ul>
+  <!--List.PageNav-->
+  <div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<!--Page.Foot-->]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>内容页模块</title>
+		<type>5</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!--Page.Head-->
+
+<div class="main">
+  <div class="title"><!--Article.Title--></div>
+  <div><!--Article.ViewTotal-->/<!--Article.CommentTotal--></div>
+  <div>关键词：<!--Article.Tag--></div>
+  <div><!--Article.Summary--></div>
+  <div><!--Article.Content--></div>
+  <div><span class="right">下一篇：<!--Article.NextTopic--></span><span>上一篇：<!--Article.FirstTopic--></span></div>
+</div>
+
+<div class="leftBox">
+  <ul class="list">
+  <!--Article.RelatedList Begin-->
+  <!--Parameter(5,10,0)-->
+    <li><a href="<!--Url-->"><!--Title--></a>&nbsp;<span class="subTitle"><!--SubTitle--></span></li>
+  <!--Article.RelatedList End-->
+  </ul>
+</div>
+
+<div class="clear"></div>
+
+<!--Page.Foot-->]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>搜索页模块</title>
+		<type>6</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<!--Page.Head-->
+
+<div class="main">
+  <ul>
+    <!--Search.Topic Begin-->
+      <li><a href="<!--Url-->"><!--Title--></a></li>
+    <!--Search.Topic End-->
+  </ul>
+
+  <div><!--Search.PageNav--></div>
+</div>
+
+<div class="clear"></div>
+
+<!--Page.Foot-->]]></code>
+	</TableData>
+	<TableData op="insert">
+		<title>打印页模块</title>
+		<type>7</type>
+		<themesID>1</themesID>
+		<code><![CDATA[<html>
+<head>
+<title><!--Page.Title--></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="zh-CN">
+<meta name="Keywords" content="<!--Page.Keyword-->">
+<meta name="Description" content="<!--Page.Description-->">
+</head>
+<body> 
+<table width="778" border="0" cellspacing="0" cellpadding="0"> 
+<tr> 
+  <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
+      <tr> 
+        <td><h3><!--Article.Title--></h3></td> 
+      </tr> 
+      <tr> 
+        <td>作者:<%=ArticleInfo(8,0)%>　来源:<%=ArticleInfo(16,0)%>　最后修改于：<i><%=ArticleInfo(13,0)%></i>　<a href="javascript:vod();" onClick="window.print();">点击开始打印</a></td> 
+      </tr> 
+      <tr> 
+        <td><!--Article.Content--></td> 
+      </tr> 
+    </table> 
+</body>
+</html>]]></code>
+	</TableData>
 </table>
 <table name="NB_MyFavorites">
 	<Id>int identity(1, 1) not null</Id>
@@ -200,6 +654,10 @@
 	<IsDefault>int default 0</IsDefault>
 	<TableIndex name="PrimaryKey">ID</TableIndex>
 	<TableIndex name="IsDefault">IsDefault DESC</TableIndex>
+	<TableData op="insert">
+		<title>默认模版</title>
+		<isDefault>1</isDefault>
+	</TableData>
 </table>
 <table name="NB_User">
 	<Id>int identity(1, 1) not null</Id>
