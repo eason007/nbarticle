@@ -45,7 +45,7 @@ Sub Chk_Login
 	
 	Temp = EA_DBO.Get_MemberLogin(Login_Accout)
 	If Not IsArray(Temp) Then Call EA_Pub.ShowErrMsg(2, 2)
-	If Temp(1,0) <> Login_Password Then Call EA_Pub.ShowErrMsg(29, 2)
+	If Trim(Temp(1,0)) <> Login_Password Then Call EA_Pub.ShowErrMsg(29, 2)
 	If Temp(2,0) <> 1 Then Call EA_Pub.ShowErrMsg(30, 2)
 	
 	EA_Pub.Mem_Info(0) = Temp(0, 0)
