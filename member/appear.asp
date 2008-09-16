@@ -56,7 +56,7 @@ End If
 <meta http-equiv="Content-Language" content="zh-cn" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=SystemFolder%>js/public.js"></script>
-<script type="text/javascript" src="<%=SystemFolder%>plugins/fck_editor/fckeditor.js"></script>
+<script type="text/javascript" src="<%=SystemFolder%>plugins/tinymce_editor/tiny_mce.js"></script>
 </head>
 <body id="center">
 
@@ -66,7 +66,7 @@ End If
 <div class="left" style="border: #DBE1E9 1px solid;padding: 5px;">
 	<table>
 		<tr>
-			<td><select name="column"> 
+			<td><select name="column" id="Column"> 
                 <option value="0">请选择栏目...</option> 
                 <%
 					ColumnOption=EA_Mem_DBO.Get_MemberAppearColumnList()
@@ -83,10 +83,10 @@ End If
 						Next
 					End If
 				%> 
-              </select>&nbsp;<input type="text" name="title" size="50" value="<%=Title%>" /></td>
+              </select>&nbsp;<input type="text" name="title" id="title" size="50" value="<%=Title%>" /></td>
 		</tr>
 		<tr>
-			<td id="myFCKeditor"></td>
+			<td><textarea name="content" id="content"></textarea></td>
 		</tr>
 	</table>
 </div>
@@ -136,20 +136,37 @@ End If
 
 </form>
 <script type="text/javascript">
+tinyMCE.init({
+	mode : "exact",
+	elements : "content",
+	language: "zh",
+	skin : "o2k7",
+	plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups",
+	width : 645,
+	height : 410,
+
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_buttons1 : "cut,copy,paste,pastetext,pasteword,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,fontsizeselect,|,forecolor,backcolor",
+	theme_advanced_buttons2 : "undo,redo,|,link,image,tablecontrols,removeformat,cleanup,|,charmap,emotions,iespell,media,fullscreen,pagebreak",
+	theme_advanced_buttons3 : "",
+	theme : "advanced"
+});
+
 function checkData() {
 	var f1 = document.a1;
 	var wm = "\n";
 	var noerror = 1;
-	var isAutoRemote=<%=EA_Pub.SysInfo(22)%>;
-	var iEditorType=<%=EA_Pub.SysInfo(24)%>;
+	var isAutoRemote=0;
+	var iEditorType=2;
 
-	var t1 = a1.Column;
+	var t1 = f1.Column;
 	if (t1.value == "" || t1.value == "0") {
 		wm += "请选择添加的栏目\r\n";
 		noerror = 0;
 	}
 
-	var t1 = a1.title;
+	var t1 = f1.title;
 	if (t1.value == "" || t1.value == " ") {
 		wm += "请填写文章的标题\r\n";
 		noerror = 0;
@@ -162,7 +179,8 @@ function checkData() {
 			var sHTML = content1.getHTML();
 		}
 		else{
-			f1.content.value = oEdit1.getHTMLBody();
+			f1.content.value = tinyMCE.get('myFCKeditor').getContent();
+			alert(f1.content.value);
 			var sHTML = f1.content.value;
 		}
 		if (sHTML == "" || sHTML == " ") {
@@ -228,12 +246,6 @@ function review_img(){
 		window.open(''+document.all.img.value+'','','');
 	}
 }
-
-var div = $("myFCKeditor");
-var fck = new FCKeditor("Content", 650, 480);
-fck.BasePath	= "../plugins/fck_editor/";
-fck.Value		= "<%=Text%>";
-div.innerHTML	= fck.CreateHtml();
 </script>
 </body>
 </html>

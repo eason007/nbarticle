@@ -293,7 +293,7 @@ Sub Add
 				If InStr(1,","&Column_Power&",",","&Temp(0,i)&"2,")>0 Then Tmp	= Tmp & "[" & str_Master_Column_Manager & "]"
 				If InStr(1,","&Column_Power&",",","&Temp(0,i)&"3,")>0 Then Tmp	= Tmp & "[" & str_Master_Column_Edit & "]"
 
-				Tmp		= Tmp & "," & Temp(0,i) & " "
+				Tmp		= Tmp & "," & Temp(0,i)
 			End If
 		Next
 	End If
@@ -435,8 +435,6 @@ Sub Save
 		key="000000"&Cstr(Int((999999-1+100000)*Rnd+1))
 		TrueTime=TrueTime&Right(Key,6)
 
-		IsDis=EA_DBO.Get_Column_Info(ColumnId)(11,0)
-
 		If Rs.State=1 Then rs.Close
 		If PostId<>0 Then
 			Sql="Select * From [NB_Content] Where [Id]="&PostId
@@ -458,7 +456,6 @@ Sub Save
 			rs("isimg")		= IsImg
 			rs("img")		= ImgPath
 			rs("istop")		= IsTop
-			rs("IsDis")		= IsDis
 			rs("outurl")	= OutUrl
 			rs("isout")		= IsOut
 			rs("ViewNum")	= ViewNum

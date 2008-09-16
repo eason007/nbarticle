@@ -70,8 +70,6 @@ Class cls_Member_DBOperation
 			rs("byte")=vArticleInfo(11)
 			rs("isimg")=vArticleInfo(7)
 			rs("img")=vArticleInfo(6)
-			rs("IsDis")=vArticleInfo(17)
-			rs("CutArticle")=vArticleInfo(15)
 			If PostId=0 Then
 				rs("AddDate")=vArticleInfo(16)
 				rs("TrueTime")=vArticleInfo(18)

@@ -344,7 +344,7 @@ Sub MakeJs()
 				Content="document.write ('<table><tr><td>·没有任何文章</td></tr></table>');"
 			End If
 
-			FileName="../jsfiles/" & FileName & ".js"
+			FileName="../jsfiles/" & FileName
 			Call EA_Pub.Save_HtmlFile(FileName,Content)
 
 			ID = ID + 1

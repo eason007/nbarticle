@@ -154,7 +154,7 @@ Sub Add
 		End If
 
 		UserGroup=Temp(8,0)
-		Call EA_M_XML.AppInfo("State",Temp(9,0))
+		Call EA_M_XML.AppInfo("State",Abs(Temp(9,0)))
 	End If
 
 	ArticleCount=EA_M_DBO.Get_FlorilegiumStat(Temp(6,0),PostId)(0,0)
@@ -187,6 +187,8 @@ Sub Add
 	Call EA_M_XML.AppElements("Language_Member_ArticleTotal",str_Member_ArticleTotal)
 	Call EA_M_XML.AppElements("Language_Member_LoginPassword",str_Member_LoginPassword)
 	Call EA_M_XML.AppElements("Language_Member_PasswordEditInfo",str_Member_PasswordEditInfo)
+	Call EA_M_XML.AppElements("Language_Comm_Yes",str_Comm_Yes)
+	Call EA_M_XML.AppElements("Language_Comm_No",str_Comm_No)
 
 	Call EA_M_XML.AppElements("btnSubmit",str_Comm_Save_Button)
 	Call EA_M_XML.AppElements("btnReturn",str_Comm_Return_Button)

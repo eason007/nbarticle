@@ -361,10 +361,10 @@ Sub Save
 	If PostId=0 Then 
 		EA_M_DBO.Set_System_ColumnTotal 1
 			
-		Sql="INSERT INTO NB_Column ( Title, Code, Info, IsOut, OutUrl, StyleId, IsReview, IsPost, IsTop, List_TempId, Article_TempId, PageSize, ListPower, IsHide )"
-		Sql=Sql&" VALUES ( '"&Name&"','"&TypeCode&"','"&Info&"',"&IsOut&",'"&OutUrl&"',"&Style&","&IsReview&","&IsPost&","&IsTop&","&List_TempId&","&Article_TempId&","&PageSize&","&Power&","&IsHide&")"
+		Sql="INSERT INTO NB_Column ( Title, Code, Info, IsOut, OutUrl, IsReview, IsPost, IsTop, List_TempId, Article_TempId, PageSize, ListPower, IsHide )"
+		Sql=Sql&" VALUES ( '"&Name&"','"&TypeCode&"','"&Info&"',"&IsOut&",'"&OutUrl&"',"&IsReview&","&IsPost&","&IsTop&","&List_TempId&","&Article_TempId&","&PageSize&","&Power&","&IsHide&")"
 	ElseIf IsNumeric(PostId) And PostId<>"" And PostId<>"0" Then
-		Sql="Update [NB_Column] Set Title='"&Name&"',Info='"&Info&"',IsOut="&IsOut&",OutUrl='"&OutUrl&"',StyleId="&Style&",IsReview="&IsReview&",IsPost="&IsPost&",IsTop="&IsTop&",List_TempId="&List_TempId&",Article_TempId="&Article_TempId&",PageSize="&PageSize&",ListPower="&Power&",IsHide="&IsHide
+		Sql="Update [NB_Column] Set Title='"&Name&"',Info='"&Info&"',IsOut="&IsOut&",OutUrl='"&OutUrl&"',IsReview="&IsReview&",IsPost="&IsPost&",IsTop="&IsTop&",List_TempId="&List_TempId&",Article_TempId="&Article_TempId&",PageSize="&PageSize&",ListPower="&Power&",IsHide="&IsHide
 		If EditCode Then Sql=Sql&",Code='"&TypeCode&"'"
 		Sql=Sql&" Where Id="&PostId
 	End If
