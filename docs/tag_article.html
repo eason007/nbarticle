@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标签：Article.*</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>标签：Article.*</h1>
+</div>
+
+<div class="content">
+	<div class="section">Version (4.00)</div>
+	<br />
+	<div class="section">
+		<h2>说明：</h2>
+		<p>内容页的内容调用。</p>
+		<h3>显示元素：</h3>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>名称</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Article.ColumnID</td>
+					<td>所属栏目ID</td>
+				</tr>
+				<tr>
+					<td>Article.ID</td>
+					<td>文章ID</td>
+				</tr>
+				<tr>
+					<td>Article.Url</td>
+					<td>连接地址</td>
+				</tr>
+				<tr>
+					<td>Article.Title</td>
+					<td>文章标题</td>
+				</tr>
+				<tr>
+					<td>Article.Date</td>
+					<td>发布日期</td>
+				</tr>
+				<tr>
+					<td>Article.Time</td>
+					<td>发布时间</td>
+				</tr>
+				<tr>
+					<td>Article.Author</td>
+					<td>作者</td>
+				</tr>
+				<tr>
+					<td>Article.Source</td>
+					<td>来源</td>
+				</tr>
+				<tr>
+					<td>Article.Summary</td>
+					<td>摘要</td>
+				</tr>
+				<tr>
+					<td>Article.Content</td>
+					<td>正文</td>
+				</tr>
+				<tr>
+					<td>Article.Tag</td>
+					<td>标签</td>
+				</tr>
+				<tr>
+					<td>Article.ViewTotal</td>
+					<td>浏览总数</td>
+				</tr>
+				<tr>
+					<td>Article.CommentTotal</td>
+					<td>评论总数</td>
+				</tr>
+				<tr>
+					<td>Article.FirstTopic</td>
+					<td>上一文章</td>
+				</tr>
+				<tr>
+					<td>Article.NextTopic</td>
+					<td>下一文章</td>
+				</tr>
+				<tr>
+					<td>Article.RelatedList</td>
+					<td>相关文章循环块</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h4>Article.RelatedList调用方法：</h4>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>调用方法</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Parameter(Top, TitleLen, IsColumn)</td>
+					<td>Top - 显示相关文章的数目<br />
+					TitleLen - 显示文章标题的字数<br />
+					IsColumn - 是否只显示栏目内的相关文章。0为不限于本栏目内，1为只限于本栏目内。
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>显示元素</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Title</td>
+					<td>文章标题</td>
+				</tr>
+				<tr>
+					<td>Url</td>
+					<td>连接地址</td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>发布日期</td>
+				</tr>
+				<tr>
+					<td>Time</td>
+					<td>发布时间</td>
+				</tr>
+				<tr>
+					<td>Icon</td>
+					<td>小图标</td>
+				</tr>
+				<tr>
+					<td>Summary</td>
+					<td>摘要</td>
+				</tr>
+				<tr>
+					<td>Author</td>
+					<td>作者</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="separator"></div>
+
+		<h5>调用范例：</h5>
+		<div class="example">
+<pre>
+<p>
+&lt;div&gt;
+&nbsp;&lt;span&gt;&lt;!--Article.Title--&gt;&lt;/span&gt;
+&nbsp;&lt;span&gt;&lt;!--Article.Content--&gt;&lt;/span&gt;
+&nbsp;&lt;div&gt;
+&nbsp;&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&nbsp;&lt;!--Article.RelatedList&nbsp;Begin--&gt;
+&nbsp;&nbsp;&nbsp;&lt;!--Parameter(10,20,0)--&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href="&lt;!--Url--&gt;"&nbsp;target="_blank"&gt;&lt;!--Title--&gt;&lt;/a&gt;&lt;!--Date--&gt;&lt;/li&gt;
+&nbsp;&nbsp;&nbsp;&lt;!--Article.RelatedList&nbsp;End--&gt;
+&nbsp;&nbsp;&lt;/ul&gt;
+&nbsp;&lt;/div&gt;
+&lt;/div&gt;
+</p>
+</pre>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">返回首页(Index)</a></div>
+	<div class="copyright">Copyright&nbsp;&copy;&nbsp;2004-2008&nbsp;EliteCMS</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

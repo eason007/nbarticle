@@ -1,0 +1,62 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./reload.asp";
+FormEdit.dateVal = "action=";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[70]);
+
+	FormEdit.start();
+}
+
+</script>
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_ReLoad_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+	<form id="form1" name="form1" method="post" action="./reload.asp" target="frmAction">
+		<input type="hidden" name="action" value="">
+		<fieldset>
+			<legend id="Language_ReLoad_UpDateSystem"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td>&nbsp;<input type="button" name="btnSubmit1" id="btnSubmit1" onclick="javascript:this.form.action.value='updata';this.form.submit();"></td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset style="margin-top: 5px;">
+			<legend id="Language_ReLoad_MakeSitemaps"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="140">&nbsp;<input type="button" name="btnSubmit2" id="btnSubmit2" onclick="javascript:this.form.action.value='sitemaps';this.form.submit();"></td>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;<span id="Language_ReLoad_MakeSitemaps_Desc"></span></TD>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset style="margin-top: 5px;">
+			<legend id="Language_ReLoad_MakeBaiduNewsop"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="140">&nbsp;<input type="button" name="btnSubmit3" id="btnSubmit3" onclick="javascript:this.form.action.value='baidu_newsop';this.form.submit();"></td>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;<span id="Language_ReLoad_MakeBaiduNewsop_Desc"></span></TD>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+	</div>
+
+	<div style="margin-top: 5px;"><iframe name="frmAction" frameborder="0" scrolling="no" src="" width="90%" height="90"></iframe></div>
+</div>
+
+</div>

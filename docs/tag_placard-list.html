@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标签：Placard.List</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>标签：Placard.List</h1>
+</div>
+
+<div class="content">
+	<div class="section">Version (4.00)</div>
+	<br />
+	<div class="section">
+		<h2>说明：</h2>
+		<p>站点公告的调用。</p>
+		<h3>调用方法：</h3>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>调用方法</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Parameter(Top)</td>
+					<td>调用指定数目的公告。按发布时间倒序排列。</td>
+				</tr>
+				<tr>
+					<td>Parameter(ID=)</td>
+					<td>调用指定ID的公告信息</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h4>显示元素：</h4>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>名称</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Title</td>
+					<td>公告标题</td>
+				</tr>
+				<tr>
+					<td>Content</td>
+					<td>公告内容</td>
+				</tr>
+				<tr>
+					<td>AddTime</td>
+					<td>发布时间</td>
+				</tr>
+				<tr>
+					<td>OverTime</td>
+					<td>过期时间</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="separator"></div>
+
+		<h5>调用范例1：</h5>
+		<div class="example">
+<pre>
+<p>
+&lt;div&gt;
+&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&lt;!--Placard.List&nbsp;Begin--&gt;
+&nbsp;&nbsp;&lt;!--Parameter(2)--&gt;
+&nbsp;&nbsp;&nbsp;&lt;li&gt;标题：&lt;!--Title--&gt;&lt;/li&gt;
+&nbsp;&nbsp;&lt;!--Placard.List&nbsp;End--&gt;
+&nbsp;&lt;/ul&gt;
+&lt;/div&gt;
+</p>
+</pre>
+		</div>
+		<br />
+
+		<h5>调用范例2：</h5>
+		<div class="example">
+<pre>
+<p>
+&lt;div&gt;
+&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&lt;!--Placard.List&nbsp;Begin--&gt;
+&nbsp;&nbsp;&lt;!--Parameter(ID=2)--&gt;
+&nbsp;&nbsp;&nbsp;&lt;li&gt;标题：&lt;!--Title--&gt;[&lt;!--AddTime--&gt;]&lt;/li&gt;
+&nbsp;&nbsp;&lt;!--Placard.List&nbsp;End--&gt;
+&nbsp;&lt;/ul&gt;
+&lt;/div&gt;
+</p>
+</pre>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">返回首页(Index)</a></div>
+	<div class="copyright">Copyright&nbsp;&copy;&nbsp;2004-2008&nbsp;EliteCMS</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

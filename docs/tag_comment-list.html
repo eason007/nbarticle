@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标签：Comment.List</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>标签：Comment.List</h1>
+</div>
+
+<div class="content">
+	<div class="section">Version (4.00)</div>
+	<br />
+	<div class="section">
+		<h2>说明：</h2>
+		<p>提取评论。</p>
+		<h3>调用方法：</h3>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>调用参数</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Parameter(Top, ArticleID, StrLen)</td>
+					<td>Top - 提取的评论数。<br />ArticleID - 指定提取某文章下的评论。0则为全站所有评论。<br />StrLen - 提取评论内容的字数。</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h4>显示元素：</h4>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>名称</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>UserName</td>
+					<td>评论用户</td>
+				</tr>
+				<tr>
+					<td>Content</td>
+					<td>评论内容</td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>发布时间</td>
+				</tr>
+				<tr>
+					<td>ArticleUrl</td>
+					<td>文章连接</td>
+				</tr>
+				<tr>
+					<td>ArticleTitle</td>
+					<td>文章标题</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="separator"></div>
+
+		<h5>调用范例：</h5>
+		<div class="example">
+<pre>
+<p>
+&lt;div&gt;
+&nbsp;&lt;!--Comment.List&nbsp;Begin--&gt;
+&nbsp;&lt;!--Parameter(10,0,150)--&gt;
+&nbsp;&nbsp;&lt;div&gt;
+&nbsp;&nbsp;&nbsp;&lt;!--UserName--&gt;说：
+&nbsp;&nbsp;&nbsp;&lt;p&gt;&lt;!--Content--&gt;&lt;/p&gt;
+&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&lt;!--Comment.List&nbsp;End--&gt;
+&lt;/div&gt;
+</p>
+</pre>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">返回首页(Index)</a></div>
+	<div class="copyright">Copyright&nbsp;&copy;&nbsp;2004-2008&nbsp;EliteCMS</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

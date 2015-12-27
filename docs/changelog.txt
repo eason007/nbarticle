@@ -1,0 +1,553 @@
+﻿EliteArticle Ver 3.00 Beta2
+改进及新特性:
+	1、重新编写管理后台，在Beta1版全面采用Ajax的基础上，加入业界领先的多标签(Tab)浏览的操作方式，增强操作的便捷性。
+	2、优化了部分程序及修正大小10多处Bug，提高了大概3%的系统速度
+	3、FCKEditor更新到2.4版本
+	4、加入生成百度新闻协议功能
+
+07/03/11 更新：
+	1、修正会员收藏夹不能翻页的错误
+		\member\favlist.asp
+	2、调整后台关于百度新闻协议的说明
+		\manager\reload.asp
+		\manager\language_files\comm.asp
+		\manager\templates\reload.htm
+07/03/12 更新：
+	1、修正添加文章和文章模版时的编辑器错误
+		\manager\templates\admin_arttemplate_option.htm
+		\manager\templates\admin_content_option.htm
+
+07/03/13 更新：
+	1、修正保存系统设置时的错误
+		\js\objFormEdit.js
+
+07/13/17 更新：
+	1、修正会员发表文章时无法找到编辑器的错误
+		\editor\fck_editor\fckeditor.asp
+	2、修正标签切换时，添加和编辑内容相冲突
+		\js\manager.js
+		\js\objForm.js
+		\js\objTable.js
+		\manager\admin_index.htm
+		\manager\templates\admin_friend_option.htm
+		\manager\templates\admin_adsense_option.htm
+		\manager\templates\admin_arttemplate_option.htm
+		\manager\templates\admin_column_option.htm
+		\manager\templates\admin_content_option.htm
+		\manager\templates\admin_insidelink_option.htm
+		\manager\templates\admin_interface_option.htm
+		\manager\templates\admin_ip_option.htm
+		\manager\templates\admin_makejs_option.htm
+		\manager\templates\admin_member_option.htm
+		\manager\templates\admin_placard_option.htm
+		\manager\templates\admin_template_option.htm
+		\manager\templates\admin_usergroup_option.htm
+		\manager\templates\admin_vote_option.htm
+
+
+EliteArticle Ver 3.00 Beta1
+改进及新特性:
+	1、重新编写管理后台，全面采用AJAX，提高系统的响应速度，并优化了部分操作流程
+	2、列表页修改为纯HTML输出，加入新的list模版控制标签，取消原ColumnTopicList标签
+	3、内容页取消自动分页功能，如采用手动分页，则输出纯HTML文件
+	4、优化了部分程序的执行方式，提高了大概5%的系统速度
+	5、恢复加入旧有的经典风格模版
+	6、FCKEditor更新到2.3.1版本
+	7、后台编辑器只支持FCKEditor编辑器
+	8、加入新的模版风格 - 仿163新闻中心
+
+07/01/02 更新：
+	1、修正bug
+		\include\cls_public.asp
+		\include\cls_ini.asp
+		\manager\admin_config.asp
+		\manager\admin_usergroup.asp
+
+06/12/20 更新：
+	1、修正bug
+		\manager\reload.asp
+
+06/11/20 更新：
+	1、修正bug
+		\manager\admin_makeview.asp
+
+06/11/19 更新：
+	1、优化
+		\js\public.js
+	2、内容页加入摘要的输出及规范连接地址的输出
+		\article.asp
+		\manager\admin_makeview.asp
+
+06/11/16 更新：
+	1、修正bug
+		\manager\admin_config.asp
+
+06/11/12 更新：
+	1、调整sitemaps输出文件的优先级别
+		\manager\reload.asp
+	2、调整rss输出内容
+		\rssfeed.asp
+	3、优化在大批量生成html内容页时的速度
+		\include\cls_public.asp
+		\manager\admin_makeview.asp
+	4、调整系统架构
+		\include\inc.asp
+		\include\_cls_template.asp
+	5、调整asp列表页及内容在渲染Tag标签时的内容
+		\list.asp
+		\article.asp
+	6、调整html列表页和内容在渲染Tag标签时的内容
+		\manager\admin_makeview.asp
+		\manager\admin_makelist.asp
+	7、优化搜索流程
+		\search.asp
+	8、优化部分后台程序
+		\manager\login.asp
+		\manager\admin_data.asp
+		\manager\admin_master.asp
+		\manager\admin_content.asp
+		\manager\admin_index.asp
+		\manager\comm\inc.asp
+	9、修正上传文件管理部分的错误
+		\manager\admin_upfile.asp
+		\manager\templates\admin_upfile_list.htm
+		\js\objajax.js
+		\js\objformedit.js
+
+06/09/26 更新：
+	1、常规更新
+		\js\objAjax.js
+		\js\objTable.js
+	2、会员修改资料的错误
+		\include\cls_dboperation.asp
+
+06/09/13 更新：
+	1、优化列表页的pagenav输出
+		\include\cls_template.asp
+		\manager\admin_makelist.asp
+	2、删除会员组的错误
+		\manager\admin_usergroup.asp
+	3、文章tag连接改为限定搜索关键字字段
+		\article.asp
+		\manager\admin_makeview.asp
+	4、会员发表文章后的提示
+		\member\appear.asp
+
+06/08/26 更新：
+	1、在列表页新增作者和tag的模版标签输出
+		\manager\admin_makelist.asp
+		\list.asp
+		\include\cls_dboperation.asp
+	2、后台添加或修改失败，不跳转页面，不清空内容
+		\js\manager.js
+	3、取消发布文章时，对于关键字的长度限制
+		\manager\admin_content.asp
+	4、调整内容页的keyword输出，应该是文章关键词在前
+		\manager\admin_makeview.asp
+		\article.asp
+	5、添加文章时，不先清除编辑器的内容，添加成功后才清理
+		\manager\templates\admin_content_option.htm
+
+06/08/24 更新：
+	1、去除栏目属性中关于列表风格的设置
+		\manager\templates\admin_column_option.htm
+		\manager\admin_makeview.asp
+	2、在内容页新增tag输出，新增模版标签{$TagList$}
+		\manager\admin_makeview.asp
+		\article.asp
+	升级方法：在数据库高级管理执行以下语句
+		Alter Table [NB_Content] Alter Column [KeyWord] VarChar(250) Null
+
+06/08/20 更新：
+	1、调整在输出图片列表时，如标题长度为0，则关闭一些无效输出
+		\include\cls_template.asp
+	2、一般更新
+		\manager\templates\admin_content_option.htm
+		\manager\admin_makejs.asp
+		\manager\comm\cls_makejs.asp
+	3、注册时日期不可选
+		\member\register.asp
+
+06/08/16 更新：
+	1、取消默认会员组不能编辑
+		\manager\admin_usergroup.asp
+		\manager\language_files\comm.asp
+
+06/08/14 更新：
+	1、生成内容页无法选择日期
+		\manager\templates\admin_makeview_main.htm
+	2、sql版无法生成当日内容页
+		\manager\admin_makeview.asp
+	3、一般更新
+		\manager\admin_data.asp
+		\include\cls_dboperation.asp
+	4、内容页没有分页时，不显示页码
+		\article.asp
+		\manager\admin_makeview.asp
+	5、发表文章后，清空编辑器的内容
+		\manager\templates\admin_content_option.htm
+
+06/08/11 更新：
+	1、修正文章添加后再添加时出错
+		\manager\templates\admin_content_option.htm
+	2、修正在ie下，编辑器不能多次载入的错误
+		\manager\templates\admin_content_list.htm
+		\manager\templates\admin_arttemplate_list.htm
+		\manager\language_files\comm.asp
+	3、修正会员修改个人资料时，日历不能打开
+		\member\changecase.asp
+
+06/08/10 更新：
+	1、取消编辑器中的“浏览服务器”的按钮
+		\editor\fck_editor\fckconfig.js
+	2、修正后台删除模版时的错误。
+		\manager\admin_template.asp
+	3、修正前台会员发布文章的错误
+		\include\cls_editor.asp
+		\editor\fck_editor\fckeditor.asp
+	4、修正搜索不能选择日期的错误
+		\search.asp
+
+06/08/08 更新：
+	1、修正生成html列表页时无法全选/反选
+		\manager\templates\admin_makelist_main.htm
+		\js\manager.js
+	2、修正管理员编辑连接在ie下无效的错误
+		\manager\templates\admin_master_list.htm
+
+06/08/07 更新：
+	1、一般更新
+		\manager\templates\admin_makejs_option.htm
+		\manager\admin_makejs.asp
+		\manager\admin_makeview.asp
+		\article.asp
+		\userloginbar.asp
+	2、修正设定标题长度为0还存在输出的问题
+		\include\cls_public.asp
+
+06/08/06 更新：
+	1、修正编辑管理员权限时，全选/反选按钮不可用
+		\manager\templates\admin_master_list.htm
+		\manager\language_files\comm.asp
+	2、取消系统内有关内容页分页模式的选项
+		\manager\admin_config.asp
+		\manager\admin_content.asp
+		\manager\templates\admin_config.htm
+		\manager\templates\admin_content_option.htm
+	3、取消内容页显示时，判断分页模式。改为自动获取分页标记，无如标记，只一页显示
+		\manager\admin_makeview.asp
+		\article.asp
+	4、将FCK编辑器的“加入分页符”按钮添加的标记改为文章系统专用的分页符号，位置在工具栏第3行倒数第2
+		\editor\fck_editor\fckconfig.js
+		\editor\fck_editor\editor\js\*.*
+
+
+
+EliteArticle Ver 2.20
+改进及新特性:
+	1、系统默认模版改为改为xhtml-严格型标准
+		/article.asp
+		/list.asp
+		/include/cls_template.asp
+		/include/cls_public.asp
+		/js/public.js
+		/js/cutarticle.js
+		/js/exchangestyle.js
+		/manager/comm/cls_makejs.asp
+		/manager/admin_makeview.asp
+		/manager/admin_makelist.asp
+		/manager/admin_template.asp
+
+	2、优化列表页的mate标签内容
+		/list.asp
+		/manager/admin_makelist.asp	
+BUG修正:
+	1、我的列表页面删除文章后出错
+		\include\cls_dboperation.asp
+
+06/03/22 - 更新
+1、不能打开投票连接
+	/include/cls_template.asp
+	/js/public.js
+2、getarticlelist标签调用图片并设为显示分类时错误
+	/include/cls_template.asp
+3、跟随google的sitemap标准升级生成程序
+	/manager/reload.asp
+
+
+06/04/12 - 更新
+1、优化HTML生成模块
+	/include/cls_template.asp
+2、添加系统设置时的提示文字
+	/manager/admin_config.asp
+3、修正需权限浏览的栏目文章可通过rss获取
+	/rssfeed.asp
+4、修正首页调用错误
+	/topicquery.asp
+5、优化图片标签输出代码
+	/include/cls_template.asp
+6、调整列表的页面标题输出内容
+	/list.asp
+	/manager/admin_makelist.asp
+7、更新tinymce编辑器版本
+	/editor/tinymce_editor/*.*
+8、更新fck编辑器版本[可选]
+	/editor/fck_editor/*.*
+
+
+06/04/23 - 更新
+1、修正html输出代码
+	/include/cls_template.asp
+2、修正getarticlelist标签的错误[在选择以图片样式输出，并显示栏目名称时，标题连接无效]
+	/include/cls_template.asp
+3、修正推荐文章的错误
+	/manager/admin_content.asp
+4、修正xml-rpc模块中同一动作无法同步多个接口的错误
+	/include/cls_xml_rpc.asp
+5、加入对dpo接口的支持[在协议模版中加入针对DPO接口的验证码标签,参考dpo_register.xml]
+	/include/cls_xml_rpc.asp
+	/xml_rpc/dpo_register.xml
+	
+
+
+
+EliteArticle 2.1 RC1
+改进及新特性:
+	1、调整模版编辑时的流程及提示语言
+	2、新增sitemaps生成功能	
+	3、优化评论页面的显示格式
+BUG修正:
+	1、getarticlelist标签对于现有参数提示错误
+	2、企业版后台文章管理中查看当日文章错误
+	3、发布文章时对关键字的长度判断错误
+	4、编辑投票后前台查看及投票均出错
+	5、编辑“会员列表”及“图片列表”页模版，提交后出错
+	6、调整模版头部，以实现utf-8模式下正确显示中文
+
+
+05/12/19 - 更新
+1、同一页面显示多个投票时无法投票
+	include\cls_template.asp
+2、sitemaps生成的sitemps索引文件指向路径错误
+	/manager/reload.asp
+3、修正详细评论页翻页后格式显示错误
+	/review.asp
+	/js/public.js
+4、发布及编辑文章时，把无权限的栏目屏蔽
+	/manager/admin_content.asp
+5、优化FCK编辑器工具栏的加载内容及显示中文字体
+	\editor\fck_editor\editor\css\fck_editorarea.css
+	\editor\fck_editor\fckconfig.js
+6、新增TinyMCE编辑器[v2.0.1]
+	\include\cls_editor.asp
+	\manager\templates\admin_config.htm
+	\manager\templates\admin_content_option.htm
+	\editor\tinymce_editor\*.*
+7、修改公告时显示的时间不正确
+	\manager\admin_placard.asp
+8、修改公告列表显示样式
+	\include\cls_template.asp
+9、调整发布文章的代码
+	include\cls_dboperation.asp
+	manager\admin_content.asp
+	member\appear.asp
+10、加入新版的说明文件
+	说明文档\index.html
+11、削减在线编辑器，改为自带eWebediror及TinyMCE编辑器；FCK及InnovaStudio编辑器为补充插件形式
+
+
+06/01/08 - 更新
+1、后台多处列表的分页记录统计数与实际分页数不符
+	\manager\admin_vote.asp
+	\manager\admin_adsense.asp
+	\manager\admin_arttemplate.asp
+	\manager\admin_review.asp
+	\manager\admin_insidelink.asp
+	\manager\admin_interface.asp
+	\manager\admin_ip.asp
+	\manager\admin_member.asp
+	\manager\admin_placard.asp
+	\manager\admin_friend.asp
+2、内容页生成的外部链接不能自动跳转
+	/manager/admin_makeview.asp
+	/manager/admin_makelist.asp
+	/include/cls_public.asp
+3、相关文章加入显示数目控制
+	/article.asp
+	/include/cls_dboperation.asp
+	/manager/admin_makeview.asp
+	/include/cls_template.asp
+
+
+06/01/23 - 更新
+1、优化html栏目页及内容的生成
+	/manager/admin_makelist.asp
+	/manager/admin_makeview.asp
+	/js/exchangestyle.js
+2、调整后台头部连接
+	/manager/templates/admin_top.htm
+	/manager/language_files/comm.asp
+	/manager/admin_top.asp
+3、栏目列表页转换风格自动回页面头部
+	/js/exchangestyle.js
+
+
+06/02/08 - 更新
+1、修正在"批量生成静态内容页"时,选"按日期生成"且不填日期就点确定时发生的错误
+	/manager/admin_makeview.asp
+2、强化数据库查询类功能，并优化了其中一个函数
+	\include\cls_dboperation.asp
+3、优化sitemaps生成，以解决在大数据量下生成时的速度过慢的问题。
+	/manager/reload.asp
+4、搜索结果改为降序排列
+	/search.asp
+5、优化rss内容，将原来只显示摘要改为显示全部内容及加入评论地址节点
+	\include\cls_dboperation.asp
+	\rssfeed.asp
+6、加入新风格——银色淡雅
+7、说明文档加入接口的使用及开发说明
+
+
+
+EliteArticle 2.10
+改进及新特性:
+	1、全新的后台界面
+	2、全系统UTF-8化
+	3、加入列表页用ChildColumnNav标签[具体请看标签说明]
+	4、加入XML-RPC数据接口，可广泛用于系统整合、离线式数据管理
+	5、阿江探针升级到最新版[v1.92]
+	6、FCKeditor升级到最新版[v2.1.1]
+	7、加入InnovaStudio编辑器[v2.3]
+	8、针对服务器装有卡巴斯基杀毒软件时出现的某些进行了处理
+	9、加入浏览内容页时自动重新统计评论总数的处理
+BUG修正:
+	1、批量生成内容页时的页面关键字的错误
+	2、修正了模版标签没有填写完时会出现的错误
+	3、修正在详细评论页面不能显示评论的错误
+	4、修正在注册会员时二次输入密码不同时的脚本错误提示
+	5、修正了注册会员时qq号不能输入12位及以上的错误
+	...........
+
+05/11/03-更新
+1、/manager/templates/admin_makejs_list.htm - 修正调用语句格式
+2、/manager/admin_serverinfo.asp - 修正该文件在瑞星下提示为木马的错误
+3、list.asp - 修正在html模式下，浏览该页面的错误
+4、/manager/templates/admin_placard_option.htm - 修正编辑公告变为添加公告的错误
+5、/include/cls_template.asp - 修正DisList标签调用时的路径错误
+6、/manager/templates/*.* - 修正后台多处界面在800*600分辨率下显示移位
+7、/include/cls_public.asp - 修正在生成html文件时，因没有权限而出现的页面错误
+8、create.asp - 修正在安装时提示文字乱码的错误
+9、加入蓝色风格 - 用户请自行对照“标签说明.txt”中的说明而修改模版里的标签调用参数
+
+
+05/11/14 - 更新
+1、调查标签不能调用多次
+	/include/cls_template.asp
+2、前台会员发表文章，后台不能正确接收
+	/include/cls_editor.asp
+	/member/appear.asp
+3、后台发表文章如使用innova编辑器时，会二次提交
+	/manager/templates/admin_content_option.htm
+4、后台查看磁盘空间不能显示具体数值
+	/manager/admin_data.asp
+5、调整fck编辑器的上传过滤流程，增强安全性
+	editor\fck_editor\editor\filemanager\browser\default\connectors\asp\commands.asp
+	editor\fck_editor\editor\filemanager\upload\asp\upload.asp
+6、修正会员注册及修改资料时出现空白页面的错误
+	include/cls_xml_rpc.asp
+7、调整后台模版编辑流程
+	manager\language_files\comm.asp
+	manager\templates\admin_template_option.htm
+	manager\admin_template.asp
+8、修正自动更新提示路径
+	manager\templates\admin_main.htm
+9、不能正确发送邮件
+	email.asp
+10、配置文件会泄露安全信息
+	include\cls_public.asp
+	email.asp
+	manager\admin_config.asp
+
+
+
+EliteArticle 2.0 RC2
+1、改进系统流程，减少运行时对系统资源的消耗
+2、修正搜索不能提取当日的错误
+3、修正后台批量删除文章时的错误
+4、加入一些系统常用CSS样式(具体看系统CSS.txt)
+5、修正注册时该用户名已被注册的提示错误
+......
+
+
+EliteArticle 2.0 RC1
+1、加入系统调试模式，以方便查错
+2、加入首页在HTML模式下是否自动跳转到HTML页的选项
+3、GetArticleList标签加入是否提取下属栏目的参数
+4、修正会员组会员列表中移动组时的错误
+5、修正其他地方一些小错误
+......
+
+
+EliteArticle 2.0
+1、更优化的系统流程
+2、加入了自动更新统计的功能
+3、一些其他的地方修改不记得了。。
+......
+
+
+EliteArticle 2.0 Beta2
+1、更优化的系统流程
+2、修正自beta1以来的几个未修正错误
+3、加入两个在文章内容页的标签
+4、修正在列表及内容页指定其他模版时的头尾不相符的错误
+....
+
+
+EliteArticle 2.0 Beta 1
+1、加入显示可打印的版本页面
+2、会员组每日投稿数限制
+3、会员列表，加入按投稿数、会员组、注册日期排列
+4、会员可修改已发布的文章
+5、提取文章时，日期靠右显示
+6、最新评论列表
+7、后台与官方论坛的连接
+8、屏蔽ip可设置屏蔽时间
+9、投票可通过调用标签指定调用哪个投票项目
+10、删除文章时检测html是否存在，是则删除
+11、各个栏目使用不同风格
+12、各栏目文章可单独指定显示风格
+13、公告加入结束时间
+14、公告可以通过调用标签决定提取多少条公告，0=默认为10条最新
+15、文章调用标签，加入是否显示新标签参数
+16、文章调用标签，加入是否新开窗口参数
+17、文章调用标签，加入可调用作者
+18、文章调用标签，加入是否显示文章类型图标
+19、内容页取消固定文字大小
+20、加入会员排行榜模版标签
+21、各栏目可定义分页显示记录数
+23、增强对搜索引擎的支持，在内容页，把文章摘要放在meta标签的Description里
+24、增强对搜索引擎的支持，文章内容放在xml里，通过客户端js处理，避免所谓的作弊现象
+25、会员可删除已发布的文章
+26、增强对搜索引擎的支持，所有的img连接都加上alt
+27、文章简介文字改为文章摘要
+28、在asp路径检测到为html的时候，先检测html文件是否存在，不存在，则先生成html后再跳转
+29、加入上传图片的管理
+30、加入对多个编辑器的支持
+31、可分别设置管理员后台及会员投稿使用的在线编辑器
+32、可设置发布文章时，是否自动上传远程图片及分页方式、分页字数、编辑等设置
+33、加入对广告的支持
+34、更详细的系统空间占用图表
+35、业界首创的增强型搜索功能，支持多种逻辑搜索
+36、后台完整支持各语种间的自由转换
+37、增强对搜索引擎的支持，在内容页，把文章的关键字与站点关键字相结合放在meta标签里
+38、更优化的代码结构
+39、更安全的传入参数过滤
+40、导航栏可完整显示路径的层次
+41、列表页加入显示下属栏目最新文章的标签
+41、投票可设置是否允许游客参加
+42、修正会员保存登陆资料中的一个安全问题
+43、改进了系统安装流程，只保留连接数据库操作
+......
+
+
+NBArticle 1.xx (05/03/01 - 04/08/09)

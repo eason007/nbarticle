@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>SuperPassport(数据接口)</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>SuperPassport(数据接口)</h1>
+</div>
+
+<div class="content">
+	<h2>说明</h2>
+	<div class="section">
+		<p>NB文章系统(NBArticle) 的SuperPassport(数据接口)，顾名思义，即是专门用于各系统之间的数据传递、整合、备份而开发的一个通行证技术。利用此接口，用户可以很容易的和其他应用系统——例如论坛/blog等——等进行数据的传递和整合，也可以用于关键数据的备份。</p>
+		<p>由于该接口使用了领先业界的 XML-RPC 通讯协议，因此在数据传递时不受对方应用系统的开发语言、数据库系统、服务器系统等——即无论对方的应用系统为ASP/ASP/JSP/.NET/CGI等，数据库为ACCESS/MSSQL/MYSQL等，服务器系统为WINDOWS/WINDOWS NT/LINUX/UNIX等——影响，并且与传统的方法相比，该接口无需修改对方或自身的程序，因此在面临系统版本升级时，无需再次进行整合工作。</p>
+		<p>目前该接口可用于会员注册/修改基本资料/修改安全资料等功能，日后将继续开发如：文章发布等功能。</p>
+		<div class="separator"></div>
+		<h2>使用方法</h2>
+		<p>
+			<ul>
+				<p>1、登陆管理后台，打开左侧菜单的接口管理，点击 添加 连接。<br />
+				2、在 接口说明 处填写当前接口的简单说明，如“与本站论坛的接口”。<br />
+				3、在 远程接口地址 处，填入被连接应用系统的接口地址，如：http://www.xxx.com/bbs/xml-prc/index.asp。<br />
+				4、在 接口文件 处，填写被连接应用系统的接口规范模版文件名，该文件必须放置在 /xml_rpc/ 目录下，并且符合XML-RPC协议规范。<br />
+				5、在 接口类型 处，选择需与被连接应用系统进行连接的动作。<br />
+				6、在 接口密匙 处，填写于被连接应用系统的接口密匙。<br />
+				<br />
+				注：同一动作可绑定多个接口；接口密匙为对方定义之密匙。
+				</p>
+			</ul>
+		</p>
+		<div class="separator"></div>
+		<h2>开发方法——接收</h2>
+		<p>
+			<ul>
+				<p>本小节的内容，指的是由 NB文章系统(NBArticle) 的 SuperPassport(数据接口) 接收数据的操作。SuperPassport(数据接口) 只接收对 NB文章系统(NBArticle) 有用的数据。</p>
+				<li><strong>用户注册</strong>&nbsp;[<a href="nbarticle_register.xml" target="_blank">代码示例</a>]</li>
+				<li><strong>用户修改基本资料</strong>&nbsp;[<a href="nbarticle_editeinfo.xml" target="_blank">代码示例</a>]</li>
+				<li><strong>用户修改安全资料</strong>&nbsp;[<a href="nbarticle_editsafeinfo.xml" target="_blank">代码示例</a>]</li>
+				<br /><br />
+				注：接口密匙为 /connection.asp 文件中 sCacheName 变量定义之内容。
+			</ul>
+		</p>
+		<div class="separator"></div>
+		<h2>开发方法——发送</h2>
+		<p>
+			<ul>
+				<p>本小节的内容，指的是由 NB文章系统(NBArticle) 的 SuperPassport(数据接口) 发送数据的操作。SuperPassport(数据接口) 只发送对 NB文章系统(NBArticle) 自身的数据。</p>
+				<li><strong>用户注册</strong></li><br />
+				内容包括：用户名、密码(明文)、E-Mail地址、取回密码问题、取回密码问题的答案、性别(1=男，0=女)、个人主页地址、QQ号码、ICQ号码、MSN地址、姓名、生日(yy/mm/dd)、来自于。
+				<li><strong>用户修改基本资料</strong></li><br />
+				内容包括：用户名、密码(明文)、E-Mail地址、性别(1=男，0=女)、个人主页地址、QQ号码、ICQ号码、MSN地址、姓名、生日(yy/mm/dd)、来自于。
+				<li><strong>用户修改安全资料</strong></li><br />
+				内容包括：用户名、原密码(明文)、新密码(明文)、取回密码问题、取回密码问题的答案。
+				<p>
+				注：
+				<ul>
+					<li>具体例子可查看程序根目录下的 xml_rpc 子目录中的 nbarticle_register.xml、nbarticle_editeinfo.xml、nbarticle_editsafeinfo.xml 文件，其分别是 用户注册、用户修改基本资料、用户修改安全资料 。</li>
+					<li>接口密匙将由后台添加接口时的 接口密匙 内容填充。</li>
+				</ul>
+				</p>
+			</ul>
+		</p>
+		<div class="separator"></div>
+		<p>欢迎各应用系统的开发者与我们联系有关 NB文章系统(NBArticle) SuperPassport(数据接口) 的任何问题。</p>
+		<p>您可以访问以下网址获得更多信息：NB文章系统官方站点：<a href="http://www.nbarticle.com/" target="new">http://www.nbarticle.com/</a></p>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">返回首页(Index)</a></div>
+	<div class="copyright">Copyright&nbsp;&copy;&nbsp;2004-2008&nbsp;EliteCMS</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

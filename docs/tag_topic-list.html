@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标签：Topic.List</title>
+<link href="css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+	<h1>标签：Topic.List</h1>
+</div>
+
+<div class="content">
+	<div class="section">Version (4.00)</div>
+	<br />
+	<div class="section">
+		<h2>说明：</h2>
+		<p>文章的调用。</p>
+		<h3>调用方法：</h3>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>参数</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Parameter(Top, ColumnID, Type, TitleLen, IsChild)</td>
+					<td>
+					Top - 提取的文章总数。<br />
+					ColumnID - 提取指定栏目ID的文章，如设置为0，则提取所有栏目的文章。<br />
+					Type - 0为最新文章；1为推荐文章；3为图片文章；4为浏览最多文章；5为随机提取。<br />
+					TitleLen - 文章显示的标题长度。<br />
+					IsChild - 是否包含指定栏目的子栏目。1为包含；0为不包含。只有ColumnID不为0时才有效。
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h4>显示元素：</h4>
+		<table border="1" cellspacing="0" cellpadding="4">
+			<thead>
+				<tr>
+					<td>名称</td>
+					<td>描述</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Title</td>
+					<td>文章标题</td>
+				</tr>
+				<tr>
+					<td>Url</td>
+					<td>文章连接地址</td>
+				</tr>
+				<tr>
+					<td>SubTitle</td>
+					<td>副标题。如设置了副标题的连接，则自动加上连接。</td>
+				</tr>
+				<tr>
+					<td>Img</td>
+					<td>文章头图</td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>发布日期</td>
+				</tr>
+				<tr>
+					<td>Time</td>
+					<td>发布时间</td>
+				</tr>
+				<tr>
+					<td>Author</td>
+					<td>作者</td>
+				</tr>
+				<tr>
+					<td>Icon</td>
+					<td>文章小图标</td>
+				</tr>
+				<tr>
+					<td>ColumnName</td>
+					<td>所属栏目名称</td>
+				</tr>
+				<tr>
+					<td>ColumnUrl</td>
+					<td>所属栏目连接</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="separator"></div>
+
+		<h5>调用范例：</h5>
+		<div class="example">
+<pre>
+<p>
+&lt;div&gt;
+&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&lt;!--Topic.List&nbsp;Begin--&gt;
+&nbsp;&nbsp;&lt;!--Parameter(10,0,1,23,0)--&gt;
+&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a&nbsp;href="&lt;!--Url--&gt;"&nbsp;target="_blank"&gt;&lt;!--Title--&gt;&lt;/a&gt;&lt;!--Date--&gt;&lt;/li&gt;
+&nbsp;&nbsp;&lt;!--Topic.List&nbsp;End--&gt;
+&nbsp;&lt;/ul&gt;
+&lt;/div&gt;
+</p>
+</pre>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div class="helpindexlink"><a href="index.html">返回首页(Index)</a></div>
+	<div class="copyright">Copyright&nbsp;&copy;&nbsp;2004-2008&nbsp;EliteCMS</div>
+	<br style="clear: both" />
+</div>
+
+</body>
+</html>

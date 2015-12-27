@@ -1,0 +1,58 @@
+<script type="text/javascript">
+//objTable.debug = true;
+objTable.setURL("./admin_review.asp");
+objTable.dateVal = "action=";
+objTable.noneValue = "<br /><br />"+listEmpty+"<br /><br /><br />";
+objTable.doResponseOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[110]);
+
+	objTable.start();
+}
+
+function query(flag,data){
+	for (var i=0;i<=5 ;i++ )
+	{
+		$('menu'+i).className="";
+		if (i == flag)
+		{
+			$('menu'+i).className="abg";
+		}
+	}
+
+	objTable.nowPage = 1;
+	objTable.dateVal = "action=''&" + data;
+	initTabContent();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Review_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<div class="menu2" style="TEXT-ALIGN: left;"><a href="javascript:vod();" onclick="javascript:query(0,'');" id="menu0" class="abg"><span id="Language_Comm_AllColumn"></span><a href="javascript:vod();" onclick="javascript:query(1,'w=1d');" id="menu1"><span id="Language_Comm_Today"></span></a><a href="javascript:vod();" onclick="javascript:query(2,'w=1w');" id="menu2"><span id="Language_Comm_Week"></span></a><a href="javascript:vod();" onclick="javascript:query(3,'w=1m');" id="menu3"><span id="Language_Comm_Month"></span></a><a href="javascript:vod();" onclick="javascript:query(4,'w=npass');" id="menu4"><span id="Language_Comm_State_NoPass"></span></a><a href="javascript:vod();" onclick="javascript:query(5,'w=pass');" id="menu5"><span id="Language_Comm_State_Pass"></span></a>
+		</div>
+		<table width="100%" id="listTable" style="white-space:nowrap;word-break: break-all;">
+		  <tr>
+			<th style="width: 5px;"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);"></th>
+			<th><span id="Language_Review_Content"></span></th>
+			<th><span id="Language_Review_User"></span></th>
+			<th><span id="Language_Review_UnderArticle"></span></th>
+			<th><span id="Language_Review_State"></span></th>
+			<th><span id="Language_Review_AddTime"></span></th>
+		  </tr>
+		</table>
+		<div style="BACKGROUND: #efefef;height:25px;">
+			<div id="opBar" style="float: left;width:50%;">&nbsp;<input type="button" id="Comm_Del_Operation" onclick="javascript:del('./admin_review.asp');">&nbsp;<input type="button" id="Comm_State_Pass" onclick="javascript:postChooseForm('./admin_review.asp','pass',getStatePostResult);">&nbsp;<input type="button" id="Comm_State_NoPass" onclick="javascript:postChooseForm('./admin_review.asp','npass',getStatePostResult);"></div>
+			<div id="pageListDiv" style="float: right;"></div>
+		</div>
+	</div>
+</div>
+
+</form>

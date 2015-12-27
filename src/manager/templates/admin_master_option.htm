@@ -1,0 +1,103 @@
+<script type="text/javascript">
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[151]);
+
+	sw_help_topic_init("");
+}
+
+function postForm(){
+	if ($("ID").value == "0")
+	{
+		objForm.doResponseMethod = getAddPostResult;
+	}
+	else{
+		objForm.doResponseMethod = getEditPostResult;
+		editSuccessUrl = './templates/admin_master_list.htm';
+	}
+
+	objForm.ajaxPost();
+
+	return false;
+}
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_master.asp";
+</script>
+
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID" id="ID" value="{$MasterID$}">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();">{$Language_OperationNotice$}</span></legend>
+        <div id="help_topic">{$Language_Master_Help$}</div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend>{$Language_Master_EditInfo$}</legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="13%" align="right">{$Language_Master_Account$}:</td>
+				  <td>&nbsp;<input type="text" name="account" value="{$MasterAccount$}" dataType="Require"></td>
+				  <TD class=vsplit_line width=1></TD>
+				  <TD class=describe_txt width=300>&nbsp;{$Language_Master_AddMaster_AccountInfo$}</TD>
+				</tr>
+				<tr>
+				  <td align="right">{$Language_Master_Password$}:</td>
+				  <td>&nbsp;<input type="password" name="password"></td>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;{$Language_Master_AddMaster_PasswordInfo$}</TD>
+				</tr>
+				<tr>
+				  <td align="right">{$Language_Master_State$}:</td>
+				  <td>&nbsp;{$Language_Comm_Enabled$}<input type="radio" name="State" value="1"{$State_1$}>{$Language_Comm_Disabled$}<input type="radio" name="State" value="0"{$State_0$}></td>
+				  <TD class=vsplit_line></TD>
+				  <TD class=describe_txt>&nbsp;</TD>
+				</tr>
+			  </table>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;<input type="button" name="btnSubmit1" id="btnSubmit1" value="{$Language_Comm_Save_Button$}" onclick="javascript:return postForm();">&nbsp;&nbsp;<input type="button" name="btnReturn" value="{$Language_Comm_Return_Button$}" onclick="javascript:ajaxChangeRightContent('./templates/admin_master_list.htm','pageContent');"></div>
+
+	<div style="margin: 5px 5px 0 5px;">
+		<fieldset>
+			<legend>{$Language_Master_ColumnPowerOption$}</legend>
+			<table width="100%" class="edittable">
+				{$list Begin$}
+				<tr valign="middle" bgcolor="ffffff" onmouseover=this.style.backgroundColor='E4E8EF' onmouseout=this.style.backgroundColor=''>
+				  <td align="left" width="55%">&nbsp;{$ColumnName$}</td>
+				  <td align="right">{$Language_Master_Column_Add$}<input type="checkbox" name="power" value="{$ColumnID$}1"{$Power_{$ColumnID$}_1$}>&nbsp;{$Language_Master_Column_Manager$}<input type="checkbox" name="power" value="{$ColumnID$}2"{$Power_{$ColumnID$}_2$}>&nbsp;{$Language_Master_Column_Edit$}<input type="checkbox" name="power" value="{$ColumnID$}3"{$Power_{$ColumnID$}_3$}>&nbsp;{$Language_Master_Column_Del$}<input type="checkbox" name="power" value="{$ColumnID$}4"{$Power_{$ColumnID$}_4$}>&nbsp;&nbsp;</td>
+				</tr>
+				{$list End$}
+			  </table>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;<input type="button" name="btnSubmit2" id="btnSubmit2" value="{$Language_Comm_Save_Button$}" onclick="javascript:return postForm();">&nbsp;&nbsp;<input type="button" name="btnReturn" value="{$Language_Comm_Return_Button$}" onclick="javascript:ajaxChangeRightContent('./templates/admin_master_list.htm','pageContent');"></div>
+
+	<div style="margin: 5px 5px 0 5px;">
+		<fieldset>
+			<legend>{$Language_Master_MenuPowerOption$}</legend>
+			<table width="100%" class="edittable">
+				{$list1 Begin$}
+				<tr>
+				  <td>&nbsp;<strong>{$MenuName$}</strong></td>
+				</tr>
+				<tr>
+				  <td align="left">{$list2 Begin$}&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="admin_power" value="{$Power$}"{$Power_{$Power$}$}>{$Power$}.{$MenuName$}{$list2 End$}</td>
+				</tr>
+				{$list1 End$}
+			  </table>
+		</fieldset>
+	</div>
+
+	<div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;<input type="button" name="btnSubmit5" id="btnSubmit5" value="{$Language_Comm_Save_Button$}" onclick="javascript:return postForm();">&nbsp;&nbsp;<input type="button" name="btnReturn" value="{$Language_Comm_Return_Button$}" onclick="javascript:ajaxChangeRightContent('./templates/admin_master_list.htm','pageContent');"><input name="chkall" type="checkbox" value="on" onclick="CheckAll(document.form1,this);">{$Language_Comm_SelectAll$}</div>
+</div>
+
+</form>

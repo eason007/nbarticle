@@ -1,0 +1,86 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_friend.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_friend_list.htm';
+
+	setTabTitle(currentTab, tabTitle[22]);
+}
+else{
+	objForm.doResponseMethod = getAddPostResult;
+
+	setTabTitle(currentTab, tabTitle[21]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_friend.asp";
+
+function initTabContent(){
+	FormEdit.start();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Friend_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Friend_Input_Info"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="5%" align="right"><span id="Language_Friend_SiteName"></td>
+				  <td align="left">&nbsp;<input type="text" name="LinkName" size="27" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_SiteLogo"></td>
+				  <td align="left">&nbsp;<input type="text" name="LinkImgPath" size="43" onChange="if(this.value!=''){faceview.src=this.value;}" />&nbsp;<img src="images/spacer.gif" name="faceview" id="faceview" align="absbottom"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_SiteURL"></td>
+				  <td align="left">&nbsp;<input type="text" name="LinkURL" size="43" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td width="20%" align="right" valign="top"><span id="Language_Friend_SiteInfo"></td>
+				  <td align="left">&nbsp;<textarea name="LinkInfo" cols="40" wrap="VIRTUAL" rows="5"></textarea></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_Location"></td>
+				  <td align="left">&nbsp;<select name="ColumnList"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_Order"></td>
+				  <td align="left">&nbsp;<input type="text" name="OrderNum" size="5" value="0" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_State"></td>
+				  <td align="left">&nbsp;<select name="state"></select></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_Friend_Style"></td>
+				  <td align="left">&nbsp;<select name="style"></select></td>
+				</tr>
+				<tr bgcolor="efefef">
+				  <td align="left" valign="middle" colspan="2" height="22">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_friend_list.htm','pageContent');"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

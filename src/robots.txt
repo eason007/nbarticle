@@ -1,0 +1,14 @@
+#
+# robots.txt for EliteCMS Ver4.00 Beta1
+#
+
+User-agent: *
+
+Disallow: /db/
+Disallow: /include/
+Disallow: /js/
+Disallow: /language/
+Disallow: /manager/
+Disallow: /member/
+Disallow: /plugins/
+Disallow: /themes/

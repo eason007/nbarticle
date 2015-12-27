@@ -1,0 +1,64 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_ip.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_ip_list.htm';
+
+	setTabTitle(currentTab, tabTitle[162]);
+}
+else{
+	objForm.doResponseMethod = getAddPostResult;
+
+	setTabTitle(currentTab, tabTitle[161]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+//objForm.debug = true;
+objForm.postUrl = "./admin_ip.asp";
+
+function initTabContent(){
+	FormEdit.start();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_IP_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_IP_InputIp"></legend>
+			<table width="100%" class="edittable">
+				<tr>
+				  <td width="13%" align="right"><span id="Language_IP_IPHead"></span>:</td>
+				  <td width="35%"><input type="text" name="Head_A" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Head_B" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Head_C" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Head_D" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" dataType="Require"></td>
+				  <td width="13%" align="center"><span id="Language_IP_IPFoot"></span>:</td>
+				  <td><input type="text" name="Foot_A" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Foot_B" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Foot_C" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">.<input type="text" name="Foot_D" size="3" maxlength="3" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" dataType="Require"></td>
+				</tr>
+				<tr>
+				  <td align="right"><span id="Language_IP_OverTime"></span>:</td>
+				  <td colspan="3"><input type="text" name="OverTime" id="OverTime" size="10" onclick="SD(this,'OverTime')" /></td>
+				</tr>
+				<tr bgcolor="efefef">
+				  <td align="left" colspan="4" height="25">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_ip_list.htm','pageContent');"></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</div>
+
+</form>

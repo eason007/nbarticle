@@ -1,0 +1,56 @@
+<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_columnbath.asp";
+FormEdit.dateVal = "action=del";
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+objForm.doResponseMethod = getPostResult;
+objForm.postUrl = "./admin_columnbath.asp";
+
+function initTabContent(){
+	setTabTitle(currentTab, tabTitle[101]);
+	FormEdit.start();
+}
+
+function getPostResult(returnResult){
+	alert(returnResult);
+	objForm.resetForm();
+}
+</script>
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="" />
+<input type="hidden" name="action" value="bathdel" />
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Bath_Del_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<div class="menu2" style="TEXT-ALIGN: left;"><a href="javascript:vod();" onclick="javascript:ajaxChangeRightContent('./templates/admin_columnbath_move.htm','pageContent');" id="menu1"><span id="Language_Bath_BathMove"></span></a><a href="javascript:vod();" onclick="javascript:ajaxChangeRightContent('./templates/admin_columnbath_del.htm','pageContent');" id="menu2" class="abg"><span id="Language_Bath_BathDel"></span></a>
+		</div>
+		<table width="100%" class="edittable">
+			<tr valign="middle">
+			  <td width="12%" align="right">&nbsp;&nbsp;<span id="Language_Bath_DestColumn"></span>:</td>
+			  <td align="left"><select name="Column"></select></td>
+			</tr>
+			<tr>
+			  <td align="right" valign="top">&nbsp;&nbsp;<span id="Language_Bath_Condition"></span>: </td>
+			  <td><input type="radio" name="where" value="0" checked />&nbsp;<span id="Language_Bath_All"></span><br><input type="radio" name="where" value="1" />&nbsp;<span id="Language_Bath_ByDate"></span>:<input type="text" name="date" id="date" size="10" onclick="SD(this,'date')" /><br><input type="radio" name="where" value="2" />&nbsp;<span id="Language_Bath_ByKeyword"></span>:<input type="text" name="keyword" />&nbsp;<span id="Language_Bath_In"></span>:<select name="Field"></select></td>
+			</tr>
+			<tr>
+			  <td align="right" valign="top">&nbsp;&nbsp;<span id="Language_Bath_Option"></span>:</td>
+			  <td><input type="radio" name="back" value="0" checked />&nbsp;<span id="Language_Bath_RecycleBin"></span><br><input type="radio" name="back" value="1" />&nbsp;<span id="Language_Bath_NoRecycleBin"></span></td>
+			</tr>
+			<tr bgcolor="efefef">
+			  <td colspan="2">&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return objForm.ajaxPost();" /></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</form>

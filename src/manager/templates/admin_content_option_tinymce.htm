@@ -1,0 +1,196 @@
+﻿<script type="text/javascript">
+//FormEdit.debug = true;
+FormEdit.formName = "form1";
+FormEdit.postUrl = "./admin_content.asp";
+FormEdit.dateVal = "action=add";
+if (typeof(tabFormID[currentTab]) != "undefined")
+{
+	FormEdit.dateVal += "&ID=" + tabFormID[currentTab];
+
+	objForm.doResponseMethod = getEditPostResult;
+	editSuccessUrl = './templates/admin_content_list.htm';
+
+	$('saveas').style.display = "";
+
+	setTabTitle(currentTab, tabTitle[92]);
+}
+else{
+	editDateVal = "";
+	objForm.doResponseMethod = getAddPostResult;
+
+	$('saveas').style.display = "none";
+
+	setTabTitle(currentTab, tabTitle[91]);
+}
+FormEdit.doResponseMethodOther = "sw_help_topic_init()";
+
+function initTabContent(){
+	FormEdit.start();
+
+	tinyMCE.init({
+		mode : "exact",
+		elements : "Content",
+		language: "zh",
+		skin : "o2k7",
+		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups",
+		width : 645,
+		height : 410,
+
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_buttons1 : "cut,copy,paste,pastetext,pasteword,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,fontsizeselect,|,forecolor,backcolor",
+		theme_advanced_buttons2 : "undo,redo,|,link,image,tablecontrols,removeformat,cleanup,|,charmap,emotions,iespell,media,fullscreen,pagebreak",
+		theme_advanced_buttons3 : "",
+		theme : "advanced"
+	});
+}
+
+function checkData(sTargetName) {
+	$(sTargetName).value = getFekeditorText(sTargetName);
+	
+	FormEdit.doResponseMethodOther = "";
+
+	//objForm.debug = true;
+	objForm.doResponseOther = "switchTab(currentTab);FormEdit.start();";
+	objForm.postUrl = "./admin_content.asp";
+	objForm.ajaxPost();
+
+	return false;
+}
+
+function RedirectTemplate(iValue,vSelect){
+	var dateVal = FormEdit.dateVal;
+
+	if (dateVal.indexOf("temp_id")>-1)
+	{
+		dateVal = dateVal.substring(0,dateVal.indexOf("temp_id")+8) + vSelect.options[iValue].value;
+	}
+	else{
+		dateVal = dateVal + '&temp_id=' + vSelect.options[iValue].value;
+	}
+	
+	FormEdit.dateVal = dateVal;
+	FormEdit.doResponseMethodOther = "";
+	FormEdit.start();
+}
+
+function inputsource(Str){
+	var tmp
+	
+	tmp=Str.split("==");
+	
+	$('source').value=tmp[0];
+	$('sourceurl').value=tmp[1];
+	
+}
+
+function review_img(){
+	if ($('img').value!=''){
+		window.open(''+$('img').value+'','','');
+	}
+}
+
+function getFekeditorText(editor_name)
+{
+    returnValue = tinyMCE.get(editor_name).getContent();
+
+    return returnValue;
+}
+</script>
+
+<form id="form1" name="form1" method="get" onsubmit="return false;">
+
+<input type="hidden" name="">
+<input type="hidden" name="ID">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="authorid">
+
+<div class="mainWindows">
+	<div>
+		<fieldset><legend><span id="help_topic_icon" onclick="sw_help_topic();"><span id="Language_OperationNotice"></span></span></legend>
+        <div id="help_topic"><span id="Language_Content_Add_Help"></span></div>
+        </fieldset>
+	</div>
+
+	<div style="margin-top: 5px;">
+		<fieldset>
+			<legend id="Language_Content_AddArticle"></legend>
+			<div class="left" style="margin-right: 5px;">
+				<table class="edittable">
+				  <tr>
+					<td align="right">&nbsp;<span id="Language_Content_Title"></span></td>
+					<td align="left">&nbsp;<select name="color"></select>&nbsp;<input type="text" name="title" size="77" dataType="Require"></td>
+				  </tr>
+				  <tr>
+					<td align="left" colspan="2" valign="top"><textarea name="Content" id="Content"></textarea></td>
+				  </tr>
+			  </table>
+		  </div>
+		  <div class="left">
+			  <table class="edittable">
+				  <tr>
+					<td align="right"><span id="Language_Content_Column"></span></td>
+					<td align="left">&nbsp;<select name="Column" dataType="Require" style="width: 220px;"></select></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Keyword"></span></td>
+					<td align="left">&nbsp;<textarea name="keyword" cols="28" rows="2"></textarea></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Summary"></span></td>
+					<td align="left">&nbsp;<textarea name="summary" id="summary" cols="28" rows="4" wrap="VIRTUAL"></textarea></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_SubTitle"></span></td>
+					<td align="left">&nbsp;<input type="text" name="subtitle" size="33"></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_SubUrl"></span></td>
+					<td align="left">&nbsp;<input type="text" name="suburl" size="33"></td>
+				  </tr>
+				  <tr>
+				    <td align="right" valign="top"><span id="Language_Content_OutURL"></span></td>
+					<td align="left">&nbsp;<input type="text" name="outurl" size="33"></td>
+				  </tr>
+				  <tr>
+					<td align="right" valign="top"><span id="Language_Content_Img"></span></td>
+					<td align="left">&nbsp;<input type="text" name="img" id="img" size="33"><br />&nbsp;<a href="javascript:vod();" onclick="review_img();" id="Language_Content_ReviewImg"></a></td>
+				  </tr>
+				  <tr>
+				    <td align="right" valign="top"><span id="Language_Content_Source"></span></td>
+					<td align="left">&nbsp;<select name="choosesource" onchange="inputsource(this.options[this.selectedIndex].value)"></select><br />&nbsp;<input type="text" name="source" id="source" size="33"><br />&nbsp;<input type="text" name="sourceurl" id="sourceurl" size="33"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_Date"></span></td>
+					<td align="left">&nbsp;<input type="text" name="adddate" size="18"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_ArticleTemplate"></span></td>
+					<td align="left">&nbsp;<select name="atemplate" onchange="RedirectTemplate(this.options.selectedIndex,this);"></select></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_Top"></span></td>
+					<td align="left">&nbsp;<input type="radio" name="istop" value="1"><span id="Language_Comm_Yes"></span>&nbsp;<input type="radio" name="istop" value="0"><span id="Language_Comm_No"></span></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_ViewNum"></span></td>
+					<td align="left">&nbsp;<input type="text" name="viewnum" size="5"></td>
+				  </tr>
+				  
+				  <tr>
+					<td align="right"><span id="Language_Content_PassNow"></span></td>
+					<td align="left">&nbsp;<input type="checkbox" name="ispass" value="1"></td>
+				  </tr>
+				  <tr>
+					<td align="right"><span id="Language_Content_SaveAs"></span></td>
+					<td align="left">&nbsp;<input type="checkbox" name="saveas" id="saveas" value="1"></td>
+				  </tr>
+			  </table>
+		  </div>
+
+		  <div style="margin-top: 5px;TEXT-ALIGN: left;">&nbsp;&nbsp;<input type="button" name="btnSubmit" id="btnSubmit" onclick="javascript:return checkData('Content');">&nbsp;<input type="button" name="btnReturn" id="btnReturn" onclick="javascript:ajaxChangeRightContent('./templates/admin_content_list.htm','pageContent');"></div>
+		</fieldset>
+	</div>
+</div>
+
+</form>
